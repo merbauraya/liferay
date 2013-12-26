@@ -1,0 +1,16 @@
+.portlet-msg, .portlet-msg-info, .lfr-message-info {
+  background: #EEE none no-repeat 6px 50%;
+  border: 1px solid #555;
+  color: #34404F;
+  display: block;
+  font-weight: bold;
+  margin: 2px auto 14px;
+  padding: 6px 6px 6px 30px;
+  text-align: left; }
+
+/* ---------- Help messages, general additional information, etc. ---------- */
+.portlet-msg-info, .lfr-message-info {
+  background-color: #DFF4FF;
+  background-image: url(../images/messages/info.png);
+  border-color: #A7CEDF; }
+

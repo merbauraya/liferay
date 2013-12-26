@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.1.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_1_0.dtd">
+
+<layout-templates>
+	<custom>
+		<layout-template id="merbau_bootstrap_3_1" name="Merbau Bootstrap 3 1">
+			<template-path>/merbau_bootstrap_3_1.tpl</template-path>
+			<wap-template-path>/merbau_bootstrap_3_1.wap.tpl</wap-template-path>
+			<thumbnail-path>/merbau_bootstrap_3_1.png</thumbnail-path>
+		</layout-template>
+	</custom>
+</layout-templates>

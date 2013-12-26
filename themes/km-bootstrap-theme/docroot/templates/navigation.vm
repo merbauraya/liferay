@@ -1,0 +1,96 @@
+<header class="$nav_css_class">
+	
+		<div id="km-logo" class="hidden-xs" >
+			<a class="$logo_css_class" href="$site_default_url" title="#language ("go-to") $site_name">
+							<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+			</a>
+		</div>
+
+		<div class="navbar navbar-default">
+			  <div class="navbar-header">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#km-menu-collapse">
+			      <span class="sr-only">Toggle navigation</span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			    </button>
+			    
+			  </div>
+						
+			<div class="navbar-collapse collapse" id="km-menu-collapse">
+			
+				<ul class="nav navbar-nav">
+				
+					#foreach ($nav_item in $nav_items)
+						#if($nav_item.getLayout().getExpandoBridge().getAttribute($footerNav) == false)
+							#if ($nav_item.isSelected())
+								#set( $selected = "current active " )
+							#else
+								#set( $selected = "" )
+							#end
+							#if ($nav_item.hasChildren())
+								#set($child = "dropdown")
+								#set($childClass="dropdown-toggle")
+							#else
+								#set($child = "")
+								#set($childClass="")
+							#end
+							<li class="$selected$child">
+							
+								#if ($nav_item.hasChildren())
+									<a class="$childClass" data-toggle="$child" href="#" $nav_item.getTarget()>$nav_item.getName()<b class="caret"></b></a>
+								#else
+									<a class="$childClass" data-toggle="$child" href="$nav_item.getURL()" $nav_item.getTarget()><span>$nav_item.icon() $nav_item.getName()</span></a>
+								
+								#end
+								#if ($nav_item.hasChildren())
+									<ul class="dropdown-menu" role="menu">
+										#foreach ($nav_child in $nav_item.getChildren())
+											#if ($nav_child.isSelected())
+												<li aria-selected="true" class="selected">
+											#else
+												<li>
+											#end
+												<a href="$nav_child.getURL()" $nav_child.getTarget()>$nav_child.getName()</a>
+											</li>
+										#end
+									</ul>
+								#end
+							</li>
+						#end
+					#end
+				</ul>
+				<div class="navbar-form navbar-right">$theme.search()</div>
+				<ul class="nav navbar-nav navbar-right"> 
+					
+					#if (!$is_signed_in)
+						<li>
+							<a href="$sign_in_url" rel="nofollow">$sign_in_text</a>
+						</li>
+					#end
+					#if ($is_signed_in)
+						
+						<li class="dropdown">
+							<a class="dropdown-toggle" href="#" data-toggle="dropdown">
+								Welcome $user_name
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+		  							<a href="$themeDisplay.getURLMyAccount();">My Profile</a>
+		  						</li>
+		  						<li>
+		  							<a href="$sign_out_url" rel="nofollow">$sign_out_text</a>
+		  						</li>
+		  					</ul>
+		  				</li>
+					
+		  				
+		  				
+					#end
+				</ul>
+			</div>
+			
+		</div> ## navbar
+	
+</header>

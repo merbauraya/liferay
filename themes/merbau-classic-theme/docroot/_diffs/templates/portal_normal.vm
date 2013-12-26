@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language ("lang.dir")" dir="#language ("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>$the_title - $company_name</title>
+
+	$theme.include($top_head_include)
+</head>
+
+<body class="$css_class">
+
+$theme.include($body_top_include)
+
+
+#if (($is_signed_in) && $permissionChecker.isCompanyAdmin($company_id))
+ #dockbar()
+
+#else
+	#if ($is_signed_in && $permissionChecker.isGroupAdmin($group_id))
+        #dockbar()
+    #end
+#end
+	
+		#if ($has_navigation || $is_signed_in)
+			#parse ("$full_templates_path/navigation.vm")
+		#end
+
+
+	<section id="gk-main">
+		<div class="container-fluid">
+
+			#if ($selectable)
+				$theme.include($content_include)
+			#else
+				$portletDisplay.recycle()
+	
+				$portletDisplay.setTitle($the_title)
+	
+				$theme.wrapPortlet("portlet.vm", $content_include)
+			#end
+		</div>
+	</section>
+
+	<footer id="footer" role="contentinfo" class="container-fluid">
+		<div class="span7">
+			<ul class="nav menu">
+				<li class="item54"><a href="/index.php/en/online-services"><span>Online Services</span></a></li>
+				<li class="item396"><a href="/index.php/en/office"><span>Office</span></a></li>
+				<li class="item61"><a href="/index.php/en/contact-us"><span>Contact Us</span></a></li>
+				<li class="item63"><a href="/index.php/en/site-map"><span>Site Map</span></a></li>
+				<li class="item64"><a href="/index.php/en/w3c"><span>W3C</span></a></li>
+			</ul>	
+		</div>
+		<p class="pull-right">
+			<ul class="nav menu">
+				<li><a href="#">Disclaimer &amp; Copyright</a></li>
+				<li><a href="#">Privacy Statement</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul>
+		</p>
+		
+	</footer>
+
+
+$theme.include($body_bottom_include)
+
+$theme.include($bottom_include)
+
+</body>
+
+</html>

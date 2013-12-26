@@ -1,0 +1,7 @@
+## ---------- Footer Custom Field ---------- ##
+
+#set ($footerNav = "footer-navigation")
+
+#if ($layout.getExpandoBridge().hasAttribute($footerNav) == false)
+     #set($VOID = $layout.getExpandoBridge().addAttribute($footerNav, 1, false))
+#end

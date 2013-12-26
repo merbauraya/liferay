@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language ("lang.dir")" dir="#language ("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>$the_title - $company_name</title>
+
+	$theme.include($top_head_include)
+	<script type="text/javascript" src="$javascript_folder/jquery-1.9.1.min.js"></script>	
+</head>
+
+<body class="$css_class">
+
+$theme.include($body_top_include)
+
+
+#if (($is_signed_in) && $permissionChecker.isCompanyAdmin($company_id))
+ #dockbar()
+
+#else
+	#if ($is_signed_in && $permissionChecker.isGroupAdmin($group_id))
+        #dockbar()
+    #end
+#end
+	
+		#if ($has_navigation || $is_signed_in)
+			#parse ("$full_templates_path/navigation.vm")
+		#end
+
+
+	
+	<section id="km-main">
+		
+
+			#if ($selectable)
+				$theme.include($content_include)
+			#else
+				$portletDisplay.recycle()
+	
+				$portletDisplay.setTitle($the_title)
+	
+				$theme.wrapPortlet("portlet.vm", $content_include)
+			#end
+		
+	</section>
+
+	<footer class="ftr-sect row" role="contentinfo">
+		
+			#parse ("$full_templates_path/footer.vm")
+		
+		
+	</footer>
+
+
+	$theme.include($body_bottom_include)
+    
+
+	$theme.include($bottom_include)
+	
+	
+	#set( $userGroup = "Guest") 
+	
+	#set($userGroupLocalService=$serviceLocator.findService("com.liferay.portal.service.UserGroupLocalService"))
+	
+	#set ($usrGroup = $userGroupLocalService.getUserUserGroups( $user_id ))
+	#foreach( $grp in $usrGroup )
+		#set( $userGroup = $grp.getName()) 
+		
+	#end
+	
+	
+	
+	#if ($is_signed_in)
+		#set( $userName = $user_name)
+		#set( $userId = $user_id )
+		
+	#else
+		#set( $userName = "Guest")
+		#set( $userId = "Guest" )
+		#set( $userGroup = "Guest") 
+	#end
+	#set ($trackingUrl = $propsUtil.get("tracking.piwik.url"))
+	
+<script type="text/javascript">
+  var _paq = _paq || [];
+  
+  _paq.push(['setCustomVariable',1,"userName","$userName","visit"]);
+  _paq.push(['setCustomVariable',2,"userId","$userId","visit"]);
+  _paq.push(['setCustomVariable',3,"userGroup","$userGroup","visit"]);
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+  
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://$trackingUrl";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "1"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="$javascript_folder/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="$javascript_folder/jquery-ui.1.10.3.custom.min.js" charset="utf-8"></script> 
+    
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<div class="footer-nav">
+	#foreach ($nav_item in $nav_items)
+		#if($nav_item.getLayout().getExpandoBridge().getAttribute($footerNav))
+			
+				## we are only interested in second level menu
+				#if ($nav_item.hasChildren())
+					<ul class="nav menu">
+						#foreach ($nav_child in $nav_item.getChildren())
+							#if ($nav_child.isSelected())
+								<li class="selected">
+							#else
+								<li>
+							#end
+								<a class="ftr-link" href="$nav_child.getURL()" $nav_child.getTarget()>$nav_child.getName()</a>
+							</li>
+						#end
+					</ul>
+				#end
+			
+			
+		#end
+	#end ##foreach
+</div>
+

@@ -1,0 +1,166 @@
+.purple .navbar
+{
+	background-image:none !important;
+	background-color:#5C155F;
+	border-color:#461E47;
+}
+.purple .navbar-default
+{
+	
+}
+.purple .navbar-default .navbar-nav > li > a {
+    color: #FFFFFF;
+}
+.purple .navbar-default .navbar-nav > .dropdown > a .caret {
+    border-bottom-color: #FFFFFF;
+    border-top-color: #FFFFFF;
+}
+.purple .navbar-default .navbar-nav > li > a:hover,
+.purple .navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+  background-color: #AC64AF;
+}
+
+.purple .navbar-default .navbar-nav > .active > a,
+.purple .navbar-default .navbar-nav > .active > a:hover,
+.purple .navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #AC64AF;
+}
+
+.purple .navbar-default .navbar-nav > .disabled > a,
+.purple .navbar-default .navbar-nav > .disabled > a:hover,
+.purple .navbar-default .navbar-nav > .disabled > a:focus {
+  color: #cccccc;
+  background-color: transparent;
+}
+
+.purple .navbar-default .navbar-toggle {
+  border-color: #461E47;
+}
+
+.purple .navbar-default .navbar-toggle:hover,
+.purple .navbar-default .navbar-toggle:focus {
+  background-color: #AC64AF;
+}
+
+.purple .navbar-default .navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+
+.purple .navbar-default .navbar-collapse,
+.purple .navbar-default .navbar-form {
+  border-color: #AC64AF;
+}
+
+.purple .navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.purple .navbar-default .navbar-nav > .dropdown > a:focus .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+.purple .navbar-default .navbar-nav > .open > a,
+.purple .navbar-default .navbar-nav > .open > a:hover,
+.purple .navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #AC64AF;
+}
+
+.purple .navbar-default .navbar-nav > .open > a .caret,
+.purple .navbar-default .navbar-nav > .open > a:hover .caret,
+.purple .navbar-default .navbar-nav > .open > a:focus .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+.purple .navbar-default .navbar-nav > .dropdown > a .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+.purple .dropdown-menu > li > a {
+    clear: both;
+    color: #333333;
+    display: block;
+    font-weight: normal;
+    line-height: 1.42857;
+    padding: 3px 20px;
+    white-space: nowrap;
+}
+.purple a {
+    color: #3c073e;
+    text-decoration: none;
+}
+.purple a {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.purple .dropdown-menu > li > a:hover,
+.purple .dropdown-menu > li > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #AC49AF;
+}
+
+.purple .dropdown-menu > .active > a,
+.purple .dropdown-menu > .active > a:hover,
+.purple .dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #AC64AF;
+  outline: 0;
+}
+
+.purple .dropdown-menu > .disabled > a,
+.purple .dropdown-menu > .disabled > a:hover,
+.purple .dropdown-menu > .disabled > a:focus {
+  color: #aea79f;
+}
+.purple .btn-primary {
+    background-color: #DD4814;
+    border-color: #DD4814;
+    color: #FFFFFF;
+}
+.purple .btn-primary:hover,
+.purple .btn-primary:focus,
+.purple .btn-primary:active,
+.purple .btn-primary.active,
+.purple .open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #b83c11;
+  border-color: #a5360f;
+}
+.purple .portlet-topper {
+    background: linear-gradient(to bottom, #AC49AF 0%, #AC54AF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-bottom: 1px solid #C2C2C2;
+    color: #FFF;
+ 
+    text-shadow: none;
+}.purple .portlet-title {
+    text-shadow: none;
+    color:#FFF;
+}
+.purple .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #BF3E11;
+}
+h1.purple, h2.purple, h3.purple, h4.purple, h5.purple, h6.purple, ora .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #DD4814;
+}
+body.purple
+{
+	/*color:#DD4814;*/
+}
+.purple #gk-main
+{
+	background-image:none;
+}
+.purple .portlet-topper a
+{
+	color: #FFF;
+}
+/* footer */
+.purple .ftr-sect
+{
+	background-color:#5D0560;}
+.purple .ftr-link {color:#FFF;}
+
+	
+	

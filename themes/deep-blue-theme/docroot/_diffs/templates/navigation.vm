@@ -1,0 +1,53 @@
+<header class="container-fluid $nav_css_class">
+	<a class="$logo_css_class pull-left" href="$site_default_url" title="#language ("go-to") $site_name">
+					<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+	</a>
+	<div class="gk-mainmenu-toggle">
+		<a data-target=".nav-collapse" data-toggle="collapse" href="#"> Main menu </a>
+	</div>
+	<div class="nav-collapse collapse $nav_css_class gk-main-menu" id="navigation">
+		
+		<ul class="nav menu">
+			#foreach ($nav_item in $nav_items)
+				#if ($nav_item.isSelected())
+					#set( $selected = "current active " )
+				#else
+					#set( $selected = "" )
+				#end
+				#if ($nav_item.hasChildren())
+					#set($child = "deeper parent hasChild")
+				#else
+					#set($child = "")
+				#end
+				<li class="$selected$child">
+				
+				
+					<a href="$nav_item.getURL()" $nav_item.getTarget()><span>$nav_item.icon() $nav_item.getName()</span></a>
+	
+					#if ($nav_item.hasChildren())
+						<ul class="nav-child unstyled small">
+							#foreach ($nav_child in $nav_item.getChildren())
+								#if ($nav_child.isSelected())
+									<li aria-selected="true" class="selected">
+								#else
+									<li>
+								#end
+									<a href="$nav_child.getURL()" $nav_child.getTarget()>$nav_child.getName()</a>
+								</li>
+							#end
+						</ul>
+					#end
+				</li>
+				
+			#end
+			#if (!$is_signed_in)
+				<li class="pull-right">
+					<a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
+				</li>
+			#end
+			#if ($is_signed_in)
+  				<div class="nav-search pull-right">$theme.search()</div>
+			#end
+		</ul>
+	</div>
+</header>

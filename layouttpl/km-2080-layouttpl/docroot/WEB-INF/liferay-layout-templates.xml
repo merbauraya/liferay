@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.1.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_1_0.dtd">
+
+<layout-templates>
+	<custom>
+		<layout-template id="km_2080" name="Responsive 20 80 layout">
+			<template-path>/km_2080.tpl</template-path>
+			<wap-template-path>/km_2080.wap.tpl</wap-template-path>
+			<thumbnail-path>/km_2080.png</thumbnail-path>
+		</layout-template>
+	</custom>
+</layout-templates>

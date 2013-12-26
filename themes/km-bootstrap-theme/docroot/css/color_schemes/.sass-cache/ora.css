@@ -1,0 +1,138 @@
+.ora .navbar {
+  background-image: none !important;
+  background-color: #dd4814;
+  border-color: #bf3e11; }
+
+.ora .navbar-default .navbar-nav > li > a {
+  color: #FFFFFF; }
+
+.ora .navbar-default .navbar-nav > .dropdown > a .caret {
+  border-bottom-color: #FFFFFF;
+  border-top-color: #FFFFFF; }
+
+.ora .navbar-default .navbar-nav > li > a:hover,
+.ora .navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+  background-color: #97310e; }
+
+.ora .navbar-default .navbar-nav > .active > a,
+.ora .navbar-default .navbar-nav > .active > a:hover,
+.ora .navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #ae3910; }
+
+.ora .navbar-default .navbar-nav > .disabled > a,
+.ora .navbar-default .navbar-nav > .disabled > a:hover,
+.ora .navbar-default .navbar-nav > .disabled > a:focus {
+  color: #cccccc;
+  background-color: transparent; }
+
+.ora .navbar-default .navbar-toggle {
+  border-color: #97310e; }
+
+.ora .navbar-default .navbar-toggle:hover,
+.ora .navbar-default .navbar-toggle:focus {
+  background-color: #97310e; }
+
+.ora .navbar-default .navbar-toggle .icon-bar {
+  background-color: #ffffff; }
+
+.ora .navbar-default .navbar-collapse,
+.ora .navbar-default .navbar-form {
+  border-color: #bf3e11; }
+
+.ora .navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.ora .navbar-default .navbar-nav > .dropdown > a:focus .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff; }
+
+.ora .navbar-default .navbar-nav > .open > a,
+.ora .navbar-default .navbar-nav > .open > a:hover,
+.ora .navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #ae3910; }
+
+.ora .navbar-default .navbar-nav > .open > a .caret,
+.ora .navbar-default .navbar-nav > .open > a:hover .caret,
+.ora .navbar-default .navbar-nav > .open > a:focus .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff; }
+
+.ora .navbar-default .navbar-nav > .dropdown > a .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff; }
+
+.ora .dropdown-menu > li > a {
+  clear: both;
+  color: #333333;
+  display: block;
+  font-weight: normal;
+  line-height: 1.42857;
+  padding: 3px 20px;
+  white-space: nowrap; }
+
+.ora a {
+  color: #DD4814;
+  text-decoration: none; }
+
+.ora a {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0); }
+
+.ora .dropdown-menu > li > a:hover,
+.ora .dropdown-menu > li > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #dd4814; }
+
+.ora .dropdown-menu > .active > a,
+.ora .dropdown-menu > .active > a:hover,
+.ora .dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #dd4814;
+  outline: 0; }
+
+.ora .dropdown-menu > .disabled > a,
+.ora .dropdown-menu > .disabled > a:hover,
+.ora .dropdown-menu > .disabled > a:focus {
+  color: #aea79f; }
+
+.ora .btn-primary {
+  background-color: #DD4814;
+  border-color: #DD4814;
+  color: #FFFFFF; }
+
+.ora .btn-primary:hover,
+.ora .btn-primary:focus,
+.ora .btn-primary:active,
+.ora .btn-primary.active,
+.ora .open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #b83c11;
+  border-color: #a5360f; }
+
+.ora .portlet-topper {
+  background: linear-gradient(to bottom, #aa330a 0%, #e87a54 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border-bottom: 1px solid #C2C2C2;
+  color: #FFF;
+  text-shadow: none; }
+
+.ora .portlet-title {
+  text-shadow: none;
+  color: #FFF; }
+
+.ora .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: #BF3E11; }
+
+h1.ora, h2.ora, h3.ora, h4.ora, h5.ora, h6.ora, ora .h1, .h2, .h3, .h4, .h5, .h6 {
+  color: #DD4814; }
+
+body.ora {
+  /*color:#DD4814;*/ }
+
+.ora #gk-main {
+  background-image: none; }
+
+.ora .portlet-topper a {
+  color: #FFF; }
+

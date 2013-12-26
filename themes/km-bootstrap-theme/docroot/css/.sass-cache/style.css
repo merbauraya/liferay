@@ -1,0 +1,83 @@
+.custom-logo {
+  display: block; }
+
+#km-logo {
+  width: 100%; }
+
+#km-logo img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+#km-nav {
+  clear: both;
+  min-height: 2.2em; }
+
+body > header + div#km-main:before {
+  content: "";
+  display: block;
+  margin-top: 0;
+  padding-top: 5px;
+  width: 100%; }
+
+#km-main {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin-top: 10px; }
+
+/*main body */
+#gk-main {
+  background: url(../images/bg-main.png);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 35px;
+  padding-right: 35px;
+  width: 100%; }
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important; }
+
+/*
+body > header
+{
+	border-bottom: 1px solid #e5e5e5;
+}*/
+/* footer */
+body > footer {
+  border-top: 1px solid #e5e5e5;
+  font-size: 11.05px;
+  padding: 12px 0; }
+
+body > footer a {
+  color: #aaa; }
+
+body > footer a:active,
+body > footer a:focus,
+body > footer a:hover {
+  background: transparent !important;
+  color: #5990de; }
+
+.navbar {
+  border-radius: 0px !important;
+  margin-bottom: 0px !important; }
+
+.navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+/* end bootstrap ovrite */
+/* start aui override */
+.portlet-asset-publisher .asset-title {
+  .margin-top: 1em !important; }
+
+.footer-nav {
+  text-align: center;
+  margin: 0 auto; }
+
+.footer-nav ul li {
+  display: inline-block; }
+
