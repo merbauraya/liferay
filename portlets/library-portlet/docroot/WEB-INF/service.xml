@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.slayer">
+	<author>matle</author>
+	<namespace>LMS</namespace>
+
+	<entity name="LMSBook" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="bookId" type="long" primary="true" id-type="increment" />
+
+		<!-- Audit fields -->
+
+		<column name="bookTitle" type="String" />
+		<column name="author" type="String" />
+		
+		<column name="createDate" type="Date" />
+
+
+	</entity>
+</service-builder>

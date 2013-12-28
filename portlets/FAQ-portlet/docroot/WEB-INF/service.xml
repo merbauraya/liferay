@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.idetronic.portlet">
+	<author>Mazlan Mat</author>
+	<namespace>FAQ</namespace>
+
+	<entity name="FAQEntry" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="entryId" type="long" primary="true" id-type="increment"/>
+		
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="question" type="String" />
+		<column name="category" type="String" />
+		<column name="answer" type="String" />
+		<column name="isactive" type="Boolean" />
+		<column name="displayOrder" type="long" />
+
+
+		<!-- Order -->
+
+
+
+		<!-- Finder methods -->
+		<finder name="DistinctCatalogery" return-type="Collection" unique="true">
+            <finder-column name="category" />
+        </finder>
+	
+	</entity>
+</service-builder>

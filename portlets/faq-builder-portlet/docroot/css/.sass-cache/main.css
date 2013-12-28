@@ -1,0 +1,20 @@
+.faq-category > h3 {
+  font-size: 20px !important;
+  margin-top: 5px !important; }
+
+.faq-answer {
+  margin-left: 20px; }
+
+.faq-portlet-content > h3 {
+  font-color: #0088CC;
+  font-size: 1.1em; }
+
+.faq-question {
+  font-size: 100% important;
+  color: #428BCA; }
+
+.faq-entry-expander {
+  cursor: pointer;
+  float: left;
+  padding-right: 5px; }
+

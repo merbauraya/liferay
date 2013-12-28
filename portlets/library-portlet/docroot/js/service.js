@@ -1,0 +1,1 @@
+Liferay.Service.register("Liferay.Service.LMS", "com.slayer.service", "library-portlet");

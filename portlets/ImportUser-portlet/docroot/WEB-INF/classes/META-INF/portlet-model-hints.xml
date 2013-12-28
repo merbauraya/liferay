@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.idetronic.portlet.model.staff_active">
+		<field name="bp_name" type="String" />
+		<field name="bp_no_pekerja" type="String" />
+		<field name="bp_no_kp" type="String" />
+		<field name="bk_jab_hakiki" type="String" />
+		<field name="bk_jab_hakiki_desc" type="String" />
+		<field name="bk_jab_sekarang" type="String" />
+		<field name="bk_jab_sekarang_desc" type="String" />
+		<field name="bk_jaw_jenis" type="String" />
+		<field name="al_alamat1" type="String" />
+		<field name="al_alamat2" type="String" />
+		<field name="al_alamat3" type="String" />
+		<field name="al_poskod" type="String" />
+		<field name="al_bandar" type="String" />
+		<field name="al_negeri" type="String" />
+		<field name="al_negara" type="String" />
+		<field name="bp_telefon" type="String" />
+		<field name="bp_email" type="String" />
+		<field name="bp_tjangka_bsara" type="Date" />
+		<field name="bp_rekod_status" type="String" />
+		<field name="bk_jaw_hakiki" type="String" />
+		<field name="bk_jaw_hakiki_desc" type="String" />
+		<field name="bk_jaw_sekarang" type="String" />
+		<field name="bk_jaw_sekarang_desc" type="String" />
+		<field name="bk_tarikh_lahir" type="Date" />
+		<field name="bk_tarikh_masuk" type="Date" />
+		<field name="bk_rekod_status" type="String" />
+	</model>
+</model-hints>

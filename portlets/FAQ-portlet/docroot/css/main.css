@@ -1,0 +1,17 @@
+.faq-portlet-content
+{
+	margin-left: 10px;
+}
+.faq-portlet-content > p
+{
+	margin-left:10px;
+}
+.faq-portlet-content > h3
+{
+	font-color: #0088CC;
+	font-size: 1.2em;
+}
+.faq-portlet-inner
+{
+	padding:5px 5px 5px 5px;
+}

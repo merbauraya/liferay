@@ -1,0 +1,166 @@
+<html>
+<head>
+    <title>isaac &gt; authenticate</title>
+
+    <style type="text/css">
+    <!--
+body {
+    font-family:verdana,arial,helvetica;
+}
+.smaller {
+    font-size:80%;
+}
+.error {
+    color:red;
+}
+.error-header {
+    font-size:120%;
+    color:red;
+}
+.issac-footer {
+    font-size:70%;
+}
+    --> 
+    </style>
+    
+    <script language="JavaScript">
+    <!--
+        // conditional_focus(FORMNAME, FIELD1, FIELD2)
+        //
+        // Looks for the existence of a form named FORMNAME
+        // with an input field named FIELD1. If found,
+        // and it is empty, it gets the cursor. Otherwise,
+        // if FIELD2 exists it gets the focus (it doesn't
+        // check to see if FIELD2 is defined)
+        //
+        // Special thanks to Jules Cook Graybill <julesg@amazon.com>
+        // you've made many, many people happy, Jules.
+        //
+        function conditional_focus(formname, fieldname1, fieldname2) {
+            var base = "document." + formname;
+            // Make sure the form exists
+            if ( !eval(base) ) {
+                return false;
+            }
+            var field1 = base + "." + fieldname1;
+            var field2 = base + "." + fieldname2;
+            // If the first form field exists and doesn't have a value,
+            // it gets the focus. Otherwise the second field gets the 
+            // focus.
+            if ( eval(field1) && !eval(field1 + ".value") ) {
+                eval(field1 + ".focus()");
+            } else if ( eval(field2) ) {
+                eval(field2 + ".focus()");
+            }
+        }
+        
+    // -->
+    </script>
+</head>
+<body bgcolor="white" onLoad="conditional_focus('login', 'uid', 'passwd')">
+<TABLE border=0 cellpadding=0 cellspacing=0 width="100%">
+    <TR>
+        <TD>
+            <A HREF="http://internal.amazon.com/">
+            <IMG src="http://auth.amazon.com/images/safe/i.gif" 
+                 height=38 width=20 border=0></A>
+
+            <FONT face="Verdana, Arial, Helvetica, sans-serif" 
+                  size="+1" color="#CC6600">
+            <b>&nbsp; isaac > authenticate
+            </b>
+            </FONT>
+       </TD>
+       <TD>
+            <A HREF="http://www.amazon.com/">
+            <IMG SRC="http://auth.amazon.com/images/safe/logo_white_131x28.gif" 
+                 hspace=30 border=0 align=right></A>
+       </TD>
+
+    </TR>
+</TABLE>
+<hr size=1 noshade="noshade"/>
+<!-- END HEADER -->
+<!-- BEGIN: $Id: sign-in-main.tmpl,v 1.18 2003/03/13 04:18:13 stumpf Exp $ -->
+<H3>Internal Secure Authentication & Authorization Control (ISAAC)</H3>
+<BLOCKQUOTE>
+<p>
+Welcome to ISAAC. 
+</p>
+<p>
+Please login using your UNIX username and password in the form below.
+</p>
+<p>
+
+Once completed, you will be sent back to your original destination.
+</p>
+<p class="smaller">
+If you do not know your UNIX password, please use the tools available at  
+<a href="https://password.amazon.com"> https://password.amazon.com</a> site to reset your UNIX password.  
+If you are unable to do so, please ask your direct manager to access 
+the <a href="https://password.amazon.com">password site</a> 
+and use the <a href="https://password.amazon.com/managerReset.aspx">Reset Someone Else's Password</a> link to reset your password.
+</p>
+<p class="smaller">
+If you are returned to this page after signing in, your browser may be 
+configured to ignore cookies.  Please ensure cookies are enabled and try
+signing in again.
+
+</p>
+<p>
+<i>(Once authenticated, your ticket will last for 12.0 hours)</i>
+</p>
+</BLOCKQUOTE>
+<p>
+<!-- BEGIN: $Id: sign-in-form.tmpl,v 1.5 2002/04/22 22:42:11 herbert Exp $ -->
+<FORM method=POST action=https://auth.amazon.com/isaac/sign-in-done name=login>
+<TABLE border=0 align=center>
+<TR>
+    <TH align=right>
+        Username:
+    </TH>
+    <TD>
+
+        <INPUT type=text 
+               name=uid 
+               size=9
+               value="">@amazon.com
+    </TD>
+</TR>
+<TR>
+    <TH align=right>
+        Password:
+    </TH>
+    <TD>
+        <INPUT type=password 
+               name=passwd 
+               size=9
+               autocomplete="off">
+        <br>
+    </TD>
+
+</TR>
+<TR>
+    <TD></TD>
+    <TD>
+        <INPUT type=image 
+               SRC="http://auth.amazon.com/images/safe/sign-in-secure1.gif" 
+               border=0>
+    </TD>
+</TR>
+</TABLE>
+</FORM>
+<!-- END: $Id: sign-in-form.tmpl,v 1.5 2002/04/22 22:42:11 herbert Exp $ -->
+<!-- END: $Id: sign-in-main.tmpl,v 1.18 2003/03/13 04:18:13 stumpf Exp $ -->
+<!-- $Id: $ -->
+<hr size="1" noshade="noshade"/>
+
+<p class="issac-footer">
+ISAAC is maintained by the
+<a href="mailto:intranet-tech@amazon.com">IntranetTech</a>. 
+<br/>
+&#169; 2001-2006 Amazon.com, Inc. or its affiliates. All rights reserved.
+</p>
+</body>
+</html>
+

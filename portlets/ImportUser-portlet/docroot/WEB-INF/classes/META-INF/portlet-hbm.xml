@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.idetronic.portlet.model.staff_active" />
+	<class name="com.idetronic.portlet.model.impl.staff_activeImpl" table="_staff_active">
+		<cache usage="read-write" />
+		<id name="bp_no_kp" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="bp_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bp_no_pekerja" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jab_hakiki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jab_hakiki_desc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jab_sekarang" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jab_sekarang_desc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jaw_jenis" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="al_alamat1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="al_alamat2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="al_alamat3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="al_poskod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="al_bandar" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="al_negeri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="al_negara" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bp_telefon" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bp_email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bp_tjangka_bsara" type="org.hibernate.type.TimestampType" />
+		<property name="bp_rekod_status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jaw_hakiki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jaw_hakiki_desc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jaw_sekarang" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_jaw_sekarang_desc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bk_tarikh_lahir" type="org.hibernate.type.TimestampType" />
+		<property name="bk_tarikh_masuk" type="org.hibernate.type.TimestampType" />
+		<property name="bk_rekod_status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

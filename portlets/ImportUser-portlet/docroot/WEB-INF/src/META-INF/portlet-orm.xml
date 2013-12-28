@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.idetronic.portlet.model.impl.staff_activeModelImpl">
+		<attributes>
+			<id name="bp_no_kp" />
+			<basic name="bp_name" />
+			<basic name="bp_no_pekerja" />
+			<basic name="bk_jab_hakiki" />
+			<basic name="bk_jab_hakiki_desc" />
+			<basic name="bk_jab_sekarang" />
+			<basic name="bk_jab_sekarang_desc" />
+			<basic name="bk_jaw_jenis" />
+			<basic name="al_alamat1" />
+			<basic name="al_alamat2" />
+			<basic name="al_alamat3" />
+			<basic name="al_poskod" />
+			<basic name="al_bandar" />
+			<basic name="al_negeri" />
+			<basic name="al_negara" />
+			<basic name="bp_telefon" />
+			<basic name="bp_email" />
+			<basic name="bp_tjangka_bsara">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="bp_rekod_status" />
+			<basic name="bk_jaw_hakiki" />
+			<basic name="bk_jaw_hakiki_desc" />
+			<basic name="bk_jaw_sekarang" />
+			<basic name="bk_jaw_sekarang_desc" />
+			<basic name="bk_tarikh_lahir">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="bk_tarikh_masuk">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="bk_rekod_status" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.idetronic.portlet.model.impl.staff_activeImpl" name="staff_active">
+		<table name="_staff_active" />
+		<attributes />
+	</entity>
+</entity-mappings>

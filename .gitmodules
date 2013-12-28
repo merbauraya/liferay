@@ -1,0 +1,3 @@
+[submodule "portlets"]
+	path = portlets
+	url = ./portlets

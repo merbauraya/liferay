@@ -1,0 +1,16 @@
+.carousel-item
+{
+	min-height:100%;
+	background:none repeat scroll 0 0 #393839;
+	overflow:hidden;
+	
+}
+.carousel-control {
+	width:0 !important;
+}
+.carousel-control.left,.carousel-control.right
+{background-image:none !important;}
+.carouselTable td
+{
+	padding-left:5px;
+}

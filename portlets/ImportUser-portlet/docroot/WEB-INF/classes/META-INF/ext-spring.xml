@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<beans default-destroy-method="destroy" default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="simsDataSource"
+		class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<property name="targetDataSource">
+			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+				<property name="propertyPrefix" value="jdbc.sims.default." />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="simsHibernateSessionFactory" 
+		class="com.liferay.portal.kernel.spring.util.SpringFactoryUtil"
+		factory-method="newBean">
+		<constructor-arg
+			value="com.liferay.portal.spring.hibernate.PortletHibernateConfiguration" />
+		<constructor-arg>
+			<map>
+				<entry key="dataSource" value-ref="simsDataSource" />
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="simsSessionFactory" 
+		class="com.liferay.portal.kernel.spring.util.SpringFactoryUtil"
+		factory-method="newBean">
+		<constructor-arg
+			value="com.liferay.portal.dao.orm.hibernate.PortletSessionFactoryImpl" />
+		<constructor-arg>
+			<map>
+				<entry key="dataSource" value-ref="simsDataSource" />
+				<entry key="sessionFactoryClassLoader" value-ref="portletClassLoader" />
+				<entry key="sessionFactoryImplementor" 
+						value-ref="simsHibernateSessionFactory" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="transactionAdvice" 
+		class="com.liferay.portal.kernel.spring.util.SpringFactoryUtil"
+		factory-method="newBean">
+		<constructor-arg
+			value="com.liferay.portal.spring.transaction.TransactionInterceptor" />
+		<constructor-arg>
+			<map>
+				<entry key="platformTransactionManager" 
+						value-ref="simsTransactionManager" />
+				<entry key="transactionAttributeSource" 
+						value-ref="transactionAttributeSource" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="simsTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		lazy-init="true">
+		<property name="dataSource">
+			<ref bean="simsDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="simsHibernateSessionFactory" />
+		</property>
+	</bean>
+</beans>

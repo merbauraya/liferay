@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.idetronic.portlet">
+	<author>Mazlan Mat</author>
+	<namespace></namespace>
+
+	<entity name="staff_active" local-service="true" remote-service="false"
+		data-source="simsDataSource"
+		tx-manager="simsTransactionManager"
+		session-factory="simsSessionFactory">
+		
+
+		<!-- PK fields -->
+
+		<column name="bp_name" type="String" />
+		<column name="bp_no_pekerja" type="String" />
+		<column name="bp_no_kp" type="String" primary="true" />
+		<column name="bk_jab_hakiki" type="String" />
+		<column name="bk_jab_hakiki_desc" type="String" />
+		<column name="bk_jab_sekarang" type="String" />
+		<column name="bk_jab_sekarang_desc" type="String" />
+		<column name="bk_jaw_jenis" type="String" />
+		<column name="al_alamat1" type="String" />
+		<column name="al_alamat2" type="String" />
+		<column name="al_alamat3" type="String" />
+ 		<column name="al_poskod" type="String" />
+ 		<column name="al_bandar" type="String" />
+ 		<column name="al_negeri" type="String" />
+ 		<column name="al_negara" type="String" />
+ 		<column name="bp_telefon" type="String" />
+ 		<column name="bp_email" type="String" />
+ 		<column name="bp_tjangka_bsara" type="Date" />
+ 		<column name="bp_rekod_status" type="String" />
+  		<column name="bk_jaw_hakiki" type="String" />
+  		<column name="bk_jaw_hakiki_desc" type="String" />
+  		<column name="bk_jaw_sekarang" type="String" />
+  		<column name="bk_jaw_sekarang_desc" type="String" />
+  		<column name="bk_tarikh_lahir" type="Date" />
+  		<column name="bk_tarikh_masuk" type="Date" />
+  		<column name="bk_rekod_status" type="String" />
+  		
+ 
+	</entity>
+</service-builder>

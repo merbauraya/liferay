@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.idetronic.service.StaffLocalService" class="com.idetronic.service.impl.StaffLocalServiceImpl" />
+	<bean id="com.idetronic.service.persistence.StaffPersistence" class="com.idetronic.service.persistence.StaffPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="simsDataSource" />
+		<property name="sessionFactory" ref="simsSessionFactory" />
+	</bean>
+</beans>

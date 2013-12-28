@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="bootstrap-carousel">
+        <wb-resource deploy-path="/" source-path="/docroot" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/docroot/WEB-INF/src"/>
+        <property name="context-root" value="bootstrap-carousel-portlet"/>
+        <property name="java-output-path" value="/bootstrap-carousel/docroot/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

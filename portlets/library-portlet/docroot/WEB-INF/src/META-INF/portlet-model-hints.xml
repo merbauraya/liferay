@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.slayer.model.LMSBook">
+		<field name="bookId" type="long" />
+		<field name="bookTitle" type="String" />
+		<field name="author" type="String" />
+		<field name="createDate" type="Date" />
+	</model>
+</model-hints>
