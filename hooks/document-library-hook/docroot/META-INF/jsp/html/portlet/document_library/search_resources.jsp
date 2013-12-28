@@ -64,33 +64,6 @@ else {
 List<Folder> mountFolders = DLAppServiceUtil.getMountFolders(scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 String keywords = ParamUtil.getString(request, "keywords");
-boolean searchFolder = true;
-/* search folder */
-List<Object> folderList = null;
-int folderHit = 0;
-DLFolder searchedFolder ;
-if (searchFolder)
-{
-	DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFolder.class);
-	Criterion criterion = null;
-	criterion = RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT+ keywords + StringPool.PERCENT); 
-	dynamicQuery.add(criterion);
-	
-
-	try {
-		folderList = DLFolderLocalServiceUtil.dynamicQuery(dynamicQuery);
-					
-	}catch (SystemException ex)
-	{
-		ex.printStackTrace();
-	}
-	
-	
-}
-
-/* end search folder */
-
-
 int searchType = ParamUtil.getInteger(request, "searchType");
 
 String displayStyle = ParamUtil.getString(request, "displayStyle");
@@ -103,6 +76,39 @@ int entryStart = ParamUtil.getInteger(request, "entryStart");
 int entryEnd = ParamUtil.getInteger(request, "entryEnd", entriesPerPage);
 
 int total = 0;
+
+
+boolean searchFolder = true;
+/* search folder */
+List<Object> folderList = null;
+int folderHit = 0;
+DLFolder searchedFolder ;
+if (searchFolder)
+{
+	DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFolder.class);
+	Criterion criterion = null;
+	criterion = RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT+ keywords + StringPool.PERCENT); 
+	dynamicQuery.setLimit(entryStart,entryEnd);
+	dynamicQuery.add(criterion);
+	
+	
+
+	try {
+		folderList = DLFolderLocalServiceUtil.dynamicQuery(dynamicQuery);
+					
+	}catch (SystemException ex)
+	{
+		ex.printStackTrace();
+		_log.error(ex, ex);
+	}
+	
+	
+}
+
+/* end search folder */
+
+
+
 %>
 
 <aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
@@ -282,21 +288,7 @@ int total = 0;
 				List resultRows = searchContainer.getResultRows();
 
 				Document[] docs = hits.getDocs();
-				/*
-					search folder
-				*/
 				
-				if (searchFolder)
-				{
-					folderHit = folderList.size();
-					for (int _folderHit = 0; _folderHit < folderHit; _folderHit++)
-					{
-						DLFolder tmpFolder;
-						tmpFolder = (DLFolder)folderList.get(_folderHit);
-						results.add(tmpFolder);
-						
-					}
-				}
 				
 				if (docs != null) {
 					for (Document doc : docs) {
@@ -319,6 +311,21 @@ int total = 0;
 						}
 
 						results.add(fileEntry);
+					}
+				}
+				/*
+				search folder
+			*/
+			
+				if (searchFolder)
+				{
+					folderHit = folderList.size();
+					for (int _folderHit = 0; _folderHit < folderHit; _folderHit++)
+					{
+						DLFolder tmpFolder = null;
+						tmpFolder = (DLFolder)folderList.get(_folderHit);
+						results.add(tmpFolder);
+						
 					}
 				}
 
@@ -516,11 +523,11 @@ int total = 0;
 			
 								<c:choose>
 									<c:when test='<%= displayStyle.equals("icon") %>'>
-										<liferay-util:include page="/html/portlet/document_library/view_folder_icon.jsp" />
+										<liferay-util:include page="/html/portlet/document_library/view_folder_search_icon.jsp" />
 									</c:when>
 			
 									<c:otherwise>
-										<liferay-util:include page="/html/portlet/document_library/view_folder_descriptive.jsp" />
+										<liferay-util:include page="/html/portlet/document_library/view_folder_descriptive_search.jsp" />
 									</c:otherwise>
 								</c:choose>
 							</c:when>
@@ -569,7 +576,7 @@ int total = 0;
 			
 								for (String columnName : entryColumns) {
 									if (columnName.equals("action")) {
-										row.addJSP("/html/portlet/document_library/folder_action.jsp");
+										row.addJSP("/html/portlet/document_library/folder_search_action.jsp");
 									}
 			
 									if (columnName.equals("create-date")) {
