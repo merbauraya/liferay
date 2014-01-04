@@ -87,6 +87,7 @@ public class ProxyHandler {
 		 }
 		}
 		 String url = origActionURL == "" ? _proxyURL: origActionURL;
+		 log.info("url="+url);
 		 url = buildProxyURL(url,rootURL);
 		 ProxyState state = new ProxyState(url,method);
 		 try {
@@ -98,10 +99,8 @@ public class ProxyHandler {
 		 
 		 String response = xform.transform(pResponse.getContents(), props);
 		// System.out.print(response);
-		
-		
-		
-		String ret = null;
+
+		log.info(response);
 		return response;
 	}
 	

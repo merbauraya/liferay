@@ -10,6 +10,8 @@
 
 	$theme.include($top_head_include)
 	<script type="text/javascript" src="$javascript_folder/jquery-1.9.1.min.js"></script>	
+	<script type="text/javascript" src="$javascript_folder/jquery-ui.min.js" charset="utf-8"></script> 
+	
 </head>
 
 <body class="$css_class">
@@ -105,7 +107,6 @@ $theme.include($body_top_include)
 
 
 <script type="text/javascript" src="$javascript_folder/bootstrap.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="$javascript_folder/jquery-ui.1.10.3.custom.min.js" charset="utf-8"></script> 
     
 </body>
 

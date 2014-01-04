@@ -16,8 +16,8 @@
 <%@page import="javax.portlet.ActionRequest"%>
 <%@page import="javax.portlet.PortletURL"%> 
 
-<%@page import="com.idetronic.portlet.FAQEntryLocalServiceUtil"%>
-<%@page import="com.idetronic.carousel.FAQEntry"%>
+<%@page import="com.idetronic.portlet.service.FAQEntryLocalServiceUtil"%>
+<%@page import="com.idetronic.portlet.model.FAQEntry"%>
 <%@page import="com.liferay.portal.kernel.util.UnicodeFormatter"%>
 <%@page import="com.liferay.portal.kernel.util.Constants" %>
 <%@ page import="javax.portlet.PortletPreferences" %>

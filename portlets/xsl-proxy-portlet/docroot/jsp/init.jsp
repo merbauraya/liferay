@@ -7,7 +7,7 @@
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="javax.portlet.ActionRequest"%>
 <%@page import="javax.portlet.PortletURL"%> 
-<%@page import="com.idetronic.carousel.ProxyConstant"%>
+<%@page import="com.idetronic.portlet.ProxyConstant"%>
 
 <%@page import="com.liferay.portal.kernel.util.UnicodeFormatter"%>
 <%@page import="com.liferay.portal.kernel.util.Constants" %>

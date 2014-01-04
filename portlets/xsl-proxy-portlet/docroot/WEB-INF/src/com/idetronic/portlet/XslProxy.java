@@ -73,7 +73,7 @@ public class XslProxy extends MVCPortlet {
 	 public void processLink(ActionRequest actionRequest, ActionResponse actionResponse)
 		        throws IOException, PortletException 
 		 {
-		 
+		 	processAction(actionRequest,actionResponse);
 		 }
 	
 	 public void processAction(ActionRequest actionRequest, ActionResponse actionResponse)
@@ -150,6 +150,7 @@ public class XslProxy extends MVCPortlet {
 		 //log.info(response);
 		 actionRequest.setAttribute("result", response);
 		 actionRequest.setAttribute("url",url);
+		 log.info("endAction");
 		 /*
 		//show the result 
 		String portletName = (String)actionRequest.getAttribute(WebKeys.PORTLET_ID);
@@ -209,6 +210,7 @@ public class XslProxy extends MVCPortlet {
 	}
 	private void getPortletInfo(ActionRequest actionRequest)
 	{
+		log.info("getPortletInfo");
 		ThemeDisplay themeDisplay =(ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		PortletConfig portletConfig = (PortletConfig) actionRequest.getAttribute("javax.portlet.config");
 		_portletName = portletConfig.getPortletName();
@@ -216,12 +218,12 @@ public class XslProxy extends MVCPortlet {
 				actionRequest,
 				_portletName + "_WAR_" + _portletName + "portlet",
 				themeDisplay.getPlid(),PortletRequest.ACTION_PHASE);
-		try {
+		/*try {
 			pURL.setWindowState(WindowState.NORMAL );
 		} catch (WindowStateException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		pURL.setParameter(ActionRequest.ACTION_NAME,ProxyConstant.ACTION_LINK);
 		_portletURL = pURL.toString();
 		

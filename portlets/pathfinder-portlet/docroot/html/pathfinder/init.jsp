@@ -26,7 +26,7 @@
 <%@ page import="com.liferay.portal.security.permission.ActionKeys"%>
 <%@page import="java.net.URL" %>
 <%@page import="java.io.*" %>
-<%@page import="com.idetronic.liferay.portlet.XslTransformer" %>
+<%@page import="com.idetronic.XslTransformer" %>
 <%@page import="com.liferay.portal.kernel.util.StringUtil" %>
  
 <liferay-theme:defineObjects />
@@ -72,8 +72,9 @@ final String defaultXSL =  "http://www.w3schools.com/xml/simple.xsl";
 String eprintURL = preferences.getValue("eprintURL","");
 String  listRecordXmlUrl = preferences.getValue("listrecord",defaultXML);
 String listSetXmlUrl = preferences.getValue("listset",defaultXML);
-String  xslUrl = preferences.getValue("xsl", defaultXSL);
-xslUrl = StringUtil.replace(xslUrl,"@portal_url@", themeDisplay.getPortalURL());
+String  xsl = preferences.getValue("xsl", defaultXSL);
+//xslUrl = StringUtil.replace(xslUrl,"@portal_url@", themeDisplay.getPortalURL());
+
  
 
  
