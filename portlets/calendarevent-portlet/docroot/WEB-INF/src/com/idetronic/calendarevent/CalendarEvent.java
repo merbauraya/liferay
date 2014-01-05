@@ -8,6 +8,7 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.RenderResponse;
@@ -31,28 +32,27 @@ public class CalendarEvent extends MVCPortlet {
 	String endDate;
 	boolean isAjax;
 	protected String viewJSP;
-	static Log log = LogFactoryUtil.getLog(com.idetronic.calendarevent.CalendarEvent.class);//  (LMSBookLocalServiceImpl.class);
-
+	static Log log = LogFactoryUtil.getLog(com.idetronic.calendarevent.CalendarEvent.class);
 	
-	/*
-    public void processAction(ActionRequest request, ActionResponse response) throws PortletException, IOException {
-    	isAjax = false;
-    	log.info("in processAction ");
-    }*/
+	
+	          
+	
     public void serveResource(ResourceRequest request, ResourceResponse response) throws PortletException, IOException 
     {
     	ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY); 
     	PortletRequestDispatcher dispatcher = null;
     	List<CalEvent> lstEvents = null;
-    	
+    	PortletPreferences pref = request.getPreferences();
+    	EventDisplayModel evModel = CalendarHelper.createEventModel(pref);
     	startDate = request.getParameter("startDate");
 		endDate = request.getParameter("endDate");
-		log.info("st="+ startDate + " end="+ endDate);
+	
 		isAjax = true;
-		SimpleDateFormat df = new  SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat df = new  SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date dStartDate = df.parse(startDate);
 			Date dEndDate   = df.parse(endDate);
+		
 			lstEvents = CalendarHelper.getEventFromDateRange(themeDisplay,dStartDate,dEndDate);
 			
 		} catch (ParseException e) {
@@ -60,38 +60,23 @@ public class CalendarEvent extends MVCPortlet {
 		}
 		
 		request.setAttribute("lstEvents", lstEvents);
-		
-		
-		
-		
-		 log.info("in refreshEvent ");
+		request.setAttribute("evModel", evModel);
 		 dispatcher = getPortletContext().getRequestDispatcher("/html/calendarevent/refreshEvent.jsp");
 		 dispatcher.include(request, response);
 		 isAjax = false;
 	 }
 
-    
-/*	 public void refreshEvent(ActionRequest request, ActionResponse response) throws PortletException, IOException 
-	 {
 
-		 startDate = request.getParameter("startDate");
-		 endDate = request.getParameter("endDate");
-		 isAjax = true;
-		 log.info("in refreshEvent ");
-	 }*/
 	 public void doView(RenderRequest request, RenderResponse response) throws PortletException, IOException 
 	 {
-		 response.setContentType("text/html");
-		 log.info("in diview ");
+		 PortletPreferences pref = request.getPreferences();
+		 EventDisplayModel evModel = CalendarHelper.createEventModel(pref);
+		 
 		 PortletRequestDispatcher dispatcher = null;
-		 //if (isAjax){
-			// dispatcher = getPortletContext().getRequestDispatcher("/html/calendarevent/refreshEvent.jsp");
-		 //}
-		 	// else
-		 //{
-			 dispatcher = getPortletContext().getRequestDispatcher("/html/calendarevent/view.jsp");
-			 
-		 //}
+	
+		dispatcher = getPortletContext().getRequestDispatcher("/html/calendarevent/view.jsp");
+		request.setAttribute("evModel", evModel);
+		
 		 dispatcher.include(request, response);
 		 
 	 }

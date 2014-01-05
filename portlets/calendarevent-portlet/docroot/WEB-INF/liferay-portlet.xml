@@ -6,6 +6,7 @@
 	<portlet>
 		<portlet-name>calendarevent</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>com.idetronic.calendarevent.CalendarConfig</configuration-action-class> 
 		<instanceable>true</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<header-portlet-css>/css/iThing.css</header-portlet-css>

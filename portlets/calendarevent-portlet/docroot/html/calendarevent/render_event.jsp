@@ -4,26 +4,39 @@
 String eventType = ParamUtil.getString(request, "eventType", "ALL_EVENT");
 List<CalEvent> lstRenderEvent = new ArrayList<CalEvent>();
 List<CalEvent> lstEvents = (List<CalEvent>)request.getAttribute("events");
-
+EventDisplayModel evModel = (EventDisplayModel) request.getAttribute("evModel");
+Map<String, Integer> map = new HashMap<String, Integer>();
+int i = 0;
+int maxEventDisplay = Integer.parseInt(evModel.getMaxEventDisplay());
 for (CalEvent cev : lstEvents) 
 {
-	if (eventType == CalendarConstant.ALL_EVENT)
-		lstRenderEvent.add(cev);
+	if (eventType == CalendarConstant.ALL_EVENT){
+		if (i < Integer.parseInt(evModel.getMaxAllEventDisplay()))
+			lstRenderEvent.add(cev);
+		i++;
+	}
 	else 
 	{
 		if (cev.getType().equalsIgnoreCase(eventType))
-			lstRenderEvent.add(cev);
+		{
+			if (map.containsKey(eventType))
+				map.put(eventType, map.get(eventType)+1);
+			else
+				map.put(eventType, 0);
+			if (maxEventDisplay > map.get(eventType))
+				lstRenderEvent.add(cev);
+		}
 		
 	}
 		
 }
 
 %>
-<div id="<%=eventType%>" class="tab-pane fade <%=eventType.equals(CalendarConstant.ALL_EVENT)? "active in":"" %>">
+<div id="<%=eventType.replaceAll(" ","-")%>" class="tab-pane fade <%=eventType.equals(CalendarConstant.ALL_EVENT)? "active in":"" %>">
 	<c:choose>
 	    <c:when test="<%= (lstRenderEvent == null) %>">
 			<div class="alert alert-warning">
-				<strong>Error retrieving event</strong>
+				<strong>Error retrieving event. Please retry again</strong>
 			
 			</div>
 		</c:when>

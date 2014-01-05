@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
+import javax.portlet.RenderRequest;
+
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -20,12 +24,16 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.calendar.service.*;
 import com.liferay.portlet.calendar.model.*;
 
+import com.idetronic.calendarevent.EventDisplayModel;
 public class CalendarHelper {
 	private static Log _log = LogFactoryUtil.getLog(CalendarHelper.class);
 	public static String[] getEventType()
@@ -56,13 +64,13 @@ public class CalendarHelper {
 			return null;
 		}
 	}
-	public static List<CalEvent> getMonthEvent(ThemeDisplay themeDisplay)
+	public static List<CalEvent> getMonthEvent(ThemeDisplay themeDisplay,EventDisplayModel evModel)
 	{
 		List<CalEvent> lstEvents = new ArrayList<CalEvent>();
 		TimeZone timeZone = themeDisplay.getTimeZone();
 		Locale locale = themeDisplay.getLocale();
 		java.util.Calendar curCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
+		
 		int curDay = curCal.get(Calendar.DAY_OF_MONTH);
 		int curMonth = curCal.get(Calendar.MONTH);
 		int curYear = curCal.get(Calendar.YEAR);
@@ -102,7 +110,7 @@ public class CalendarHelper {
 		Criterion criterion = null;
 		
 		criterion = RestrictionsFactoryUtil.between("startDate",startDate,endDate);
-		Order defaultOrder = OrderFactoryUtil.desc("startDate");
+		Order defaultOrder = OrderFactoryUtil.asc("startDate");
 
 		dynamicQuery.add(criterion);
 		dynamicQuery.addOrder(defaultOrder);
@@ -118,6 +126,17 @@ public class CalendarHelper {
 		
 		return lstEvents;
 	}
-
+	public static EventDisplayModel createEventModel(PortletPreferences preferences)
+	{
+		
+		EventDisplayModel evModel = new EventDisplayModel();
+		//String portletResource = ParamUtil.getString(renderRequest, "portletResource");
+				
+		evModel.setMaxAllEventDisplay(preferences.getValue("maxAllEventDisplay",CalendarConstant.MAX_ALL_EVENT_DISPLAY));
+		evModel.setMaxEventDisplay(preferences.getValue("maxEventDisplay", CalendarConstant.MAX_EVENT_DISPLAY));
+		evModel.setShowEmptyEventType(preferences.getValue("showEmptyEventType",CalendarConstant.SHOW_EMPTY_EVENT_TYPE));
+		
+		return evModel;
+	}
 
 }

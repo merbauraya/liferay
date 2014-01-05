@@ -149,7 +149,8 @@
 }
 
 .ui-rangeSlider-bar{
-	background: #68a1d6;
+	/*background: #68a1d6;*/
+	background: rgba(104,161,214,0.5);
   height: 29px;
   margin:1px 0;
   -moz-border-radius: 4px;

@@ -64,6 +64,7 @@
 
 <%@ page import="com.idetronic.calendarevent.CalendarHelper" %>
 <%@ page import="com.idetronic.calendarevent.CalendarConstant" %>
+<%@ page import="com.idetronic.calendarevent.EventDisplayModel" %>
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />

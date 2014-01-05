@@ -5,7 +5,8 @@
 <%
 String[] eventTypes = CalendarHelper.getEventType();
 List<CalEvent> lstEvents;
-lstEvents = CalendarHelper.getMonthEvent(themeDisplay);
+EventDisplayModel evModel = (EventDisplayModel)request.getAttribute("evModel");
+lstEvents = CalendarHelper.getMonthEvent(themeDisplay,evModel); 
 request.setAttribute("events", lstEvents);	
 %>
 <div id="dateSliderWrapper">
@@ -19,7 +20,7 @@ request.setAttribute("events", lstEvents);
       <ul class="nav nav-tabs" id="cl-event-tab">
         <li class="active"><a data-toggle="tab" href="#<%=CalendarConstant.ALL_EVENT%>">All Event</a></li>
         <% for (String eventType: eventTypes) {%>
-        	<li><a data-toggle="tab" href="#<%=eventType %>"><%=eventType %></a></li>
+        	<li id="<%=CalendarConstant.EVENT_TYPE_ID_PREFIX +eventType.replaceAll(" ","-")%>"><a data-toggle="tab" href="#<%=eventType.replaceAll(" ","-") %>"><%=eventType %></a></li>
         
         <%} %>
       </ul>
@@ -47,11 +48,19 @@ request.setAttribute("events", lstEvents);
     
    
  <aui:script>
- 
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+ 	var d = new Date();
+ 	var maxDate = new Date(d.getFullYear(),d.getMonth(), 0);
+ 	//set 1 year date range, 6 prev + 6 fwd
+ 	var lowDate =  new Date();
+ 	lowDate.setMonth(d.getMonth()-6);
+ 	var hiDate = new Date();
+ 	hiDate.setMonth(d.getMonth()+6);
+ 	var hiMaxdate = new Date(hiDate.getFullYear(),hiDate.getMonth(),0);
+ 	
+ 	var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     $("#dateSlider").dateRangeSlider({
-    bounds: {min: new Date(2013, 05, 1), max: new Date(2014, 06, 30, 12, 59, 59)},
-    defaultValues: {min: new Date(2014, 1, 1), max: new Date(2014, 1, 31)},
+    bounds: {min: new Date(lowDate.getFullYear(), lowDate.getMonth(), 1), max: new Date(hiDate.getFullYear(),hiDate.getMonth(), hiMaxdate.getDate(), 12, 59, 59)},
+    defaultValues: {min: new Date(d.getFullYear(), d.getMonth(), 1), max: new Date(d.getFullYear(), d.getMonth(), maxDate.getDate())},
     scales: [{
       first: function(value){ return value; },
       end: function(value) {return value; },
@@ -76,7 +85,7 @@ request.setAttribute("events", lstEvents);
             var endMonth = parseInt(endDate.getMonth())+1;
             $("#startDate").val(startDate.getFullYear() + "-" +startMonth + "-"+startDate.getDate() );
             $("#endDate").val(endDate.getFullYear() + "-" +endMonth + "-"+endDate.getDate() );
-            console.log($("#endDate").val());
+            
             //$("#minVal").value(data.values.min);
     		<portlet:namespace/>_updateEvent();
     });
