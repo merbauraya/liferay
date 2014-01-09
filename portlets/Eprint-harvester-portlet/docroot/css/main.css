@@ -1,0 +1,62 @@
+
+
+
+a, .accordion .switch a {border-width:0 0 1px 0; text-decoration:none}
+
+.accordion a{border-width:1px; text-decoration:underline}
+
+
+
+#side a {display:block; border-width:0 0 1px; border-color:#445; color:#f0f0f0}
+
+#side a:hover, #side a:active, #side a:focus {background-color:#334}
+
+/* --- Accordion --- */
+.js #main .accordion {visibility:hidden}
+
+.js #side .accordion {display:none}
+
+.accordion {margin:0; padding:0 10px}
+
+#ep-by-subj > ul {list-style-type:none;list-style:none;}
+#ep-by-subj  li {list-style-type:none;list-style:none;}
+#ep-by-subj  span
+{
+	font-size:12px;
+}
+.accordion li.last-child {margin-left:19px; list-style-type:disc}
+
+#side ul.accordion ul {margin:0; padding:0 0 0 20px;}
+
+.accordion .outer {border:1px solid #dadada; border-width:0 1px 1px; background: #fff}
+
+.accordion .inner {margin-bottom:0; padding:.5em 20px 1em; overflow:hidden}
+
+.accordion .inner .inner {padding-bottom:0}
+
+
+
+
+
+
+
+/*  
+  Add styles for all links in the 'accordion':
+.accordion a {...}
+*/    
+
+a.trigger {display:block; padding-left:20px; background-image: url(../img/plus.gif); background-repeat: no-repeat; background-position: 1px 50%;  font-weight:700}
+
+a.trigger.open {background-image: url(../img/minus.gif)}
+
+.last-child a.trigger{padding-left:1px; background-image:none; font-weight:normal}
+
+#main a.trigger {background-color:#f0f0f0}
+
+#main a.trigger.open {border-color:#dadada; background-color:#e7e7e7}
+
+#main a:hover.trigger.open, #main a:focus.trigger.open, #main a:active.trigger.open {border-color:#bcd}
+
+#main .switch a.open {background:transparent none}
+
+#side a.active{font-weight:700; color:#f72; text-decoration:none}

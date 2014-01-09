@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.idetronic.eprint">
+	<author>matle</author>
+	<namespace>eprint</namespace>
+	
+	<entity name="Eprint" local-service="true" remote-service="false">
+
+	
+		<column name="eprintId" type="long" primary="true" />
+		<column name="title" type="String" />
+		<column name="eprintType" type="String" />
+		<column name="eprintStatus" type="String" />
+		<column name="metadataVisibility" type="String" />
+		<column name="eprintAbstract" type="String" />
+		<column name="eprintKeywords" type="String" />
+		<column name="isPublished" type="String" />
+		<column name="dateYear" type="String" />
+		<column name="fullTextStatus" type="String" />
+		
+		
+		<finder return-type="Collection" name="eprintType">  
+   			<finder-column name="eprintType"/>  
+  		</finder>
+
+	</entity>
+</service-builder>

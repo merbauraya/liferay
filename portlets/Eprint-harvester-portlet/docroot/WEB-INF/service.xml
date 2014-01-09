@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.idetronic.eprint">
+	<author>Mazlan Mat</author>
+	<namespace>test</namespace>
+	<entity name="EprintSubject" local-service="true" table = "eprint_subjects" remote-service="true" data-source="eprintDatasource">
+		<!-- PK Fields -->
+		<column name="eprintId" type="long" primary="true"/>
+		
+		<column name="pos" type="long"/>
+		<column name="subjects" type="String"/>
+	</entity>
+	
+</service-builder>

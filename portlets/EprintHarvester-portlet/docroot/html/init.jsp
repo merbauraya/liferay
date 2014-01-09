@@ -61,7 +61,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
  
 PortletPreferences preferences = renderRequest.getPreferences();
  
-String portletResource = ParamUtil.getString(request, "portletResource");
+String portletResource = ParamUtil.getString(renderRequest, "portletResource");
  
 if (Validator.isNotNull(portletResource)) 
 {

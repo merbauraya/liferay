@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.idetronic.eprint.model.Eprint" />
+	<class name="com.idetronic.eprint.model.impl.EprintImpl" table="eprint_Eprint">
+		<cache usage="read-write" />
+		<id name="eprintId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eprintType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eprintStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="metadataVisibility" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eprintAbstract" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eprintKeywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="isPublished" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dateYear" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fullTextStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

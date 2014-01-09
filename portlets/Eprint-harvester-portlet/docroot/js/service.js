@@ -1,0 +1,1 @@
+Liferay.Service.register("Liferay.Service.test", "com.idetronic.eprint.service", "Eprint-harvester-portlet");

@@ -2,7 +2,7 @@
 	
 		<div id="km-logo" class="hidden-xs" >
 			<a class="$logo_css_class" href="$site_default_url" title="#language ("go-to") $site_name">
-							<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+							<img class="img-responsive" alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
 			</a>
 		</div>
 
@@ -65,7 +65,7 @@
 					
 					#if (!$is_signed_in)
 						<li>
-							<a href="$sign_in_url" rel="nofollow">$sign_in_text</a>
+							<a href="$sign_in_url" rel="nofollow">LOGIN</a>
 						</li>
 					#end
 					#if ($is_signed_in)

@@ -1,0 +1,15 @@
+<Context
+	antiJARLocking="true"
+	antiResourceLocking="true"
+	crossContext="true">
+
+
+  <Resource global="jdbc/eprints" name="jdbc/eprints" auth="Container" type="javax.sql.DataSource"
+               maxActive="20" maxIdle="30" maxWait="10000"
+               username="eprints" password="saga123" 
+               driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://192.168.0.120:3306/eprints"/>
+               
+   
+</Context>
+

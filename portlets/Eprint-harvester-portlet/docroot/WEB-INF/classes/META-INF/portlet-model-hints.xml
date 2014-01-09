@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.idetronic.eprint.model.EprintSubject">
+		<field name="eprintId" type="long" />
+		<field name="pos" type="long" />
+		<field name="subjects" type="String" />
+	</model>
+</model-hints>

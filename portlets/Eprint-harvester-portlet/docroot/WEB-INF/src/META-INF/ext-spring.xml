@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="eprintDatasource" lazy-init="true"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.0.120/eprints?useUnicode=true"/>
+		<property name="username" value="eprints" />
+		<property name="password" value="saga123" />
+		</bean>
+		<bean id="liferayHibernateSessionFactory"   class="com.liferay.portal.spring.hibernate.PortletHibernateConfiguration">
+		<property name="dataSource" ref="eprintDatasource" />
+	</bean>
+</beans>

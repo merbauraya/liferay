@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.idetronic.eprint.service.EprintSubjectLocalService" class="com.idetronic.eprint.service.impl.EprintSubjectLocalServiceImpl" />
+	<bean id="com.idetronic.eprint.service.EprintSubjectService" class="com.idetronic.eprint.service.impl.EprintSubjectServiceImpl" />
+	<bean id="com.idetronic.eprint.service.persistence.EprintSubjectPersistence" class="com.idetronic.eprint.service.persistence.EprintSubjectPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="eprintDatasource" />
+	</bean>
+</beans>
