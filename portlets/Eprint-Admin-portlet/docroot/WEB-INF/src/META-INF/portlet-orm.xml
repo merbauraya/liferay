@@ -19,6 +19,25 @@
 			<basic name="isPublished" />
 			<basic name="dateYear" />
 			<basic name="fullTextStatus" />
+			<basic name="companyId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="groupId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eprint.model.impl.EprintSubjectModelImpl">
+		<id-class class="com.idetronic.eprint.service.persistence.EprintSubjectPK" />
+		<attributes>
+			<id name="eprintId" />
+			<id name="subjectId" />
+			<basic name="subjectName" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -26,6 +45,10 @@
 	</mapped-superclass>
 	<entity class="com.idetronic.eprint.model.impl.EprintImpl" name="Eprint">
 		<table name="eprint_Eprint" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eprint.model.impl.EprintSubjectImpl" name="EprintSubject">
+		<table name="eprint_EprintSubject" />
 		<attributes />
 	</entity>
 </entity-mappings>

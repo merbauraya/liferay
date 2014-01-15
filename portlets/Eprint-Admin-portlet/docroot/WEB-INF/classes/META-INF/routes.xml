@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC
+        "-//Liferay//DTD Friendly URL Routes 6.1.0//EN"
+        "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_1_0.dtd">
+<routes>
+        <route>
+                <pattern>/detail/{eprintId}</pattern>
+                <ignored-parameter name="backURL"/>
+                <implicit-parameter name="jspPage">/html/eprintview/detail.jsp</implicit-parameter>
+       			
+        </route>
+        <route>
+        	<pattern>/bySubject</pattern>
+        	 <ignored-parameter name="backURL"/>
+          	<implicit-parameter name="jspPage">/html/eprintview/bysubject.jsp</implicit-parameter>
+        </route>
+        <route>
+        	<pattern>/byDivision</pattern>
+        	 <ignored-parameter name="backURL"/>
+          	<implicit-parameter name="jspPage">/html/eprintview/bydivision.jsp</implicit-parameter>
+        </route>
+         <route>
+        	<pattern>/view/{eprintId}</pattern>
+        	 <ignored-parameter name="backURL"/>
+          	<implicit-parameter name="jspPage">/html/eprintview/detail.jsp</implicit-parameter>
+        </route>
+</routes>

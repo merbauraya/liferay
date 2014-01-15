@@ -23,6 +23,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the Eprint service. Represents a row in the &quot;eprint_Eprint&quot; database table, with each column mapped to a property of this class.
  *
@@ -205,6 +207,62 @@ public interface EprintModel extends BaseModel<Eprint> {
 	 * @param fullTextStatus the full text status of this eprint
 	 */
 	public void setFullTextStatus(String fullTextStatus);
+
+	/**
+	 * Returns the company ID of this eprint.
+	 *
+	 * @return the company ID of this eprint
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this eprint.
+	 *
+	 * @param companyId the company ID of this eprint
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the modified date of this eprint.
+	 *
+	 * @return the modified date of this eprint
+	 */
+	public Date getModifiedDate();
+
+	/**
+	 * Sets the modified date of this eprint.
+	 *
+	 * @param modifiedDate the modified date of this eprint
+	 */
+	public void setModifiedDate(Date modifiedDate);
+
+	/**
+	 * Returns the created date of this eprint.
+	 *
+	 * @return the created date of this eprint
+	 */
+	public Date getCreatedDate();
+
+	/**
+	 * Sets the created date of this eprint.
+	 *
+	 * @param createdDate the created date of this eprint
+	 */
+	public void setCreatedDate(Date createdDate);
+
+	/**
+	 * Returns the group ID of this eprint.
+	 *
+	 * @return the group ID of this eprint
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this eprint.
+	 *
+	 * @param groupId the group ID of this eprint
+	 */
+	public void setGroupId(long groupId);
 
 	public boolean isNew();
 

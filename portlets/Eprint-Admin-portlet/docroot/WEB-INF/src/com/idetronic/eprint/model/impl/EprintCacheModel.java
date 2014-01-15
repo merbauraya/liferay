@@ -22,6 +22,8 @@ import com.liferay.portal.model.CacheModel;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing Eprint in entity cache.
  *
@@ -32,7 +34,7 @@ import java.io.Serializable;
 public class EprintCacheModel implements CacheModel<Eprint>, Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{eprintId=");
 		sb.append(eprintId);
@@ -54,6 +56,14 @@ public class EprintCacheModel implements CacheModel<Eprint>, Serializable {
 		sb.append(dateYear);
 		sb.append(", fullTextStatus=");
 		sb.append(fullTextStatus);
+		sb.append(", companyId=");
+		sb.append(companyId);
+		sb.append(", modifiedDate=");
+		sb.append(modifiedDate);
+		sb.append(", createdDate=");
+		sb.append(createdDate);
+		sb.append(", groupId=");
+		sb.append(groupId);
 		sb.append("}");
 
 		return sb.toString();
@@ -127,6 +137,24 @@ public class EprintCacheModel implements CacheModel<Eprint>, Serializable {
 			eprintImpl.setFullTextStatus(fullTextStatus);
 		}
 
+		eprintImpl.setCompanyId(companyId);
+
+		if (modifiedDate == Long.MIN_VALUE) {
+			eprintImpl.setModifiedDate(null);
+		}
+		else {
+			eprintImpl.setModifiedDate(new Date(modifiedDate));
+		}
+
+		if (createdDate == Long.MIN_VALUE) {
+			eprintImpl.setCreatedDate(null);
+		}
+		else {
+			eprintImpl.setCreatedDate(new Date(createdDate));
+		}
+
+		eprintImpl.setGroupId(groupId);
+
 		eprintImpl.resetOriginalValues();
 
 		return eprintImpl;
@@ -142,4 +170,8 @@ public class EprintCacheModel implements CacheModel<Eprint>, Serializable {
 	public String isPublished;
 	public String dateYear;
 	public String fullTextStatus;
+	public long companyId;
+	public long modifiedDate;
+	public long createdDate;
+	public long groupId;
 }

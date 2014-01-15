@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.idetronic.eprint.model.Eprint" />
+	<import class="com.idetronic.eprint.model.EprintSubject" />
 	<class name="com.idetronic.eprint.model.impl.EprintImpl" table="eprint_Eprint">
 		<cache usage="read-write" />
 		<id name="eprintId" type="long">
@@ -17,5 +18,17 @@
 		<property name="isPublished" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dateYear" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="fullTextStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.idetronic.eprint.model.impl.EprintSubjectImpl" table="eprint_EprintSubject">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.idetronic.eprint.service.persistence.EprintSubjectPK">
+			<key-property name="eprintId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="subjectId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		</composite-id>
+		<property name="subjectName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

@@ -48,6 +48,8 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -354,6 +356,10 @@ public class EprintPersistenceImpl extends BasePersistenceImpl<Eprint>
 		eprintImpl.setIsPublished(eprint.getIsPublished());
 		eprintImpl.setDateYear(eprint.getDateYear());
 		eprintImpl.setFullTextStatus(eprint.getFullTextStatus());
+		eprintImpl.setCompanyId(eprint.getCompanyId());
+		eprintImpl.setModifiedDate(eprint.getModifiedDate());
+		eprintImpl.setCreatedDate(eprint.getCreatedDate());
+		eprintImpl.setGroupId(eprint.getGroupId());
 
 		return eprintImpl;
 	}
@@ -1126,10 +1132,14 @@ public class EprintPersistenceImpl extends BasePersistenceImpl<Eprint>
 
 	@BeanReference(type = EprintPersistence.class)
 	protected EprintPersistence eprintPersistence;
+	@BeanReference(type = EprintSubjectPersistence.class)
+	protected EprintSubjectPersistence eprintSubjectPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
 	private static final String _SQL_SELECT_EPRINT = "SELECT eprint FROM Eprint eprint";
 	private static final String _SQL_SELECT_EPRINT_WHERE = "SELECT eprint FROM Eprint eprint WHERE ";
 	private static final String _SQL_COUNT_EPRINT = "SELECT COUNT(eprint) FROM Eprint eprint";

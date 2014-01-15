@@ -4,7 +4,7 @@
 	
 	<portlet>
 		<portlet-name>Eprint Admin</portlet-name>
-		<display-name>Eprint Admin</display-name>
+		<display-name>Eprint Repository Admin</display-name>
 		<portlet-class>
 			com.idetronic.eprint.admin.EprintAdmin
 		</portlet-class>
@@ -22,9 +22,50 @@
 			<portlet-mode>view</portlet-mode>
 			<portlet-mode>config</portlet-mode>
 		</supports>
+		<supported-locale>en_GB</supported-locale>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Eprint Admin</title>
-			<short-title>New Portlet</short-title>
+			<short-title>Eprint Admin</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>eprintview</portlet-name>
+		<display-name>Eprint Viewer</display-name>
+		<portlet-class>com.idetronic.eprint.EprintView</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/eprintview/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/eprintview/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Eprint View</title>
+			<short-title>Eprint View</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

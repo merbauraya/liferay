@@ -12,5 +12,14 @@
 		<field name="isPublished" type="String" />
 		<field name="dateYear" type="String" />
 		<field name="fullTextStatus" type="String" />
+		<field name="companyId" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="createdDate" type="Date" />
+		<field name="groupId" type="long" />
+	</model>
+	<model name="com.idetronic.eprint.model.EprintSubject">
+		<field name="eprintId" type="long" />
+		<field name="subjectId" type="String" />
+		<field name="subjectName" type="String" />
 	</model>
 </model-hints>

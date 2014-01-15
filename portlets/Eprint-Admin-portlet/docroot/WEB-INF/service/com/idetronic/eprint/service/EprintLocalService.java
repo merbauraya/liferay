@@ -248,5 +248,28 @@ public interface EprintLocalService extends BaseLocalService,
 		java.lang.String eprintStatus, java.lang.String eprintType,
 		java.lang.String metadataVisibility, java.lang.String eprintKeywords,
 		java.lang.String isPublished, java.lang.String dateYear,
-		java.lang.String fullTextStatus);
+		java.lang.String fullTextStatus, java.util.Date createdDate,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.idetronic.eprint.model.Eprint modifyEprint(long eprintId,
+		java.lang.String title, java.lang.String eprintAbstract,
+		java.lang.String eprintStatus, java.lang.String eprintType,
+		java.lang.String metadataVisibility, java.lang.String eprintKeywords,
+		java.lang.String isPublished, java.lang.String dateYear,
+		java.lang.String fullTextStatus, java.util.Date createdDate,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.search.Hits getHits(
+		java.lang.String keyword, long companyId, long groupId);
+
+	public java.util.List<com.idetronic.eprint.model.Eprint> findBySubjectId(
+		java.lang.String subjectId, int begin, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.idetronic.eprint.model.Eprint> searchIndex(
+		java.lang.String keyword, long companyId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

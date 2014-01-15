@@ -28,6 +28,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,6 +77,10 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 		attributes.put("isPublished", getIsPublished());
 		attributes.put("dateYear", getDateYear());
 		attributes.put("fullTextStatus", getFullTextStatus());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createdDate", getCreatedDate());
+		attributes.put("groupId", getGroupId());
 
 		return attributes;
 	}
@@ -140,6 +145,30 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 
 		if (fullTextStatus != null) {
 			setFullTextStatus(fullTextStatus);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
+		Date createdDate = (Date)attributes.get("createdDate");
+
+		if (createdDate != null) {
+			setCreatedDate(createdDate);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 	}
 
@@ -357,6 +386,90 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 		}
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_eprintRemoteModel != null) {
+			try {
+				Class<?> clazz = _eprintRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_eprintRemoteModel, companyId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+
+		if (_eprintRemoteModel != null) {
+			try {
+				Class<?> clazz = _eprintRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModifiedDate", Date.class);
+
+				method.invoke(_eprintRemoteModel, modifiedDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	public Date getCreatedDate() {
+		return _createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		_createdDate = createdDate;
+
+		if (_eprintRemoteModel != null) {
+			try {
+				Class<?> clazz = _eprintRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCreatedDate", Date.class);
+
+				method.invoke(_eprintRemoteModel, createdDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_eprintRemoteModel != null) {
+			try {
+				Class<?> clazz = _eprintRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_eprintRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getEprintRemoteModel() {
 		return _eprintRemoteModel;
 	}
@@ -439,6 +552,10 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 		clone.setIsPublished(getIsPublished());
 		clone.setDateYear(getDateYear());
 		clone.setFullTextStatus(getFullTextStatus());
+		clone.setCompanyId(getCompanyId());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setCreatedDate(getCreatedDate());
+		clone.setGroupId(getGroupId());
 
 		return clone;
 	}
@@ -486,7 +603,7 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{eprintId=");
 		sb.append(getEprintId());
@@ -508,13 +625,21 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 		sb.append(getDateYear());
 		sb.append(", fullTextStatus=");
 		sb.append(getFullTextStatus());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", createdDate=");
+		sb.append(getCreatedDate());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eprint.model.Eprint");
@@ -560,6 +685,22 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 			"<column><column-name>fullTextStatus</column-name><column-value><![CDATA[");
 		sb.append(getFullTextStatus());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createdDate</column-name><column-value><![CDATA[");
+		sb.append(getCreatedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -576,5 +717,9 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 	private String _isPublished;
 	private String _dateYear;
 	private String _fullTextStatus;
+	private long _companyId;
+	private Date _modifiedDate;
+	private Date _createdDate;
+	private long _groupId;
 	private BaseModel<?> _eprintRemoteModel;
 }

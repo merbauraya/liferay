@@ -17,11 +17,24 @@
 		<column name="isPublished" type="String" />
 		<column name="dateYear" type="String" />
 		<column name="fullTextStatus" type="String" />
-		
+		<column name="companyId" type="long" />
+		<column name="modifiedDate" type="Date" />
+		<column name="createdDate" type="Date" />
+		<column name="groupId" type="long" />
 		
 		<finder return-type="Collection" name="eprintType">  
    			<finder-column name="eprintType"/>  
   		</finder>
+  		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+  		
 
 	</entity>
+	<entity name="EprintSubject" local-service="true" remote-service="false">
+		<column name="eprintId" type="long" primary="true"/>
+		<column name="subjectId" type="String" primary="true"/>
+		<column name="subjectName" type="String" />
+		
+	
+	</entity>
+	
 </service-builder>

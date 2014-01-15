@@ -267,10 +267,43 @@ public class EprintLocalServiceWrapper implements EprintLocalService,
 		java.lang.String eprintStatus, java.lang.String eprintType,
 		java.lang.String metadataVisibility, java.lang.String eprintKeywords,
 		java.lang.String isPublished, java.lang.String dateYear,
-		java.lang.String fullTextStatus) {
+		java.lang.String fullTextStatus, java.util.Date createdDate,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eprintLocalService.insertEprint(eprintId, title,
 			eprintAbstract, eprintStatus, eprintType, metadataVisibility,
-			eprintKeywords, isPublished, dateYear, fullTextStatus);
+			eprintKeywords, isPublished, dateYear, fullTextStatus, createdDate,
+			modifiedDate, serviceContext);
+	}
+
+	public com.idetronic.eprint.model.Eprint modifyEprint(long eprintId,
+		java.lang.String title, java.lang.String eprintAbstract,
+		java.lang.String eprintStatus, java.lang.String eprintType,
+		java.lang.String metadataVisibility, java.lang.String eprintKeywords,
+		java.lang.String isPublished, java.lang.String dateYear,
+		java.lang.String fullTextStatus, java.util.Date createdDate,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eprintLocalService.modifyEprint(eprintId, title,
+			eprintAbstract, eprintStatus, eprintType, metadataVisibility,
+			eprintKeywords, isPublished, dateYear, fullTextStatus, createdDate,
+			modifiedDate, serviceContext);
+	}
+
+	public com.liferay.portal.kernel.search.Hits getHits(
+		java.lang.String keyword, long companyId, long groupId) {
+		return _eprintLocalService.getHits(keyword, companyId, groupId);
+	}
+
+	public java.util.List<com.idetronic.eprint.model.Eprint> findBySubjectId(
+		java.lang.String subjectId, int begin, int end) {
+		return _eprintLocalService.findBySubjectId(subjectId, begin, end);
+	}
+
+	public java.util.List<com.idetronic.eprint.model.Eprint> searchIndex(
+		java.lang.String keyword, long companyId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _eprintLocalService.searchIndex(keyword, companyId, groupId);
 	}
 
 	/**

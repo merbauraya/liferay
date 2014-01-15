@@ -33,6 +33,7 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,9 +68,13 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 			{ "eprintKeywords", Types.VARCHAR },
 			{ "isPublished", Types.VARCHAR },
 			{ "dateYear", Types.VARCHAR },
-			{ "fullTextStatus", Types.VARCHAR }
+			{ "fullTextStatus", Types.VARCHAR },
+			{ "companyId", Types.BIGINT },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "createdDate", Types.TIMESTAMP },
+			{ "groupId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table eprint_Eprint (eprintId LONG not null primary key,title VARCHAR(75) null,eprintType VARCHAR(75) null,eprintStatus VARCHAR(75) null,metadataVisibility VARCHAR(75) null,eprintAbstract VARCHAR(75) null,eprintKeywords VARCHAR(75) null,isPublished VARCHAR(75) null,dateYear VARCHAR(75) null,fullTextStatus VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table eprint_Eprint (eprintId LONG not null primary key,title VARCHAR(75) null,eprintType VARCHAR(75) null,eprintStatus VARCHAR(75) null,metadataVisibility VARCHAR(75) null,eprintAbstract VARCHAR(75) null,eprintKeywords VARCHAR(75) null,isPublished VARCHAR(75) null,dateYear VARCHAR(75) null,fullTextStatus VARCHAR(75) null,companyId LONG,modifiedDate DATE null,createdDate DATE null,groupId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table eprint_Eprint";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -128,6 +133,10 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 		attributes.put("isPublished", getIsPublished());
 		attributes.put("dateYear", getDateYear());
 		attributes.put("fullTextStatus", getFullTextStatus());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createdDate", getCreatedDate());
+		attributes.put("groupId", getGroupId());
 
 		return attributes;
 	}
@@ -192,6 +201,30 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 
 		if (fullTextStatus != null) {
 			setFullTextStatus(fullTextStatus);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
+		Date createdDate = (Date)attributes.get("createdDate");
+
+		if (createdDate != null) {
+			setCreatedDate(createdDate);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 	}
 
@@ -330,13 +363,45 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 		_fullTextStatus = fullTextStatus;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
+	public Date getCreatedDate() {
+		return _createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		_createdDate = createdDate;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			Eprint.class.getName(), getPrimaryKey());
 	}
 
@@ -375,6 +440,10 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 		eprintImpl.setIsPublished(getIsPublished());
 		eprintImpl.setDateYear(getDateYear());
 		eprintImpl.setFullTextStatus(getFullTextStatus());
+		eprintImpl.setCompanyId(getCompanyId());
+		eprintImpl.setModifiedDate(getModifiedDate());
+		eprintImpl.setCreatedDate(getCreatedDate());
+		eprintImpl.setGroupId(getGroupId());
 
 		eprintImpl.resetOriginalValues();
 
@@ -509,12 +578,34 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 			eprintCacheModel.fullTextStatus = null;
 		}
 
+		eprintCacheModel.companyId = getCompanyId();
+
+		Date modifiedDate = getModifiedDate();
+
+		if (modifiedDate != null) {
+			eprintCacheModel.modifiedDate = modifiedDate.getTime();
+		}
+		else {
+			eprintCacheModel.modifiedDate = Long.MIN_VALUE;
+		}
+
+		Date createdDate = getCreatedDate();
+
+		if (createdDate != null) {
+			eprintCacheModel.createdDate = createdDate.getTime();
+		}
+		else {
+			eprintCacheModel.createdDate = Long.MIN_VALUE;
+		}
+
+		eprintCacheModel.groupId = getGroupId();
+
 		return eprintCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{eprintId=");
 		sb.append(getEprintId());
@@ -536,13 +627,21 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 		sb.append(getDateYear());
 		sb.append(", fullTextStatus=");
 		sb.append(getFullTextStatus());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", createdDate=");
+		sb.append(getCreatedDate());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.eprint.model.Eprint");
@@ -588,6 +687,22 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 			"<column><column-name>fullTextStatus</column-name><column-value><![CDATA[");
 		sb.append(getFullTextStatus());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createdDate</column-name><column-value><![CDATA[");
+		sb.append(getCreatedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -607,6 +722,10 @@ public class EprintModelImpl extends BaseModelImpl<Eprint>
 	private String _isPublished;
 	private String _dateYear;
 	private String _fullTextStatus;
+	private long _companyId;
+	private Date _modifiedDate;
+	private Date _createdDate;
+	private long _groupId;
 	private long _columnBitmask;
 	private Eprint _escapedModel;
 }

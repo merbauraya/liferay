@@ -29,17 +29,11 @@ public class CarouselConfig implements ConfigurationAction {
 	public void processAction(PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse) throws Exception {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-		   log.info("cmd="+ cmd);
-	 
-	     //   if (!cmd.equals(Constants.UPDATE)) {
-	      //      return;
-	       // }
-
-			
+		  
 	        String backgroundColor = ParamUtil.getString(actionRequest, "backgroundColor");
 	        String height  = ParamUtil.getString(actionRequest, "height");
 	        String tags = ParamUtil.getString(actionRequest, "assetTagNames");
-	        log.info("backgroundColor="+backgroundColor);
+	       
 	        String portletResource = ParamUtil.getString(actionRequest,"portletResource");
 	        PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(actionRequest, portletResource);
 	        String cssStyle = ParamUtil.getString(actionRequest, "cssStyle");

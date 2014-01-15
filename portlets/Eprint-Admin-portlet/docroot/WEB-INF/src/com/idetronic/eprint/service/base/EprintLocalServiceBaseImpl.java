@@ -16,7 +16,10 @@ package com.idetronic.eprint.service.base;
 
 import com.idetronic.eprint.model.Eprint;
 import com.idetronic.eprint.service.EprintLocalService;
+import com.idetronic.eprint.service.EprintSubjectLocalService;
+import com.idetronic.eprint.service.persistence.EprintFinder;
 import com.idetronic.eprint.service.persistence.EprintPersistence;
+import com.idetronic.eprint.service.persistence.EprintSubjectPersistence;
 
 import com.liferay.counter.service.CounterLocalService;
 
@@ -40,6 +43,10 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+
+import com.liferay.portlet.asset.service.AssetEntryLocalService;
+import com.liferay.portlet.asset.service.AssetEntryService;
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
 import java.io.Serializable;
 
@@ -303,6 +310,62 @@ public abstract class EprintLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the eprint finder.
+	 *
+	 * @return the eprint finder
+	 */
+	public EprintFinder getEprintFinder() {
+		return eprintFinder;
+	}
+
+	/**
+	 * Sets the eprint finder.
+	 *
+	 * @param eprintFinder the eprint finder
+	 */
+	public void setEprintFinder(EprintFinder eprintFinder) {
+		this.eprintFinder = eprintFinder;
+	}
+
+	/**
+	 * Returns the eprint subject local service.
+	 *
+	 * @return the eprint subject local service
+	 */
+	public EprintSubjectLocalService getEprintSubjectLocalService() {
+		return eprintSubjectLocalService;
+	}
+
+	/**
+	 * Sets the eprint subject local service.
+	 *
+	 * @param eprintSubjectLocalService the eprint subject local service
+	 */
+	public void setEprintSubjectLocalService(
+		EprintSubjectLocalService eprintSubjectLocalService) {
+		this.eprintSubjectLocalService = eprintSubjectLocalService;
+	}
+
+	/**
+	 * Returns the eprint subject persistence.
+	 *
+	 * @return the eprint subject persistence
+	 */
+	public EprintSubjectPersistence getEprintSubjectPersistence() {
+		return eprintSubjectPersistence;
+	}
+
+	/**
+	 * Sets the eprint subject persistence.
+	 *
+	 * @param eprintSubjectPersistence the eprint subject persistence
+	 */
+	public void setEprintSubjectPersistence(
+		EprintSubjectPersistence eprintSubjectPersistence) {
+		this.eprintSubjectPersistence = eprintSubjectPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -429,6 +492,62 @@ public abstract class EprintLocalServiceBaseImpl extends BaseLocalServiceImpl
 		this.userPersistence = userPersistence;
 	}
 
+	/**
+	 * Returns the asset entry local service.
+	 *
+	 * @return the asset entry local service
+	 */
+	public AssetEntryLocalService getAssetEntryLocalService() {
+		return assetEntryLocalService;
+	}
+
+	/**
+	 * Sets the asset entry local service.
+	 *
+	 * @param assetEntryLocalService the asset entry local service
+	 */
+	public void setAssetEntryLocalService(
+		AssetEntryLocalService assetEntryLocalService) {
+		this.assetEntryLocalService = assetEntryLocalService;
+	}
+
+	/**
+	 * Returns the asset entry remote service.
+	 *
+	 * @return the asset entry remote service
+	 */
+	public AssetEntryService getAssetEntryService() {
+		return assetEntryService;
+	}
+
+	/**
+	 * Sets the asset entry remote service.
+	 *
+	 * @param assetEntryService the asset entry remote service
+	 */
+	public void setAssetEntryService(AssetEntryService assetEntryService) {
+		this.assetEntryService = assetEntryService;
+	}
+
+	/**
+	 * Returns the asset entry persistence.
+	 *
+	 * @return the asset entry persistence
+	 */
+	public AssetEntryPersistence getAssetEntryPersistence() {
+		return assetEntryPersistence;
+	}
+
+	/**
+	 * Sets the asset entry persistence.
+	 *
+	 * @param assetEntryPersistence the asset entry persistence
+	 */
+	public void setAssetEntryPersistence(
+		AssetEntryPersistence assetEntryPersistence) {
+		this.assetEntryPersistence = assetEntryPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		Class<?> clazz = getClass();
 
@@ -512,6 +631,12 @@ public abstract class EprintLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected EprintLocalService eprintLocalService;
 	@BeanReference(type = EprintPersistence.class)
 	protected EprintPersistence eprintPersistence;
+	@BeanReference(type = EprintFinder.class)
+	protected EprintFinder eprintFinder;
+	@BeanReference(type = EprintSubjectLocalService.class)
+	protected EprintSubjectLocalService eprintSubjectLocalService;
+	@BeanReference(type = EprintSubjectPersistence.class)
+	protected EprintSubjectPersistence eprintSubjectPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)
@@ -526,6 +651,12 @@ public abstract class EprintLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected UserService userService;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+	@BeanReference(type = AssetEntryLocalService.class)
+	protected AssetEntryLocalService assetEntryLocalService;
+	@BeanReference(type = AssetEntryService.class)
+	protected AssetEntryService assetEntryService;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
 	private String _beanIdentifier;
 	private ClassLoader _classLoader;
 	private EprintLocalServiceClpInvoker _clpInvoker = new EprintLocalServiceClpInvoker();

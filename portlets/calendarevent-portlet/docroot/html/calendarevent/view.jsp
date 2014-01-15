@@ -8,6 +8,10 @@ List<CalEvent> lstEvents;
 EventDisplayModel evModel = (EventDisplayModel)request.getAttribute("evModel");
 lstEvents = CalendarHelper.getMonthEvent(themeDisplay,evModel); 
 request.setAttribute("events", lstEvents);	
+int evCounter = eventTypes.length;
+int i=1;
+int startDropdownMenu = 10;
+
 %>
 <div id="dateSliderWrapper">
 	<input type="hidden" id="startDate">
@@ -19,10 +23,41 @@ request.setAttribute("events", lstEvents);
 <div class="cl-event-wrapper">
       <ul class="nav nav-tabs" id="cl-event-tab">
         <li class="active"><a data-toggle="tab" href="#<%=CalendarConstant.ALL_EVENT%>">All Event</a></li>
-        <% for (String eventType: eventTypes) {%>
-        	<li id="<%=CalendarConstant.EVENT_TYPE_ID_PREFIX +eventType.replaceAll(" ","-")%>"><a data-toggle="tab" href="#<%=eventType.replaceAll(" ","-") %>"><%=eventType %></a></li>
-        
+        <% for (String eventType: eventTypes) {
+        	 i++;
+        %>
+        <c:choose>
+	        <c:when test="<%=evCounter <=startDropdownMenu %>">
+	        	<li id="<%=CalendarConstant.EVENT_TYPE_ID_PREFIX +eventType.replaceAll(" ","-")%>"><a data-toggle="tab" href="#<%=eventType.replaceAll(" ","-") %>"><%=eventType %></a></li>
+	        </c:when>
+        	<c:otherwise>
+	        	
+	        	<c:choose>
+	        		<c:when test="<%= i == startDropdownMenu %>">
+	        			<li class="dropdown">
+	        				<a class="dropdown-toggle" href="#" data-toggle="dropdown">
+	        					More <span class="caret"></span>
+	        				</a>
+	        				<ul class="dropdown-menu" role="menu">
+	        					<li id="<%=CalendarConstant.EVENT_TYPE_ID_PREFIX +eventType.replaceAll(" ","-")%>"><a data-toggle="tab" href="#<%=eventType.replaceAll(" ","-") %>"><%=eventType %></a></li>
+	 
+	        		</c:when>
+	        		<c:otherwise>
+	        			<li id="<%=CalendarConstant.EVENT_TYPE_ID_PREFIX +eventType.replaceAll(" ","-")%>"><a data-toggle="tab" href="#<%=eventType.replaceAll(" ","-") %>"><%=eventType %></a></li>
+	        		</c:otherwise>
+	        	</c:choose>
+	        </c:otherwise>
+        </c:choose>
+            			
+      
+        	
+     
         <%} %>
+  		<c:if test="<%= evCounter >=startDropdownMenu+1 %>">
+        		</ul>
+        	</li>
+        </c:if>
+        
       </ul>
       
       <div class="tab-content" id="cl-event-tabContent">

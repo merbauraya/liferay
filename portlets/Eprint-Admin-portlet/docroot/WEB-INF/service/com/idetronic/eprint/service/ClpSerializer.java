@@ -15,6 +15,7 @@
 package com.idetronic.eprint.service;
 
 import com.idetronic.eprint.model.EprintClp;
+import com.idetronic.eprint.model.EprintSubjectClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -106,6 +107,10 @@ public class ClpSerializer {
 			return translateInputEprint(oldModel);
 		}
 
+		if (oldModelClassName.equals(EprintSubjectClp.class.getName())) {
+			return translateInputEprintSubject(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +130,16 @@ public class ClpSerializer {
 		EprintClp oldClpModel = (EprintClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getEprintRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputEprintSubject(BaseModel<?> oldModel) {
+		EprintSubjectClp oldClpModel = (EprintSubjectClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getEprintSubjectRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +166,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.idetronic.eprint.model.impl.EprintImpl")) {
 			return translateOutputEprint(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"com.idetronic.eprint.model.impl.EprintSubjectImpl")) {
+			return translateOutputEprintSubject(oldModel);
 		}
 
 		return oldModel;
@@ -237,6 +257,11 @@ public class ClpSerializer {
 			return new com.idetronic.eprint.NoSuchEprintException();
 		}
 
+		if (className.equals(
+					"com.idetronic.eprint.NoSuchEprintSubjectException")) {
+			return new com.idetronic.eprint.NoSuchEprintSubjectException();
+		}
+
 		return throwable;
 	}
 
@@ -246,6 +271,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setEprintRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputEprintSubject(BaseModel<?> oldModel) {
+		EprintSubjectClp newModel = new EprintSubjectClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setEprintSubjectRemoteModel(oldModel);
 
 		return newModel;
 	}

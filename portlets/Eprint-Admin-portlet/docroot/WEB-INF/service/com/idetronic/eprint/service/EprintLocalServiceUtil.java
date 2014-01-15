@@ -274,11 +274,43 @@ public class EprintLocalServiceUtil {
 		java.lang.String eprintStatus, java.lang.String eprintType,
 		java.lang.String metadataVisibility, java.lang.String eprintKeywords,
 		java.lang.String isPublished, java.lang.String dateYear,
-		java.lang.String fullTextStatus) {
+		java.lang.String fullTextStatus, java.util.Date createdDate,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .insertEprint(eprintId, title, eprintAbstract, eprintStatus,
 			eprintType, metadataVisibility, eprintKeywords, isPublished,
-			dateYear, fullTextStatus);
+			dateYear, fullTextStatus, createdDate, modifiedDate, serviceContext);
+	}
+
+	public static com.idetronic.eprint.model.Eprint modifyEprint(
+		long eprintId, java.lang.String title, java.lang.String eprintAbstract,
+		java.lang.String eprintStatus, java.lang.String eprintType,
+		java.lang.String metadataVisibility, java.lang.String eprintKeywords,
+		java.lang.String isPublished, java.lang.String dateYear,
+		java.lang.String fullTextStatus, java.util.Date createdDate,
+		java.util.Date modifiedDate,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .modifyEprint(eprintId, title, eprintAbstract, eprintStatus,
+			eprintType, metadataVisibility, eprintKeywords, isPublished,
+			dateYear, fullTextStatus, createdDate, modifiedDate, serviceContext);
+	}
+
+	public static com.liferay.portal.kernel.search.Hits getHits(
+		java.lang.String keyword, long companyId, long groupId) {
+		return getService().getHits(keyword, companyId, groupId);
+	}
+
+	public static java.util.List<com.idetronic.eprint.model.Eprint> findBySubjectId(
+		java.lang.String subjectId, int begin, int end) {
+		return getService().findBySubjectId(subjectId, begin, end);
+	}
+
+	public static java.util.List<com.idetronic.eprint.model.Eprint> searchIndex(
+		java.lang.String keyword, long companyId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().searchIndex(keyword, companyId, groupId);
 	}
 
 	public static void clearService() {

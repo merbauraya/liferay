@@ -17,6 +17,7 @@ package com.idetronic.eprint.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,6 +56,10 @@ public class EprintWrapper implements Eprint, ModelWrapper<Eprint> {
 		attributes.put("isPublished", getIsPublished());
 		attributes.put("dateYear", getDateYear());
 		attributes.put("fullTextStatus", getFullTextStatus());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createdDate", getCreatedDate());
+		attributes.put("groupId", getGroupId());
 
 		return attributes;
 	}
@@ -118,6 +123,30 @@ public class EprintWrapper implements Eprint, ModelWrapper<Eprint> {
 
 		if (fullTextStatus != null) {
 			setFullTextStatus(fullTextStatus);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
+		Date createdDate = (Date)attributes.get("createdDate");
+
+		if (createdDate != null) {
+			setCreatedDate(createdDate);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
 		}
 	}
 
@@ -317,6 +346,78 @@ public class EprintWrapper implements Eprint, ModelWrapper<Eprint> {
 	*/
 	public void setFullTextStatus(java.lang.String fullTextStatus) {
 		_eprint.setFullTextStatus(fullTextStatus);
+	}
+
+	/**
+	* Returns the company ID of this eprint.
+	*
+	* @return the company ID of this eprint
+	*/
+	public long getCompanyId() {
+		return _eprint.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this eprint.
+	*
+	* @param companyId the company ID of this eprint
+	*/
+	public void setCompanyId(long companyId) {
+		_eprint.setCompanyId(companyId);
+	}
+
+	/**
+	* Returns the modified date of this eprint.
+	*
+	* @return the modified date of this eprint
+	*/
+	public java.util.Date getModifiedDate() {
+		return _eprint.getModifiedDate();
+	}
+
+	/**
+	* Sets the modified date of this eprint.
+	*
+	* @param modifiedDate the modified date of this eprint
+	*/
+	public void setModifiedDate(java.util.Date modifiedDate) {
+		_eprint.setModifiedDate(modifiedDate);
+	}
+
+	/**
+	* Returns the created date of this eprint.
+	*
+	* @return the created date of this eprint
+	*/
+	public java.util.Date getCreatedDate() {
+		return _eprint.getCreatedDate();
+	}
+
+	/**
+	* Sets the created date of this eprint.
+	*
+	* @param createdDate the created date of this eprint
+	*/
+	public void setCreatedDate(java.util.Date createdDate) {
+		_eprint.setCreatedDate(createdDate);
+	}
+
+	/**
+	* Returns the group ID of this eprint.
+	*
+	* @return the group ID of this eprint
+	*/
+	public long getGroupId() {
+		return _eprint.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this eprint.
+	*
+	* @param groupId the group ID of this eprint
+	*/
+	public void setGroupId(long groupId) {
+		_eprint.setGroupId(groupId);
 	}
 
 	public boolean isNew() {

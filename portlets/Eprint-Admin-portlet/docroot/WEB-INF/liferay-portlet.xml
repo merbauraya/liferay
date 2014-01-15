@@ -6,14 +6,51 @@
 	<portlet>
 		<portlet-name>Eprint Admin</portlet-name>
 		<icon>/icon.png</icon>
-		<control-panel-entry-category>my</control-panel-entry-category>
+		
+		<indexer-class>com.idetronic.eprint.admin.search.EprintIndexer</indexer-class>
+		<open-search-class>
+			com.idetronic.eprint.admin.search.EprintOpenSearchImpl
+		</open-search-class>
+		<friendly-url-mapper-class>
+                        com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper
+        </friendly-url-mapper-class>
+        <friendly-url-mapping>eprint</friendly-url-mapping>
+        <friendly-url-routes>META-INF/routes.xml</friendly-url-routes>
+		
+		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>1.5</control-panel-entry-weight>
+		<asset-renderer-factory>
+			com.idetronic.eprint.asset.EprintAssetRendererFactory
+		</asset-renderer-factory>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>eprint admin-portlet</css-class-wrapper>
+	
+	</portlet>
+
+
+	<portlet>
+		<portlet-name>eprintview</portlet-name>
+		<icon>/icon.png</icon>
+		
+		<configuration-action-class>
+			com.idetronic.eprint.EprintConfigAction
+        </configuration-action-class>   
+        <friendly-url-mapper-class>
+                        com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper
+        </friendly-url-mapper-class>
+        <friendly-url-mapping>eprint</friendly-url-mapping>
+        <friendly-url-routes>META-INF/routes.xml</friendly-url-routes>
+		
+		<instanceable>false</instanceable>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>eprintview-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

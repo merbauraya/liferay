@@ -17,6 +17,7 @@ package com.idetronic.eprint.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +40,10 @@ public class EprintSoap implements Serializable {
 		soapModel.setIsPublished(model.getIsPublished());
 		soapModel.setDateYear(model.getDateYear());
 		soapModel.setFullTextStatus(model.getFullTextStatus());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setCreatedDate(model.getCreatedDate());
+		soapModel.setGroupId(model.getGroupId());
 
 		return soapModel;
 	}
@@ -171,6 +176,38 @@ public class EprintSoap implements Serializable {
 		_fullTextStatus = fullTextStatus;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
+	public Date getCreatedDate() {
+		return _createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		_createdDate = createdDate;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	private long _eprintId;
 	private String _title;
 	private String _eprintType;
@@ -181,4 +218,8 @@ public class EprintSoap implements Serializable {
 	private String _isPublished;
 	private String _dateYear;
 	private String _fullTextStatus;
+	private long _companyId;
+	private Date _modifiedDate;
+	private Date _createdDate;
+	private long _groupId;
 }
