@@ -78,7 +78,7 @@ $(".ep-head-link").click(function(e){
 				
 			},
 			error: function () {
-                    $("#ep-subj-entry").html("Unable to complete you request");
+                    $("#ep-subj-entry").html("Unable to complete your request");
                     console.log('Error Occurred');
                 }
 		});

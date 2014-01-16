@@ -6,7 +6,7 @@
 }
 #ep-by-subj li
 {
-	padding:10px 5px 0;
+	padding:5px 5px 0;
 	position:relative;
 }
 #ep-by-subj li a {
@@ -98,12 +98,12 @@ table.dataTable thead .sorting_desc_disabled {
         cursor: pointer;
 }
 
-table.dataTable thead .sorting { background: url('../images/sort_both.png') no-repeat center right; }
-table.dataTable thead .sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
-table.dataTable thead .sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+table.dataTable thead .sorting { background: url('../img/sort_both.png') no-repeat center right; }
+table.dataTable thead .sorting_asc { background: url('../img/sort_asc.png') no-repeat center right; }
+table.dataTable thead .sorting_desc { background: url('../img/sort_desc.png') no-repeat center right; }
 
-table.dataTable thead .sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
-table.dataTable thead .sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
+table.dataTable thead .sorting_asc_disabled { background: url('../img/sort_asc_disabled.png') no-repeat center right; }
+table.dataTable thead .sorting_desc_disabled { background: url('../img/sort_desc_disabled.png') no-repeat center right; }
 
 table.dataTable th:active {
         outline: none;
@@ -265,5 +265,10 @@ div.DTFC_LeftFootWrapper table {
 }
 a.paginate_disabled_previous
 {
-	text-d
+	text-decoration:none;
 }
+table.ep-detailview
+{padding:5px}
+table.ep-detalview > th
+{padding:5px;}
+.ep-td-label{width:130px;whitespace:nowrap;}

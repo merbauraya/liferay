@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.naming.NamingException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -24,6 +27,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.idetronic.eprint.admin.data.EprintDataAccess;
 import com.idetronic.eprint.admin.data.SqlUtil;
 import com.idetronic.eprint.model.*;
@@ -154,7 +160,7 @@ public class EprintHelper {
 	{
 		List<Eprint> eprints = EprintLocalServiceUtil.findBySubjectId(subjectId, begin, end);
 		JSONArray eprintJSON = JSONFactoryUtil.createJSONArray();
-		log.info(eprints.size());
+		
 		for (Eprint eprint :eprints)
 		{
 			JSONObject curEprintJSON = JSONFactoryUtil.createJSONObject();
@@ -163,10 +169,21 @@ public class EprintHelper {
 			curEprintJSON.put("createdDate", eprint.getCreatedDate());
 			curEprintJSON.put("id", eprint.getEprintId());
 			eprintJSON.put(curEprintJSON);
-			log.info("xx="+curEprintJSON.toString());
+			
 		}
-		log.info("browseBySubjectIdJSON");
-		log.info(eprintJSON.toString());
+	
 		return eprintJSON;
+	}
+
+public static PortletURL getViewDetailUrl(ThemeDisplay themeDisplay,HttpServletRequest request,long eprintId)
+	throws Exception
+	{
+		String portletName = "eprintview_WAR_EprintAdminportlet";
+		long plid = PortalUtil.getPlidFromPortletId(themeDisplay.getScopeGroupId(), portletName);
+		PortletURL portletURL = PortletURLFactoryUtil.create(request, portletName, plid,PortletRequest.RENDER_PHASE);
+		portletURL.setParameter("jspPage", EprintConstant.VIEW_EPRINT_DETAIL);
+		portletURL.setParameter("eprintId", String.valueOf(eprintId));
+		return portletURL;
+	
 	}
 }

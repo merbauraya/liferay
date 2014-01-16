@@ -24,6 +24,7 @@
 <%@ page import="com.idetronic.eprint.EprintConstant"%>
 <%@ page import="com.idetronic.eprint.model.Eprint"%>
 <%@ page import="com.idetronic.eprint.admin.*"%> 
+<%@ page import="com.idetronic.eprint.service.*"%> 
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
 

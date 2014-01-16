@@ -14,10 +14,11 @@ import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 public class EprintConfigAction implements ConfigurationAction{
-
+	static Log log = LogFactoryUtil.getLog(EprintConfigAction.class);
 	@Override
 	public void processAction(PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse) throws Exception {
@@ -38,17 +39,40 @@ public class EprintConfigAction implements ConfigurationAction{
         preferences.setValue("cssStyle", cssStyle);
         preferences.setValue("carouselType",carouselType);
         preferences.store();
- 
+        log.info(eprintURL);
         PortletSession portletSession = actionRequest.getPortletSession();
         SessionMessages.add(actionRequest, portletConfig.getPortletName()+ ".doConfigure");
 		
 	}
 
 	@Override
-	public String render(PortletConfig arg0, RenderRequest arg1,
-			RenderResponse arg2) throws Exception {
+	public String render(PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		EprintConfig config = readConfig((PortletRequest)renderRequest);
+		renderRequest.setAttribute("eprintConfig", (Object)(config));   
+		return "/html/eprintview/config.jsp";
 	}
-
+	private EprintConfig readConfig(PortletRequest portletRequest)
+	{
+		EprintConfig config = new EprintConfig();
+		
+		PortletPreferences prefs = portletRequest.getPreferences();
+        String portletResource = ParamUtil.getString((PortletRequest)(portletRequest), (String)("portletResource"));
+        if (Validator.isNotNull((String)(portletResource))) {
+            try {
+                prefs = PortletPreferencesFactoryUtil.getPortletSetup((PortletRequest)(portletRequest), (String)(portletResource));
+            }
+            catch (Exception e) {
+                log.error((Object)("Error getting portlet preferences"), (Throwable)(e));
+            }
+        }
+        if (prefs == null) {
+            log.error((Object)("Portlet preferences is null"));
+            
+            return config;
+        }
+        config.setEprintURL(prefs.getValue("eprintURL", ""));
+        return config;
+	}
 }

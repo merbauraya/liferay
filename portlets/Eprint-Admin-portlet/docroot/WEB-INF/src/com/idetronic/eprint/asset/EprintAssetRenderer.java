@@ -57,26 +57,8 @@ public class EprintAssetRenderer extends BaseAssetRenderer{
 		PortletURL portletURL = PortletURLFactoryUtil.create(liferayPortletRequest, portletName, plid,PortletRequest.RENDER_PHASE);
 		portletURL.setParameter("jspPage", EprintConstant.VIEW_EPRINT_DETAIL);
 		portletURL.setParameter("eprintId", String.valueOf(_eprint.getEprintId()));
-		//PortletURL viewPageURL = PortletURLFactoryUtil.CRE
-	/*	PortletURL viewPageURL = PortletURLFactoryUtil.create(
-				liferayPortletRequest,
-                 portletName + "_WAR_" + portletName + "portlet",
-                 themeDisplay.getPlid(),
-                 PortletRequest.RENDER_PHASE);
-		viewPageURL.setParameter("jspPage", EprintConstant.VIEW_EPRINT_DETAIL);*/
-		//log.info("portalurl"+themeDisplay.getPortalURL());
-		//log.info("pathMain="+themeDisplay.getPathMain());
-		String url = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + 
-				     "/eprint/detail/"+_eprint.getEprintId();
-		
-		//return url;
-		
-		//log.info("EprintAssetRenderer.getURLViewInContext="+ noSuchEntryRedirect)	;
-		
-		/*return getURLViewInContext(
-				liferayPortletRequest, noSuchEntryRedirect, "/html/eprint/detail.jsp",
-				"eprintId", _eprint.getEprintId()); */
-		//log.info("epView="+viewPageURL.toString());
+
+
 		return portletURL.toString();
 		//return noSuchEntryRedirect;
 	}

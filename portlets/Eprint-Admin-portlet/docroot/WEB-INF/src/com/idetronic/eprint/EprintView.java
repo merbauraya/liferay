@@ -55,12 +55,7 @@ static Log log = LogFactoryUtil.getLog(EprintView.class);
     	request.setAttribute("subjectName", subjectName);
     	
     	JSONArray jsonResponse;
-    	/*
-    	log.info("resourceType="+resourceType);
-    	log.info("subjectId="+subjectId);
-    	log.info("reqFormat="+reqFormat);
-    	log.info("dataFormat="+dataFormat);
-    	*/
+    
     	if (Validator.equals(resourceType, "bySubjectId"))
     	{
     		if (Validator.equals(reqFormat, "json")){

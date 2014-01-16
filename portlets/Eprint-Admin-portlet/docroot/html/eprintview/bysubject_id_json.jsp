@@ -289,9 +289,14 @@ if ($.fn.DataTable.TableTools) {
 			
 			var aPos = oTable.fnGetPosition(this);
 	        var aData = oTable.fnGetData(aPos);
-	        var gIDNumber = aData[0];
+	        var eprintId = aData['id'];
+	        <%
+	        	PortletURL url = EprintHelper.getViewDetailUrl(themeDisplay, request, 0);
+	        %>
+	        var url = '<%= url.toString() %>';
 	        
-			console.log(aData['id']);
+			console.log(url+eprintId);
+			window.location.href=url+eprintId;
 			
 			
 	   });
