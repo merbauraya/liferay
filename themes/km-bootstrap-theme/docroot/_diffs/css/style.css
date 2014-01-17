@@ -17,7 +17,12 @@
 	min-height:2.2em;
 	
 }
-
+.nopadding {
+   
+   margin: 0 !important;
+   padding-left: 0 !important;
+   padding-right: 0 !important;
+}
 body > header + div#km-main:before { 
   
   content: "";

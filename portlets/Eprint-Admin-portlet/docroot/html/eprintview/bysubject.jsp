@@ -1,10 +1,10 @@
 <%@include file="/html/eprint/init.jsp" %>
 <script src="<%=request.getContextPath()%>/js/jquery.dataTables.js"/></script>
-
+<script src="<%=request.getContextPath()%>/js/date.ddmmmyy.sort.js"/></script>
 <portlet:resourceURL  var="browseBySubjectIdURL" />
 <div class="row">
 
-	<div id="ep-by-subj" class="col-md-5">
+	<div id="ep-by-subj" class="col-md-5 nopadding">
 		<jsp:include page="/html/eprintview/subject_tree.jsp" />
 		
 	</div>
@@ -53,8 +53,11 @@ $(".ep-head-link").click(function(e){
 	  var subjectName=	$(this).text();
 	  //console.log(subjectName);
 	  tId = tId.replace("epsubject-","");
-	  
+	  sCount = $(this).find('span').text();
+	  console.log(sCount);
+	  subjectName = subjectName.substring(0,subjectName.length - sCount.length);
 	  ep_viewBySubject(tId,subjectName);
+	  
 	  e.preventDefault();
 	  
 	});

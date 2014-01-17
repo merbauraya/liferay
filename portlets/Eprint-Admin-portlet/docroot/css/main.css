@@ -4,6 +4,10 @@
 	padding-top:10px;
 	float:left;
 }
+#ep-subj-entry
+{
+	
+}
 #ep-by-subj li
 {
 	padding:5px 5px 0;
@@ -40,7 +44,10 @@ div#ep-by-subj  a
 {
 	font-size:13px;
 }
-
+.dataTables_wrapper tbody tr:hover {
+    cursor: pointer;
+    * cursor: hand;
+}
 div.dataTables_length label {
         font-weight: normal;
         float: left;
@@ -50,6 +57,7 @@ div.dataTables_length label {
 div.dataTables_length select {
         width: 75px;
 }
+
 
 div.dataTables_filter label {
         font-weight: normal;

@@ -20,11 +20,12 @@
 <%@ page import="com.liferay.portal.kernel.util.ListUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.UnicodeFormatter"%>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
-
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.idetronic.eprint.EprintConstant"%>
 <%@ page import="com.idetronic.eprint.model.Eprint"%>
 <%@ page import="com.idetronic.eprint.admin.*"%> 
 <%@ page import="com.idetronic.eprint.service.*"%> 
+<%@ page import="com.idetronic.eprint.EprintConfig" %>
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
 

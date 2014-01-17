@@ -16,6 +16,8 @@ import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
@@ -111,5 +113,14 @@ static Log log = LogFactoryUtil.getLog(EprintView.class);
 	
 		
 	}
+	 public void render(RenderRequest request, RenderResponse response)
+             throws PortletException, IOException {
+    
+		 EprintConfig config = EprintConfigAction.readConfig(request);
+		 request.setAttribute("eprintConfig", (Object)(config));  
+		 log.info("render method");
+		 super.render(request, response);
+}
+
 
 }

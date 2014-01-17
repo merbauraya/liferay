@@ -160,13 +160,18 @@ public class EprintHelper {
 	{
 		List<Eprint> eprints = EprintLocalServiceUtil.findBySubjectId(subjectId, begin, end);
 		JSONArray eprintJSON = JSONFactoryUtil.createJSONArray();
-		
+		String dateFormat = "dd-MMM-yyyy";
+		SimpleDateFormat df = new SimpleDateFormat(dateFormat);
 		for (Eprint eprint :eprints)
 		{
+			
 			JSONObject curEprintJSON = JSONFactoryUtil.createJSONObject();
 			curEprintJSON.put("title", eprint.getTitle());
 			curEprintJSON.put("type", eprint.getEprintType());
-			curEprintJSON.put("createdDate", eprint.getCreatedDate());
+			
+			String strDate = df.format(eprint.getCreatedDate());
+			
+			curEprintJSON.put("createdDate", strDate);
 			curEprintJSON.put("id", eprint.getEprintId());
 			eprintJSON.put(curEprintJSON);
 			
@@ -186,4 +191,5 @@ public static PortletURL getViewDetailUrl(ThemeDisplay themeDisplay,HttpServletR
 		return portletURL;
 	
 	}
+
 }

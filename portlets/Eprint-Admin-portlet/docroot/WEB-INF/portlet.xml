@@ -50,7 +50,7 @@
 		<portlet-class>com.idetronic.eprint.EprintView</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/eprintview/view.jsp</value>
+			<value>/html/eprintview/bysubject.jsp</value>
 		</init-param>
 		<init-param>
 			<name>config-template</name>

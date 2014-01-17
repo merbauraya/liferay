@@ -6,23 +6,39 @@
 	<portlet>
 		<portlet-name>Eprint Admin</portlet-name>
 		<icon>/icon.png</icon>
-		
+		<configuration-action-class>
+			com.idetronic.eprint.admin.EprintConfigAction
+        </configuration-action-class>   
 		<indexer-class>com.idetronic.eprint.admin.search.EprintIndexer</indexer-class>
 		<open-search-class>
 			com.idetronic.eprint.admin.search.EprintOpenSearchImpl
 		</open-search-class>
-		<friendly-url-mapper-class>
-                        com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper
-        </friendly-url-mapper-class>
-        <friendly-url-mapping>eprint</friendly-url-mapping>
-        <friendly-url-routes>META-INF/routes.xml</friendly-url-routes>
+		<scheduler-entry>
+			<scheduler-event-listener-class>
+				com.idetronic.eprint.admin.EprintGenerator
+			</scheduler-event-listener-class>
+			
+			<trigger>
+			<cron>
+					<cron-trigger-value>
+						0 00 03 ? * TUE-SAT
+					</cron-trigger-value> 
+					
+				</cron> 
+			</trigger>
+		</scheduler-entry>
+		
+
+		
 		
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>1.5</control-panel-entry-weight>
 		<asset-renderer-factory>
 			com.idetronic.eprint.asset.EprintAssetRendererFactory
 		</asset-renderer-factory>
+		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<instanceable>false</instanceable>
+		
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js

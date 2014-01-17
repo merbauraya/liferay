@@ -4,8 +4,7 @@
  
 <xsl:template match="/">
   <ul>
-  	
-       <xsl:apply-templates select="item" />
+  	 <xsl:apply-templates select="item" />
   </ul>
 </xsl:template>
   <xsl:template match="item">
@@ -20,7 +19,7 @@
 	   		   		<xsl:attribute name="src">
 	   		   			<xsl:text>/Eprint-Admin-portlet/</xsl:text>
 	   		   			<xsl:choose>
-	   		   				<xsl:when test="@level &lt; 3">
+	   		   				<xsl:when test="@level &lt; 2">
 	   		   					<xsl:text>img/01_minus.png</xsl:text>
 	   		   				</xsl:when>
 	   		   				<xsl:otherwise>
@@ -60,7 +59,7 @@
          <div>
              <xsl:attribute name="class">
                 <xsl:text>ep-child-cont </xsl:text>
-                <xsl:if test="@level &gt; 2">aui-helper-hidden</xsl:if>
+                <xsl:if test="@level &gt; 1">aui-helper-hidden</xsl:if>
                 
                 
              </xsl:attribute>

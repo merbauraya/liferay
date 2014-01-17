@@ -33,6 +33,7 @@ public class EprintXmlBuilder {
 		Element level3 = null;
 		Element level4 = null;
 		Element level5 = null;
+		Element level6 = null;
 		try {
 			docBuilder = docFactory.newDocumentBuilder();
 			doc = docBuilder.newDocument();
@@ -48,6 +49,7 @@ public class EprintXmlBuilder {
 		String saveL3 = "";
 		String saveL4 = "";
 		String saveL5 = "";
+		String saveL6 = "";
 		
 		int i = 0;
 		while (rs.next())
@@ -95,6 +97,14 @@ public class EprintXmlBuilder {
 					level4.appendChild(level5);
 				}
 			}
+			if (rs.getString("l6_subjectid") != null)
+			{
+				if (!saveL6.equalsIgnoreCase(rs.getString("l6_subjectid")))
+				{
+					level6 = createElement(rs.getString("l6_subjectname"),rs.getString("l6_subjectid"),"6",rs.getString("l6_total"));
+					level5.appendChild(level6);
+				}
+			}
 				
 				
 			
@@ -102,6 +112,7 @@ public class EprintXmlBuilder {
 			saveL3 = (rs.getString("l3_subjectid") == null ? "":rs.getString("l3_subjectid"));
 			saveL4 = (rs.getString("l4_subjectid") == null ? "":rs.getString("l4_subjectid"));
 			saveL5 = (rs.getString("l5_subjectid") == null ? "":rs.getString("l5_subjectid"));
+			saveL6 = (rs.getString("l6_subjectid") == null ? "":rs.getString("l6_subjectid"));
 		}
 		rootElement.appendChild(level2);
 		writeXML();

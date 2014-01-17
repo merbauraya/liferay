@@ -252,7 +252,7 @@ if ($.fn.DataTable.TableTools) {
 	Subject :<%=subjectName %> </h1>
 </div>
 
-<table id="ep-by-subject" class="table bordered-table zebra-striped">
+<table id="ep-by-subject" class="table bordered-table table-hover">
 <thead>
 		<tr>
 			<th>id</th>
@@ -279,7 +279,9 @@ if ($.fn.DataTable.TableTools) {
 		                        {"mData": "id","aTargets": [ 0 ],"bVisible":false,"bSearchable": false},
 		                        { "mData": "title","aTargets": [ 1 ] },
 			              		{ "mData": "type","aTargets": [ 2 ] },
-			              		{ "mData": "createdDate","aTargets": [ 3 ] }
+			              		{ "mData": "createdDate","aTargets": [ 3 ],"sType" : "date-dd-mmm-yyyy"}
+			              			
+			              		
 		                        
 		                    ]
 			
