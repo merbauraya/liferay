@@ -32,6 +32,15 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eprint.model.impl.EprintStaticContentModelImpl">
+		<attributes>
+			<id name="contentId" />
+			<basic name="content" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.eprint.model.impl.EprintSubjectModelImpl">
 		<id-class class="com.idetronic.eprint.service.persistence.EprintSubjectPK" />
 		<attributes>
@@ -45,6 +54,10 @@
 	</mapped-superclass>
 	<entity class="com.idetronic.eprint.model.impl.EprintImpl" name="Eprint">
 		<table name="eprint_Eprint" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eprint.model.impl.EprintStaticContentImpl" name="EprintStaticContent">
+		<table name="eprint_EprintStaticContent" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.eprint.model.impl.EprintSubjectImpl" name="EprintSubject">

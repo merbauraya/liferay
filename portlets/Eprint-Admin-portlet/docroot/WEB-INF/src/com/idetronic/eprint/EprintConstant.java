@@ -22,5 +22,6 @@ public interface EprintConstant {
 	public final static String KEY_BROWSE_BY_SUBJECT_SQL ="browse.by.subject";
 	public final static String SQL_FINDBY_SUBJECTID="com.idetronic.eprint.service.persistence.EprintFinder.findBySubjectId";
 	
+	public static final long KEY_BY_SUBJECT_TREE=1;
 
 }

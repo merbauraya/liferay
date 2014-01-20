@@ -248,8 +248,8 @@ if ($.fn.DataTable.TableTools) {
  	
 	
 %>
-<div><h1>
-	Subject :<%=subjectName %> </h1>
+<div><h3>
+	Subject :<%=subjectName %> </h3>
 </div>
 
 <table id="ep-by-subject" class="table bordered-table table-hover">

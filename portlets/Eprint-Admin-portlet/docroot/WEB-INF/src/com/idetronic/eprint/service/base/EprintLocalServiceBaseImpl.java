@@ -16,9 +16,11 @@ package com.idetronic.eprint.service.base;
 
 import com.idetronic.eprint.model.Eprint;
 import com.idetronic.eprint.service.EprintLocalService;
+import com.idetronic.eprint.service.EprintStaticContentLocalService;
 import com.idetronic.eprint.service.EprintSubjectLocalService;
 import com.idetronic.eprint.service.persistence.EprintFinder;
 import com.idetronic.eprint.service.persistence.EprintPersistence;
+import com.idetronic.eprint.service.persistence.EprintStaticContentPersistence;
 import com.idetronic.eprint.service.persistence.EprintSubjectPersistence;
 
 import com.liferay.counter.service.CounterLocalService;
@@ -328,6 +330,44 @@ public abstract class EprintLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the eprint static content local service.
+	 *
+	 * @return the eprint static content local service
+	 */
+	public EprintStaticContentLocalService getEprintStaticContentLocalService() {
+		return eprintStaticContentLocalService;
+	}
+
+	/**
+	 * Sets the eprint static content local service.
+	 *
+	 * @param eprintStaticContentLocalService the eprint static content local service
+	 */
+	public void setEprintStaticContentLocalService(
+		EprintStaticContentLocalService eprintStaticContentLocalService) {
+		this.eprintStaticContentLocalService = eprintStaticContentLocalService;
+	}
+
+	/**
+	 * Returns the eprint static content persistence.
+	 *
+	 * @return the eprint static content persistence
+	 */
+	public EprintStaticContentPersistence getEprintStaticContentPersistence() {
+		return eprintStaticContentPersistence;
+	}
+
+	/**
+	 * Sets the eprint static content persistence.
+	 *
+	 * @param eprintStaticContentPersistence the eprint static content persistence
+	 */
+	public void setEprintStaticContentPersistence(
+		EprintStaticContentPersistence eprintStaticContentPersistence) {
+		this.eprintStaticContentPersistence = eprintStaticContentPersistence;
+	}
+
+	/**
 	 * Returns the eprint subject local service.
 	 *
 	 * @return the eprint subject local service
@@ -633,6 +673,10 @@ public abstract class EprintLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected EprintPersistence eprintPersistence;
 	@BeanReference(type = EprintFinder.class)
 	protected EprintFinder eprintFinder;
+	@BeanReference(type = EprintStaticContentLocalService.class)
+	protected EprintStaticContentLocalService eprintStaticContentLocalService;
+	@BeanReference(type = EprintStaticContentPersistence.class)
+	protected EprintStaticContentPersistence eprintStaticContentPersistence;
 	@BeanReference(type = EprintSubjectLocalService.class)
 	protected EprintSubjectLocalService eprintSubjectLocalService;
 	@BeanReference(type = EprintSubjectPersistence.class)

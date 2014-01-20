@@ -53,7 +53,7 @@ public class EprintIndexer extends BaseIndexer{
             	modifiedDate = new Date();
             document.addDate(Field.MODIFIED_DATE, modifiedDate);
             document.addText(Field.COMPANY_ID , String.valueOf(eprint.getCompanyId()));
-            log.info("dogetDocument" + eprint.getTitle());
+            
             
             return document;
     }
@@ -98,8 +98,7 @@ public class EprintIndexer extends BaseIndexer{
     }
 
     protected String getPortletId(SearchContext searchContext) {
-    	System.out.println("inside getPortletId(SearchContext searchContext)");
-        
+       
     	return AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(Eprint.class.getName()).getPortletId();    
     	 //   return null;
     }

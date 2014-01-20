@@ -1132,6 +1132,8 @@ public class EprintPersistenceImpl extends BasePersistenceImpl<Eprint>
 
 	@BeanReference(type = EprintPersistence.class)
 	protected EprintPersistence eprintPersistence;
+	@BeanReference(type = EprintStaticContentPersistence.class)
+	protected EprintStaticContentPersistence eprintStaticContentPersistence;
 	@BeanReference(type = EprintSubjectPersistence.class)
 	protected EprintSubjectPersistence eprintSubjectPersistence;
 	@BeanReference(type = ResourcePersistence.class)

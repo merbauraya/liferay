@@ -9,7 +9,7 @@
 		
 	</div>
 	<div class="col-md-7" id="ep-subj-entry">
-		<h1> Please select subject to view entry</h1>
+		<h3> Please select subject to view entry</h3>
 	</div>
 </div>
 <aui:script use="aui-base">

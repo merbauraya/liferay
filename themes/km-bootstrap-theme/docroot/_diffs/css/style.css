@@ -17,6 +17,9 @@
 	min-height:2.2em;
 	
 }
+.navbar{
+  min-height:30px !important; 
+}
 .nopadding {
    
    margin: 0 !important;
@@ -85,7 +88,7 @@ body > footer a:hover {
 	margin-bottom: 0px !important;
 }
 .navbar-nav > li > a {
-  padding-top: 10px;
+  padding-top: 12px;
   padding-bottom: 10px;
   
 }

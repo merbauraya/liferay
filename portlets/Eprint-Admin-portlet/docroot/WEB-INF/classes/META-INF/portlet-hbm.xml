@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.idetronic.eprint.model.Eprint" />
+	<import class="com.idetronic.eprint.model.EprintStaticContent" />
 	<import class="com.idetronic.eprint.model.EprintSubject" />
 	<class name="com.idetronic.eprint.model.impl.EprintImpl" table="eprint_Eprint">
 		<cache usage="read-write" />
@@ -22,6 +23,13 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="createdDate" type="org.hibernate.type.TimestampType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.idetronic.eprint.model.impl.EprintStaticContentImpl" table="eprint_EprintStaticContent">
+		<cache usage="read-write" />
+		<id name="contentId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.idetronic.eprint.model.impl.EprintSubjectImpl" table="eprint_EprintSubject">
 		<cache usage="read-write" />

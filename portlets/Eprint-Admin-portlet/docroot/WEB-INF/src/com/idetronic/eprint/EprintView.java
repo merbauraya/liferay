@@ -118,7 +118,7 @@ static Log log = LogFactoryUtil.getLog(EprintView.class);
     
 		 EprintConfig config = EprintConfigAction.readConfig(request);
 		 request.setAttribute("eprintConfig", (Object)(config));  
-		 log.info("render method");
+		 
 		 super.render(request, response);
 }
 

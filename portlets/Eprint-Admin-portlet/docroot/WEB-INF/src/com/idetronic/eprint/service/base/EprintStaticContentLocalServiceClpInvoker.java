@@ -14,37 +14,33 @@
 
 package com.idetronic.eprint.service.base;
 
-import com.idetronic.eprint.service.EprintSubjectLocalServiceUtil;
+import com.idetronic.eprint.service.EprintStaticContentLocalServiceUtil;
 
 import java.util.Arrays;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class EprintSubjectLocalServiceClpInvoker {
-	public EprintSubjectLocalServiceClpInvoker() {
-		_methodName0 = "addEprintSubject";
+public class EprintStaticContentLocalServiceClpInvoker {
+	public EprintStaticContentLocalServiceClpInvoker() {
+		_methodName0 = "addEprintStaticContent";
 
 		_methodParameterTypes0 = new String[] {
-				"com.idetronic.eprint.model.EprintSubject"
+				"com.idetronic.eprint.model.EprintStaticContent"
 			};
 
-		_methodName1 = "createEprintSubject";
+		_methodName1 = "createEprintStaticContent";
 
-		_methodParameterTypes1 = new String[] {
-				"com.idetronic.eprint.service.persistence.EprintSubjectPK"
-			};
+		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteEprintSubject";
+		_methodName2 = "deleteEprintStaticContent";
 
-		_methodParameterTypes2 = new String[] {
-				"com.idetronic.eprint.service.persistence.EprintSubjectPK"
-			};
+		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteEprintSubject";
+		_methodName3 = "deleteEprintStaticContent";
 
 		_methodParameterTypes3 = new String[] {
-				"com.idetronic.eprint.model.EprintSubject"
+				"com.idetronic.eprint.model.EprintStaticContent"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -76,40 +72,36 @@ public class EprintSubjectLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.DynamicQuery"
 			};
 
-		_methodName9 = "fetchEprintSubject";
+		_methodName9 = "fetchEprintStaticContent";
 
-		_methodParameterTypes9 = new String[] {
-				"com.idetronic.eprint.service.persistence.EprintSubjectPK"
-			};
+		_methodParameterTypes9 = new String[] { "long" };
 
-		_methodName10 = "getEprintSubject";
+		_methodName10 = "getEprintStaticContent";
 
-		_methodParameterTypes10 = new String[] {
-				"com.idetronic.eprint.service.persistence.EprintSubjectPK"
-			};
+		_methodParameterTypes10 = new String[] { "long" };
 
 		_methodName11 = "getPersistedModel";
 
 		_methodParameterTypes11 = new String[] { "java.io.Serializable" };
 
-		_methodName12 = "getEprintSubjects";
+		_methodName12 = "getEprintStaticContents";
 
 		_methodParameterTypes12 = new String[] { "int", "int" };
 
-		_methodName13 = "getEprintSubjectsCount";
+		_methodName13 = "getEprintStaticContentsCount";
 
 		_methodParameterTypes13 = new String[] {  };
 
-		_methodName14 = "updateEprintSubject";
+		_methodName14 = "updateEprintStaticContent";
 
 		_methodParameterTypes14 = new String[] {
-				"com.idetronic.eprint.model.EprintSubject"
+				"com.idetronic.eprint.model.EprintStaticContent"
 			};
 
-		_methodName15 = "updateEprintSubject";
+		_methodName15 = "updateEprintStaticContent";
 
 		_methodParameterTypes15 = new String[] {
-				"com.idetronic.eprint.model.EprintSubject", "boolean"
+				"com.idetronic.eprint.model.EprintStaticContent", "boolean"
 			};
 
 		_methodName46 = "getBeanIdentifier";
@@ -120,61 +112,53 @@ public class EprintSubjectLocalServiceClpInvoker {
 
 		_methodParameterTypes47 = new String[] { "java.lang.String" };
 
-		_methodName52 = "validateEprintSubject";
+		_methodName52 = "addContent";
 
-		_methodParameterTypes52 = new String[] {
-				"long", "java.lang.String", "java.lang.String"
-			};
-
-		_methodName53 = "insertEprintSubject";
-
-		_methodParameterTypes53 = new String[] {
-				"long", "java.lang.String", "java.lang.String"
-			};
+		_methodParameterTypes52 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.addEprintSubject((com.idetronic.eprint.model.EprintSubject)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.addEprintStaticContent((com.idetronic.eprint.model.EprintStaticContent)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.createEprintSubject((com.idetronic.eprint.service.persistence.EprintSubjectPK)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.createEprintStaticContent(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.deleteEprintSubject((com.idetronic.eprint.service.persistence.EprintSubjectPK)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.deleteEprintStaticContent(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.deleteEprintSubject((com.idetronic.eprint.model.EprintSubject)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.deleteEprintStaticContent((com.idetronic.eprint.model.EprintStaticContent)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.dynamicQuery();
+			return EprintStaticContentLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return EprintStaticContentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return EprintStaticContentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -182,68 +166,62 @@ public class EprintSubjectLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.fetchEprintSubject((com.idetronic.eprint.service.persistence.EprintSubjectPK)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.fetchEprintStaticContent(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.getEprintSubject((com.idetronic.eprint.service.persistence.EprintSubjectPK)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.getEprintStaticContent(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.getEprintSubjects(((Integer)arguments[0]).intValue(),
+			return EprintStaticContentLocalServiceUtil.getEprintStaticContents(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.getEprintSubjectsCount();
+			return EprintStaticContentLocalServiceUtil.getEprintStaticContentsCount();
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.updateEprintSubject((com.idetronic.eprint.model.EprintSubject)arguments[0]);
+			return EprintStaticContentLocalServiceUtil.updateEprintStaticContent((com.idetronic.eprint.model.EprintStaticContent)arguments[0]);
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.updateEprintSubject((com.idetronic.eprint.model.EprintSubject)arguments[0],
+			return EprintStaticContentLocalServiceUtil.updateEprintStaticContent((com.idetronic.eprint.model.EprintStaticContent)arguments[0],
 				((Boolean)arguments[1]).booleanValue());
 		}
 
 		if (_methodName46.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.getBeanIdentifier();
+			return EprintStaticContentLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			EprintSubjectLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			EprintStaticContentLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName52.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.validateEprintSubject(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
-		}
-
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-			return EprintSubjectLocalServiceUtil.insertEprintSubject(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+			return EprintStaticContentLocalServiceUtil.addContent(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -287,6 +265,4 @@ public class EprintSubjectLocalServiceClpInvoker {
 	private String[] _methodParameterTypes47;
 	private String _methodName52;
 	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
 }

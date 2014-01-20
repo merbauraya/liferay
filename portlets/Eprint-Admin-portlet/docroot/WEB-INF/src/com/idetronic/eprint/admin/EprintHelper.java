@@ -34,21 +34,25 @@ import com.idetronic.eprint.admin.data.EprintDataAccess;
 import com.idetronic.eprint.admin.data.SqlUtil;
 import com.idetronic.eprint.model.*;
 import com.idetronic.eprint.model.impl.EprintImpl;
+import com.idetronic.eprint.model.impl.EprintStaticContentImpl;
 import com.idetronic.eprint.service.*;
 import com.idetronic.eprint.transform.*;
 import com.idetronic.eprint.EprintConstant;
 import com.idetronic.eprint.service.EprintSubjectLocalServiceUtil;
+import com.idetronic.eprint.service.EprintStaticContentLocalServiceUtil;
+import com.idetronic.eprint.model.EprintStaticContent;
+
 public class EprintHelper {
 	static Log log = LogFactoryUtil.getLog(EprintHelper.class);
 	static Connection conn=null;
 	static String _porletPath;
-	public static void importRepository(ServiceContext serviceContext,String porletPath)
+	public static void importRepository(ServiceContext serviceContext)
 	{
 		
 		Statement stmt=null;
 		ResultSet rs=null;
 		Eprint eprint=null;
-		_porletPath = porletPath;
+		
 		try {
 			conn = DataAccess.getConnection("jdbc/eprints");
 			String sql = "select * from eprint where eprint_status = 'archive' "+
@@ -89,7 +93,7 @@ public class EprintHelper {
 			generateEprintPage();
 			
 		} catch (Exception e) {
-		
+			log.error("Error importing eprint repository");
 			log.error(e);
 		} finally {
 			// TODO Auto-generated catch block
@@ -124,6 +128,10 @@ public class EprintHelper {
 				EprintConstant.XSL_BY_SUBJECT);
 		Map<String,String> props = new HashMap<String,String>();
 		String response = transform.transform(bySubjectXML, props);
+		EprintStaticContentLocalServiceUtil.addContent(EprintConstant.KEY_BY_SUBJECT_TREE, response);
+		
+		/*
+	
 		
 		Writer writer = null;
 
@@ -137,7 +145,7 @@ public class EprintHelper {
 		  // report
 		} finally {
 		   try {writer.close();} catch (Exception ex) {}
-		}
+		}*/
 	}
 	public static Date dateFromEprintDate(int year,int month,int day)
 	{

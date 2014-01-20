@@ -18,13 +18,18 @@
 				com.idetronic.eprint.admin.EprintGenerator
 			</scheduler-event-listener-class>
 			
-			<trigger>
-			<cron>
+			<trigger><!--  
+				<cron>
 					<cron-trigger-value>
 						0 00 03 ? * TUE-SAT
 					</cron-trigger-value> 
 					
-				</cron> 
+				</cron> -->
+				<simple>
+                                        <simple-trigger-value>5</simple-trigger-value>
+                                        <time-unit>minute</time-unit>
+                                </simple>
+				
 			</trigger>
 		</scheduler-entry>
 		

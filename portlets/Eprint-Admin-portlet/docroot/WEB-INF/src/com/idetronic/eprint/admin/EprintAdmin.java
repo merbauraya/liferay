@@ -12,8 +12,11 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceWrapper;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -48,27 +51,34 @@ public class EprintAdmin extends MVCPortlet {
 			e.printStackTrace();
 		}
 	}
-	public void jobImportRepository() throws Exception
+	public void jobImportRepository() 
 	{
-		String portletPath = getPortletContext().getRealPath("");
+		//String portletPath = getPortletContext().getRealPath("");
 		ServiceContext serviceContext = null;
-		Company company = CompanyLocalServiceUtil.getCompanyByWebId(PropsUtil.get("default.web.id"));
-		String organisationName = PropsUtil.get("user.default.orgname");
-		long companyId = company.getCompanyId();//  company.getGroup().getGroupId(); 
+		long companyId;
+		try
+		{
+			Company company = CompanyLocalServiceUtil.getCompanyByWebId(PropsUtil.get("default.web.id"));
+			String organisationName = PropsUtil.get("user.default.orgname");
+			companyId= company.getCompanyId();//  company.getGroup().getGroupId(); 
 		
-		log.info("comp="+ companyId);
+			long organisationId = OrganizationLocalServiceUtil.getOrganizationId(companyId, organisationName);//
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(organisationId);
+			long userId =Long.valueOf(PropsUtil.get("scheduled.default.user.id"));
 		
-		//get our Organisation
-		long organisationId = OrganizationLocalServiceUtil.getOrganizationId(companyId, organisationName);//
-		Organization organization = OrganizationLocalServiceUtil.getOrganization(organisationId);
-		long userId =Long.valueOf(PropsUtil.get("scheduled.default.user.id"));
+			//log.info("orgid="+organisationId +"comp="+companyId);
+			Group grp = GroupLocalServiceUtil.getCompanyGroup(companyId);
+			//log.info(grp.getGroupId()+grp.getDescriptiveName());
+			
+			ServiceContext ctx = new ServiceContext();
+			ctx.setCompanyId(companyId);
+			ctx.setScopeGroupId(grp.getGroupId());
+			ctx.setUserId(userId);
 		
-		
-		ServiceContext ctx = new ServiceContext();
-		ctx.setCompanyId(companyId);
-		ctx.setScopeGroupId(organisationId);
-		ctx.setUserId(userId);
-		
-		EprintHelper.importRepository(ctx,portletPath);
+			EprintHelper.importRepository(ctx);
+		}catch (Exception e)
+		{
+			log.error(e);
+		}
 	}
 }

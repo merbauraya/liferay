@@ -16,6 +16,7 @@ package com.idetronic.eprint.service.messaging;
 
 import com.idetronic.eprint.service.ClpSerializer;
 import com.idetronic.eprint.service.EprintLocalServiceUtil;
+import com.idetronic.eprint.service.EprintStaticContentLocalServiceUtil;
 import com.idetronic.eprint.service.EprintSubjectLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -37,6 +38,8 @@ public class ClpMessageListener extends BaseMessageListener {
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
 			EprintLocalServiceUtil.clearService();
+
+			EprintStaticContentLocalServiceUtil.clearService();
 
 			EprintSubjectLocalServiceUtil.clearService();
 		}

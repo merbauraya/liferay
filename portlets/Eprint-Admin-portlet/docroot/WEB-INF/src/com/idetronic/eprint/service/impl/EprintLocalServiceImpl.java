@@ -103,7 +103,7 @@ public class EprintLocalServiceImpl extends EprintLocalServiceBaseImpl {
 			        serviceContext.getAssetCategoryIds(),   // category Ids
 			        serviceContext.getAssetTagNames());
 		} catch (PortalException e) {
-			// TODO Auto-generated catch block
+			
 			log.error(e);
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block

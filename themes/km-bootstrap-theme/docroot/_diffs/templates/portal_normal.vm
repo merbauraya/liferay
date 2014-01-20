@@ -85,6 +85,7 @@ $theme.include($body_top_include)
 		#set( $userGroup = "Guest") 
 	#end
 	#set ($trackingUrl = $propsUtil.get("tracking.piwik.url"))
+	#set ($currentURI = "$themeDisplay.getURLPortal()$themeDisplay.getURLCurrent()")
 	
 <script type="text/javascript">
   var _paq = _paq || [];
@@ -104,6 +105,67 @@ $theme.include($body_top_include)
     g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
   })();
 </script>
+
+<!-- Facebook -->
+ 
+<script src='http://connect.facebook.net/en_US/all.js'></script>
+<script>
+	
+	
+	FB.init({appId: "594881720588282", status: true, cookie: true});
+ 
+	function postToFeed(redirectUri, link, name, caption, description) 
+	{
+ 		
+ 		var uri ="$currentURI";
+ 		name=document.title;
+ 		console.log(uri);
+	
+		var obj = {
+			method: 'feed',
+			//redirect_uri: redirectUri,
+			link: uri,
+			picture: 'http://www.liferay.com/osb-community-theme/images/custom/facebook_link.png',
+			name: name,
+			caption: caption,
+			description: description
+		};
+ 
+		function callback(response) {
+			document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+		}
+ 
+		FB.ui(obj, callback);
+	}
+	
+	
+</script>
+
+<a onclick="postToFeed('http://localhost:8080/path-finder', 'http://localhost:8080/path-finder', 'Title Name', 'Caption Phrase', 'This is the description'); return false;" href="javascript:;">Post to Feed</a>
+ 
+<!-- Twitter -->
+ 
+<a class="twitter-share-button" data-lang="en" data-text="Here is the data text" data-url="http://www.liferay.com/about-us/careers" href="https://twitter.com/share">Tweet</a>
+ 
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+ 
+<!-- LinkedIn -->
+ 
+<script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+<script type="IN/Share" data-counter="right" data-onsuccess="LinkedInShare" data-url="http://www.liferay.com/about-us/careers"></script>
+ 
+<!-- Google Plus -->
+ 
+<div class="g-plus" data-action="share" data-annotation="bubble" data-url="http://www.liferay.com/about-us/careers"></div>
+ 
+<script type="text/javascript">
+	(function() {
+		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	})();
+</script>
+
 
 
 <script type="text/javascript" src="$javascript_folder/bootstrap.min.js" charset="utf-8"></script>

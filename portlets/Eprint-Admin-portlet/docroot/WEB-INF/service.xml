@@ -36,5 +36,9 @@
 		
 	
 	</entity>
+	<entity name="EprintStaticContent" local-service="true" remote-service="false">
+		<column name="contentId" type="long" primary="true"/>
+		<column name="content" type="String"/>
+	</entity>
 	
 </service-builder>

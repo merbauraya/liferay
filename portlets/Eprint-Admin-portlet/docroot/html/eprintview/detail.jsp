@@ -8,7 +8,11 @@
 	if (Validator.isNotNull(eprint))
 	{
 		eprintUrl = eprintConfig.getEprintURL() + eprint.getEprintId();
+		com.liferay.portal.util.PortalUtil.setPageTitle(eprint.getTitle(), request); 
 	}
+%>
+<% 
+	
 %>
 <div class="container">
 	<c:choose>
@@ -59,8 +63,8 @@
 					Eprints URL
 				</td>
 				<td>
-					<a href="<%=eprintUrl %>"><%=eprintUrl %>
-					<a target="_blank" href="<%=eprintUrl %>">New Window</a>
+					<a target="_blank" href="<%=eprintUrl %>"><%=eprintUrl %>
+					
 					</a>
 				</td>
 			</tr>
