@@ -1,0 +1,26 @@
+.aui .portlet-body
+{background-color:#fff;}
+.sidebar .sidebar-menu > li
+{line-height:8px;
+padding-bottom:1px;}
+
+.aui .navbar .nav > .active > a, .aui .navbar .nav > .active > a:hover, .aui .navbar .nav > .active > a:focus
+{border-radius:3px;}
+footer.ftr-sect {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ftr-sect
+{
+	padding: 20px 15px;
+}
+
+.footer-nav {
+    margin: 0 auto;
+    text-align: center;
+}
+.footer-nav  ul  li{
+    display: inline-block;
+    padding-left:10px;
+}

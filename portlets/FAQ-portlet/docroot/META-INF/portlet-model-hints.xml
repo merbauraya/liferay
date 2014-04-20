@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<model-hints>
+    <model name="com.idetronic.portlet.model.FAQEntry">
+        <field name="question" type="String">
+        	<hint-collection name="CLOB" />
+        </field>
+        <field name="answer" type="String">
+        	<hint-collection name="CLOB" />
+        </field>
+      
+        
+    </model>
+</model-hints>

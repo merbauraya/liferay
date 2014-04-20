@@ -1,0 +1,13 @@
+<div class="navbar-right"> <!-- navbar right -->
+	<ul class="nav navbar">
+		<li>
+			<a href="$sign_in_url" rel="nofollow">Login
+				<i class="fa fa-power-off"></i>
+				<span class="label">Login</span>
+			
+			</a>
+		
+		</li>
+	</ul>
+
+</div>

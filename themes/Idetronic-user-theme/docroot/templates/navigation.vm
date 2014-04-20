@@ -1,0 +1,33 @@
+<div class="nav-collapse collapse">
+	
+	
+
+$request.setAttribute("RENDER_PORTLET_BOUNDARY", false)
+	 	<ul class="nav navbar-nav navbar-right">
+		#set ($VOID = $velocityPortletPreferences.setValue('portlet-setup-show-borders', 'false'))
+		#set ($VOID = $velocityPortletPreferences.setValue('display-style', '1'))
+#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
+
+$velocityPortletPreferences.setValue("header-type", "none")
+#set ($myPortletId = "2_WAR_notificationsportlet")
+
+
+			
+	
+					
+	    #if ($is_signed_in)
+	    	
+	    	#parse ("$full_templates_path/user_menu.vm")
+	    #else
+	    	#parse ("$full_templates_path/guest_menu.vm")
+	    #end
+	 
+	
+	
+	
+	</ul>
+	 #if ($page_group.isUser())
+		<div class="navbar-form navbar-right km-searchbox">$theme.search()</div>
+	 #end
+	 </ul>
+</div>			

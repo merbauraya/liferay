@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.2.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_2_0.dtd">
+
+<layout-templates>
+	<custom>
+		<layout-template id="bs3_layout_1_column" name="BS3 1 Column">
+			<template-path>/bs3_layout_1_column.tpl</template-path>
+			<wap-template-path>
+				/bs3_layout_1_column.wap.tpl
+			</wap-template-path>
+			<thumbnail-path>/bs3_layout_1_column.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="bs37030" name="BS3_70-30">
+			<template-path>/bs37030.tpl</template-path>
+			<wap-template-path>/bs37030.wap.tpl</wap-template-path>
+			<thumbnail-path>/bs37030.png</thumbnail-path>
+		</layout-template>
+	</custom>
+</layout-templates>

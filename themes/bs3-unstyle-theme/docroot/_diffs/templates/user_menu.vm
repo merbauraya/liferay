@@ -1,0 +1,27 @@
+<div class="navbar-right"> <!-- navbar right -->
+	<ul class="nav navbar-nav">
+		
+		
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span>$user_name <i class="caret"></i></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li>
+                                	<a href="$themeDisplay.getURLMyAccount()">Profile</a>
+                                </li>
+                                <li>
+                                	<a href="$sign_out_url">Sign out
+                                	<i class="fa fa-power-off"></i>
+                                	</a>
+                                </li>
+                               
+                            </ul>
+                        </li>
+		
+		
+	</ul>
+
+</div>

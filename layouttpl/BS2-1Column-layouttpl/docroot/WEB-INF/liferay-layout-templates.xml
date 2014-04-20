@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.2.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_2_0.dtd">
+
+<layout-templates>
+	<custom>
+		<layout-template id="BS2_1Column" name="Bootstrap2-1Column">
+			<template-path>/BS2_1Column.tpl</template-path>
+			<wap-template-path>/BS2_1Column.wap.tpl</wap-template-path>
+			<thumbnail-path>/BS2_1Column.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="bs239" name="BS2-3-9">
+			<template-path>/bs239.tpl</template-path>
+			<wap-template-path>/bs239.wap.tpl</wap-template-path>
+			<thumbnail-path>/bs239.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="bs293" name="BS2-9-3">
+			<template-path>/bs293.tpl</template-path>
+			<wap-template-path>/bs293.wap.tpl</wap-template-path>
+			<thumbnail-path>/bs293.png</thumbnail-path>
+		</layout-template>
+	</custom>
+</layout-templates>
