@@ -94,6 +94,7 @@ $(function() {
      **/
     //alert($(window).height());
     function _fix() {
+    	return;
         //Get window height and the wrapper height
         var height = $(window).height() - $("body > .header").height();
         $(".wrapper").css("min-height", height + "px");
