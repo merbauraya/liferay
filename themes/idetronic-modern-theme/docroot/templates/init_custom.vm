@@ -98,10 +98,10 @@
 #end
 #set ($show_left_navigation = $theme_display.getThemeSetting('show-left-navigation'))
 #if ($show_left_navigation == true && $is_signed_in)
-	#set ($right_side_css = "right-side with-left-nav")
+	#set ($right_side_css = "span10")
 	
 #else
-	#set ($right_side_css = "right-side ")
+	#set ($right_side_css = "span12")
 	
 #end
 ## ---------- Footer Custom Field ---------- ##

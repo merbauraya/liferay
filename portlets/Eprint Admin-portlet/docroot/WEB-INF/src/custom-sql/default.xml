@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+    <sql id="com.idetronic.eprint.service.persistence.EprintFinderImpl.findBySubjectId">
+        select b.* 
+        from Eprints_EprintSubject a,Eprints_Eprint b
+		where a.subjectid = ?
+		and a.eprintid = b.eprintid
+
+    </sql>
+       
+</custom-sql>

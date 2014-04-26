@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC
+        "-//Liferay//DTD Friendly URL Routes 6.1.0//EN"
+        "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_1_0.dtd">
+<routes>
+         <route>
+                <pattern>/detail/{eprintId:\d+}</pattern>
+                <ignored-parameter name="backURL"/>
+                <implicit-parameter name="jspPage">/html/eprintview/detail.jsp</implicit-parameter>
+       			
+        </route>
+        <route>
+                <pattern>/bytype/{type}</pattern>
+                <ignored-parameter name="backURL"/>
+                
+       			
+        </route>
+        <route>
+                <pattern>/{urlTitle}</pattern>
+                <ignored-parameter name="backURL"/>
+                <implicit-parameter name="jspPage">/html/eprintview/detail.jsp</implicit-parameter>
+       			
+        </route>
+        
+      
+         
+        <route>
+			<pattern>/{urlTitle}</pattern>
+			<ignored-parameter name="backURL"/>
+		   	<implicit-parameter name="p_p_id">eprintview_WAR_EprintAdminportlet</implicit-parameter>
+		   
+			<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+			<implicit-parameter name="jspPage">/html/eprintview/detail.jsp</implicit-parameter>
+		</route>
+         <route>
+                <pattern>/update/{eprintId:\d+}</pattern>
+                <ignored-parameter name="backURL"/>
+                <implicit-parameter name="jspPage">/html/eprint/asset/edit_entry.jsp</implicit-parameter>
+       			
+        </route>
+        <route>
+        	<pattern>/bySubject</pattern>
+        	 <ignored-parameter name="backURL"/>
+          	<implicit-parameter name="jspPage">/html/eprintview/bysubject.jsp</implicit-parameter>
+        </route>
+        <route>
+        	<pattern>/byDivision</pattern>
+        	 <ignored-parameter name="backURL"/>
+          	<implicit-parameter name="jspPage">/html/eprintview/bydivision.jsp</implicit-parameter>
+        </route>
+         <route>
+        	<pattern>/view/{eprintId}</pattern>
+        	 <ignored-parameter name="backURL"/>
+          	<implicit-parameter name="jspPage">/html/eprintview/detail.jsp</implicit-parameter>
+        </route>
+</routes>

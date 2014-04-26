@@ -55,44 +55,49 @@ $theme.include($body_top_include)
 				</div>
             </div>
         </header>
-        <div class="wrapper row-offcanvas row-offcanvas-left">
+        
+       <!-- <div class="wrapper row-offcanvas row-offcanvas-left"> -->
+       <div class="container-fluid">
+       		<div class="row-fluid">
             <!-- Left side column. contains the logo and sidebar -->
             	
-        	 #if ($show_left_navigation == true && $is_signed_in)
-	            <aside class="left-side sidebar-offcanvas">
-	                <!-- sidebar: style can be found in sidebar.less -->
-	                <section class="sidebar">
-	                    	
-						#parse ("$full_templates_path/side_navigation.vm")
-							
-	                
-	                #if ($page_group.isUser())
-						##parse ("$full_templates_path/sidebar_portlets.vm")
-					#end
-	                
-	                </section>
-	                
-	            </aside>
-			#end
-            <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="$right_side_css">
-              
-
-                <!-- Main content -->
-                <section class="content">
-
-               		#if ($selectable)
-						$theme.include($content_include)
-					#else
-						$portletDisplay.recycle()
+	        	 #if ($show_left_navigation == true && $is_signed_in)
+		            <!--<aside class="left-side sidebar-offcanvas"> -->
+		            <div class="span2" id="left-nav">
+		                <!-- sidebar: style can be found in sidebar.less -->
+		                <section class="sidebar">
+		                    	
+							#parse ("$full_templates_path/side_navigation.vm")
+								
+		                
+		                #if ($page_group.isUser())
+							##parse ("$full_templates_path/sidebar_portlets.vm")
+						#end
+		                
+		                </section>
+		                
+		            </div>
+				#end
+	            <!-- Right side column. Contains the navbar and content of the page -->
+	            <div class="$right_side_css">
+	              
 	
-						$portletDisplay.setTitle($the_title)
+	                <!-- Main content -->
+	                <section class="content">
 	
-						$theme.wrapPortlet("portlet.vm", $content_include)
-					#end
-
-                </section><!-- /.content -->
-            </aside><!-- /.right-side -->
+	               		#if ($selectable)
+							$theme.include($content_include)
+						#else
+							$portletDisplay.recycle()
+		
+							$portletDisplay.setTitle($the_title)
+		
+							$theme.wrapPortlet("portlet.vm", $content_include)
+						#end
+	
+	                </section><!-- /.content -->
+	            </div><!-- /.right-side -->
+        	</div>
         </div><!-- ./wrapper -->
 <footer id="footer" class="ftr-sect row">
 	<div class="footer-nav">

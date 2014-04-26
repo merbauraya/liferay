@@ -5,7 +5,7 @@
     height: 35px !important;
   
 }
-body > .header .navbar .navbar-nav  {
+body > header .navbar .navbar-nav  {
     background-color: rgba(0, 0, 0, 0);
     background-image: none;
     border: 1px solid rgba(0, 0, 0, 0);
@@ -135,7 +135,7 @@ background-color:#FFF;
 }
 .aui .navbar .nav > li > a:focus, .aui .navbar .nav > li > a:hover
 {
-	border-radius:3px;
+	/*border-radius:3px;*/
 	z-index:10000;
 }
 .navbar-right {

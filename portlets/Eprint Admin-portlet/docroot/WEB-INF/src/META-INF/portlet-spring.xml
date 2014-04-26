@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.idetronic.eprint.service.EprintLocalService" class="com.idetronic.eprint.service.impl.EprintLocalServiceImpl" />
+	<bean id="com.idetronic.eprint.service.persistence.EprintPersistence" class="com.idetronic.eprint.service.persistence.EprintPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eprint.service.persistence.EprintFinder" class="com.idetronic.eprint.service.persistence.EprintFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eprint.service.EprintStaticContentLocalService" class="com.idetronic.eprint.service.impl.EprintStaticContentLocalServiceImpl" />
+	<bean id="com.idetronic.eprint.service.persistence.EprintStaticContentPersistence" class="com.idetronic.eprint.service.persistence.EprintStaticContentPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.eprint.service.EprintSubjectLocalService" class="com.idetronic.eprint.service.impl.EprintSubjectLocalServiceImpl" />
+	<bean id="com.idetronic.eprint.service.persistence.EprintSubjectPersistence" class="com.idetronic.eprint.service.persistence.EprintSubjectPersistenceImpl" parent="basePersistence" />
+</beans>

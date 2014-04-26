@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.idetronic.eprint.model.Eprint">
+		<field name="eprintId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="title" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="urlTitle" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="eprintType" type="String" />
+		<field name="eprintStatus" type="String" />
+		<field name="metadataVisibility" type="String" />
+		<field name="eprintAbstract" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="eprintKeywords" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="isPublished" type="String" />
+		<field name="dateYear" type="String" />
+		<field name="fullTextStatus" type="String" />
+		<field name="companyId" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.idetronic.eprint.model.EprintStaticContent">
+		<field name="contentId" type="long" />
+		<field name="content" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
+	<model name="com.idetronic.eprint.model.EprintSubject">
+		<field name="eprintId" type="long" />
+		<field name="subjectId" type="String" />
+		<field name="subjectName" type="String" />
+	</model>
+</model-hints>

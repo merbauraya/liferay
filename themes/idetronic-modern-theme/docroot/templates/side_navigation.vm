@@ -1,30 +1,44 @@
-<ul class="sidebar-menu">
-	#foreach ($nav_item in $nav_items)
-		#if($nav_item.getLayout().getExpandoBridge().getAttribute($sideNavigation) == true)
-			## we are only interested in second level menu
-			#if ($nav_item.hasChildren())
-				#foreach ($nav_child in $nav_item.getChildren())
-				#if ($is_signed_in || ($nav_child.getLayout().getExpandoBridge().getAttribute($hideGuest) == false))
-				
-					#if ($nav_child.isSelected())
-						#set( $selected = " active " )
-					#else
-						#set( $selected = "" )
-					#end
+
+<div class="user-side-avatar">
+	<a href="$user_profile_url" class="user-acct">
+		<img src="/image/user_male_portrait?img_id=$user.portraitId&amp;" width="40">
+	</a>
+	<div class="user-side-profile">
+		<div>
+		<a class="user-side-home" href="$user_profile_url">My Home</a>
+		<a href="$themeDisplay.getURLMyAccount()">My Profile</a>
+		</div>
+	</div>
+</div>
+<div class="sidebar-nav">
+	<ul class="sidebar-menu">
+		#foreach ($nav_item in $nav_items)
+			#if($nav_item.getLayout().getExpandoBridge().getAttribute($sideNavigation) == true)
+				## we are only interested in second level menu
+				#if ($nav_item.hasChildren())
+					#foreach ($nav_child in $nav_item.getChildren())
+					#if ($is_signed_in || ($nav_child.getLayout().getExpandoBridge().getAttribute($hideGuest) == false))
 					
-					<li class="$selected$childClass">
-					
-						
-							<a href="$nav_child.getURL()">
-								<span>$nav_child.icon() $nav_child.getName()</span> 
-							</a>
-							
+						#if ($nav_child.isSelected())
+							#set( $selected = " active " )
+						#else
+							#set( $selected = "" )
 						#end
 						
-					</li>
+						<li class="$selected$childClass">
+						
+							
+								<a href="$nav_child.getURL()">
+									<span>$nav_child.icon() $nav_child.getName()</span> 
+								</a>
+								
+							#end
+							
+						</li>
+					#end
 				#end
 			#end
 		#end
-	#end
-
-</ul>
+	
+	</ul>
+</div>
