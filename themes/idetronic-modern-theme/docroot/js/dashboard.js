@@ -4,6 +4,7 @@
  * Description:
  *      This is a demo file used only for the main dashboard (index.html)
  **/
+/*
 
 $(function() {
     "use strict";
@@ -24,7 +25,7 @@ $(function() {
         forcePlaceholderSize: true,
         zIndex: 999999
     }).disableSelection();;
-
+*/
     //bootstrap WYSIHTML5 - text editor
     $(".textarea").wysihtml5();
 

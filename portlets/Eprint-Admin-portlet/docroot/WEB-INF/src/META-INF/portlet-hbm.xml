@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.idetronic.eprint.model.Eprint" />
+	<import class="com.idetronic.eprint.model.EprintDivision" />
+	<import class="com.idetronic.eprint.model.EprintStaticContent" />
+	<import class="com.idetronic.eprint.model.EprintSubject" />
+	<class name="com.idetronic.eprint.model.impl.EprintImpl" table="Eprints_Eprint">
+		<cache usage="read-write" />
+		<id name="eprintId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="urlTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eprintType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eprintStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="metadataVisibility" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eprintAbstract" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eprintKeywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="isPublished" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dateYear" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fullTextStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.idetronic.eprint.model.impl.EprintDivisionImpl" table="Eprints_EprintDivision">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.idetronic.eprint.service.persistence.EprintDivisionPK">
+			<key-property name="eprintId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="divisionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		</composite-id>
+		<property name="divisionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.idetronic.eprint.model.impl.EprintStaticContentImpl" table="Eprints_EprintStaticContent">
+		<cache usage="read-write" />
+		<id name="contentId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.idetronic.eprint.model.impl.EprintSubjectImpl" table="Eprints_EprintSubject">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.idetronic.eprint.service.persistence.EprintSubjectPK">
+			<key-property name="eprintId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="subjectId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		</composite-id>
+		<property name="subjectName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

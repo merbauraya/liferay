@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.idetronic.eprint">
+	<author>Mazlan Mat</author>
+	<namespace>Eprints</namespace>
+	
+	<entity name="Eprint" local-service="true" remote-service="false">
+		<column name="eprintId" type="long" primary="true" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="title" type="String" />
+		<column name="urlTitle" type="String" />
+		<column name="eprintType" type="String" />
+		<column name="eprintStatus" type="String" />
+		<column name="metadataVisibility" type="String" />
+		<column name="eprintAbstract" type="String" />
+		<column name="eprintKeywords" type="String" />
+		<column name="isPublished" type="String" />
+		<column name="dateYear" type="String" />
+		<column name="fullTextStatus" type="String" />
+		<column name="companyId" type="long" />
+		<column name="modifiedDate" type="Date" />
+		<column name="createdDate" type="Date" />
+		
+		
+		
+		<finder return-type="Collection" name="eprintType">
+   			<finder-column name="eprintType"/>  
+  		</finder>
+  		<finder name="G_UT" return-type="Eprint" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="urlTitle" />
+		</finder>
+		
+  		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+  		
+
+	</entity>
+	<entity name="EprintSubject" local-service="true" remote-service="false">
+		<column name="eprintId" type="long" primary="true"/>
+		<column name="subjectId" type="String" primary="true"/>
+		<column name="subjectName" type="String" />
+	</entity>
+	<entity name="EprintDivision" local-service="true" remote-service="false">
+		<column name="eprintId" type="long" primary="true"/>
+		<column name="divisionId" type="String" primary="true"/>
+		<column name="divisionName" type="String"/>
+	</entity>
+	<entity name="EprintStaticContent" local-service="true" remote-service="false">
+		<column name="contentId" type="long" primary="true"/>
+		<column name="content" type="String"/>
+	</entity>
+	
+</service-builder>

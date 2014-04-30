@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.idetronic.eprint.model.impl.EprintModelImpl">
+		<attributes>
+			<id name="eprintId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="title" />
+			<basic name="urlTitle" />
+			<basic name="eprintType" />
+			<basic name="eprintStatus" />
+			<basic name="metadataVisibility" />
+			<basic name="eprintAbstract" />
+			<basic name="eprintKeywords" />
+			<basic name="isPublished" />
+			<basic name="dateYear" />
+			<basic name="fullTextStatus" />
+			<basic name="companyId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eprint.model.impl.EprintDivisionModelImpl">
+		<id-class class="com.idetronic.eprint.service.persistence.EprintDivisionPK" />
+		<attributes>
+			<id name="eprintId" />
+			<id name="divisionId" />
+			<basic name="divisionName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eprint.model.impl.EprintStaticContentModelImpl">
+		<attributes>
+			<id name="contentId" />
+			<basic name="content" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.eprint.model.impl.EprintSubjectModelImpl">
+		<id-class class="com.idetronic.eprint.service.persistence.EprintSubjectPK" />
+		<attributes>
+			<id name="eprintId" />
+			<id name="subjectId" />
+			<basic name="subjectName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.idetronic.eprint.model.impl.EprintImpl" name="Eprint">
+		<table name="Eprints_Eprint" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eprint.model.impl.EprintDivisionImpl" name="EprintDivision">
+		<table name="Eprints_EprintDivision" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eprint.model.impl.EprintStaticContentImpl" name="EprintStaticContent">
+		<table name="Eprints_EprintStaticContent" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.eprint.model.impl.EprintSubjectImpl" name="EprintSubject">
+		<table name="Eprints_EprintSubject" />
+		<attributes />
+	</entity>
+</entity-mappings>

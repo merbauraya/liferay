@@ -1,0 +1,2 @@
+select eprintid,divisions,name_name from eprint_divisions,subject_name_name
+where divisions=subjectid
