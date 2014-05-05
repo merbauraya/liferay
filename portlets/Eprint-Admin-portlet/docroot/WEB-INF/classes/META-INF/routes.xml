@@ -11,14 +11,15 @@
        			
         </route>
         <route>
-                <pattern>/bytype/{type}</pattern>
-                <ignored-parameter name="backURL"/>
-                
+                <pattern>/bytype/{itemType}</pattern>
+                <ignored-parameter name="redirect"/>
+              	<implicit-parameter name="jspPage">/html/eprintview/bytype.jsp</implicit-parameter> 
+       			
        			
         </route>
         <route>
                 <pattern>/{urlTitle}</pattern>
-                <ignored-parameter name="backURL"/>
+                <ignored-parameter name="redirect"/>
                 <implicit-parameter name="jspPage">/html/eprintview/detail.jsp</implicit-parameter>
        			
         </route>

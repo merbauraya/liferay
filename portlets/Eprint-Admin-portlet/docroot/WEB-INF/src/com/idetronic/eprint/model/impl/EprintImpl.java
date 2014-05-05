@@ -14,6 +14,10 @@
 
 package com.idetronic.eprint.model.impl;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+
 /**
  * The extended model implementation for the Eprint service. Represents a row in the &quot;Eprints_Eprint&quot; database table, with each column mapped to a property of this class.
  *
@@ -30,5 +34,28 @@ public class EprintImpl extends EprintBaseImpl {
 	 * Never reference this class directly. All methods that expect a eprint model instance should use the {@link com.idetronic.eprint.model.Eprint} interface instead.
 	 */
 	public EprintImpl() {
+		
 	}
+		
+	public String getSummary()
+	{
+		
+		String summary = getEprintAbstract() ;
+		if (Validator.isNotNull(summary))
+		{
+			summary = StringUtil.shorten(
+					HtmlUtil.stripHtml(summary), 200);
+			
+		}else
+		{
+			summary = getTitle();
+		}
+		
+		
+		
+		return summary;
+		
+	}
+	
 }
+	

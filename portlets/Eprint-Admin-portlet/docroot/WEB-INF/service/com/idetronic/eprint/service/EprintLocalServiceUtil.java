@@ -308,6 +308,12 @@ public class EprintLocalServiceUtil {
 				   .search(groupId, userId, creatorUserId, keyword, start, end);
 	}
 
+	public static com.liferay.portal.kernel.search.Hits getByType(
+		java.lang.String type, long companyId, long groupId)
+		throws com.liferay.portal.kernel.search.SearchException {
+		return getService().getByType(type, companyId, groupId);
+	}
+
 	public static com.liferay.portal.kernel.search.Hits getHits(
 		java.lang.String keyword, long companyId, long groupId) {
 		return getService().getHits(keyword, companyId, groupId);

@@ -140,37 +140,43 @@ public class EprintLocalServiceClpInvoker {
 				"long", "long", "long", "java.lang.String", "int", "int"
 			};
 
-		_methodName61 = "getHits";
+		_methodName61 = "getByType";
 
 		_methodParameterTypes61 = new String[] {
 				"java.lang.String", "long", "long"
 			};
 
-		_methodName62 = "findBySubjectId";
+		_methodName63 = "getHits";
 
-		_methodParameterTypes62 = new String[] { "java.lang.String", "int", "int" };
-
-		_methodName63 = "findByDivisionId";
-
-		_methodParameterTypes63 = new String[] { "java.lang.String", "int", "int" };
-
-		_methodName64 = "searchIndex";
-
-		_methodParameterTypes64 = new String[] {
+		_methodParameterTypes63 = new String[] {
 				"java.lang.String", "long", "long"
 			};
 
-		_methodName65 = "fetchEntry";
+		_methodName64 = "findBySubjectId";
 
-		_methodParameterTypes65 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes64 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName66 = "findByType";
+		_methodName65 = "findByDivisionId";
 
-		_methodParameterTypes66 = new String[] { "java.lang.String" };
+		_methodParameterTypes65 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName67 = "byTypeSummary";
+		_methodName66 = "searchIndex";
 
-		_methodParameterTypes67 = new String[] {  };
+		_methodParameterTypes66 = new String[] {
+				"java.lang.String", "long", "long"
+			};
+
+		_methodName67 = "fetchEntry";
+
+		_methodParameterTypes67 = new String[] { "long", "java.lang.String" };
+
+		_methodName68 = "findByType";
+
+		_methodParameterTypes68 = new String[] { "java.lang.String" };
+
+		_methodName69 = "byTypeSummary";
+
+		_methodParameterTypes69 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -310,45 +316,52 @@ public class EprintLocalServiceClpInvoker {
 
 		if (_methodName61.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+			return EprintLocalServiceUtil.getByType((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue());
+		}
+
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			return EprintLocalServiceUtil.getHits((java.lang.String)arguments[0],
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue());
 		}
 
-		if (_methodName62.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return EprintLocalServiceUtil.findBySubjectId((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName63.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
 			return EprintLocalServiceUtil.findByDivisionId((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return EprintLocalServiceUtil.searchIndex((java.lang.String)arguments[0],
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue());
 		}
 
-		if (_methodName65.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			return EprintLocalServiceUtil.fetchEntry(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return EprintLocalServiceUtil.findByType((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			return EprintLocalServiceUtil.byTypeSummary();
 		}
 
@@ -399,8 +412,6 @@ public class EprintLocalServiceClpInvoker {
 	private String[] _methodParameterTypes60;
 	private String _methodName61;
 	private String[] _methodParameterTypes61;
-	private String _methodName62;
-	private String[] _methodParameterTypes62;
 	private String _methodName63;
 	private String[] _methodParameterTypes63;
 	private String _methodName64;
@@ -411,4 +422,8 @@ public class EprintLocalServiceClpInvoker {
 	private String[] _methodParameterTypes66;
 	private String _methodName67;
 	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
 }

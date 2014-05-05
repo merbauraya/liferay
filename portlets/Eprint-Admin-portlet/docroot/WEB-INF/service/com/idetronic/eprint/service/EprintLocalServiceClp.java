@@ -140,37 +140,43 @@ public class EprintLocalServiceClp implements EprintLocalService {
 				"long", "long", "long", "java.lang.String", "int", "int"
 			};
 
-		_methodName22 = "getHits";
+		_methodName22 = "getByType";
 
 		_methodParameterTypes22 = new String[] {
 				"java.lang.String", "long", "long"
 			};
 
-		_methodName23 = "findBySubjectId";
+		_methodName23 = "getHits";
 
-		_methodParameterTypes23 = new String[] { "java.lang.String", "int", "int" };
-
-		_methodName24 = "findByDivisionId";
-
-		_methodParameterTypes24 = new String[] { "java.lang.String", "int", "int" };
-
-		_methodName25 = "searchIndex";
-
-		_methodParameterTypes25 = new String[] {
+		_methodParameterTypes23 = new String[] {
 				"java.lang.String", "long", "long"
 			};
 
-		_methodName26 = "fetchEntry";
+		_methodName24 = "findBySubjectId";
 
-		_methodParameterTypes26 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes24 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName27 = "findByType";
+		_methodName25 = "findByDivisionId";
 
-		_methodParameterTypes27 = new String[] { "java.lang.String" };
+		_methodParameterTypes25 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName28 = "byTypeSummary";
+		_methodName26 = "searchIndex";
 
-		_methodParameterTypes28 = new String[] {  };
+		_methodParameterTypes26 = new String[] {
+				"java.lang.String", "long", "long"
+			};
+
+		_methodName27 = "fetchEntry";
+
+		_methodParameterTypes27 = new String[] { "long", "java.lang.String" };
+
+		_methodName28 = "findByType";
+
+		_methodParameterTypes28 = new String[] { "java.lang.String" };
+
+		_methodName29 = "byTypeSummary";
+
+		_methodParameterTypes29 = new String[] {  };
 	}
 
 	@Override
@@ -882,13 +888,49 @@ public class EprintLocalServiceClp implements EprintLocalService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.search.Hits getHits(
-		java.lang.String keyword, long companyId, long groupId) {
+	public com.liferay.portal.kernel.search.Hits getByType(
+		java.lang.String type, long companyId, long groupId)
+		throws com.liferay.portal.kernel.search.SearchException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName22,
 					_methodParameterTypes22,
+					new Object[] {
+						ClpSerializer.translateInput(type),
+						
+					companyId,
+						
+					groupId
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.search.SearchException) {
+				throw (com.liferay.portal.kernel.search.SearchException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.search.Hits)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.Hits getHits(
+		java.lang.String keyword, long companyId, long groupId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
 					new Object[] {
 						ClpSerializer.translateInput(keyword),
 						
@@ -914,37 +956,6 @@ public class EprintLocalServiceClp implements EprintLocalService {
 
 	@Override
 	public java.util.List<com.idetronic.eprint.model.Eprint> findBySubjectId(
-		java.lang.String subjectId, int begin, int end) {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName23,
-					_methodParameterTypes23,
-					new Object[] {
-						ClpSerializer.translateInput(subjectId),
-						
-					begin,
-						
-					end
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<com.idetronic.eprint.model.Eprint>)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public java.util.List<com.idetronic.eprint.model.Eprint> findByDivisionId(
 		java.lang.String subjectId, int begin, int end) {
 		Object returnObj = null;
 
@@ -975,14 +986,45 @@ public class EprintLocalServiceClp implements EprintLocalService {
 	}
 
 	@Override
+	public java.util.List<com.idetronic.eprint.model.Eprint> findByDivisionId(
+		java.lang.String subjectId, int begin, int end) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
+					new Object[] {
+						ClpSerializer.translateInput(subjectId),
+						
+					begin,
+						
+					end
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.idetronic.eprint.model.Eprint>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public java.util.List<com.idetronic.eprint.model.Eprint> searchIndex(
 		java.lang.String keyword, long companyId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName25,
-					_methodParameterTypes25,
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26,
 					new Object[] {
 						ClpSerializer.translateInput(keyword),
 						
@@ -1017,8 +1059,8 @@ public class EprintLocalServiceClp implements EprintLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName26,
-					_methodParameterTypes26,
+			returnObj = _invokableLocalService.invokeMethod(_methodName27,
+					_methodParameterTypes27,
 					new Object[] { groupId, ClpSerializer.translateInput(
 							urlTitle) });
 		}
@@ -1048,8 +1090,8 @@ public class EprintLocalServiceClp implements EprintLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27,
+			returnObj = _invokableLocalService.invokeMethod(_methodName28,
+					_methodParameterTypes28,
 					new Object[] { ClpSerializer.translateInput(type) });
 		}
 		catch (Throwable t) {
@@ -1077,8 +1119,8 @@ public class EprintLocalServiceClp implements EprintLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName28,
-					_methodParameterTypes28, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1156,4 +1198,6 @@ public class EprintLocalServiceClp implements EprintLocalService {
 	private String[] _methodParameterTypes27;
 	private String _methodName28;
 	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
 }

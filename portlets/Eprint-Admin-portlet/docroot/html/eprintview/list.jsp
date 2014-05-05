@@ -1,20 +1,13 @@
 <%@include file="/html/eprint/init.jsp" %>
-<%@page import="com.liferay.portal.kernel.search.Indexer" %>
-<%@page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
-<%@page import="com.liferay.portal.kernel.search.SearchContext" %>
-<%@page import="com.liferay.portal.kernel.language.LanguageUtil" %>
-<%@page import="com.liferay.portal.kernel.search.Hits" %>
-<%@page import="com.liferay.portal.kernel.search.Field" %>
-<%@page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
-<%@page import="com.liferay.portal.kernel.search.BooleanQuery" %>
-<%@page import="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" %>
-<%@page import="com.idetronic.eprint.util.EprintSearcher" %>
-<%@page import="com.idetronic.eprint.service.base.EprintLocalServiceBaseImpl" %>
-<%@page import="com.idetronic.eprint.util.EprintUtil" %>
+
 <%
 String keywords = ParamUtil.getString(request, "q");
+String redirect = ParamUtil.getString(request, "redirect");
 %>
-List.jsp
+
+<liferay-portlet:renderURL varImpl="searchURL">
+	<portlet:param name="jspPage" value="/html/eprintview/list.jsp" />
+</liferay-portlet:renderURL>
 
 
 <%
@@ -25,22 +18,25 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	
 	portletURL.setParameter("q", keywords);
 	%>
+<aui:form action="<%= searchURL %>" method="get" name="fm">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	
 
-
-<liferay-ui:search-container
-		emptyResultsMessage='<%= LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>") %>'
-		iteratorURL="<%= portletURL %>"
-	>
+	<liferay-ui:header
+			backURL="<%= redirect %>"
+			title="search"
+	/>
+	<div class="form-search">
+		<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" id="q" name="q" placeholder='<%= LanguageUtil.get(locale, "keywords") %>' />
+	</div>
+	
+	<liferay-ui:search-container
+			emptyResultsMessage='<%= LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>") %>'
+			iteratorURL="<%= portletURL %>"
+		>
 
 <%
-	//Indexer indexer = EprintSearcher.getInstance();
-	Indexer indexer = IndexerRegistryUtil.getIndexer(Eprint.class);
-	SearchContext searchContext = SearchContextFactory.getInstance(request);
-	searchContext.setAttribute("paginationType", "more");
-	searchContext.setEnd(searchContainer.getEnd());
-	searchContext.setKeywords(keywords);
-	//searchContext.setAttribute(name, value)
-	searchContext.setStart(searchContainer.getStart());
 	
 	Hits hits = EprintLocalServiceUtil.getHits(keywords, themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId());
 	
@@ -58,27 +54,25 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			className="Object"
 			modelVar="obj"
 		>
-		<%
-			Eprint entry = (Eprint)obj;
-
-		//String rowHREF = themeDisplay.getPathMain().concat("/detail/").concat(String.valueOf(entry.getEprintId()));
-		PortletURL pURL = EprintHelper.getViewDetailUrl(themeDisplay, request, 0);
-		String rowHREF=pURL.toString();
-		rowHREF = rowHREF.substring(0,rowHREF.length()-1); 
-		%>
-		
-		<liferay-ui:search-container-column-text
-						name="title"
-						href="<%= rowHREF+ entry.getUrlTitle() %>"
-						title="<%= entry.getTitle() %>"
-						value="<%=entry.getTitle() %>"
-					/>
-		<liferay-ui:search-container-column-text
-						name="type"
-						title="<%= entry.getEprintType() %>"
-						value="<%=entry.getEprintType() %>"
-					/>		
+			<%
+				Eprint entry = (Eprint)obj;
+	
+				PortletURL pURL = EprintHelper.getViewDetailUrl(themeDisplay, request, 0);
+				String rowHREF=pURL.toString();
+				rowHREF = rowHREF.substring(0,rowHREF.length()-1); 
 			
-		</liferay-ui:search-container-row>					
-		<liferay-ui:search-iterator type="more" />
-	</liferay-ui:search-container>
+			%>
+			
+				<liferay-ui:app-view-search-entry
+					cssClass='<%= MathUtil.isEven(index) ? "search" : "search alt" %>'
+					description="<%=  entry.getSummary() %>"
+					mbMessages="<%= null%>"
+					queryTerms="<%= null %>"
+					thumbnailSrc="<%= StringPool.BLANK %>"
+					title="<%=  entry.getTitle() %>"
+					url="<%= rowHREF+ entry.getUrlTitle() %>"
+				/>	
+			</liferay-ui:search-container-row>					
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="more" />
+		</liferay-ui:search-container>
+	</aui:form>

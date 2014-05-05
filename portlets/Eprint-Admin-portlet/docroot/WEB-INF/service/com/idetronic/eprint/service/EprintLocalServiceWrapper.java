@@ -321,6 +321,13 @@ public class EprintLocalServiceWrapper implements EprintLocalService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.search.Hits getByType(
+		java.lang.String type, long companyId, long groupId)
+		throws com.liferay.portal.kernel.search.SearchException {
+		return _eprintLocalService.getByType(type, companyId, groupId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.search.Hits getHits(
 		java.lang.String keyword, long companyId, long groupId) {
 		return _eprintLocalService.getHits(keyword, companyId, groupId);

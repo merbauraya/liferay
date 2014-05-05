@@ -635,6 +635,11 @@ public class EprintWrapper implements Eprint, ModelWrapper<Eprint> {
 	}
 
 	@Override
+	public java.lang.String getSummary() {
+		return _eprint.getSummary();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

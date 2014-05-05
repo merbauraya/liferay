@@ -41,6 +41,12 @@
 		<ul class="nav">
 			<li><a class="eprint-nav" id="eprint-by-subject" href="#">By Subject</a></li>
 			<li><a class="eprint-nav" id="eprint-by-division" href="#">By Division </a></li>
+			<li class="divider-vertical"></li>
+			<li>
+				<a href="#" onclick="javascript:$('#eprint-type-nav').toggle();">
+					<i class="fa fa-bars"></i>
+				</a>
+			</li>
 		</ul>
 		<div class="collapse nav-collapse">
 			<div class="navbar-search pull-right">
@@ -52,6 +58,7 @@
 							<button class="btn" type="submit">Search</button>
 						
 						</div>
+						<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 					</aui:form>
 				
 									

@@ -4,95 +4,57 @@
 <portlet:resourceURL  var="browseBySubjectIdURL" />
 
 
-<div class="row">
 
-	<div id="ep-by-subj" class="col-md-5 nopadding">
-		<jsp:include page="/html/eprintview/type_tree.jsp" />
-		
-	</div>
-	<div class="col-md-7" id="ep-subj-entry">
-		
-		
-	</div>
-</div>
-<aui:script use="aui-base">
-	var minusAlt = '<%= UnicodeLanguageUtil.get(pageContext, "collapse") %>';
-	var minusImage = '01_minus.png';
-	var plusAlt = '<%= UnicodeLanguageUtil.get(pageContext, "expand") %>';
-	var plusImage = '01_plus.png';
+<%
+	String type = ParamUtil.getString(request, "itemType");
+	String redirect = ParamUtil.getString(request, "redirect");
+	String title = "View by type : " +type;
+	Hits hits = EprintLocalServiceUtil.getByType(type, themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId());
+	
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-	A.all('.ep-entry-expander').on(
-		'click',
-		function(event) {
-			var expander = event.currentTarget;
-			var epEventDesc = expander.get('parentNode').one('.ep-child-cont');
+	portletURL.setParameter("typeName", type);
 
-			if (epEventDesc) {
-				var altText = expander.attr('alt');
-				var src = expander.attr('src');
+%>
+<liferay-ui:header
+			backURL="javascript:history.go(-1);"
+			title="<%= title %>"
+	/>
 
-				if (src.indexOf('minus.png') > -1) {
-					altText = altText.replace(minusAlt, plusAlt);
-					src = src.replace(minusImage, plusImage);
-				}
-				else {
-					altText = altText.replace(plusAlt, minusAlt);
-					src = src.replace(plusImage, minusImage);
-				}
+<liferay-ui:search-container
+			emptyResultsMessage='<%= LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(type) + "</strong>") %>'
+			iteratorURL="<%= portletURL %>"
+		>
+<%
+	searchContainer.setTotal(hits.getLength());
+%>
 
-				epEventDesc.toggle();
+	<liferay-ui:search-container-results
+			results="<%= EprintUtil.getEntries(hits) %>"
+		/>
 
-				expander.attr('alt', altText);
-				expander.attr('src', src);
-			}
-		}
-	);
-</aui:script>
-<script>
-jQuery(".ep-head-link").click(function(e){
-	  // Holds the product ID of the clicked element
-	  
-	  var tId = this.id;
-	  var subjectName=	$(this).text();
-	  console.log(subjectName);
-	  tId = tId.replace("epsubject-","");
-	  sCount = $(this).find('span').text();
-	  console.log(sCount);
-	  subjectName = subjectName.substring(0,subjectName.length - sCount.length);
-	  ep_viewBySubject(tId,subjectName);
-	  
-	  e.preventDefault();
-	  
-	});
-	function ep_viewBySubject(subjectId,subjectName)
-    {
-    	
-		jQuery.ajax({
-			type: "POST",
-			url: "<%=browseBySubjectIdURL%>",
-			cache: false,
-			dataType: "html",
-			data : {
-					subjectId: subjectId,
-					isAjax: 1,
-					resType: "bySubjectId",
-					reqFormat: "json",
-					subjectName: subjectName
-			},
-			success: function(res)
-			{
-				$("#ep-subj-entry").html(res);
-				
-			},
-			error: function () {
-                    $("#ep-subj-entry").html("Unable to complete your request");
-                    console.log('Error Occurred');
-                }
-		});
-    }
-</script>
-<script>
-jQuery(function() {
-	ep_viewBySubject(null,'Latest Entry');
-})
-</script>
+		<liferay-ui:search-container-row
+			className="Object"
+			modelVar="obj"
+		>
+			<%
+				Eprint entry = (Eprint)obj;
+	
+				PortletURL pURL = EprintHelper.getViewDetailUrl(themeDisplay, request, 0);
+				String rowHREF=pURL.toString();
+				rowHREF = rowHREF.substring(0,rowHREF.length()-1); 
+			
+			%>
+			
+				<liferay-ui:app-view-search-entry
+					cssClass='<%= MathUtil.isEven(index) ? "search" : "search alt" %>'
+					description="<%=  entry.getSummary() %>"
+					mbMessages="<%= null%>"
+					queryTerms="<%= null %>"
+					thumbnailSrc="<%= StringPool.BLANK %>"
+					title="<%=  entry.getTitle() %>"
+					url="<%= rowHREF+ entry.getUrlTitle() %>"
+				/>	
+			</liferay-ui:search-container-row>					
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="more" />
+		</liferay-ui:search-container>

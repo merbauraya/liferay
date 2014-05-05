@@ -48,7 +48,7 @@ public class EprintConfigAction implements ConfigurationAction{
 	@Override
 	public String render(PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse) throws Exception {
-		// TODO Auto-generated method stub
+		
 		EprintConfig config = readConfig((PortletRequest)renderRequest);
 		renderRequest.setAttribute("eprintConfig", (Object)(config));   
 		return "/html/eprintview/config.jsp";

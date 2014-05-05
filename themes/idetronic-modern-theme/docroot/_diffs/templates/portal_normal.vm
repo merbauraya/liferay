@@ -113,8 +113,8 @@ $theme.include($bottom_include)
 
 
 <script type="text/javascript" src="$javascript_folder/bootstrap.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="$javascript_folder/app.js" charset="utf-8"></script>
-<!--
+<!--<script type="text/javascript" src="$javascript_folder/app.js" charset="utf-8"></script>
+
 <script type="text/javascript" src="$javascript_folder/dashboard.js" charset="utf-8"></script>
 -->
 

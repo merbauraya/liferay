@@ -36,6 +36,21 @@
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portlet.PortletURLUtil" %>
+<%@page import="com.liferay.portal.kernel.search.Indexer" %>
+<%@page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
+<%@page import="com.liferay.portal.kernel.search.SearchContext" %>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil" %>
+<%@page import="com.liferay.portal.kernel.search.Hits" %>
+<%@page import="com.liferay.portal.kernel.search.Field" %>
+<%@page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
+<%@page import="com.liferay.portal.kernel.search.BooleanQuery" %>
+<%@page import="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" %>
+<%@page import="com.liferay.portal.kernel.util.MathUtil" %>
+<%@page import="com.idetronic.eprint.util.EprintSearcher" %>
+<%@page import="com.idetronic.eprint.service.base.EprintLocalServiceBaseImpl" %>
+<%@page import="com.idetronic.eprint.util.EprintUtil" %>
+
 <%@ page import="javax.portlet.WindowState" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
@@ -59,4 +74,8 @@ boolean enableComments = true;
 boolean enableFlags = true;
 boolean enableRatings = true;
 boolean showRelatedAssets = true;
+
+PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
+WindowState windowState = liferayPortletRequest.getWindowState();
+String currentURL = currentURLObj.toString();
 %>

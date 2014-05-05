@@ -10,6 +10,7 @@ public interface EprintConstant {
 	//our pages
 	public final static String PAGE_LIST = "/html/eprintview/list.jsp";
 	public final static String PAGE_BY_SUBJECT = "/html/eprintview/bysubject.jsp";
+	public final static String PAGE_FILTER_BY_TYPE = "/html/eprintview/bytype.jsp";
 	//public final static String PAGE_BY_SUBJECT2 = "/html/eprintview/bysubject2.jsp";
 	public final static String PAGE_ENTRY_SUBJECT_ID = "/html/eprintview/bysubject_id.jsp";
 	public final static String PAGE_ENTRY_SUBJECT_ID_DATATABLE = "/html/eprintview/bysubject_id_json.jsp";

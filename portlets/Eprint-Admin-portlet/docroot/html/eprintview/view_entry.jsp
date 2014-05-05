@@ -4,11 +4,13 @@
 	String socialBookmarksDisplayStyle = "horizontal";
 	String eprintUrl = (String)request.getAttribute("eprintUrl");
 	request.setAttribute("eprint", eprint);
+	String redirect = ParamUtil.getString(request, "redirect");
+	request.setAttribute("redirect",redirect);
 	AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp-assetEntry");
-
+	
 %>
 	<portlet:renderURL var="viewEntryURL">
-					<portlet:param name="jspPage" value="/blogs/view_entry" />
+					
 					
 					<portlet:param name="urlTitle" value="<%= eprint.getUrlTitle() %>" />
 				</portlet:renderURL>
@@ -26,8 +28,10 @@
 			
 			localizeTitle="<%= false %>"
 			title="<%= eprint.getTitle() %>"
+			backURL="javascript:history.go(-1);"
 			/>
-		
+			
+			
 			<div class="entry-content">
 				<div class="entry-date-img">
 					<span class="aui-helper-hidden-accessible"><liferay-ui:message key="published-date" /></span>

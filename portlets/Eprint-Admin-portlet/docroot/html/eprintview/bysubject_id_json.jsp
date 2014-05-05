@@ -300,6 +300,7 @@ if ($.fn.DataTable.TableTools) {
 	        	
 	        
 	        	PortletURL url = EprintHelper.getViewDetailUrl(themeDisplay, request, 0);
+	        	url.setParameter("redirect", currentURL);
 	        	
 	        %>
 	        var url = '<%= url.toString() %>';

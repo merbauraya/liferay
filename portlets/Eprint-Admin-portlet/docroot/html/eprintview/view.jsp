@@ -22,7 +22,7 @@
 	</div>
 	<input type="hidden" id="nType"/>
 </div>
-<script type="text/javascript">
+<aui:script>
 	var minusAlt = '<%= UnicodeLanguageUtil.get(pageContext, "collapse") %>';
 	var minusImage = '01_minus.png';
 	var plusAlt = '<%= UnicodeLanguageUtil.get(pageContext, "expand") %>';
@@ -54,9 +54,7 @@
 		}
 		
 	});
-</script>
 
-<script type="text/javascript">
 jQuery(".eprint-nav").click(function(e){
 	  // Holds the product ID of the clicked element
 	
@@ -89,7 +87,7 @@ jQuery(".eprint-nav").click(function(e){
 		
 	function load_nav(navType)
 	{
-		console.log("nav"+navType);
+		
 		jQuery.ajax({
 			type: "GET",
 			url: "<%=navURL.toString()%>",
@@ -102,8 +100,9 @@ jQuery(".eprint-nav").click(function(e){
 			success: function(res)
 			{
 				$("#eprint-type-nav").html(res);
-				$("#eprint-type-nav").toggle();
-				
+				if ($("#eprint-type-nav").is(":hidden"))
+					$("#eprint-type-nav").toggle();
+					
 			},
 			error: function () {
                     $("#eprint-type-nav").html("Unable to load navigation");
@@ -114,7 +113,7 @@ jQuery(".eprint-nav").click(function(e){
 	
 function ep_viewBySubjectx(subjectName,subjectId)
     {
-		console.log("ep_viewBySubjectx")	;    	
+		
 		jQuery.ajax({
 			type: "POST",
 			url: "<%=navURL.toString() %>",
@@ -141,20 +140,19 @@ function ep_viewBySubjectx(subjectName,subjectId)
 		});
     }
 	
-</script>
-<script type="text/javascript">
+
 jQuery(document).on("click",".ep-head-link",function(e){
 
 	  // Holds the product ID of the clicked element
 	  
 	  var tId = this.id;
 	  var subjectName=	$(this).text();
-	  console.log(subjectName);
+	  
 	  subjectId = tId.replace("epsubject-","");
 	  sCount = $(this).find('span').text();
-	  console.log(subjectId + "-"+ sCount);
+	  
 	  subjectName = subjectName.substring(0,subjectName.length - sCount.length);
-	  //ep_viewBySubject(tId,subjectName);
+	  
 	  ep_viewBySubjectx(subjectName,subjectId);
 	  e.preventDefault();
 	  
@@ -162,4 +160,4 @@ jQuery(document).on("click",".ep-head-link",function(e){
 $(document ).ready(function() {
 	ep_viewBySubjectx("Latest Entry",null);
 });
-</script>
+</aui:script>

@@ -271,6 +271,11 @@ public interface EprintLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.search.Hits getByType(
+		java.lang.String type, long companyId, long groupId)
+		throws com.liferay.portal.kernel.search.SearchException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits getHits(
 		java.lang.String keyword, long companyId, long groupId);
 

@@ -51,7 +51,7 @@ public class EprintIndexer extends BaseIndexer{
             document.addText(Field.TITLE, eprint.getTitle());
             document.addKeyword(Field.KEYWORD_SEARCH, eprint.getEprintKeywords());
             document.addText(Field.DESCRIPTION, eprint.getEprintAbstract());
-            document.addText("Resource Type", eprint.getEprintType());
+            document.addText("eprintType", eprint.getEprintType());
             Date modifiedDate = eprint.getModifiedDate();
             if (modifiedDate == null)
             	modifiedDate = new Date();

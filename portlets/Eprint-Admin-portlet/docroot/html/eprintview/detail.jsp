@@ -4,6 +4,7 @@
 	String eprintId = null;
 	
 	String urlTitle = request.getParameter("urlTitle");
+	String redirect = request.getParameter("redirect");
 	urlTitle.replaceAll("\\s","");
 	
 	Eprint eprint = null;
@@ -31,6 +32,7 @@
 			AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(Eprint.class.getName(), eprint.getEprintId());
 			request.setAttribute("eprintUrl", eprintUrl);
 			request.setAttribute("eprint", eprint);
+			request.setAttribute("redirect",redirect);
 			AssetEntryServiceUtil.incrementViewCounter(Eprint.class.getName(), eprint.getEprintId());
 			
 			String socialBookmarksDisplayStyle = "none";
@@ -44,7 +46,7 @@
 		
 		e.printStackTrace();//  (e.printStackTrace());
 %>		
-		Error La
+		
 		<jsp:include page="/html/eprintview/error.jsp" />	
 <%		
 	}

@@ -63,7 +63,8 @@
 			<td>
 			Filter By Type:
 				<portlet:renderURL var="viewByType">
-						<portlet:param name="type" value="<%=entry.getEprintType() %>" />
+						<portlet:param name="itemType" value="<%=entry.getEprintType() %>" />
+						<portlet:param name="jspPage" value="<%=EprintConstant.PAGE_FILTER_BY_TYPE %>" />
 				</portlet:renderURL>
 				<a href="<%=viewByType %>"><%=entry.getEprintType() %></a>
 				

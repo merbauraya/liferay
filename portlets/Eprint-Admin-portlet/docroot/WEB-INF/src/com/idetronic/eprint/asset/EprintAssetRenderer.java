@@ -13,8 +13,11 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -70,7 +73,24 @@ public class EprintAssetRenderer extends BaseAssetRenderer{
 		return _eprint.getGroupId();
 	}
 	public String getSummary(Locale locale) {
-		return _eprint.getEprintAbstract();
+		String summary = _eprint.getEprintAbstract() ;
+		if (Validator.isNotNull(summary))
+		{
+			summary = StringUtil.shorten(
+					HtmlUtil.stripHtml(summary), 200);
+			
+		}else
+		{
+			summary = _eprint.getTitle();
+		}
+		
+		
+		
+		return summary;
+		
+		
+		
+		
 	}
 	public String getTitle(Locale locale) {
 		return _eprint.getTitle();

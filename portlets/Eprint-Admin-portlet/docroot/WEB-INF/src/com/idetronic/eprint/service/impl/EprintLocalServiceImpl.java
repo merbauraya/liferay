@@ -218,6 +218,31 @@ public class EprintLocalServiceImpl extends EprintLocalServiceBaseImpl {
 
 		return indexer.search(searchContext);
 	}
+	public Hits getByType(String type,long companyId,long groupId) throws SearchException
+	{
+
+		SearchContext searchContext = new SearchContext();
+		searchContext.setCompanyId(companyId);
+		String[] CLASS_NAMES = { Eprint.class.getName() };
+		searchContext.setEntryClassNames(CLASS_NAMES);
+		long[] groupIds = {groupId};
+		BooleanQuery searchQuery =
+				BooleanQueryFactoryUtil.create(searchContext);
+		String[] terms = {"eprintType"};
+		try {
+			searchQuery.addTerms(terms, type);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Hits hit = getHit(searchContext,searchQuery);
+		return hit;
+	}
+	private Hits getHit(SearchContext searchContext,BooleanQuery searchQuery) throws SearchException
+	{
+		Hits hit =  SearchEngineUtil.search(
+				searchContext, searchQuery);
+		return hit;
+	}
 	public Hits getHits(String keyword, long companyId, long groupId) {
 		// 1. Preparing a Search Context
 		SearchContext searchContext = new SearchContext();

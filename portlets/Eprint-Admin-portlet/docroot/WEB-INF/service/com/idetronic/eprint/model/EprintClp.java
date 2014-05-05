@@ -575,6 +575,25 @@ public class EprintClp extends BaseModelImpl<Eprint> implements Eprint {
 		}
 	}
 
+	@Override
+	public java.lang.String getSummary() {
+		try {
+			String methodName = "getSummary";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getEprintRemoteModel() {
 		return _eprintRemoteModel;
 	}
