@@ -1,0 +1,38 @@
+.aui .portlet-body {
+  background-color: #fff; }
+
+.sidebar .sidebar-menu > li {
+  line-height: 8px;
+  padding-bottom: 1px; }
+
+footer.ftr-sect {
+  margin: 0 auto;
+  text-align: center; }
+
+.ftr-sect {
+  padding: 20px 15px; }
+
+.footer-nav {
+  margin: 0 auto;
+  text-align: center; }
+
+.footer-nav ul li {
+  display: inline-block;
+  padding-left: 10px; }
+
+/*
+.portlet-title-text {
+    background-color: rgba(0, 0, 0, 0);
+    
+    
+    display: block;
+    font-size: 18px;
+    font-weight: normal;
+    height: 45px;
+    letter-spacing: 0.01em;
+    margin: 0;
+    padding: 7px 30px 5px 20px;
+    text-shadow: none;
+    text-transform: uppercase;
+}*/
+

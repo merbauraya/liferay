@@ -17,7 +17,8 @@ public class TazkirahUtil {
 		int max = 0;
 		int randomNumber = 0;
 		Tazkirah tazkirah = null;
-		List<Tazkirah> tazkirahs = TazkirahLocalServiceUtil.getByCategory(category, companyId,groupId);
+		String[] categories = category.split(",");
+		List<Tazkirah> tazkirahs = TazkirahLocalServiceUtil.getByCategories(categories, companyId, groupId);
 		
 		if ((Validator.isNotNull(tazkirahs) && tazkirahs.size()>0))
 		{
@@ -25,7 +26,7 @@ public class TazkirahUtil {
 			randomNumber = min + (int)(Math.random() * (max - min));
 			
 			tazkirah = tazkirahs.get(randomNumber);
-			return tazkirah;
+			
 		}
 		
 		return tazkirah;

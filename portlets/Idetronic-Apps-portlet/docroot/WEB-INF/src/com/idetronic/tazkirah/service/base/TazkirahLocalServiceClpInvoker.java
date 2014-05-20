@@ -136,9 +136,15 @@ public class TazkirahLocalServiceClpInvoker {
 
 		_methodParameterTypes41 = new String[] { "long", "long" };
 
-		_methodName42 = "getByCategory";
+		_methodName42 = "getByCategories";
 
 		_methodParameterTypes42 = new String[] {
+				"java.lang.String[][]", "long", "long"
+			};
+
+		_methodName43 = "getByCategory";
+
+		_methodParameterTypes43 = new String[] {
 				"java.lang.String", "long", "long"
 			};
 	}
@@ -280,6 +286,13 @@ public class TazkirahLocalServiceClpInvoker {
 
 		if (_methodName42.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
+			return TazkirahLocalServiceUtil.getByCategories((java.lang.String[])arguments[0],
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue());
+		}
+
+		if (_methodName43.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
 			return TazkirahLocalServiceUtil.getByCategory((java.lang.String)arguments[0],
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue());
@@ -334,4 +347,6 @@ public class TazkirahLocalServiceClpInvoker {
 	private String[] _methodParameterTypes41;
 	private String _methodName42;
 	private String[] _methodParameterTypes42;
+	private String _methodName43;
+	private String[] _methodParameterTypes43;
 }

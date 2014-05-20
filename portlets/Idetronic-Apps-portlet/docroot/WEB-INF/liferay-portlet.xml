@@ -27,6 +27,17 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>tazkirahadmin-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>event-view</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>com.idetronic.eventview.ConfigurationActionImpl</configuration-action-class> 
+		<instanceable>true</instanceable>
+		<header-portlet-css>/css/eventview/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>event-view-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

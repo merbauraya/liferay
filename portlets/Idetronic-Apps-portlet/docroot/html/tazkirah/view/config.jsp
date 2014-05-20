@@ -4,14 +4,14 @@
 <%
 	String imageFileName = StringPool.BLANK;
 	TazkirahConfig tazkirahConfig =(TazkirahConfig) request.getAttribute("config");
-
+	imageFileName = String.valueOf(tazkirahConfig.getBackgroundImageId());
 	PortletPreferences preferences = renderRequest.getPreferences();
 	String portletResource = ParamUtil.getString(renderRequest, (String)("portletResource"));
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup((PortletRequest)(renderRequest), (String)(portletResource));
 	String showTitle = tazkirahConfig.getShowTitle();// preferences.getValue("showTitle", "false");
 	boolean chkShowTitle = (showTitle.equals("true") ? true:false);
 	String selectedCategory = tazkirahConfig.getSelectedCategory();
-	
+	out.print(selectedCategory);
 	
 	
 	//String[] allCategory = (String[]) categoryList.toArray(new String[0]);
@@ -68,7 +68,7 @@ String dlSelectURL = "javascript:Liferay.Tazkirah.displayPopup('" + selectDLURL 
 <aui:form name="fm" method="POST" action="<%=configActionUrl.toString() %>" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "submitTazkirah();" %>'>
 	<aui:fieldset>
 		<aui:input type="hidden" name="toList"/>
-		<aui:input type="hidden" name="bgImageId" />
+		<aui:input type="hidden" name="bgImageId" value="<%=imageFileName %>"/>
 		<aui:input type="checkbox" name="showTitle" label="Show Title" 
 			checked="<%=chkShowTitle %>"
 		/>
@@ -76,11 +76,11 @@ String dlSelectURL = "javascript:Liferay.Tazkirah.displayPopup('" + selectDLURL 
 		<aui:field-wrapper label="display-category">
 		 
 			<liferay-ui:input-move-boxes
-					leftBoxName="availableCat"
+					leftBoxName="selectedCat"
 					leftList="<%= leftList %>"
 					leftReorder="true"
 					leftTitle="Current Category"
-					rightBoxName="selectedCat"
+					rightBoxName="availableCat"
 					rightList="<%= rightList %>"
 					rightTitle="Available Category"
 				/>
@@ -142,7 +142,7 @@ String dlSelectURL = "javascript:Liferay.Tazkirah.displayPopup('" + selectDLURL 
 								uri: '<%= selectDLURL.toString() %>'
 							},
 							function(event) {
-								console.log(event);
+								
 								document.getElementById("<portlet:namespace />imageFileName").value = event[1];
 								document.getElementById("<portlet:namespace />bgImageId").value = event[0];
 								

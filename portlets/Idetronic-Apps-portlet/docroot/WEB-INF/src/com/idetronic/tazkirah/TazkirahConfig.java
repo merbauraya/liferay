@@ -3,7 +3,16 @@ package com.idetronic.tazkirah;
 public class TazkirahConfig {
 	private String showTitle;
 	private String selectedCategory;
+	private long backgroundImageId;
 	
+	public void setBackgroundImageId(long value)
+	{
+		this.backgroundImageId = value;
+	}
+	public long getBackgroundImageId()
+	{
+		return this.backgroundImageId;
+	}
 	public void setShowTitle(String value)
 	{
 		this.showTitle = value;

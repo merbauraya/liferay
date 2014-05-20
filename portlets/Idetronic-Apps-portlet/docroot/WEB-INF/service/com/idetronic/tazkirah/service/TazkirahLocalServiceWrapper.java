@@ -312,6 +312,13 @@ public class TazkirahLocalServiceWrapper implements TazkirahLocalService,
 	}
 
 	@Override
+	public java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategories(
+		java.lang.String[] category, long companyId, long groupId) {
+		return _tazkirahLocalService.getByCategories(category, companyId,
+			groupId);
+	}
+
+	@Override
 	public java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategory(
 		java.lang.String category, long companyId, long groupId) {
 		return _tazkirahLocalService.getByCategory(category, companyId, groupId);

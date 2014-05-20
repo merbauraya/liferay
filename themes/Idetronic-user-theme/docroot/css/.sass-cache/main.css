@@ -9055,7 +9055,7 @@ body > .header {
   display: block; }
 
 /*right side - contins main content*/
-.right-side {
+.right-side.owner {
   margin-left: 220px; }
 
 /*left side - contains sidebar*/
@@ -9493,7 +9493,7 @@ body > .header .logo .icon {
   padding: 0; }
 
 .sidebar .sidebar-menu > li > a {
-  padding: 12px 5px 12px 15px;
+  padding: 5px 5px 5px 15px;
   display: block; }
 
 .sidebar .sidebar-menu > li > a > .fa,
@@ -11522,6 +11522,18 @@ Component: timeline
 
 .aui .navbar .nav > .active > a, .aui .navbar .nav > .active > a:hover, .aui .navbar .nav > .active > a:focus {
   border-radius: 3px; }
+
+.dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count {
+  background-color: #0066B3;
+  border: 1px solid #0066B3;
+  display: table;
+  line-height: 1.25em;
+  margin: 4px 0;
+  padding: 2px 6px;
+  position: relative; }
+
+#p_p_id_2_WAR_notificationsportlet_ {
+  width: 10px; }
 
 .breadcrumbs {
   margin-bottom: 10px;

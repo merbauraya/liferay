@@ -302,6 +302,11 @@ public class TazkirahLocalServiceUtil {
 		return getService().listOrderByCategory(companyId, groupId);
 	}
 
+	public static java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategories(
+		java.lang.String[] category, long companyId, long groupId) {
+		return getService().getByCategories(category, companyId, groupId);
+	}
+
 	public static java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategory(
 		java.lang.String category, long companyId, long groupId) {
 		return getService().getByCategory(category, companyId, groupId);

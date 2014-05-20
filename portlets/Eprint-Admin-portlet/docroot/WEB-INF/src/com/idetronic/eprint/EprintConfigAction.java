@@ -39,7 +39,6 @@ public class EprintConfigAction implements ConfigurationAction{
         preferences.setValue("cssStyle", cssStyle);
         preferences.setValue("carouselType",carouselType);
         preferences.store();
-        log.info(eprintURL);
         PortletSession portletSession = actionRequest.getPortletSession();
         SessionMessages.add(actionRequest, portletConfig.getPortletName()+ ".doConfigure");
 		

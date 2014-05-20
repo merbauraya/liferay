@@ -8,6 +8,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import com.idetronic.tazkirah.model.Tazkirah;
+import com.idetronic.tazkirah.TazkirahConfig;
 import com.idetronic.tazkirah.service.TazkirahLocalServiceUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -18,12 +19,14 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class TazkirahView extends MVCPortlet {
 	
 	
-	 public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		 //read params
-	 
-		 super.doView(renderRequest, renderResponse);
-	 }
-	 
+	public void render(RenderRequest request, RenderResponse response)
+	             throws PortletException, IOException {
+	    
+		TazkirahConfig tazkirahConfig= ConfigurationActionImpl.readConfig(request);
+		request.setAttribute("tazkirahConfig", (Object)(tazkirahConfig));
+
+		super.render(request, response);
+	}
  
 
 }

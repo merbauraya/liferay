@@ -8,36 +8,51 @@
                <liferay-portlet:param name="groupId"
                   value="<%= String.valueOf(themeDisplay.getSiteGroupId()) %>" />
           </liferay-portlet:renderURL>
-          <a href="<%= selectDLURL %>">Select</a>
+          
 <%
 	String category = null;
-	PortletPreferences preferences = renderRequest.getPreferences();
-	String portletResource = ParamUtil.getString(renderRequest, (String)("portletResource"));
-	if (Validator.isNotNull("portletResource"))
-		preferences = PortletPreferencesFactoryUtil.getPortletSetup((PortletRequest)(renderRequest), (String)(portletResource));
-	String showTitle = (String)preferences.getValue("showTitle", "false");
-	category = (String)preferences.getValue("category", null);
-
+	String content = null;
+	TazkirahConfig tazkirahConfig = (TazkirahConfig)request.getAttribute("tazkirahConfig");
+	String showTitle = tazkirahConfig.getShowTitle();
+	category = tazkirahConfig.getSelectedCategory();
+	
 	Tazkirah tazkirah = TazkirahUtil.getRandom(themeDisplay.getCompanyId(), 
 			themeDisplay.getScopeGroupId(), category);
-	/*
-	String content = tazkirah.getContent();
-	out.print(content);*/
-	if (Validator.isNull(tazkirah))
+	long backgroundImageId = tazkirahConfig.getBackgroundImageId(); 
+	String bgImageURL = null;
+	if (Validator.isNotNull(backgroundImageId))
 	{
-%>
-	<div class="alert alert-info">
-		No content to display
-	</div>
-<%		
-	}else
-	{
-		String content = tazkirah.getContent();
-		out.print(showTitle+ category);
-		if (showTitle.equals("true"))
-			out.print("<h4>"+ tazkirah.getTitle()+ "</h4>");
-		out.print(content);
+		FileEntry bgImage = DLAppServiceUtil.getFileEntry(backgroundImageId); 
+		//bgImageURL = DLUtil.getThumbnailSrc(bgImage, bgImage.getFileVersion(), null, themeDisplay); 
+		bgImageURL = DLUtil.getImagePreviewURL(bgImage, bgImage.getFileVersion(), themeDisplay);
 	}
+	
 %>
-
-
+<div class="tazkirah-container">
+	<c:choose>
+		<c:when test="<%=Validator.isNull(tazkirah) %>">
+			<div class="alert alert-info">
+				No content to display
+			</div>
+		
+		</c:when>
+		<c:otherwise>
+			
+			<c:if test="<%=showTitle.equals(\"true\") %>">
+				<h4><%=tazkirah.getTitle() %></h4>
+			</c:if>
+			<%=tazkirah.getContent() %>
+		</c:otherwise>
+	</c:choose>	
+	
+	
+	<c:choose>
+		<c:when test="<%=Validator.isNotNull(bgImageURL) %>">
+			<img src="<%=bgImageURL %>" class="tazkirah-bg">
+		</c:when>
+		<c:otherwise>
+		
+		</c:otherwise>
+	
+	</c:choose>
+</div>

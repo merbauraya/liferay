@@ -8,5 +8,6 @@
 	<category name="Idetronic Sdn Bhd">
 		<portlet id="tazkirah"></portlet>
 		<portlet id="tazkirahAdmin"></portlet>
+		<portlet id="event-view"></portlet>
 	</category>
 </display>

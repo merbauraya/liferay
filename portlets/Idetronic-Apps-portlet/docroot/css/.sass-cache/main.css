@@ -1,0 +1,15 @@
+div.tazkirah-container {
+  position: relative;
+  overflow: hidden;
+  padding: 5px;
+  color: #000; }
+
+img.tazkirah-bg {
+  width: 100%;
+  opacity: 0.4;
+  filter: alpha(opacity=30);
+  /* For IE8 and earlier */
+  top: 0;
+  left: 0;
+  position: absolute; }
+

@@ -136,9 +136,15 @@ public class TazkirahLocalServiceClp implements TazkirahLocalService {
 
 		_methodParameterTypes22 = new String[] { "long", "long" };
 
-		_methodName23 = "getByCategory";
+		_methodName23 = "getByCategories";
 
 		_methodParameterTypes23 = new String[] {
+				"java.lang.String[][]", "long", "long"
+			};
+
+		_methodName24 = "getByCategory";
+
+		_methodParameterTypes24 = new String[] {
 				"java.lang.String", "long", "long"
 			};
 	}
@@ -817,13 +823,44 @@ public class TazkirahLocalServiceClp implements TazkirahLocalService {
 	}
 
 	@Override
-	public java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategory(
-		java.lang.String category, long companyId, long groupId) {
+	public java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategories(
+		java.lang.String[] category, long companyId, long groupId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName23,
 					_methodParameterTypes23,
+					new Object[] {
+						ClpSerializer.translateInput(category),
+						
+					companyId,
+						
+					groupId
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.idetronic.tazkirah.model.Tazkirah>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategory(
+		java.lang.String category, long companyId, long groupId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
 					new Object[] {
 						ClpSerializer.translateInput(category),
 						
@@ -894,4 +931,6 @@ public class TazkirahLocalServiceClp implements TazkirahLocalService {
 	private String[] _methodParameterTypes22;
 	private String _methodName23;
 	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

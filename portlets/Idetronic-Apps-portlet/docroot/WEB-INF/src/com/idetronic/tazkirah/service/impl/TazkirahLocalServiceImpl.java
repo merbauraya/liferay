@@ -119,6 +119,26 @@ public class TazkirahLocalServiceImpl extends TazkirahLocalServiceBaseImpl {
 		}
 		return tazkirahs;
 	}
+	public List<Tazkirah> getByCategories(String[] category,long companyId,long groupId)
+	{
+		List<Tazkirah> tazkirahs = null;
+		
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Tazkirah.class);
+		query.add(PropertyFactoryUtil.forName("companyId").eq(companyId));
+		//query.add(PropertyFactoryUtil.forName("groupId").eq(groupId));
+		query.addOrder(OrderFactoryUtil.desc("modifiedDate"));
+		query.setLimit(0, 50);
+		
+		query.add(PropertyFactoryUtil.forName("category").in(category));
+		
+		try {
+			tazkirahs = dynamicQuery(query);
+			
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return tazkirahs;
+	}
 	public List<Tazkirah> getByCategory(String category,long companyId,long groupId)
 	{
 		List<Tazkirah> tazkirahs = null;

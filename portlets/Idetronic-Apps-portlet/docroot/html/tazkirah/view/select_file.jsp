@@ -7,11 +7,9 @@
 	String nameSpace = ParamUtil.getString(request, "nameSpace");
 	long groupId = BeanParamUtil.getLong(folder, request, "groupId");
 	String eventName = ParamUtil.getString(request, "eventName", nameSpace + "selectFile");
-
+	
 	long repositoryId = groupId;
-	if (folder != null) {
-		DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
-	}
+	
 %>
 <liferay-portlet:actionURL portletConfiguration="true" var="configActionUrl"/>
 <aui:form method="post" name="selectFileFm" action="<%=configActionUrl %>">
@@ -28,6 +26,7 @@
 	portletURL.setParameter("groupId", String.valueOf(groupId));
 	portletURL.setParameter("folderId", String.valueOf(folderId));
 	portletURL.setParameter("eventName", eventName);
+	portletURL.setParameter("nameSpace", nameSpace);
 	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("folder");
@@ -58,7 +57,8 @@
 		rowURL.setParameter("jspPage", "/html/tazkirah/view/select_file.jsp");
 		rowURL.setParameter("groupId", String.valueOf(groupId));
 		rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-
+		rowURL.setParameter("eventName", eventName);
+		rowURL.setParameter("nameSpace", nameSpace);
 		// Name
 
 		StringBundler sb = new StringBundler(4);

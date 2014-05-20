@@ -261,6 +261,10 @@ public interface TazkirahLocalService extends BaseLocalService,
 		long companyId, long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategories(
+		java.lang.String[] category, long companyId, long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.idetronic.tazkirah.model.Tazkirah> getByCategory(
 		java.lang.String category, long companyId, long groupId);
 }

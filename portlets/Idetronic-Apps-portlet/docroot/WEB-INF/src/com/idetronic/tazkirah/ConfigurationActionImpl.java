@@ -67,6 +67,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
         }
         config.setShowTitle(prefs.getValue("showTitle", "false"));
         config.setSelectedCategory(prefs.getValue("selectedCategory", ""));
+        String imageBg = prefs.getValue("imageBackgroundId", null);
+        if (Validator.isNotNull(imageBg))
+        	config.setBackgroundImageId(Long.valueOf(imageBg));
         return config;
 	}
 

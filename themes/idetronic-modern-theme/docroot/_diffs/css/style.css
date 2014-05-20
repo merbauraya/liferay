@@ -24,6 +24,10 @@ footer.ftr-sect {
     display: inline-block;
     padding-left:10px;
 }
+.aui .portlet-topper
+{
+	background: url("../images/portlet-header.png") repeat-x scroll 0 -10px rgba(0, 0, 0, 0);
+}
 /*
 .portlet-title-text {
     background-color: rgba(0, 0, 0, 0);
