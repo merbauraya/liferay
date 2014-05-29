@@ -9,5 +9,6 @@
 		<portlet id="tazkirah"></portlet>
 		<portlet id="tazkirahAdmin"></portlet>
 		<portlet id="event-view"></portlet>
+		<portlet id="tab-view"></portlet>
 	</category>
 </display>

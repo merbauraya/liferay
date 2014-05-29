@@ -10,14 +10,23 @@ public class EventViewConfig {
 	private int maxItemToDisplay;
 	private String internalTitle;
 	private boolean showInternalTitle;
+	private int upComingViewType;
 	
+	public int getUpcomingViewType()
+	{
+		return this.upComingViewType;
+	}
+	public void setUpcomingViewType(String value)
+	{
+		this.upComingViewType = Integer.valueOf(value);
+	}
 	public int getViewType()
 	{
 		return this.viewType;
 	}
 	public void setViewType(int value)
 	{
-		viewType = value;
+		this.viewType = value;
 	}
 	public void setViewType(String value)
 	{

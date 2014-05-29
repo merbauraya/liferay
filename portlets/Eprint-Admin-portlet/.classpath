@@ -18,5 +18,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/opt/lportal6.2-ga2/tomcat-7.0.42/webapps/Eprint-Admin-portlet/WEB-INF/lib/Eprint-Admin-portlet-service.jar"/>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>

@@ -13,6 +13,7 @@
 <%@ page import="com.liferay.portal.kernel.util.Time"%>
 <%@ page import="com.liferay.calendar.model.CalendarResource" %>
 <%@ page import="com.liferay.calendar.service.permission.CalendarPermission" %>
+
 <%@ page import="com.liferay.portal.model.User" %>
 <%@ page import="java.util.GregorianCalendar"%>
 <%@ page import="java.util.TimeZone" %>
@@ -31,6 +32,7 @@ Format dateFormatLongDate = FastDateFormatFactoryUtil.getDate(FastDateFormatCons
 
 Format dateFormatTime = null;
 int viewType = viewConfig.getViewType();
+
 String portletResource = ParamUtil.getString(renderRequest, (String)("portletResource"));
 String portletId = (String) request.getAttribute(WebKeys.PORTLET_ID);
 String timeZoneId = user.getTimeZoneId();

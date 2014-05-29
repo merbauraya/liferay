@@ -30,10 +30,11 @@ body {
 }
 
 .aui .portlet-topper .portlet-title {
-    font-size: 1em;
+    font-size: 1.3em;
     font-weight: normal;
     line-height: 2.2;
     margin: 0;
+    border-bottom: 3px solid #009AD9;
 }
 
 .aui .portlet-topper .portlet-topper-toolbar {
@@ -43,12 +44,7 @@ body {
     right: 10px;
     top: 50%;
 }
-/*
-.aui .portlet-topper {
-    background: none repeat scroll 0 0 #D3D3D3;
-    color: #FFFFFF;
-    padding: 0;
-} */
+
 
 .aui .portlet-topper .portlet-title i, .aui .portlet-topper .portlet-title span img {
     display: none;
@@ -146,6 +142,14 @@ background-color:#FFF;
 }
 #top-navigation{
 z-index: 10000;
+}
+.aui .portlet-topper
+{
+	   border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    padding:5px;
+    
 }
 
 @import url(color_schemes/purple.css);

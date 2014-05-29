@@ -4,7 +4,7 @@
 	PortletURL portletURL = renderResponse.createRenderURL();
 	portletURL.setParameter("jspPage", "/html/eventview/view.jsp");
 	List<CalendarBooking> events = EventViewUtil.getUpComingEvent(themeDisplay, 10, 100);// .getCurrentMonthEvent(themeDisplay, false);
-
+	
 
 	%>
 	
@@ -25,62 +25,108 @@
 			//monthYear += " " + dfYear.format(Time.getDate(nextOccur.getTime(), TimeZoneUtil.getDefault()));
 			String year = dfYear.format(Time.getDate(nextOccur.getTime(), TimeZoneUtil.getDefault()));
 			String day = dfDayName.format(Time.getDate(nextOccur.getTime(), TimeZoneUtil.getDefault()));
-		
-	
-	%>
-	<div class="cl-event-item">
-		<div class="cl-event-date">
-			<div class="cl-event-year">
-				<%=year %>
-			</div>
-			<div class="cl-event-dayname">
-				<%=day %>
-			</div>
-			<div class="cl-event-month">
-				<%=month%>
-			</div>
-			<div class="cl-event-day">
-				<%=dfDay.format(Time.getDate(nextOccur.getTime(), TimeZoneUtil.getDefault()))%> 
-			</div>
-		
-		</div>
-		<div class="cl-event-info">
-			<div class="cl-event-title">
-				<%
-					String popLink = "javascript:viewEventDetail('"+ce.getCalendarBookingId()+"')";
-					String tmpTitle = ce.getTitle(locale);
-					String shortTitle = tmpTitle.substring(0, Math.min(tmpTitle.length(), 50));
-							
-				%>
-				<a href="<%=popLink%>">
-				
-				<%=shortTitle%></a>
-			
+			String simpleDate = dfDay.format(Time.getDate(nextOccur.getTime(), TimeZoneUtil.getDefault())) + " " + month + " " + year;
+			String popLink = "javascript:viewEventDetail('"+ce.getCalendarBookingId()+"')";
+			String tmpTitle = ce.getTitle(locale);
+			String shortTitle = tmpTitle.substring(0, Math.min(tmpTitle.length(), 50));
 
-			</div>
-			<div class="cl-event-time">
-				Start : <%=dateFormatTime.format(ce.getStartTime()) %>
-				<c:choose>
-					<c:when test="<%=ce.getAllDay() %>">
-						- All Day Event
-					</c:when>
-					<c:otherwise>
-						-  <%=dateFormatTime.format(ce.getEndTime()) %>	
-					</c:otherwise>
-				</c:choose>
+	%>
+	<c:choose>
+		<c:when test="<%=viewConfig.getUpcomingViewType() == EventViewConstant.UPCOMING_VIEW_GRAPHICAL  %>">
+			<div class="cl-event-item">
+				<div class="cl-event-date">
+					<div class="cl-event-year">
+						<%=year %>
+					</div>
+					<div class="cl-event-dayname">
+						<%=day %>
+					</div>
+					<div class="cl-event-month">
+						<%=month%>
+					</div>
+					<div class="cl-event-day">
+						<%=dfDay.format(Time.getDate(nextOccur.getTime(), TimeZoneUtil.getDefault()))%> 
+					</div>
 				
-				
+				</div>
+				<div class="cl-event-info">
+					<div class="cl-event-title">
+						<%
+									
+						%>
+						<a href="<%=popLink%>">
+						
+						<%=shortTitle%></a>
+					
+		
+					</div>
+					<div class="cl-event-time">
+						Start : <%=dateFormatTime.format(ce.getStartTime()) %>
+						<c:choose>
+							<c:when test="<%=ce.getAllDay() %>">
+								- All Day Event
+							</c:when>
+							<c:otherwise>
+								-  <%=dateFormatTime.format(ce.getEndTime()) %>	
+							</c:otherwise>
+						</c:choose>
+						
+						
+						
+					</div>
+					<div class="cl-event-location">
+						Location: <%=ce.getLocation() %>
+					</div>
+					
+				</div>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="cl-day-header">
+				<p><%=day + "  -    " + simpleDate %></p>
 				
 			</div>
-			<div class="cl-event-location">
-				Location: <%=ce.getLocation() %>
+			<div class="cl-day-event">
+				<div class="cl-event-info">
+					<div class="cl-event-title">
+						<%
+									
+						%>
+						<a href="<%=popLink%>">
+						
+						<%=shortTitle%></a>
+					
+		
+					</div>
+					<div class="cl-event-time">
+						Start : <%=dateFormatTime.format(ce.getStartTime()) %>
+						<c:choose>
+							<c:when test="<%=ce.getAllDay() %>">
+								- All Day Event
+							</c:when>
+							<c:otherwise>
+								-  <%=dateFormatTime.format(ce.getEndTime()) %>	
+							</c:otherwise>
+						</c:choose>
+						
+						
+						
+					</div>
+					<div class="cl-event-location">
+						Location: <%=ce.getLocation() %>
+					</div>
+					
+				</div>
 			</div>
-			
-		</div>
-	</div>
-	
-	
+		</c:otherwise>
+	</c:choose>
 	<%
+			List<CalendarBooking> childEvents = ce.getChildCalendarBookings();
+			for (CalendarBooking childEvent : childEvents)
+			{
+				//out.print(childEvent.getTitle(locale));
+				//out.print(childEvent.getDuration());
+			}
 		}
 	%>
 	

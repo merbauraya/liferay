@@ -31,6 +31,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String maxDaysToQuery = ParamUtil.getString(actionRequest, "maxDaysToQuery");
 		String maxItemToDisplay = ParamUtil.getString(actionRequest, "maxItemToDisplay");
 		String viewType = ParamUtil.getString(actionRequest, "viewType");
+		String upcomingViewType = ParamUtil.getString(actionRequest, "upcomingViewType");
 		log.info(showTitle);
 		/*
 		config.setInternalTitle(prefs.getValue("internalTitle", StringPool.BLANK));
@@ -45,6 +46,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("maxDaysToQuery", maxDaysToQuery);
 		prefs.setValue("maxItemToDisplay", maxItemToDisplay);
 		prefs.setValue("viewType", viewType);
+		prefs.setValue("upcomingViewType", upcomingViewType);
 		
 		prefs.store();
 		PortletSession portletSession = actionRequest.getPortletSession();
@@ -83,6 +85,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
         config.setShowInternalTitle(prefs.getValue("showInternalTitle", "false"));
         config.setMaxItemToDisplay(prefs.getValue("maxItemToDisplay", "10"));
         config.setViewType(prefs.getValue("viewType", "1"));
+        config.setUpcomingViewType(prefs.getValue("upcomingViewType", "1"));
 
         return config;
 	}

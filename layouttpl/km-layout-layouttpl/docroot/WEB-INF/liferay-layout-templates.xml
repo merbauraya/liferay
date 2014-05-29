@@ -8,10 +8,11 @@
 			<wap-template-path>/km_layout.wap.tpl</wap-template-path>
 			<thumbnail-path>/km_layout.png</thumbnail-path>
 		</layout-template>
-		<layout-template id="bs23070" name="BS2_30-70">
-			<template-path>/bs23070.tpl</template-path>
-			<wap-template-path>/bs23070.wap.tpl</wap-template-path>
-			<thumbnail-path>/bs23070.png</thumbnail-path>
+
+		<layout-template id="fourtwo" name="four-two">
+			<template-path>/fourtwo.tpl</template-path>
+			<wap-template-path>/fourtwo.wap.tpl</wap-template-path>
+			<thumbnail-path>/fourtwo.png</thumbnail-path>
 		</layout-template>
 	</custom>
 </layout-templates>

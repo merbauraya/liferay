@@ -70,6 +70,16 @@
 				<liferay-ui:message key="20"></liferay-ui:message>
 			</aui:option>
 		</aui:select>
+		<aui:select name="upcomingViewType" label="View Type">
+			<aui:option value="<%=EventViewConstant.UPCOMING_VIEW_SIMPLE %>"
+				selected="<%= (viewConfig.getUpcomingViewType() ==EventViewConstant.UPCOMING_VIEW_SIMPLE) %>">
+				<liferay-ui:message key="Simple" />
+			</aui:option>
+			<aui:option value="<%=EventViewConstant.UPCOMING_VIEW_GRAPHICAL %>"
+				selected="<%= (viewConfig.getUpcomingViewType() ==EventViewConstant.UPCOMING_VIEW_GRAPHICAL) %>">
+				<liferay-ui:message key="Graphical" />
+			</aui:option>
+		</aui:select>
 		<aui:button type="submit" value="Save" />
 	</aui:fieldset>
 
