@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="/opt/uitm_upgrade_v2/tomcat-7.0.42/webapps/user-service-experience-portlet" reloadable="true" source="org.eclipse.jst.jee.server:user-service-experience-portlet"/>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.idetronic.portlet.model.ExpertiseTag">
+		<field name="tagId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="tagName" type="String" />
+		<field name="userCount" type="int" />
+	</model>
+	<model name="com.idetronic.portlet.model.OrgChart">
+		<field name="userId" type="long" />
+		<field name="parentId" type="long" />
+	</model>
+	<model name="com.idetronic.portlet.model.ServiceExperience">
+		<field name="serviceExperienceId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="startDate" type="Date" />
+		<field name="title" type="String" />
+		<field name="endDate" type="Date" />
+		<field name="serviceData" type="String" />
+		<field name="status" type="int" />
+	</model>
+	<model name="com.idetronic.portlet.model.UserEntries_ExpertiseTags">
+		<field name="userId" type="long" />
+		<field name="tagId" type="long" />
+	</model>
+</model-hints>

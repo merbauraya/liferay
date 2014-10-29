@@ -1,7 +1,6 @@
-<%@include file="/html/eprint/init.jsp" %>
+<%@include file="/html/eprintview/init.jsp" %>
 <%
 	Eprint eprint = (Eprint)request.getAttribute("eprint");
-	String socialBookmarksDisplayStyle = "horizontal";
 	String eprintUrl = (String)request.getAttribute("eprintUrl");
 	request.setAttribute("eprint", eprint);
 	String redirect = ParamUtil.getString(request, "redirect");
@@ -104,6 +103,23 @@
 							portletURL="<%= renderResponse.createRenderURL() %>"
 						/>
 					</span>
+					<c:if test="<%= enableRelatedAssets %>">
+					<liferay-ui:asset-links
+						assetEntryId="<%= eprint.getPrimaryKey() %>"
+						className="<%= Eprint.class.getName() %>"
+						classPK="<%= eprint.getPrimaryKey() %>"
+							/>
+					</c:if>
+					<c:if test='<%= enableSocialBookmarks && socialBookmarksDisplayPosition.equals("bottom") %>'>
+						<liferay-ui:social-bookmarks
+							contentId="<%= String.valueOf(eprint.getEprintId()) %>"
+							displayStyle="<%= socialBookmarksDisplayStyle %>"
+							target="_blank"
+							title="<%= eprint.getTitle() %>"
+							types="<%= socialBookmarksTypes %>"
+							url="<%= PortalUtil.getCanonicalURL(bookmarkURL.toString(), themeDisplay, layout) %>"
+						/>
+					</c:if>
 					<c:if test="<%= enableRatings %>">
 						<liferay-ui:ratings
 							className="<%= Eprint.class.getName() %>"
@@ -111,13 +127,7 @@
 						/>
 					</c:if>
 				
-				<c:if test="<%= showRelatedAssets %>">
-					<liferay-ui:asset-links
-						assetEntryId="<%= eprint.getPrimaryKey() %>"
-						className="<%= Eprint.class.getName() %>"
-						classPK="<%= eprint.getPrimaryKey() %>"
-							/>
-				</c:if>
+				
 			</c:if>
 		</div>
 	</c:when>

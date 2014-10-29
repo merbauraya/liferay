@@ -22,6 +22,11 @@
 <%@ page import="com.liferay.portal.kernel.util.UnicodeFormatter"%>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.portal.kernel.util.PropsKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.PropsUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.ArrayUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
@@ -70,10 +75,10 @@ permissionChecker, layout, portletDisplay.getRootPortletId(), ActionKeys.UPDATE)
 boolean canDelete = PortletPermissionUtil.contains(permissionChecker, layout, portletDisplay.getRootPortletId(), ActionKeys.DELETE);
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-boolean enableComments = true;
-boolean enableFlags = true;
-boolean enableRatings = true;
-boolean showRelatedAssets = true;
+//boolean enableComments = true;
+//boolean enableFlags = true;
+//boolean enableRatings = true;
+//boolean showRelatedAssets = true;
 
 PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 WindowState windowState = liferayPortletRequest.getWindowState();

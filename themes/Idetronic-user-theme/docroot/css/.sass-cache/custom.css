@@ -138,6 +138,12 @@ header > nav {
 .navbar-right {
   float: right !important; }
 
+.col-centered {
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block; }
+
 .aui header .navbar-inner {
   background-color: #732C7B;
   background-image: -moz-linear-gradient(top, #732c7b, #9c8aa5);

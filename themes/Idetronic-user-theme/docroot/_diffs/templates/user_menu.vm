@@ -7,12 +7,12 @@
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#" $nav_item.getTarget()>My Sites<b class="caret"></b></a>
 		
 		<ul class="dropdown-menu">
-			#foreach($site in $user.getMySites)
+			#foreach($site in $user.mySites)
 				#if ($site.isRegularSite() && $site.hasPublicLayouts())
 	            	<li><a href="/web${site.friendlyURL}">$site.descriptiveName</a></li>
 	        	#end
 			
-			#end
+			#end 
 		</ul>
 	</li>
 			
@@ -31,7 +31,12 @@
         	</a>
         </li>
          <li>
-        	<a href="$user_public_page">My Home
+        	<a href="$user_private_page">My Home
+        		<i class="fa fa-user"></i>
+        	</a>
+        </li>
+         <li>
+        	<a href="$user_public_page">My Profile
         		<i class="fa fa-user"></i>
         	</a>
         </li>

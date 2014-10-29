@@ -106,27 +106,25 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
 	<portlet>
-		<portlet-name>tab-view</portlet-name>
-		<display-name>Tab View</display-name>
-		<portlet-class>com.idetronic.tabview.TabView</portlet-class>
+		<portlet-name>Summon-Search</portlet-name>
+		<display-name>Summon Search</display-name>
+		<portlet-class>
+			com.liferay.util.bridges.mvc.MVCPortlet
+		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/tabview/view.jsp</value>
-		</init-param>
-		<init-param>
-			<name>config-template</name>
-			<value>/html/tabview/config.jsp</value>
+			<value>/html/summon-search/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
-		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
-			<title>Tab View</title>
-			<short-title>Tab View</short-title>
+			<title>Search Online Database</title>
+			<short-title>Summon Search</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

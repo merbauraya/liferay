@@ -13,8 +13,7 @@ body {
   overflow-x: hidden !important;
   font-family: 'Source Sans Pro', sans-serif !important;
   -webkit-font-smoothing: antialiased;
-  min-height: 100%;
-  background: #f9f9f9; }
+  min-height: 100%; }
 
 /* Layouts */
 .wrapper {
@@ -35,12 +34,6 @@ body > .header {
   left: 0;
   right: 0;
   z-index: 1030; }
-
-.user-side-avatar {
-  padding-left: 15px;
-  clear: both;
-  content: " ";
-  display: block; }
 
 .user-acct {
   float: left; }
@@ -297,7 +290,6 @@ table.text-center th {
 */
 body > .header {
   position: relative;
-  max-height: 100px;
   z-index: 100; }
 
 body > .header:after {

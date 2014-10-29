@@ -1,6 +1,6 @@
 #tabview-wrapper
 {
-	margin:10px;
+	/*margin:10px;*/
 	overflow:hidden;
 	border-bottom:1px solid #ccc;
 	border-collapse:collapse;
@@ -44,7 +44,7 @@
 margin-right:1px;}
 
 /* LIST #2 */
-.tbview-ol { width:100%; }
+.tbview-ol {padding-left:30px; }
 .tbview-ol ol { font-style:italic; font-family:Georgia, Times, serif; font-size:18px; }
 .tbview-ol ol li { }
 .tbview-ol ol li a { padding:8px; font-style:normal; font-family:Arial; font-size:13px; border-left: 1px solid #999; }

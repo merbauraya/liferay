@@ -4,6 +4,7 @@
 <display>
 	<category name="category.sample">
 		<portlet id="Idetronic-Apps" />
+		<portlet id="Summon-Search"></portlet>
 	</category>
 	<category name="Idetronic Sdn Bhd">
 		<portlet id="tazkirah"></portlet>

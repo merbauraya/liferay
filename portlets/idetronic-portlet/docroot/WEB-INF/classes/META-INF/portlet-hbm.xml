@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.idetronic.portlet.model.ExpertiseTag" />
+	<import class="com.idetronic.portlet.model.OrgChart" />
+	<import class="com.idetronic.portlet.model.ServiceExperience" />
+	<import class="com.idetronic.portlet.model.UserEntries_ExpertiseTags" />
+	<class name="com.idetronic.portlet.model.impl.ExpertiseTagImpl" table="ide_ExpertiseTag">
+		<cache usage="read-write" />
+		<id name="tagId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="tagName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.idetronic.portlet.model.impl.OrgChartImpl" table="ide_OrgChart">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.idetronic.portlet.service.persistence.OrgChartPK">
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="parentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+	</class>
+	<class name="com.idetronic.portlet.model.impl.ServiceExperienceImpl" table="ide_ServiceExperience">
+		<cache usage="read-write" />
+		<id name="serviceExperienceId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="endDate" type="org.hibernate.type.TimestampType" />
+		<property name="serviceData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.idetronic.portlet.model.impl.UserEntries_ExpertiseTagsImpl" table="ide_UserEntries_ExpertiseTags">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.idetronic.portlet.service.persistence.UserEntries_ExpertiseTagsPK">
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="tagId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+	</class>
+</hibernate-mapping>

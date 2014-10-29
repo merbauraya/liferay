@@ -1,0 +1,18 @@
+ <aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                   
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    
+                    	#if ($page_group.isUser() && ($isPageOwner == true))
+							#parse ("$full_templates_path/side_navigation.vm")
+						#end
+                
+                #if ($page_group.isUser())
+					##parse ("$full_templates_path/sidebar_portlets.vm")
+				#end
+                
+                </section>
+                <!-- /.sidebar -->
+</aside>

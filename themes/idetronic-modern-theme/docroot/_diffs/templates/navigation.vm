@@ -19,7 +19,7 @@
 					<li class="$selected$child">
 					
 						#if ($nav_item.hasChildren())
-							<a class="$childClass" data-toggle="$child" href="#" $nav_item.getTarget()>$nav_item.getName()<b class="caret"></b></a>
+							<a class="$childClass" data-toggle="$child" href="#" $nav_item.getTarget()><span class="nav-item-label"> $nav_item.getName() </span><i class="icon-caret-down"></i></a>
 						#else
 							<a class="$childClass" data-toggle="$child" href="$nav_item.getURL()" $nav_item.getTarget()><span>$nav_item.icon() $nav_item.getName()</span></a>
 						
@@ -45,24 +45,29 @@
 #end
 <ul class="nav navbar-nav navbar-right"> 
 	##our search portlet
-	<li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			<i class="fa fa-search"></i>
-		</a>
-		<ul class="dropdown-menu">
-			<li>
-				<div id="portal-search">
-					    	$theme.search()
-					    </div> 
-			</li>
+	#if ($is_signed_in)
 		
-		</ul>
-	</li>					
-    #if ($is_signed_in)
+		
+ 		$request.setAttribute("RENDER_PORTLET_BOUNDARY", false)
+		#set ($VOID = $velocityPortletPreferences.setValue('portlet-setup-show-borders', 'false'))
+		#set ($VOID = $velocityPortletPreferences.setValue('display-style', '1'))
+		#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
+
+		$velocityPortletPreferences.setValue("header-type", "none")
+		#set ($myPortletId = "2_WAR_notificationsportlet")
+		#if (!$permissionChecker.isCompanyAdmin($company_id))
+			$theme.runtime($myPortletId, '', $velocityPortletPreferences.toString())
+		#end
+		
+	
     	#parse ("$full_templates_path/user_menu.vm")
-    #else
-    	#parse ("$full_templates_path/guest_menu.vm")
     #end
+
+	<div id="portal-search" class="pull-right input-append">
+		$theme.search()
+	</div> 
+			
+   
  </ul>
 			
 </div>			

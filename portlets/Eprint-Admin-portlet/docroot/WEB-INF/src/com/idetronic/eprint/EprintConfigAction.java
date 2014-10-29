@@ -11,47 +11,49 @@ import javax.portlet.RenderResponse;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
-public class EprintConfigAction implements ConfigurationAction{
+public class EprintConfigAction extends DefaultConfigurationAction{
 	static Log log = LogFactoryUtil.getLog(EprintConfigAction.class);
 	@Override
 	public void processAction(PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse) throws Exception {
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-		  
-        String eprintURL = ParamUtil.getString(actionRequest, "eprintURL");
-        String eprintNewWindow = ParamUtil.getString(actionRequest, "eprintNewWindow");
-        String showDepositDate  = ParamUtil.getString(actionRequest, "showDepositDate");
-        String tags = ParamUtil.getString(actionRequest, "assetTagNames");
-       
-        String portletResource = ParamUtil.getString(actionRequest,"portletResource");
-        PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(actionRequest, portletResource);
-        String cssStyle = ParamUtil.getString(actionRequest, "cssStyle");
-        String carouselType = ParamUtil.getString(actionRequest,"carouselType");
-        preferences.setValue("eprintURL", eprintURL);
-        preferences.setValue("eprintNewWindow", eprintNewWindow);
-        preferences.setValue("showDepositDate", showDepositDate);
-        preferences.setValue("cssStyle", cssStyle);
-        preferences.setValue("carouselType",carouselType);
-        preferences.store();
-        PortletSession portletSession = actionRequest.getPortletSession();
-        SessionMessages.add(actionRequest, portletConfig.getPortletName()+ ".doConfigure");
+		//super.processAction(portletConfig, actionRequest, actionResponse);
+		PortletPreferences prefs = actionRequest.getPreferences();
+		validateEprintURL(actionRequest);
+		super.processAction(portletConfig, actionRequest, actionResponse);
+		
 		
 	}
-
+	protected void validateEprintURL(ActionRequest actionRequest)
+	{
+		String eprintURL  = getParameter(actionRequest,"eprintURL");
+		
+		if (Validator.isNull(eprintURL)){
+			SessionErrors.add(actionRequest, "eprintURL");
+			
+		}else if (!Validator.isUrl(eprintURL))
+		{
+			SessionErrors.add(actionRequest, "eprintURL");
+		}
+	}
 	@Override
 	public String render(PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse) throws Exception {
-		
+		log.info("render");
 		EprintConfig config = readConfig((PortletRequest)renderRequest);
 		renderRequest.setAttribute("eprintConfig", (Object)(config));   
 		return "/html/eprintview/config.jsp";
 	}
+	//obsolete
 	public static EprintConfig readConfig(PortletRequest portletRequest)
 	{
 		EprintConfig config = new EprintConfig();
@@ -71,7 +73,15 @@ public class EprintConfigAction implements ConfigurationAction{
             
             return config;
         }
+        String socialBookmarksDisplayStyle = prefs.getValue("socialBookmarksDisplayStyle", "simple");
+        String socialBookmarksDisplayPosition = prefs.getValue("socialBookmarksDisplayPosition", "bottom");
+        log.info("style="+socialBookmarksDisplayStyle);
         config.setEprintURL(prefs.getValue("eprintURL", ""));
+        String enableBookmarks = prefs.getValue("enableSocialBookmarks", "false");
+        
+        config.setEnableSocialBookmarks(enableBookmarks == "true"?true:false);//
+        config.setSocialBookmarksDisplayPosition(socialBookmarksDisplayPosition);
+        config.setSocialBookmarksDisplayStyle(socialBookmarksDisplayStyle);
         return config;
 	}
 }

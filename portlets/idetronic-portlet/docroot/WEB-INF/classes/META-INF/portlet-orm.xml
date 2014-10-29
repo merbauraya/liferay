@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.idetronic.portlet.model.impl.ExpertiseTagModelImpl">
+		<attributes>
+			<id name="tagId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="tagName" />
+			<basic name="userCount" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.portlet.model.impl.OrgChartModelImpl">
+		<id-class class="com.idetronic.portlet.service.persistence.OrgChartPK" />
+		<attributes>
+			<id name="userId" />
+			<id name="parentId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.portlet.model.impl.ServiceExperienceModelImpl">
+		<attributes>
+			<id name="serviceExperienceId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="title" />
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="serviceData" />
+			<basic name="status" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.portlet.model.impl.UserEntries_ExpertiseTagsModelImpl">
+		<id-class class="com.idetronic.portlet.service.persistence.UserEntries_ExpertiseTagsPK" />
+		<attributes>
+			<id name="userId" />
+			<id name="tagId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.idetronic.portlet.model.impl.ExpertiseTagImpl" name="ExpertiseTag">
+		<table name="ide_ExpertiseTag" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.portlet.model.impl.OrgChartImpl" name="OrgChart">
+		<table name="ide_OrgChart" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.portlet.model.impl.ServiceExperienceImpl" name="ServiceExperience">
+		<table name="ide_ServiceExperience" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.portlet.model.impl.UserEntries_ExpertiseTagsImpl" name="UserEntries_ExpertiseTags">
+		<table name="ide_UserEntries_ExpertiseTags" />
+		<attributes />
+	</entity>
+</entity-mappings>

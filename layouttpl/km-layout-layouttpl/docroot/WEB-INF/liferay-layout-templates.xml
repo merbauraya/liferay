@@ -14,5 +14,13 @@
 			<wap-template-path>/fourtwo.wap.tpl</wap-template-path>
 			<thumbnail-path>/fourtwo.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="onecolumcentered"
+			name="one-colum-centered">
+			<template-path>/onecolumcentered.tpl</template-path>
+			<wap-template-path>
+				/onecolumcentered.wap.tpl
+			</wap-template-path>
+			<thumbnail-path>/onecolumcentered.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>

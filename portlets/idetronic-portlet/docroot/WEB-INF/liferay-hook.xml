@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.2.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_2_0.dtd">
+
+<hook>
+	<portal-properties>portal.properties</portal-properties>
+	<language-properties>content/Language_en_GB.properties</language-properties>
+	<language-properties>content/Language.properties</language-properties>
+	<language-properties>content/Language_en.properties</language-properties>
+	<language-properties>content/Language.properties</language-properties>
+	<custom-jsp-dir>/META-INF/custom_jsps</custom-jsp-dir>
+	<indexer-post-processor>
+        <indexer-class-name>com.liferay.portal.model.User</indexer-class-name>
+        <indexer-post-processor-impl>com.idetronic.hook.user.indexer.UserIndexerPostProcessor</indexer-post-processor-impl>
+    </indexer-post-processor> 
+    <struts-action>
+        <struts-action-path>/users_admin/edit_user</struts-action-path>
+        <struts-action-impl>com.idetronic.hook.user.action.EditUserAction</struts-action-impl>
+    </struts-action>
+    <struts-action>
+        <struts-action-path>/my_account/edit_user</struts-action-path>
+        <struts-action-impl>com.idetronic.hook.user.action.EditUserAction</struts-action-impl>
+    </struts-action>
+       
+</hook>

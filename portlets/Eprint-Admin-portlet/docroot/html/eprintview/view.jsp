@@ -1,4 +1,4 @@
-<%@include file="/html/eprint/init.jsp" %>
+<%@include file="/html/eprintview/init.jsp" %>
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.dataTables.js"/></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/date.ddmmmyy.sort.js"/></script>

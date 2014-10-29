@@ -1,0 +1,68 @@
+.ev-view-title {
+  padding-bottom: 5px;
+  font-size: 16px;
+  text-align: center; }
+
+.cl-event-item {
+  padding-bottom: 10px; }
+
+.cl-event-year {
+  color: #FFF;
+  padding-left: 15px;
+  font-weight: bold; }
+
+.cl-event-dayname {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  /* Opera, Chrome, and Safari */
+  padding-top: 10px;
+  padding-left: 5px;
+  float: left;
+  color: #7b0000; }
+
+.cl-event-date {
+  background: url("../../images/calbooking.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+  color: #000000;
+  display: table-cell;
+  height: 60px;
+  width: 60px; }
+
+.cl-event-month {
+  font-size: 13px;
+  font-weight: bold;
+  /* padding-top: 10px;
+   text-align: center;*/
+  text-transform: uppercase;
+  color: #FFF;
+  margin-left: -10px;
+  float: left; }
+
+.cl-event-day {
+  font-size: 24px;
+  clear: left;
+  float: left;
+  color: #000;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: -18px;
+  padding-top: 3px; }
+
+.cl-event-info {
+  display: table-cell;
+  padding-left: 10px;
+  vertical-align: top; }
+
+.cl-day-header {
+  background-color: #819ab8;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.4em;
+  padding-left: 10px;
+  border-radius: 2px; }
+
+.cl-day-event {
+  clear: both;
+  margin-top: -6px; }
+

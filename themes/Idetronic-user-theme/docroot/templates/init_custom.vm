@@ -14,6 +14,7 @@
 #set ($user_profile_url = $community_default_public_url)
 
 #set ($user_public_page = "/web/" + $user.getScreenName())
+#set ($user_private_page = "/user/" + $user.getScreenName())
 #set ($current_user = $user_local_service.getUserById($page_group.getClassPK()))
 
 #if (($company.getLogoId() == 0) && !$layout.layoutSet.isLogo())

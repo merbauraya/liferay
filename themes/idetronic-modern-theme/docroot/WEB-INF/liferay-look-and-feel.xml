@@ -14,8 +14,12 @@
 			<css-class>purple</css-class>
 			<color-scheme-images-path>${images-path}/color_schemes/${css-class}</color-scheme-images-path>
 		</color-scheme>
-		<color-scheme id="02" name="Grey">
-			<css-class>grey</css-class>
+		<color-scheme id="02" name="Green">
+			<css-class>green</css-class>
+			<color-scheme-images-path>${images-path}/color_schemes/${css-class}</color-scheme-images-path>
+		</color-scheme>
+		<color-scheme id="03" name="Black">
+			<css-class>black</css-class>
 			<color-scheme-images-path>${images-path}/color_schemes/${css-class}</color-scheme-images-path>
 		</color-scheme>
 		

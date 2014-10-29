@@ -56,33 +56,45 @@ $theme.include($body_top_include)
 				</div>
             </div>
         </header>
-         <div class="wrapper row-offcanvas row-offcanvas-left">
-             #if ($isPageOwner)
-        		#parse ("$full_templates_path/sidebar.vm")
-        	#end
-           
-
-            <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side $css_right_side">
-              
-
-                <!-- Main content -->
-                <section class="content">
-
-               		#if ($selectable)
-						$theme.include($content_include)
-					#else
-						$portletDisplay.recycle()
+         #if($layout.isPublicLayout())
+         	<div class="container">
+         		##$portletDisplay.recycle()
+				##$portletDisplay.setTitle($the_title)
+				##$theme.wrapPortlet("portlet.vm", $content_include)
+				$theme.include($content_include)
+			</div>
+         #else
+	         <div class="wrapper row-offcanvas row-offcanvas-left">
+	             #if ($isPageOwner)
+	        		#parse ("$full_templates_path/sidebar.vm")
+	        	#end
+	           
 	
-						$portletDisplay.setTitle($the_title)
+	            <!-- Right side column. Contains the navbar and content of the page -->
+	            
+	            
+	            
+	            
+	            <aside class="right-side $css_right_side">
+	              
 	
-						$theme.wrapPortlet("portlet.vm", $content_include)
-					#end
-
-                </section><!-- /.content -->
-            </aside><!-- /.right-side -->
-        </div>
-       
+	                <!-- Main content -->
+	                <section class="content">
+	
+	               		#if ($selectable)
+							$theme.include($content_include)
+						#else
+							$portletDisplay.recycle()
+		
+							$portletDisplay.setTitle($the_title)
+		
+							$theme.wrapPortlet("portlet.vm", $content_include)
+						#end
+	
+	                </section><!-- /.content -->
+	            </aside><!-- /.right-side -->
+	        </div>
+       	#end
 	
 <div id="footer" class="row-fluid">
 	<div class="span12">
@@ -108,9 +120,6 @@ $theme.include($bottom_include)
 #end
 
 
- 
- 
- 
 </body>
 
 </html>

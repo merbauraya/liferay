@@ -135,7 +135,7 @@ static Log log = LogFactoryUtil.getLog(EprintView.class);
     }
 	public void updateEntry(ActionRequest request, ActionResponse response) throws Exception
 	{
-		log.info("updateEntry");
+		
 		String eprintId = request.getParameter("eprintId");
 		String title = request.getParameter("title");
 		String eprintAbstract = request.getParameter("abstract");
@@ -200,9 +200,9 @@ static Log log = LogFactoryUtil.getLog(EprintView.class);
 	    }
 	public void search(ActionRequest request, ActionResponse response) throws PortletException, IOException 
 	{
-		log.info("Searchhhhh");
+		
 		String q = request.getParameter("q");
-		log.info("que="+q);
+		
 		 response.setRenderParameter("jspPage",
 				 EprintConstant.PAGE_LIST);
 	}
@@ -216,7 +216,7 @@ static Log log = LogFactoryUtil.getLog(EprintView.class);
 		//                        themeDisplay.getLayout().getPlid(), PortletRequest.RENDER_PHASE);
 		
 	
-		log.info("browsebysubject");
+		
 		
 		actionResponse.setRenderParameter("jspPage", EprintConstant.PAGE_BY_SUBJECT);
 	
@@ -228,7 +228,7 @@ static Log log = LogFactoryUtil.getLog(EprintView.class);
 	}
 	public void render(RenderRequest request, RenderResponse response)
              throws PortletException, IOException {
-		 
+		
 		String keyword = request.getParameter("q");
 	    EprintConfig config = EprintConfigAction.readConfig(request);
 		request.setAttribute("eprintConfig", (Object)(config));  
@@ -241,22 +241,6 @@ static Log log = LogFactoryUtil.getLog(EprintView.class);
 		
 		 super.render(request, response);
 	 }
-	 /*
-	public void searchBooks(ActionRequest actionRequest, ActionResponse actionResponse)
-			 throws IOException, PortletException 
-	{
-		String searchTerm = ParamUtil.getString(actionRequest, "searchTerm");
-		if (Validator.isNull(searchTerm)) return;
-		try {
-			 List<LMSBook> lmsBooks =
-			 LMSBookLocalServiceUtil.searchBooks(searchTerm);
-			 actionRequest.setAttribute("SEARCH_RESULT", lmsBooks);
-			 actionResponse.setRenderParameter("jspPage",
-			 LibraryConstants.PAGE_LIST);
-			 } catch (SystemException e) {
-			 e.printStackTrace();
-			 }
-	}
-*/
+	
 
 }

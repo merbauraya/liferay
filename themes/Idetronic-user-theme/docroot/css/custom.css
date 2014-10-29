@@ -147,4 +147,9 @@ background-color:#FFF;
 .navbar-right {
     float: right !important;
 }
+.col-centered
+{ float: none !important;
+    margin-left: auto !important;
+    margin-right:auto !important;
+    display:block}
 @import url(color_schemes/purple.css);

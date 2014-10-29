@@ -23,7 +23,10 @@
 			String eprintUrl = null;
 			if (Validator.isNotNull(eprint))
 			{
-				eprintUrl = eprintConfig.getEprintURL() + eprint.getEprintId();
+				eprintUrl = eprintConfig.getEprintURL();//
+				if (!eprintUrl.endsWith("/"))
+					eprintUrl += "/";
+				eprintUrl += eprint.getEprintId();
 				com.liferay.portal.util.PortalUtil.setPageTitle(eprint.getTitle(), request); 
 			}else
 			{

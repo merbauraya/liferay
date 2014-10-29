@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.idetronic.portlet">
+	<author>Mazlan Mat</author>
+	<namespace>ide</namespace>
+
+	<entity local-service="true" remote-service="false" name="ServiceExperience">
+		<!-- PK fields -->
+		<column name="serviceExperienceId" type="long" primary="true"></column>
+		<!-- Audit fields -->
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+		<column name="startDate" type="Date"></column>
+		<column name="title" type="String"></column>
+		<!-- Other fields -->
+		<column name="endDate" type="Date"></column>
+		<column name="serviceData" type="String"></column>
+		<column name="status" type="int"></column>
+		<!-- Order -->
+		<order by="desc">
+			<order-column name="startDate" order-by="desc"></order-column>
+		</order>
+		<!-- Finder methods -->
+		<finder name="byUserId" return-type="Collection">
+			<finder-column name="userId"></finder-column>
+		</finder>
+	</entity>
+	
+	<entity name="UserEntries_ExpertiseTags" local-service="true" remote-service="false">
+		<column name="userId" type="long" primary="true"></column>
+		<column name="tagId" type="long" primary="true"></column>
+		<finder name="userId" return-type="Collection">
+			<finder-column name="userId"></finder-column>
+		</finder>
+		<finder name="tagId" return-type="Collection">
+			<finder-column name="tagId"></finder-column>
+		</finder>
+	</entity>
+    <entity name="ExpertiseTag" local-service="true" remote-service="false">
+        <column name="tagId" type="long" primary="true"></column>
+        <column name="groupId" type="long"></column>
+        <column name="companyId" type="long"></column>
+        <column name="userId" type="long"></column>
+        <column name="userName" type="String"></column>
+        <column name="createDate" type="Date"></column>
+        <column name="modifiedDate" type="Date"></column>
+        <column name="tagName" type="String"></column>
+        <column name="userCount" type="int"></column>
+         <finder name="TagName" return-type="Collection">
+			<finder-column name="tagName" arrayable-operator="OR" />
+		</finder>
+    </entity>
+    <entity name="OrgChart" local-service="true" remote-service="false">
+    	<column name="userId" type="long" primary="true"></column>
+    	<column name="parentId" type="long" primary="true"></column>
+    	<finder name="userId" return-type="Collection">
+			<finder-column name="userId"></finder-column>
+		</finder>
+    </entity>
+</service-builder>

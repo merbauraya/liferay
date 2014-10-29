@@ -1,0 +1,58 @@
+#tabview-wrapper {
+  /*margin:10px;*/
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  border-collapse: collapse; }
+
+#tabview-wrapper .nav-tabs {
+  margin: 0; }
+
+#tabview-wrapper .tab-content {
+  height: 100%;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #ccc;
+  background: #fff; }
+
+#tabview-wrapper .tab-pane {
+  padding: 10px; }
+
+#tabview-wrapper .nav-tabs > li > a {
+  /* background-color: #333333; */
+  background: none repeat scroll 0 0 #666;
+  color: #FFFFFF; }
+
+#tabview-wrapper
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  color: #000;
+  background-color: #fff;
+  border-bottom: 1px solid #fff; }
+
+  /*
+#tabview-wrapper 
+.nav-tabs>li>a:hover {
+  border-color: #ccc;
+  background-color: #111111;
+} */
+#tabview-wrapper .nav-tabs > li > a {
+  border-radius: 2px;
+  margin-right: 1px; }
+
+/* LIST #2 */
+.tbview-ol {
+  padding-left: 30px; }
+
+.tbview-ol ol {
+  font-style: italic;
+  font-family: Georgia, Times, serif;
+  font-size: 18px; }
+
+.tbview-ol ol li a {
+  padding: 8px;
+  font-style: normal;
+  font-family: Arial;
+  font-size: 13px;
+  border-left: 1px solid #999; }
+
+.tbview-ol ol li a em {
+  display: block; }
+

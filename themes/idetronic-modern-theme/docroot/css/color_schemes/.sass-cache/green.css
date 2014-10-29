@@ -1,130 +1,138 @@
-body.green, .green .portlet {
-  background-color: #F1F3EF; }
+.aui body.green {
+  background-color: #ced9bc; }
 
-.green {
-  /* ---------- Links ---------- */
-  /* ---------- Application styling ---------- */
-  /* ---------- Portlet wrapper and icons ---------- */
-  /* ---------- Calendar portlet ---------- */
-  /* ---------- Miscellaneous portlet styles ---------- */
-  /* This CSS sets the default styles for forms. */ }
-  .green .icon {
-    background-image: url(@theme_image_path@/color_schemes/green/aui/icon_sprite.png); }
-  .green a {
-    color: #677D5B; }
-    .green a:hover {
-      color: #66CD00; }
-  .green .drop-area {
-    background-color: #DBDED4; }
-  .green .resizable-proxy {
-    border-color: #909683; }
-  .green .sortable-proxy {
-    background-color: #7C8272; }
-  .green .menugroup-content h4 {
-    background-color: #D7DFD3;
-    color: #677D5B; }
-  .green .menu-content li a {
-    color: #2F342C; }
-  .green .menu-content li a.focus, .green .lfr-menu-expanded li a:focus {
-    background-color: #677D5B;
-    color: #FFF;
-    text-shadow: -1px -1px #2F342C; }
-  .green .tab {
-    background: none; }
-  .green .tab-active {
-    background-color: #333; }
-  .green .tab-active, .green .tab-active a {
-    color: #FFF; }
-  .green .portlet-communities .portlet-enterprise-admin .lfr-current-theme {
-    background-color: #F6F8F1;
-    border-color: #909683; }
-  .green .portlet-communities .portlet-enterprise-admin .theme-entry .theme-title {
-    background-color: #909488;
-    border-color: #909683; }
-  .green .portlet-communities .portlet-enterprise-admin .lfr-theme-list h3 {
-    background-color: #DBDED4; }
-  .green .portlet-communities .portlet-enterprise-admin .selected-color-scheme .theme-entry {
-    border-color: #669A33; }
-  .green .portlet-communities .portlet-enterprise-admin .lfr-theme-list .theme-entry:hover {
-    background-color: #F5FFE0;
-    border-color: #CFE0A8;
-    color: #BBC99F; }
-  .green .portlet-communities .portlet-enterprise-admin .theme-entry:hover .theme-thumbnail {
-    border-color: #CFE0A8; }
-  .green .portlet-document-library .detail-column-last {
-    background-color: #F2FFD8; }
-    .green .portlet-document-library .detail-column-last .detail-column-content {
-      border-color: #C6DA89; }
-  .green .dockbar {
-    background-color: #A2AF98;
-    background-image: url(@theme_image_path@/color_schemes/green/dockbar/dockbar_bg.png); }
-    .green .dockbar .menu-button-active {
-      background-color: #95DB5C;
-      background-image: url(@theme_image_path@/color_schemes/green/dockbar/button_active_bg.png); }
-      .green .dockbar .menu-button-active a {
-        color: #FFF; }
-  .green .sortable-layout-drag-indicator {
-    background-color: #57B63C; }
-  .green .autocomplete-results-content {
-    border-color: #C1F599; }
-  .green .autocomplete-selected {
-    background-color: #E9F7E0;
-    border-color: #BBEAA4; }
-  .green .textboxlistentry {
-    background-color: #D9F4CB;
-    border-color: #BBEAA4; }
-  .green .textboxlistentry-focused {
-    background-color: #57B63C;
-    border-color: #404F34; }
-  .green .textboxlistentry-close-hover {
-    background-color: #BBEAA4; }
-  .green .portlet {
-    border-color: #909683; }
-  .green .portlet-topper {
-    background-color: #D9DDD3;
-    border-bottom-color: #B7BCAE; }
-  .green .panel-page .portlet-topper {
-    border-bottom-color: #909683; }
-  .green .portlet-section-selected, .green .portlet-section-selected a {
-    background-color: #909683; }
-  .green .portlet-section-selected a:focus, .green .portlet-section-selected a:hover {
-    background-color: #909683; }
-  .green .portlet-calendar .calendar-day .day-text {
-    background-color: #909683; }
-  .green .portlet-calendar .taglib-calendar tr td.calendar-current-day a:focus, .green .portlet-calendar .taglib-calendar tr td.calendar-current-day a:hover {
-    background-color: #F2FFDF;
-    border-color: #B7BCAE;
-    color: #5BCC00; }
-  .green .taglib-calendar tr td a {
-    background-color: #EFF3EA; }
-    .green .taglib-calendar tr td a:hover {
-      background-color: #909683; }
-  .green .taglib-calendar .calendar-current-day a {
-    border-color: #909683;
-    color: #5F9930; }
-  .green .taglib-calendar .calendar-current-day, .green .taglib-calendar .calendar-current-day a {
-    background-color: #FFF; }
-  .green .taglib-calendar tr td.calendar-inactive {
-    color: #BEC4B5; }
-  .green .journal-template-error .scroll-pane pre span {
-    background-color: #BEC4B5; }
-  .green .restricted * {
-    color: #909683; }
-  .green .lfr-tag-selector-popup .textfield-content {
-    background-color: #DBDED4;
-    border-color: #B9BDAF; }
-  .green button, .green input[type="button"], .green input[type="reset"], .green input[type="submit"] {
-    color: #404F34; }
-  .green button:hover, .green input[type="button"]:hover, .green input[type="reset"]:hover, .green input[type="submit"]:hover {
-    background-color: #CFDABA;
-    background-image: url(@theme_image_path@/color_schemes/green/application/state_hover_bg.png);
-    border-color: #778362;
-    color: #669A33; }
-  .green button:focus, .green input[type="button"]:focus, .green input[type="reset"]:focus, .green input[type="submit"]:focus {
-    background-color: #ECECEC;
-    background-image: url(@theme_image_path@/application/state_active_bg.png); }
+.aui .green .navbar-inner {
+  background-color: #3c5b45;
+  background-image: -moz-linear-gradient(top, #3c5b45, #4b7156);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3c5b45), to(#4b7156));
+  background-image: -webkit-linear-gradient(top, #3c5b45, #4b7156);
+  background-image: -o-linear-gradient(top, #3c5b45, #4b7156);
+  background-image: linear-gradient(to bottom, #3c5b45, #4b7156);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3c5b45', endColorstr='#4b7156', GradientType=0); }
 
-/* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
-.ie6 .green button, .ie6 .green input.button, .ie6 .green input.submit, .ie6 .green .button-disabled button, .ie6 .green .button-disabled input.button, .ie6 .green .button-disabled input.submit {
-  color: #404F34; }
+.aui .green a {
+  color: #26ada1; }
+
+.green .navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eee; }
+
+.green .navbar .nav a {
+  color: #333333; }
+
+.aui .green .nav-list > .active > a,
+.aui .green .nav-list > .active > a:hover,
+.aui .green .nav-list > .active > a:focus {
+  background-color: #dff0d8;
+  color: #468847;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2); }
+
+.aui .green .navbar .nav > li > a:hover,
+.navbar .green .nav > li > a:active,
+.navbar .green .nav > li > a:focus,
+.navbar .green .nav .open > a,
+.navbar .green .nav .open > a:hover,
+.navbar .green .nav .open > a:focus {
+  background: #ffffff;
+  color: #999999; }
+
+.aui .navbar .nav > li > a {
+  color: #FFF; }
+
+.aui .green .navbar .nav > li > a:focus,
+.aui .green .navbar .nav > li > a:hover {
+  color: #fff;
+  background-color: #3c5b45; }
+
+.aui .green .dropdown-submenu:hover > a {
+  background-color: #26ada1;
+  color: #FFF; }
+
+.aui .green .dropdown-menu > li > a:hover,
+.aui .green .dropdown-menu > li > a:focus,
+.aui .green .dropdown-submenu:focus > a {
+  text-decoration: none;
+  color: #85794d;
+  background-color: #26ada1;
+  background-image: none; }
+
+.aui .green .navbar .nav > .active > a,
+.aui .green .navbar .nav > .active > a:hover,
+.aui .green .navbar .nav > .active > a:focus {
+  background-color: #2d4433;
+  box-shadow: none;
+  color: #FFF;
+  text-decoration: none; }
+
+.aui .green header .navbar .nav > .active > a,
+.aui .green .navbar .nav > .active > a:hover,
+.aui .green .navbar .nav > .active > a:focus {
+  background-color: #2d4433;
+  box-shadow: none;
+  color: #FFF;
+  text-decoration: none; }
+
+.aui .green header .navbar .nav li.dropdown.open > .dropdown-toggle,
+.aui .green .navbar .nav li.dropdown.active > .dropdown-toggle,
+.aui .green .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: #2d4433;
+  color: #fff; }
+
+.green #portal-search input[type="text"] {
+  color: #fff;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+  border: 0 none;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(60, 91, 69, 0.8) inset; }
+
+/* button */
+.aui .green .btn-primary {
+  color: #ffffff;
+  background-color: #26ada1;
+  border-color: #21988e; }
+
+.aui .green .btn-primary:hover,
+.aui .green .btn-primary:focus,
+.aui .green .btn-primary:active,
+.aui .green .btn-primary.active,
+.aui .green .open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #1f8c82;
+  border-color: #16665f; }
+
+.aui .green .dropdown-menu > li > a {
+  color: #85794d;
+  background-color: #FFF;
+  background-image: none; }
+
+.aui .green .dropdown-menu > li > a:hover {
+  color: #FFF;
+  background-color: #26ada1;
+  background-image: none; }
+
+.aui .portlet-topper {
+  color: #000;
+  background-color: #FFF;
+  padding: 0; }
+
+.aui .green .well {
+  background-color: #f5f5f5; }
+
+.aui .green .portlet-topper .portlet-title {
+  border-bottom: 3px solid #2d4433; }
+
+.purple .navbar .navbar-right > .nav {
+  margin-right: 10px; }
+
+.green .ftr-link {
+  color: #FFFFFF; }
+
+.green .ftr-sect {
+  background: none repeat scroll 0 0 #3c5b45;
+  color: #FFF; }
+
+.aui .green .footer-nav .nav > li > a:hover, .aui .footer-nav > li > a:hover {
+  text-decoration: underline;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: #FFF; }
 

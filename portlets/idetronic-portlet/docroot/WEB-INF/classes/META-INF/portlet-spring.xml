@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.idetronic.portlet.service.ExpertiseTagLocalService" class="com.idetronic.portlet.service.impl.ExpertiseTagLocalServiceImpl" />
+	<bean id="com.idetronic.portlet.service.persistence.ExpertiseTagPersistence" class="com.idetronic.portlet.service.persistence.ExpertiseTagPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.portlet.service.OrgChartLocalService" class="com.idetronic.portlet.service.impl.OrgChartLocalServiceImpl" />
+	<bean id="com.idetronic.portlet.service.persistence.OrgChartPersistence" class="com.idetronic.portlet.service.persistence.OrgChartPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.portlet.service.ServiceExperienceLocalService" class="com.idetronic.portlet.service.impl.ServiceExperienceLocalServiceImpl" />
+	<bean id="com.idetronic.portlet.service.persistence.ServiceExperiencePersistence" class="com.idetronic.portlet.service.persistence.ServiceExperiencePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.portlet.service.UserEntries_ExpertiseTagsLocalService" class="com.idetronic.portlet.service.impl.UserEntries_ExpertiseTagsLocalServiceImpl" />
+	<bean id="com.idetronic.portlet.service.persistence.UserEntries_ExpertiseTagsPersistence" class="com.idetronic.portlet.service.persistence.UserEntries_ExpertiseTagsPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.portlet.service.persistence.UserEntries_ExpertiseTagsFinder" class="com.idetronic.portlet.service.persistence.UserEntries_ExpertiseTagsFinderImpl" parent="basePersistence" />
+</beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="com.idetronic.portlet.service.persistence.UserEntries_ExpertiseTagsFinderImpl.findDetailByUserId">
+		select * from
+		ide_UserEntries_ExpertiseTags a,ide_ExpertiseTag b
+		where a.userId = ?
+		and a.tagId = b.tagId
+	
+	</sql>
+	
+	
+
+</custom-sql>

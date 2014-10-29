@@ -34,7 +34,7 @@ body {
     font-weight: normal;
     line-height: 2.2;
     margin: 0;
-    border-bottom: 3px solid #009AD9;
+    
 }
 
 .aui .portlet-topper .portlet-topper-toolbar {
@@ -123,8 +123,7 @@ background-color:#FFF;
     border-image: none;
     border-style: solid;
     border-width: 1px 1px 1px;}
-.aui body
-{background-color:#F5F5F5;}
+
 
 *{
 	text-shadow:none;
@@ -153,3 +152,5 @@ z-index: 10000;
 }
 
 @import url(color_schemes/purple.css);
+@import url(color_schemes/green.css);
+@import url(color_schemes/black.css);

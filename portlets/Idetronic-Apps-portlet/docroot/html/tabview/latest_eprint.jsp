@@ -12,28 +12,40 @@ PortletURL portletURL = renderResponse.createRenderURL();
 //searchContainer.setEmptyResultsMessage("no-documents-were-found");
  
 results = EprintLocalServiceUtil.getEprints(0, 10);//  DLFileEntryLocalServiceUtil.getGroupFileEntries(themeDisplay.getScopeGroupId(), 0, 10);
+%>
+<c:choose>
+<c:when test="<%= results.isEmpty() %>">
+	<liferay-ui:message key="there-are-no-Eprints" />
 
+	<br /><br />
+</c:when>
+<c:otherwise>
+	<div class="tbview-ol">
+		<ol>
 
-for (int i=0; i<results.size();i++)
-	{
+	<%
+	for (int i = 0; i < results.size(); i++) {
 		Eprint eprint = results.get(i);
-		ResultRow row = new ResultRow(eprint, eprint.getEprintId(), i);
-		//DLFileVersion fileVersion = fileEntry.getLatestFileVersion(false);
 		String docURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/pathfinder/-/eprint/" + eprint.getUrlTitle();
 		
-%>
-<div title="<%= HtmlUtil.escape(eprint.getTitle()) %>">
-
-	<liferay-ui:icon
+	%>
+	
+		<li>
+			<a href="<%=docURL %>">
+				<%=eprint.getTitle() %>
+			</a>
+		</li>	
+			
 		
-		label="<%= true %>"
-		message="<%= eprint.getTitle() %>"
-		url="<%= docURL %>"
-	/>
-</div>
-<%	
+		
+	
 
-
-
+	<%
 	}
-%>
+	%>
+		</ol>
+	</div>
+</c:otherwise>
+</c:choose>
+
+

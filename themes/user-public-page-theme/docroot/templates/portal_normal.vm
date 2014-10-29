@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="$root_css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>$the_title - $company_name</title>
+ 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+	$theme.include($top_head_include)
+	<script type="text/javascript" src="$javascript_folder/jquery-1.11.0.min.js" charset="utf-8"></script>
+	
+</head>
+
+<body class="$css_class">
+
+
+$theme.include($body_top_include)
+
+#if ($is_signed_in)
+	#if (!$page_group.isUser())
+		#dockbar()
+	#end
+	#parse ("$full_templates_path/admin_url.vm")
+	#set ($dockbar_visible = "true")
+#end
+
+	
+         <header class="header">
+           <div class="row-fluid">
+             <a class="$logo_css_class" href="$site_default_url" title="#language ("go-to") $site_name">
+							<img class="img-responsive" alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+			</a>
+           </row>
+            <!-- Header Navbar: style can be found in header.less -->
+            <div class="navbar navbar-static-top" role="navigation" id="top-navigation">
+            	<div class="navbar-inner">
+	                
+		                <!-- Sidebar toggle button-->
+		                <!--
+		                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+		                    <span class="sr-only">Toggle navigation</span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                </a> -->
+		              	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	       				 	<span class="icon-th-list"></span>
+	       				 </a>
+		                #if ($has_navigation || $is_signed_in)
+							#parse ("$full_templates_path/navigation.vm")
+						#else
+							
+						#end
+					
+				</div>
+            </div>
+        </header>
+         <div class="wrapper row-offcanvas row-offcanvas-left">
+             #if ($isPageOwner)
+        		#parse ("$full_templates_path/sidebar.vm")
+        	#end
+           
+
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side $css_right_side">
+              
+
+                <!-- Main content -->
+                <section class="content">
+
+               		#if ($selectable)
+						$theme.include($content_include)
+					#else
+						$portletDisplay.recycle()
+	
+						$portletDisplay.setTitle($the_title)
+	
+						$theme.wrapPortlet("portlet.vm", $content_include)
+					#end
+
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div>
+       
+	
+<div id="footer" class="row-fluid">
+	<div class="span12">
+		<p>Footer</p>
+	</div>
+</div>
+$theme.include($body_bottom_include)
+
+$theme.include($bottom_include)
+
+
+<script type="text/javascript" src="$javascript_folder/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="$javascript_folder/app.js" charset="utf-8"></script>
+
+
+#if (($is_signed_in) && $permissionChecker.isCompanyAdmin($company_id))
+ 	<script type="text/javascript" src="$javascript_folder/dockbar-toggle.js" charset="utf-8"></script>
+
+#else
+	#if ($is_signed_in && $permissionChecker.isGroupAdmin($group_id))
+        <script type="text/javascript" src="$javascript_folder/dockbar-toggle.js" charset="utf-8"></script>
+    #end
+#end
+
+
+ 
+ 
+ 
+</body>
+
+</html>

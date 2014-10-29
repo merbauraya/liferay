@@ -2,7 +2,7 @@
 
 @import url(application.css);
 
-@import url(aui.css);
+/*@import url(aui.css);*/
 @import url(layout.css);
 
 @import url(dockbar.css);
@@ -21,4 +21,5 @@
 @import url(style.css);
 @import url(generic_portlet.css);
 @import url(bs2-transition.css);
+@import url(mega-menu.css);
 @import url(custom.css);

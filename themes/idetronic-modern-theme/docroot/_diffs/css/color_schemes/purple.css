@@ -1,4 +1,4 @@
-.aui header .navbar-inner
+.purple .aui header .navbar-inner
 {
 	
 	
@@ -13,12 +13,9 @@
     }
   
 
-
-.purple .left-side {
-   /* background: none repeat scroll 0 0 	 #3D3242; */
-}
 .purple a
 {color: #421C52;}
+
  header .purple .navbar {
   background-color: #ffffff;
   border-bottom: 1px solid #eee;
@@ -26,7 +23,7 @@
  .purple .navbar .nav a {
   color: #333333;
 }
-.aui .navbar .nav > li > a:hover,
+.aui .purple .navbar .nav > li > a:hover,
  .navbar .nav > li > a:active,
  .navbar .nav > li > a:focus,
  .navbar .nav .open > a,
@@ -35,18 +32,18 @@
   background: #ffffff;
   color: #999999;
 }
-.aui header .navbar .nav > li > a {
+.aui .purple header .navbar .nav > li > a {
 	color:#FFF;
 }
-.aui header .navbar .nav > li > a:focus, .aui header .navbar .nav > li > a:hover
+.aui .purple header .navbar .nav > li > a:focus, .aui .purple header .navbar .nav > li > a:hover
 {
 	color:#fff;
 	background-color: #421C52;
 }
-.aui header .dropdown-menu > li > a:hover,
-  .aui .dropdown-menu > li > a:focus,
-  .aui .dropdown-submenu:hover > a,
-  .aui .dropdown-submenu:focus > a {
+.aui .purple header .dropdown-menu > li > a:hover,
+  .aui .purple .dropdown-menu > li > a:focus,
+  .aui .purple .dropdown-submenu:hover > a,
+  .aui .purple .dropdown-submenu:focus > a {
     text-decoration: none;
     color: white;
     background-color: #9C8AA5;
@@ -58,17 +55,21 @@
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9C8AA5', endColorstr='#BDAEC6', GradientType=0); }
   
-.aui header .navbar .nav > .active > a, .aui .navbar .nav > .active > a:hover, .aui .navbar .nav > .active > a:focus {
+.aui .purple header .navbar .nav > .active > a, 
+.aui .purple .navbar .nav > .active > a:hover, 
+.aui .purple .navbar .nav > .active > a:focus {
     background-color: #421c52;
     box-shadow: none;
     color: #FFF;
     text-decoration: none;
 }
-.aui header .navbar .nav li.dropdown.open > .dropdown-toggle, .aui .navbar .nav li.dropdown.active > .dropdown-toggle, .aui .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+.aui .purple header .navbar .nav li.dropdown.open > .dropdown-toggle, 
+.aui .purple .navbar .nav li.dropdown.active > .dropdown-toggle, 
+.aui .purple .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: #421c52;
     color: #fff;
 }
-.aui .portlet-topper {
+.aui .purple .portlet-topper {
     color:#000;
     background-color: #FFF;
    
