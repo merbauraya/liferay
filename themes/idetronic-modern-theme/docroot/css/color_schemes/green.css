@@ -98,7 +98,16 @@
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(60, 91, 69, 0.8) inset;
 }
 
-
+/* notification */
+.green .dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count
+{
+	display:inline-block;
+	background-color:#fff;
+	
+	color:#2d4433;
+	
+	border-radius:10px;
+}
 /* button */
 .aui .green .btn-primary {
   color: #ffffff;

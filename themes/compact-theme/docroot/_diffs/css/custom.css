@@ -1,0 +1,68 @@
+.aui .navbar-inner {
+border-radius:0;
+}
+.navbar-right {
+    float: right !important;
+}
+.portlet {
+    margin: 0 0 10px;
+    text-align: left;
+}
+
+/* overwrite */
+.dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count
+{display:inline-block;
+padding: 0 6px;
+margin: 0;}
+
+
+#portal-search {
+    padding: 5px;
+}
+#portal-search {
+    margin-bottom: 0 !important;
+}
+#portal-search input[type="text"] {
+    border-radius: 13px;
+}
+#portal-search input[type="image"] {
+    padding: 8px 20px;
+    position: absolute;
+    right: 0;
+}
+#portal-search select {
+    display: none;
+}
+#portal-search input:focus{
+	z-index:auto !important;
+}
+
+.aui .portlet-title {
+    padding: 0 10px;
+}
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #fff;
+    border-color: #cccccc;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 12px 10px 10px;
+}
+.portlet-topper .portlet-title{
+	margin:0;
+	font-size:1em;
+	
+}
+.aui h1, .aui h2 .aui h3{
+    line-height:30px;
+}
+
+
+
+/* end overwrite */
+@import url(color_schemes/default.css);
+@import url(color_schemes/blue.css);

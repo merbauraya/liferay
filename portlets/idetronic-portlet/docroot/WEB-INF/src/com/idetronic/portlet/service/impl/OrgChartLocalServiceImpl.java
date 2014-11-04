@@ -14,7 +14,14 @@
 
 package com.idetronic.portlet.service.impl;
 
+import java.util.List;
+
+import com.idetronic.portlet.model.OrgChart;
+import com.idetronic.portlet.service.OrgChartLocalServiceUtil;
 import com.idetronic.portlet.service.base.OrgChartLocalServiceBaseImpl;
+import com.idetronic.portlet.service.persistence.OrgChartFinderUtil;
+import com.idetronic.portlet.service.persistence.OrgChartPK;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the org chart local service.
@@ -36,4 +43,30 @@ public class OrgChartLocalServiceImpl extends OrgChartLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.idetronic.portlet.service.OrgChartLocalServiceUtil} to access the org chart local service.
 	 */
+	public OrgChart addEntry(long userId,long parentId) throws SystemException
+	{
+		
+		OrgChartPK orgChartPK = new OrgChartPK(userId,parentId);
+		//find existing relationship and delete them
+		List<OrgChart> usrList = orgChartPersistence.findByuserId(userId);
+		for (OrgChart orgChart : usrList)
+		{
+			OrgChartLocalServiceUtil.deleteOrgChart(orgChart);
+		}
+		OrgChart entry = OrgChartLocalServiceUtil.createOrgChart(orgChartPK);
+		OrgChartLocalServiceUtil.addOrgChart(entry);
+		return null;
+	}
+	public void deleteByParentId(long parentId) throws SystemException
+	{
+		List<OrgChart> usrList = orgChartPersistence.findByparentId(parentId);
+		for (OrgChart orgChart : usrList)
+		{
+			OrgChartLocalServiceUtil.deleteOrgChart(orgChart);
+		}
+	}
+	public List getUserTree(long userId)
+	{
+		return OrgChartFinderUtil.getUserTree(userId);
+	}
 }

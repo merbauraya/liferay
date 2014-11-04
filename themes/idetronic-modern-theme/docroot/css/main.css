@@ -1,3 +1,4 @@
+
 @import url(base.css);
 
 @import url(application.css);
@@ -15,9 +16,10 @@
 
 @import url(ioicons.min.css);
 
-
+/*
 
 @import url(AdminLTE.css);
+*/
 @import url(style.css);
 @import url(generic_portlet.css);
 @import url(bs2-transition.css);

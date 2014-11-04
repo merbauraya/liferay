@@ -93,9 +93,17 @@
 /* notification */
 .black .dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count {
   display: inline-block;
-  margin: 2px;
-  line-height: 1em;
+  background-color: #fff;
+  color: #000;
   border-radius: 10px; }
+
+/* nav pills */
+.aui .black .nav-pills > .active > a, .aui .nav-pills > .active > a:hover, .aui .nav-pills > .active > a:focus {
+  background-color: #4c4c4c;
+  color: white; }
+
+.black .portlet-search .search-layout .result .asset-entry .asset-entry-title {
+  color: #4c4c4c; }
 
 /* button 
 .aui .black .btn-primary {

@@ -7,7 +7,22 @@
 		and a.tagId = b.tagId
 	
 	</sql>
+	<sql id="com.idetronic.portlet.service.persistence.OrgChartFinderImpl.findUserTree">
+		select * from ide_OrgChart a,User_ b
+			where a.parentId=?
+			and a.userId = b.userId
+		union
+		
+		select * from ide_OrgChart a, User_ b
+			where a.parentId in (select userId from ide_OrgChart where parentId = ?)
+			and a.userID = b.userId
+		union
+		select User_.userId,0,User_.*
+		from User_
+		where User_.userId = ?
 	
+	
+	</sql>
 	
 
 </custom-sql>

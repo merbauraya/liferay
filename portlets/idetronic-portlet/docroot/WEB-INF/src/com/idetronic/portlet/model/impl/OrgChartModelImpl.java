@@ -75,8 +75,8 @@ public class OrgChartModelImpl extends BaseModelImpl<OrgChart>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.idetronic.portlet.model.OrgChart"),
 			true);
-	public static long USERID_COLUMN_BITMASK = 1L;
-	public static long PARENTID_COLUMN_BITMASK = 2L;
+	public static long PARENTID_COLUMN_BITMASK = 1L;
+	public static long USERID_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.idetronic.portlet.model.OrgChart"));
 
@@ -178,7 +178,19 @@ public class OrgChartModelImpl extends BaseModelImpl<OrgChart>
 
 	@Override
 	public void setParentId(long parentId) {
+		_columnBitmask |= PARENTID_COLUMN_BITMASK;
+
+		if (!_setOriginalParentId) {
+			_setOriginalParentId = true;
+
+			_originalParentId = _parentId;
+		}
+
 		_parentId = parentId;
+	}
+
+	public long getOriginalParentId() {
+		return _originalParentId;
 	}
 
 	public long getColumnBitmask() {
@@ -249,6 +261,10 @@ public class OrgChartModelImpl extends BaseModelImpl<OrgChart>
 
 		orgChartModelImpl._setOriginalUserId = false;
 
+		orgChartModelImpl._originalParentId = orgChartModelImpl._parentId;
+
+		orgChartModelImpl._setOriginalParentId = false;
+
 		orgChartModelImpl._columnBitmask = 0;
 	}
 
@@ -307,6 +323,8 @@ public class OrgChartModelImpl extends BaseModelImpl<OrgChart>
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private long _parentId;
+	private long _originalParentId;
+	private boolean _setOriginalParentId;
 	private long _columnBitmask;
 	private OrgChart _escapedModel;
 }

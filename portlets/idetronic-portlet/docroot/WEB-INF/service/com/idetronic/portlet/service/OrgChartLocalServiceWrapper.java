@@ -286,6 +286,24 @@ public class OrgChartLocalServiceWrapper implements OrgChartLocalService,
 			arguments);
 	}
 
+	@Override
+	public com.idetronic.portlet.model.OrgChart addEntry(long userId,
+		long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _orgChartLocalService.addEntry(userId, parentId);
+	}
+
+	@Override
+	public void deleteByParentId(long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_orgChartLocalService.deleteByParentId(parentId);
+	}
+
+	@Override
+	public java.util.List getUserTree(long userId) {
+		return _orgChartLocalService.getUserTree(userId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

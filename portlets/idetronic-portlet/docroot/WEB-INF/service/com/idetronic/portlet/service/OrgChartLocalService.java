@@ -248,4 +248,14 @@ public interface OrgChartLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.idetronic.portlet.model.OrgChart addEntry(long userId,
+		long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteByParentId(long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List getUserTree(long userId);
 }

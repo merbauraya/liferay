@@ -39,9 +39,7 @@ public class UserExpertise extends MVCPortlet {
 	{
 		long userId = ParamUtil.getLong(request, "userId");
 		String expertises = ParamUtil.getString(request, "exp_Expertise");
-		//User user = UserLocalServiceUtil.getUser(userId);
-		//_log.info(userId +" saveUserExpertise::"+expertises);
-		//find tags, if they do not exists create them
+		
 		UserEntries_ExpertiseTagsLocalServiceUtil.addEntry(userId, expertises, ",");
 		
 		

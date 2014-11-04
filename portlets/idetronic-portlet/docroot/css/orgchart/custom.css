@@ -5,6 +5,10 @@
 	margin 				: 10px;
 	padding 			: 10px;
 }
+#upload-chart li a
+{
+	fontsize:110%;
+}
 
 #show-list{
 	cursor 				: pointer;
@@ -136,4 +140,10 @@ display:none;
 	margin:0px !important;
 	font-size:12px !important;
 }
-#upload-chart li{line-height:20px !important;}
+#upload-chart li{line-height:20px !important;
+background: linear-gradient(to bottom, rgb(78, 82, 91) 0%, rgb(57, 61, 68) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+color:#fff;
+border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+
+padding:3px;
+}

@@ -1,0 +1,149 @@
+.aui .navbar-inner {
+  border-radius: 0; }
+
+.navbar-right {
+  float: right !important; }
+
+.portlet {
+  margin: 0 0 10px;
+  text-align: left; }
+
+/* overwrite */
+.dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count {
+  display: inline-block;
+  padding: 0 6px;
+  margin: 0; }
+
+#portal-search {
+  padding: 5px; }
+
+#portal-search {
+  margin-bottom: 0 !important; }
+
+#portal-search input[type="text"] {
+  border-radius: 13px; }
+
+#portal-search input[type="image"] {
+  padding: 8px 20px;
+  position: absolute;
+  right: 0; }
+
+#portal-search select {
+  display: none; }
+
+#portal-search input:focus {
+  z-index: auto !important; }
+
+.aui .portlet-title {
+  padding: 0 10px; }
+
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #fff;
+  border-color: #cccccc;
+  border-image: none;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  padding: 12px 10px 10px; }
+
+.portlet-topper .portlet-title {
+  margin: 0;
+  font-size: 1em; }
+
+.aui h1, .aui h2 .aui h3 {
+  line-height: 30px; }
+
+/* end overwrite */
+.aui .default .navbar .nav > .active > a,
+.aui .default .navbar .nav > .active > a:hover,
+.aui .default .navbar .nav > .active > a:focus {
+  box-shadow: none; }
+
+.aui .default .portlet-topper {
+  color: #333;
+  background-color: #dbdbdb;
+                             /*
+   background-image: -moz-linear-gradient(top, #555555, #f9f9f9);
+   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#f9f9f9));
+   background-image: -webkit-linear-gradient(top, #555555, #f9f9f9);
+   background-image: -o-linear-gradient(top, #555555, #f9f9f9);
+   background-image: linear-gradient(to bottom, #555555, #f9f9f9);
+   background-repeat: repeat-x;
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#f9f9f9', GradientType=0); 
+*/
+  padding: 0; }
+
+.aui .default .portlet-content, .aui .default .portlet-minimized .portlet-content-container {
+  background-color: #fff;
+  border-color: #cccccc;
+  border-image: none;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  padding: 12px 10px 10px; }
+
+.default footer {
+  background: none repeat scroll 0 0 rgba(44, 37, 8, 0.17);
+  color: inherit; }
+
+.aui body.blue {
+  color: #333333;
+  background-color: #f9f9f9; }
+
+.aui .blue .top_login {
+  height: 10px;
+  background-color: #2773ae; }
+
+.aui .blue .navbar-inner {
+  background-color: #45aeea;
+  background-image: linear-gradient(to bottom, #54b4eb, #2fa4e7);
+  background-repeat: repeat-x;
+  border: 1px solid #1990d5; }
+
+.aui .blue .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+  background-color: #1684c2;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125) inset;
+  color: #fff;
+  text-decoration: none; }
+
+.aui .blue .navbar .nav > li > a {
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2); }
+
+.aui .blue .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: #1684c2;
+  color: #fff; }
+
+.blue #portal-search input[type="text"] {
+  /*background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+  
+  box-shadow: 0 1px 0 rgba(22, 132, 194, 0.1), 0 1px 7px 0 rgba(69, 174, 234, 0.8) inset;
+  */
+  border: 0 none; }
+
+.aui .blue .portlet-topper {
+  color: white;
+  background-color: #45aeea;
+  background-image: -moz-linear-gradient(top, #45aeea, #1684c2);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#45aeea), to(#1684c2));
+  background-image: -webkit-linear-gradient(top, #45aeea, #1684c2);
+  background-image: -o-linear-gradient(top, #45aeea, #1684c2);
+  background-image: linear-gradient(to bottom, #45aeea, #1684c2);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#45aeea', endColorstr='#1684c2', GradientType=0);
+  padding: 0; }
+
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+  background-color: #fff;
+  border-color: #cccccc;
+  border-image: none;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  padding: 12px 10px 10px; }
+
+.blue footer {
+  background-color: #2773ae;
+  color: #fff; }
+

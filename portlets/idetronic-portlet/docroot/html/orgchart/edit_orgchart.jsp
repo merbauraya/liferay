@@ -1,7 +1,13 @@
 <%@ include file="/html/orgchart/init.jsp" %>
+<% 
+User selUser = PortalUtil.getSelectedUser(request);
+
+%>
 
 <liferay-portlet:resourceURL var="getUserURL">
 	<portlet:param name="resource" value="usertree"/>
+	<portlet:param name="userId"
+		value="<%=String.valueOf(selUser.getUserId())%>" />
 </liferay-portlet:resourceURL>
 <liferay-portlet:resourceURL var="searchUserURL">
 	<portlet:param name="resource" value="usersearch"/>
@@ -17,11 +23,7 @@
 	<div class="user-list" style="float:left;width:20%">
 	<input style="width:80px" name="<portlet:namespace /><%=Constant.PARAMETER_KEYWORDS %>" id="<portlet:namespace /><%=Constant.PARAMETER_KEYWORDS %>" type="text" placeholder="Search">
  	<ul id="upload-chart">
-		<li dataid="222" id="Albert" class="node child"><span class="label_node"><a href="http://github.com/sselvamani22">Albert</a><br><i>Data Architect</i> </span><div class="details"><p><strong>rank:</strong>Vice President</p><p><strong>department:</strong>Research and Development</p></div></li>
-		<li dataid="212" id="Moser" class="node child"><span class="label_node"><a href="http://github.com/sselvamani22">Moser</a><br><i>technical engineer </i></span><div class="details"><p><strong>rank:</strong>Manager</p><p><strong>department:</strong>IT</p></div></li>
-		<li dataid="213 "id="Meinert" class="node child"><span class="label_node"><a href="http://github.com/sselvamani22">Meinert</a><br><i>Maintenance Service Engineer</i></span><div class="details"><p><strong>rank:</strong>Vice President</p><p><strong>department:</strong>Research and Development</p></div></li>
-	    <li dataid="241" id="Mic" class="node child"><span class="label_node"><a href="http://github.com/sselvamani22">Mic</a><br><i>Chairman of the Board, President</i></span><div class="details"><p><strong>rank:</strong>Manager</p><p><strong>department:</strong>IT</p></div></li>
-
+	
 	</ul>
 	</div>
 	<div id="chart" class="orgChart" style="float:right;width:80%"></div>
@@ -99,7 +101,7 @@ function remChild(removing){
 			var tree= A.one('#<portlet:namespace />orgTree');
 			A.one('#<portlet:namespace />orgTree').set('value',JSON.stringify(hierarchy));
 			return hierarchy;
-			alert("Check console")
+			
 		}
 		function getUser(userId,parentId)
         {
@@ -113,6 +115,9 @@ function remChild(removing){
 
 		
         $(document).ready(function() {
+        	var regx = /\w*(row)/;
+        	
+        	
             /* Custom jQuery for the example */
             $("#show-list").click(function(e){
                 e.preventDefault();
@@ -133,6 +138,28 @@ function remChild(removing){
                     }
                 });
             });
+            $(".del").live("click", function(e){
+              var nodo=$(this);
+
+              if(!nodo.parent().parent().hasClass("temp")){
+                  var nodeDiv = nodo.parent().parent();
+                  var cu = nodeDiv.find("a").attr("rel");
+                  classList = nodeDiv.attr('class').split(/\s+/);
+                  $.each(classList, function(index,item) {
+                      if(item != "temp" && item != "node" && item != "child" && item != "ui-draggable" && item != "ui-droppable" && !regx.test(item) ){
+                          del_node = item;
+                          
+                      }
+                  });
+                  var element = $("li."+del_node+":not('.temp, #upload-chart li')").removeAttr("class").addClass("node").addClass("child");
+                  remChild(element);
+                  init_tree();
+              }
+
+          });
+            
+            
+            
         });
     function getData()
     {
@@ -180,12 +207,16 @@ function remChild(removing){
 		function loadjson(jsonTree){
 			var items = [];
             
+            
+            
+            
+            
         
             var data = TAFFY(jsonTree);
             
          
              
-			 data({"parent":""}).each(function (record,recordnumber) {
+			 data({"parent":0}).each(function (record,recordnumber) {
 			     
 			     loops(record);
              });
@@ -194,14 +225,14 @@ function remChild(removing){
                 
                 
 				if (root.parent == ""){
-				    // items.push("<li class='root unic" + root.id + " root' dataid='"+root.id + "' id='" + root.name + "'><span class='label_node'><a href='http://github.com/sselvamani22'>" + root.name+"</a></br><i>"+ root.jobTitle+ "</i></span><div class='details'><p><strong>rank:</strong>" + root.rank+"</p><p><strong>department:</strong>" + root.department+"</p></div>");
-		items.push("<li class='root unic" + root.id + " root' dataid='"+root.id + "'><span class='label_node'><a href='http://github.com/sselvamani22'>" + root.name+"</a></br><i>"+ root.jobTitle+ "</i></span><div class='details'><p><strong>rank:</strong>" + root.rank+"</p><p><strong>department:</strong>" + root.department+"</p></div>");
+				    // items.push("<li class='root unic" + root.id + " root' dataid='"+root.id + "' id='" + root.name + "'><span class='label_node'><a href='#'>" + root.name+"</a></br><i>"+ root.jobTitle+ "</i></span><div class='details'><p><strong>rank:</strong>" + root.rank+"</p><p><strong>department:</strong>" + root.department+"</p></div>");
+		items.push("<li class='root unic" + root.id + " root' dataid='"+root.id + "'><span class='label_node'><a href='#'>" + root.name+"</a></br><i>"+ root.jobTitle+ "</i></span><div class='details'><p><strong>rank:</strong>" + root.rank+"</p><p><strong>department:</strong>" + root.department+"</p></div>");
 		
                 
                 }
 				else{
-				//   items.push("<li class='child unic"+root.id+ "' dataid='" + root.id + "' id='" + root.name + "'><span class='label_node'><a href='http://github.com/sselvamani22'>" + root.name+"</a></br><i>"+ root.jobTitle+ "</i></span><div class='details'><p><strong>rank:</strong>" + root.rank+"</p><p><strong>department:</strong>" + root.department+"</p></div>");
-				items.push("<li class='child unic"+root.id+ "' dataid='" + root.id + "'><span class='label_node'><a href='http://github.com/sselvamani22'>" + root.name+"</a></br><i>"+ root.jobTitle+ "</i></span><div class='details'><p><strong>rank:</strong>" + root.rank+"</p><p><strong>department:</strong>" + root.department+"</p></div>");
+				//   items.push("<li class='child unic"+root.id+ "' dataid='" + root.id + "' id='" + root.name + "'><span class='label_node'><a href='#'>" + root.name+"</a></br><i>"+ root.jobTitle+ "</i></span><div class='details'><p><strong>rank:</strong>" + root.rank+"</p><p><strong>department:</strong>" + root.department+"</p></div>");
+				items.push("<li class='child unic"+root.id+ "' dataid='" + root.id + "'><span class='label_node'><a href='#'>" + root.name+"</a></br><i>"+ root.jobTitle+ "</i></span><div class='details'><p><strong>rank:</strong>" + root.rank+"</p><p><strong>department:</strong>" + root.department+"</p></div>");
 				
                 }
 				
@@ -240,7 +271,7 @@ function remChild(removing){
 					$('<span>').attr('class','label_node').append(
 						$('<a>').attr('href','#').append(record.name)
 					
-						).append('<br>')
+						).append('<br>').append($('<i>').append(record.jobTitle))
 					
 				
 				
@@ -251,18 +282,9 @@ function remChild(removing){
 			
 			});
 			init_tree();
-			/*
-			<li class="node child" id="Albert" dataid="222">
-				<span class="label_node">
-					<a href="http://github.com/sselvamani22">Albert</a>
-					<br>
-					<i>Data Architect</i> 
-				</span>
-			</li>
+	
 			
-			*/
 			
-			console.log(data);
 		
 		}
 		
@@ -323,5 +345,5 @@ function remChild(removing){
 	
 		
 		A.one('#<portlet:namespace/><%=Constant.PARAMETER_KEYWORDS %>').on('valuechange', updateUserList);
-		
+      	
 </aui:script>

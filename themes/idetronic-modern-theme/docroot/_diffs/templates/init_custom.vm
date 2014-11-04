@@ -13,7 +13,7 @@
 #set ($user_local_service = $serviceLocator.findService("com.liferay.portal.service.UserLocalService"))
 #set ($user_profile_url = $community_default_public_url)
 
-#set ($current_user = $user_local_service.getUserById($page_group.getClassPK()))
+
 
 #if (($company.getLogoId() == 0) && !$layout.layoutSet.isLogo())
 	#set ($site_logo = $so_logo)
@@ -28,6 +28,7 @@
 #end
 
 #if ($is_signed_in)
+	#set ($current_user = $user_local_service.getUserById($themeDisplay.getUserId()))
 	#set ($liferay_toggle_controls = $sessionClicks.get($request, "liferay_toggle_controls", ""))
 	#set ($themeNamespace = "_" + $themeDisplay.getThemeId() + "_")
 
@@ -44,7 +45,11 @@
 
 	#set ($layoutLocalService = $serviceLocator.findService("com.liferay.portal.service.LayoutLocalService"))
 	#set ($user_layout = $layoutLocalService.getLayouts($user_group.getGroupId(), true))
-
+	#set ($current_user_profile_url = $theme_display.getURLPortal() + $theme_display.getPathFriendlyURLPublic() + "/" + $current_user.getScreenName())
+	#set ($current_user_profile_portrait_url = $current_user.getPortraitURL($themeDisplay))
+	#if ($current_user.getPortraitId() == 0)
+		#set ($current_user_profile_portrait_url = $images_folder + "/custom/so_user_profile_male_default.png")
+	#end
 #end
 
 #if ($page_group.isUser())

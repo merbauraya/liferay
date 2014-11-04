@@ -65,7 +65,7 @@ public class UserServiceExperience extends MVCPortlet {
 		String serviceExperienceId = PortalUtil.getOriginalServletRequest(httpReq).getParameter("serviceExperienceId");
 		if (Validator.isNull(serviceExperienceId))
 			serviceExperienceId = ParamUtil.getString(request, "serviceExperienceId");
-		_log.info("serveresource");
+
 		ParamUtil.print(request);
     
     }

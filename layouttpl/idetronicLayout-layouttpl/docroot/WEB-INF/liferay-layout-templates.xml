@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.2.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_2_0.dtd">
+
+<layout-templates>
+	<custom>
+
+
+		<layout-template id="onecolumn" name="oneColumn">
+			<template-path>/onecolumn.tpl</template-path>
+			<wap-template-path>/onecolumn.wap.tpl</wap-template-path>
+			<thumbnail-path>/onecolumn.png</thumbnail-path>
+		</layout-template>
+
+		<layout-template id="twocolumn8020" name="twoColumn8020">
+			<template-path>/twocolumn8020.tpl</template-path>
+			<wap-template-path>
+				/twocolumn8020.wap.tpl
+			</wap-template-path>
+			<thumbnail-path>/twocolumn8020.png</thumbnail-path>
+		</layout-template>
+	</custom>
+
+</layout-templates>

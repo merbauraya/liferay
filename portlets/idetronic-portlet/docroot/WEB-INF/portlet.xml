@@ -97,7 +97,7 @@
 	<portlet>
 		<portlet-name>org</portlet-name>
 		<display-name>Reporting Structure</display-name>
-		<portlet-class>com.idetronic.portlet.OrgChart</portlet-class>
+		<portlet-class>com.idetronic.portlet.UserOrgChart</portlet-class>
 		<init-param>
 			<name>check-auth-token</name>
 			<value>false</value>

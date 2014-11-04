@@ -36,6 +36,9 @@ body {
   right: 10px;
   top: 50%; }
 
+.taglib-page-iterator .lfr-pagination-buttons {
+  margin-right: 30px; }
+
 .aui .portlet-topper .portlet-title i, .aui .portlet-topper .portlet-title span img {
   display: none; }
 
@@ -369,6 +372,13 @@ header .purple .navbar {
   border: 0 none;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 7px 0 rgba(60, 91, 69, 0.8) inset; }
 
+/* notification */
+.green .dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count {
+  display: inline-block;
+  background-color: #fff;
+  color: #2d4433;
+  border-radius: 10px; }
+
 /* button */
 .aui .green .btn-primary {
   color: #ffffff;
@@ -515,9 +525,17 @@ header .purple .navbar {
 /* notification */
 .black .dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count {
   display: inline-block;
-  margin: 2px;
-  line-height: 1em;
+  background-color: #fff;
+  color: #000;
   border-radius: 10px; }
+
+/* nav pills */
+.aui .black .nav-pills > .active > a, .aui .nav-pills > .active > a:hover, .aui .nav-pills > .active > a:focus {
+  background-color: #4c4c4c;
+  color: white; }
+
+.black .portlet-search .search-layout .result .asset-entry .asset-entry-title {
+  color: #4c4c4c; }
 
 /* button 
 .aui .black .btn-primary {

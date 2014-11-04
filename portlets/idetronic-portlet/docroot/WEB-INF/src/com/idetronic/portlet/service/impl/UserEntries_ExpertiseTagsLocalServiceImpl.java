@@ -70,13 +70,11 @@ public class UserEntries_ExpertiseTagsLocalServiceImpl
 			
 			if (!tagEntries.contains(tagEntry.getTagId()) || tagEntries.size() ==0)
 			{
-				_log.info("addEntry::"+ tagEntry.getTagId()+ " uid="+userId);
+		
 				UserEntries_ExpertiseTagsPK ueExp = new UserEntries_ExpertiseTagsPK(userId,tagEntry.getTagId());
 				tagEntry.setUserCount(tagEntry.getUserCount()+1);
 				
 				ExpertiseTagLocalServiceUtil.updateExpertiseTag(tagEntry);
-				//userEntries_ExpertiseTagsPersistence.create(ueExp);
-				//UserEntries_ExpertiseTags umm = new UserEntries_ExpertiseTags();
 				UserEntries_ExpertiseTags entry = UserEntries_ExpertiseTagsLocalServiceUtil.createUserEntries_ExpertiseTags(ueExp);
 				UserEntries_ExpertiseTagsLocalServiceUtil.addUserEntries_ExpertiseTags(entry);
 				

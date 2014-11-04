@@ -1,0 +1,27 @@
+.top_login {
+height:10px;
+}
+.logo {display:block;}
+
+
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+.nav-user-avatar {
+    margin-top: -2px;
+    text-decoration: none;
+    vertical-align: middle;
+    width: 20px;
+}
+.main-wrapper{
+	
+	
+}
+.content {
+	
+}
+footer {
+	border-top:1px solid #000;
+}

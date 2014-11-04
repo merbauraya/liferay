@@ -1,0 +1,19 @@
+
+#set ($groupService = $serviceLocator.findService('com.liferay.portal.service.GroupLocalService'))
+#set ($layoutService = $serviceLocator.findService('com.liferay.portal.service.LayoutLocalService'))
+#set ($controlPanelGroup = $groupService.getGroup($company_id, "Control Panel"))
+#set ($controlPanelPlid = $layoutService.getDefaultPlid($controlPanelGroup.getGroupId(), true))
+
+#set ($viewUsersURL = $portletURLFactory.create($request,"125",$controlPanelPlid,"RENDER_PHASE"))
+$viewUsersURL.setParameter("struts_action","/users_admin/view")
+$viewUsersURL.setParameter("usersListView","tree")
+$viewUsersURL.setParameter("saveUsersListView","true")
+
+#set ($dockbarPanelGroup = $groupService.getGroup($company_id, "Dockbar"))
+#set ($dockbarPlid = $layoutService.getDefaultPlid($dockbarPanelGroup.getGroupId(), true))
+
+#set ($addContentURL = $portletURLFactory.create($request,"145",$page.getPlid(),"RENDER_PHASE"))
+$addContentURL.setParameter("struts_action","/dockbar/add_panel")
+$addContentURL.setParameter("viewEntries","true")
+
+

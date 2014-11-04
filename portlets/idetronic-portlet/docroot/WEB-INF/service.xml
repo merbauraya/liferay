@@ -56,8 +56,12 @@
     <entity name="OrgChart" local-service="true" remote-service="false">
     	<column name="userId" type="long" primary="true"></column>
     	<column name="parentId" type="long" primary="true"></column>
+    
     	<finder name="userId" return-type="Collection">
 			<finder-column name="userId"></finder-column>
+		</finder>
+		<finder name="parentId" return-type="Collection">
+			<finder-column name="parentId"></finder-column>
 		</finder>
     </entity>
 </service-builder>

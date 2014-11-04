@@ -1,5 +1,44 @@
-.custom-logo {
+/*
+.custom-logo{display:block;}
+*/
+.logo {
   display: block; }
+
+body {
+  font-family: 'Open Sans', Arial, sans-serif; }
+
+body > .header {
+  position: relative;
+  z-index: 100; }
+
+body > .header {
+  left: 0;
+  right: 0;
+  top: 0; }
+
+body > .header .navbar {
+  height: 30px;
+  margin-bottom: 0; }
+
+.content {
+  padding: 20px 15px; }
+
+/* notification */
+.dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count {
+  border: none;
+  line-height: 1.4em;
+  margin: 0;
+  padding: 0 6px; }
+
+.nav-user-avatar {
+  margin-top: -2px;
+  text-decoration: none;
+  vertical-align: middle;
+  width: 20px; }
+
+/* All images should be responsive */
+img {
+  max-width: 100%important; }
 
 .navbar-xs {
   height: 22px;
@@ -20,11 +59,7 @@
   display: none; }
 
 #portal-search input[type="text"] {
-  border-radius: 13px;
-  /*
-  background: linear-gradient(to bottom, #443266 0px, #732c3b 24px, #e1e1e1 100px, #eeeeee 124px) no-repeat;
-  
-  box-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def; */ }
+  border-radius: 13px; }
 
 #portal-search input[type="image"] {
   padding: 8px 20px;
@@ -40,6 +75,9 @@
 
 .aui .portlet-body {
   background-color: #fff; }
+
+.portlet-search .search-layout .result .asset-entry .asset-entry-title {
+  font-size: 1.1em; }
 
 footer a {
   color: #fff; }

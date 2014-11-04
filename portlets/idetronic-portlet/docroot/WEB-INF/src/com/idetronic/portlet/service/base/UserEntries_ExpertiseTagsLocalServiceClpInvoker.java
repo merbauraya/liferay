@@ -114,27 +114,27 @@ public class UserEntries_ExpertiseTagsLocalServiceClpInvoker {
 				"com.idetronic.portlet.model.UserEntries_ExpertiseTags"
 			};
 
-		_methodName46 = "getBeanIdentifier";
+		_methodName48 = "getBeanIdentifier";
 
-		_methodParameterTypes46 = new String[] {  };
+		_methodParameterTypes48 = new String[] {  };
 
-		_methodName47 = "setBeanIdentifier";
+		_methodName49 = "setBeanIdentifier";
 
-		_methodParameterTypes47 = new String[] { "java.lang.String" };
+		_methodParameterTypes49 = new String[] { "java.lang.String" };
 
-		_methodName52 = "addEntry";
+		_methodName54 = "addEntry";
 
-		_methodParameterTypes52 = new String[] { "long", "java.lang.String[][]" };
+		_methodParameterTypes54 = new String[] { "long", "java.lang.String[][]" };
 
-		_methodName53 = "addEntry";
+		_methodName55 = "addEntry";
 
-		_methodParameterTypes53 = new String[] {
+		_methodParameterTypes55 = new String[] {
 				"long", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName54 = "getUserEntry";
+		_methodName56 = "getUserEntry";
 
-		_methodParameterTypes54 = new String[] { "long" };
+		_methodParameterTypes56 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -226,36 +226,36 @@ public class UserEntries_ExpertiseTagsLocalServiceClpInvoker {
 			return UserEntries_ExpertiseTagsLocalServiceUtil.updateUserEntries_ExpertiseTags((com.idetronic.portlet.model.UserEntries_ExpertiseTags)arguments[0]);
 		}
 
-		if (_methodName46.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
 			return UserEntries_ExpertiseTagsLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName47.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
 			UserEntries_ExpertiseTagsLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-
-			return null;
-		}
-
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			UserEntries_ExpertiseTagsLocalServiceUtil.addEntry(((Long)arguments[0]).longValue(),
-				(java.lang.String[])arguments[1]);
-
-			return null;
-		}
-
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-			UserEntries_ExpertiseTagsLocalServiceUtil.addEntry(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 
 			return null;
 		}
 
 		if (_methodName54.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+			UserEntries_ExpertiseTagsLocalServiceUtil.addEntry(((Long)arguments[0]).longValue(),
+				(java.lang.String[])arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			UserEntries_ExpertiseTagsLocalServiceUtil.addEntry(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+
+			return null;
+		}
+
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return UserEntries_ExpertiseTagsLocalServiceUtil.getUserEntry(((Long)arguments[0]).longValue());
 		}
 
@@ -294,14 +294,14 @@ public class UserEntries_ExpertiseTagsLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName46;
-	private String[] _methodParameterTypes46;
-	private String _methodName47;
-	private String[] _methodParameterTypes47;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
+	private String _methodName48;
+	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
 	private String _methodName54;
 	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
 }

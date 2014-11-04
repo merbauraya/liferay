@@ -275,6 +275,21 @@ public class OrgChartLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.idetronic.portlet.model.OrgChart addEntry(long userId,
+		long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addEntry(userId, parentId);
+	}
+
+	public static void deleteByParentId(long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteByParentId(parentId);
+	}
+
+	public static java.util.List getUserTree(long userId) {
+		return getService().getUserTree(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

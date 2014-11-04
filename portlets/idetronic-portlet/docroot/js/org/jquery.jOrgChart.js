@@ -145,12 +145,25 @@ var cx = 0;
             // Drop event handler for nodes
 			var removeside_node = ""
             $divNode.bind("drop", function handleDropEvent( event, ui ) {
-			
+            	
+            	//ensure we do not have duplicate
+            	
+            	var sourceId = ui.draggable.attr("dataid");
+            	
+            	var existingId = $('#orgChartDisp').find('li[dataid="'+sourceId +'"]');
+            	if (existingId.length > 0)
+            		return;
+            	
+            	
+            	//console.log(sourceId);
                 var targetID = $(this).data("tree-node");
+               // console.log(targetID);
                 var targetLi = $this.find("li").filter(function() { return $(this).data("tree-node") === targetID; } );
                 var targetUl = targetLi.children('ul');
+               // console.log(targetUl);
 				
                 var sourceID = ui.draggable.data("tree-node");
+                
 				if(sourceID == null){
 				   var lilength = $this.find("li").length;
 				   var sourceLi =  ui.draggable.clone().addClass('unic'+(lilength+1));

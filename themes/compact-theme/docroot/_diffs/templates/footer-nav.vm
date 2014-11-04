@@ -1,0 +1,48 @@
+
+	#foreach ($nav_item in $nav_items)
+
+		#if($nav_item.getLayout().getExpandoBridge().getAttribute($footerNav))
+			
+				## we are only interested in second level menu
+				#if ($nav_item.hasChildren())
+					<ul class="nav">
+						#foreach ($nav_child in $nav_item.getChildren())
+							#if ($nav_child.isSelected())
+								<li class="selected">
+							#else
+								<li>
+							#end
+								<a class="ftr-link" href="$nav_child.getURL()" $nav_child.getTarget()>$nav_child.getName()</a>
+							</li>
+						#end
+					</ul>
+				#end
+			
+			
+		#end
+	#end ##foreach
+	<div id="sub-footer">
+		<div class="row">
+			<div class="span6">
+				<div class="copyright">
+					<p>
+						<span>Copyright© PTAR 2013-2014 All right reserved. </span>
+						<span>Faculty of Elecrical Engineering</span>
+						
+						
+					</p>
+				</div>
+			</div>
+			<div class="span6">
+				<ul class="social-network">
+					<li><a title="" data-placement="top" href="http://www.facebook.com/ptar.km" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+					<li><a title="" data-placement="top" href="#" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+					<li><a title="" data-placement="top" href="#" data-original-title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+					<li><a title="" data-placement="top" href="#" data-original-title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
+					<li><a title="" data-placement="top" href="#" data-original-title="Google plus"><i class="fa fa-google-plus"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	
+	</div>
+

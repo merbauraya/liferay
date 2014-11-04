@@ -44,7 +44,9 @@ body {
     right: 10px;
     top: 50%;
 }
-
+.taglib-page-iterator .lfr-pagination-buttons {
+    margin-right: 30px;
+}
 
 .aui .portlet-topper .portlet-title i, .aui .portlet-topper .portlet-title span img {
     display: none;

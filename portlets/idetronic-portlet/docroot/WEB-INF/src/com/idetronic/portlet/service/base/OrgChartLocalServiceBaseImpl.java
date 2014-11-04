@@ -17,6 +17,7 @@ package com.idetronic.portlet.service.base;
 import com.idetronic.portlet.model.OrgChart;
 import com.idetronic.portlet.service.OrgChartLocalService;
 import com.idetronic.portlet.service.persistence.ExpertiseTagPersistence;
+import com.idetronic.portlet.service.persistence.OrgChartFinder;
 import com.idetronic.portlet.service.persistence.OrgChartPK;
 import com.idetronic.portlet.service.persistence.OrgChartPersistence;
 import com.idetronic.portlet.service.persistence.ServiceExperiencePersistence;
@@ -356,6 +357,24 @@ public abstract class OrgChartLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the org chart finder.
+	 *
+	 * @return the org chart finder
+	 */
+	public OrgChartFinder getOrgChartFinder() {
+		return orgChartFinder;
+	}
+
+	/**
+	 * Sets the org chart finder.
+	 *
+	 * @param orgChartFinder the org chart finder
+	 */
+	public void setOrgChartFinder(OrgChartFinder orgChartFinder) {
+		this.orgChartFinder = orgChartFinder;
+	}
+
+	/**
 	 * Returns the service experience local service.
 	 *
 	 * @return the service experience local service
@@ -634,6 +653,8 @@ public abstract class OrgChartLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.idetronic.portlet.service.OrgChartLocalService orgChartLocalService;
 	@BeanReference(type = OrgChartPersistence.class)
 	protected OrgChartPersistence orgChartPersistence;
+	@BeanReference(type = OrgChartFinder.class)
+	protected OrgChartFinder orgChartFinder;
 	@BeanReference(type = com.idetronic.portlet.service.ServiceExperienceLocalService.class)
 	protected com.idetronic.portlet.service.ServiceExperienceLocalService serviceExperienceLocalService;
 	@BeanReference(type = ServiceExperiencePersistence.class)

@@ -1,6 +1,7 @@
-
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    	
+    	<img src="$current_user_profile_portrait_url"  class="nav-user-avatar"/>
         <i class="glyphicon glyphicon-user"></i>
         <span class="nav-item-label">$user_name <i class="icon-caret-down"></i></span>
     </a>
