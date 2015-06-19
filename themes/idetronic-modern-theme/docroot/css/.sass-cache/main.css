@@ -2767,18 +2767,14 @@ body.portlet {
 .fa-plus-square-o:before {
   content: "\f196"; }
 
-/*
+html, body {
+  font-family: 'Source Sans Pro', sans-serif !important; }
 
-@import url(AdminLTE.css);
-*/
 /*
 .custom-logo{display:block;}
 */
 .logo {
   display: block; }
-
-body {
-  font-family: 'Open Sans', Arial, sans-serif; }
 
 body > .header {
   position: relative;
@@ -3802,66 +3798,6 @@ textarea
 {-moz-box-sizing:content-box;
     -box-sizing: content-box;
     -webkit-box-sizing:content-box;}*/
-.dropdown-large {
-  position: static !important; }
-
-.dropdown-menu-large {
-  margin-left: 16px;
-  margin-right: 16px;
-  padding: 20px 0px; }
-
-.dropdown-menu-large > li > ul {
-  padding: 0;
-  margin: 0; }
-
-.dropdown-menu-large > li > ul > li {
-  list-style: none; }
-
-.dropdown-menu-large > li > ul > li > a {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: normal;
-  line-height: 1.428571429;
-  color: #333333;
-  white-space: normal; }
-
-.dropdown-menu-large > li ul > li > a:hover,
-.dropdown-menu-large > li ul > li > a:focus {
-  text-decoration: none;
-  color: #262626;
-  background-color: #f5f5f5; }
-
-.dropdown-menu-large .disabled > a,
-.dropdown-menu-large .disabled > a:hover,
-.dropdown-menu-large .disabled > a:focus {
-  color: #999999; }
-
-.dropdown-menu-large .disabled > a:hover,
-.dropdown-menu-large .disabled > a:focus {
-  text-decoration: none;
-  background-color: transparent;
-  background-image: none;
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  cursor: not-allowed; }
-
-.dropdown-menu-large .dropdown-header {
-  color: #428bca;
-  font-size: 18px; }
-
-@media (max-width: 768px) {
-  .dropdown-menu-large {
-    margin-left: 0;
-    margin-right: 0; }
-
-  .dropdown-menu-large > li {
-    margin-bottom: 30px; }
-
-  .dropdown-menu-large > li:last-child {
-    margin-bottom: 0; }
-
-  .dropdown-menu-large .dropdown-header {
-    padding: 3px 15px !important; } }
 .dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count {
   margin: 0px !important; }
 
@@ -3999,6 +3935,19 @@ body {
   border-right: 1px solid #CCCCCC;
   border-top: 1px solid #CCCCCC;
   padding: 5px; }
+
+/* overwrite */
+.aui h1 {
+  font-size: 30px; }
+
+.aui h2 {
+  font-size: 25px; }
+
+.aui h3 {
+  font-size: 20px; }
+
+.aui h4 {
+  font-size: 16px; }
 
 .purple .aui header .navbar-inner {
   background-color: #732C7B;

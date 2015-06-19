@@ -1,0 +1,98 @@
+.aui body.ocean
+{
+	color: #0869ab;
+	background-color:#e4f1fc;
+  	
+}
+
+.ocean .content
+{
+	
+}
+.aui .ocean a {
+    color: #02223f;
+    text-decoration: none;
+}
+.aui .ocean .navbar-inner {
+ background-color: #033d71;
+    border: 1px solid #02223f;
+    background-image:none;
+    }
+
+.aui .ocean .navbar .nav > .active > a, 
+.ocean .navbar  .nav > .active > a:hover, 
+.ocean .navbar .nav > .active > a:focus {
+    background-color: #02223f;
+    
+    color: #fff;
+    
+}
+.aui .ocean .navbar .nav > li > a:hover
+{
+	color:#fff;
+}
+
+.aui .ocean .navbar .nav > li > a {
+    color:#62a1dd;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+.aui .ocean .navbar .nav li.dropdown.open > .dropdown-toggle, 
+.ocean .navbar .nav li.dropdown.active > .dropdown-toggle, 
+.ocean .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color: #1c7cc2;
+    color: #fff;
+}
+.ocean .navbar .navbar-nav > .open > a, 
+.ocean .navbar .navbar-nav > .open > a:hover, 
+.ocean .navbar .navbar-nav > .open > a:focus {
+    background-color: #1c7cc2;
+    color: #ffffff;
+}
+.ocean .dropdown-menu > li > a {
+    color: #1c7cc2;
+    
+}
+.ocean .dropdown-menu > li > a:hover {
+    color: #fff;
+    background-color:#1c7cc2;
+    background-image:none;
+    
+}
+
+.aui .ocean .nav-list > .active > a, 
+.aui .ocean .nav-list > .active > a:hover, 
+.aui .ocean .nav-list > .active > a:focus {
+    background-color: #1c7cc2;
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+.ocean #portal-search input[type="text"] {
+    /*background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+    
+    box-shadow: 0 1px 0 rgba(22, 132, 194, 0.1), 0 1px 7px 0 rgba(69, 174, 234, 0.8) inset;
+    */
+    border: 0 none;
+    
+}
+
+.aui .ocean .portlet-topper {
+    color:white;
+    background-color: #1c7cc2;
+    background-image:none !important;
+
+    padding: 0;
+}
+.aui .ocean .portlet-content, 
+.aui .ocean .portlet-minimized .portlet-content-container {
+    
+    background-color: #fff;
+    border-color: #a1cdf5;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 12px 10px 10px;
+}
+.ocean footer {
+	background-color:#02223f;
+	color:#fff;
+}

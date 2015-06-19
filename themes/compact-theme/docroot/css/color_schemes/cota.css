@@ -1,0 +1,106 @@
+.aui body.cota
+{
+	color: #97708a;
+	background-color:#eee6d9;
+  	
+}
+
+.cota .content
+{
+	
+}
+.aui .cota a {
+    color: #422c3e;
+    text-decoration: none;
+}
+.aui .cota .navbar-inner {
+ background-color: #422c3e;
+    border: 1px solid #392635;
+    background-image:none;
+    }
+
+.aui .cota .navbar .nav > .active > a, 
+.cota .navbar  .nav > .active > a:hover, 
+.cota .navbar .nav > .active > a:focus {
+    background-color: #392635;
+    
+    color: #fff;
+    
+}
+.aui .cota .navbar .nav > li > a:hover
+{
+	color:#fff;
+}
+
+.aui .cota .navbar .nav > li > a {
+    color:#e2ab79;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+.aui .cota .navbar .nav li.dropdown.open > .dropdown-toggle, 
+.cota .navbar .nav li.dropdown.active > .dropdown-toggle, 
+.cota .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color: #392635;
+    color: #fff;
+}
+.cota .navbar .navbar-nav > .open > a, 
+.cota .navbar .navbar-nav > .open > a:hover, 
+.cota .navbar .navbar-nav > .open > a:focus {
+    background-color: #392635;
+    color: #ffffff;
+}
+.cota .dropdown-menu > li > a {
+    color: #97708a;
+    
+}
+.cota .dropdown-menu > li > a:hover {
+    color: #fff;
+    background-color:#ab6361;
+    background-image:none;
+    
+}
+
+.aui .cota .nav-list > .active > a, 
+.aui .cota .nav-list > .active > a:hover, 
+.aui .cota .nav-list > .active > a:focus {
+    background-color: #ab6361;
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+.cota #portal-search input[type="text"] {
+    /*background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+    
+    box-shadow: 0 1px 0 rgba(22, 132, 194, 0.1), 0 1px 7px 0 rgba(69, 174, 234, 0.8) inset;
+    */
+    border: 0 none;
+    
+}
+
+.aui .cota .portlet-topper {
+    color:white;
+    background-color: #ab6361;
+    background-image:none !important;
+    /*
+    background-image: -moz-linear-gradient(top, #ab6361, #ab6361);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ab6361), to(#ab6361));
+    background-image: -webkit-linear-gradient(top, #ab6361, #ab6361);
+    background-image: -o-linear-gradient(top, #ab6361, #ab6361);
+    background-image: linear-gradient(to bottom, #ab6361, #ab6361);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ab6361', endColorstr='#ab6361', GradientType=0); 
+ */
+    padding: 0;
+}
+.aui .cota .portlet-content, 
+.aui .cota .portlet-minimized .portlet-content-container {
+    
+    background-color: #fff;
+    border-color: #ab6361;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 12px 10px 10px;
+}
+.cota footer {
+	background-color:#392635;
+	color:#fff;
+}

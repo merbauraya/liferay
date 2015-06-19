@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.idetronic.ruangj.service.ItemLocalService" class="com.idetronic.ruangj.service.impl.ItemLocalServiceImpl" />
+	<bean id="com.idetronic.ruangj.service.persistence.ItemPersistence" class="com.idetronic.ruangj.service.persistence.ItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.ruangj.service.ItemFileEntryLocalService" class="com.idetronic.ruangj.service.impl.ItemFileEntryLocalServiceImpl" />
+	<bean id="com.idetronic.ruangj.service.ItemFileEntryService" class="com.idetronic.ruangj.service.impl.ItemFileEntryServiceImpl" />
+	<bean id="com.idetronic.ruangj.service.persistence.ItemFileEntryPersistence" class="com.idetronic.ruangj.service.persistence.ItemFileEntryPersistenceImpl" parent="basePersistence" />
+</beans>

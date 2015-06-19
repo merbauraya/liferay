@@ -17,7 +17,9 @@ background-color: #2773ae;}
     background-repeat: repeat-x;
     border: 1px solid #1990d5;}
 
-.aui .blue .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+.aui .blue .navbar .nav > .active > a, 
+.blue .navbar .nav > .active > a:hover, 
+.blue .navbar .nav > .active > a:focus {
     background-color: #1684c2;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125) inset;
     color: #fff;
@@ -27,7 +29,9 @@ background-color: #2773ae;}
     color:#fff;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
-.aui .blue .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+.aui .blue .navbar .nav li.dropdown.open > .dropdown-toggle, 
+.blue .navbar .nav li.dropdown.active > .dropdown-toggle, 
+.blue .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: #1684c2;
     color: #fff;
 }
@@ -54,7 +58,7 @@ background-color: #2773ae;}
  
     padding: 0;
 }
-.aui .portlet-content, .aui .portlet-minimized .portlet-content-container {
+.aui .blue .portlet-content, .aui .portlet-minimized .portlet-content-container {
     
     background-color: #fff;
     border-color: #cccccc;

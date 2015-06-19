@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<!-- Get all metadata for a given item -->
+	<sql id="com.idetronic.subur.service.persistence.MetadataPropertyValueFinderImpl.getAuthor">
+		select * from subur_MetadataPropertyValue a,subur_MetadataProperty b
+		where a.itemId = ?
+		and a.propertyId = b.metadataPropertyId
+		and b.element = 'contributor'
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.MetadataPropertyValueFinderImpl.getAdditionalMetadata">
+		SELECT 
+		  subur_metadataproperty.metadatapropertyid, 
+		  subur_metadatapropertyvalue.itemid, 
+		  subur_metadataproperty.scope, 
+		  subur_metadataproperty.element,
+		  subur_metadatapropertyvalue.textvalue
+		  
+		FROM 
+		  public.subur_metadataproperty
+		left outer join subur_metadatapropertyvalue on
+			subur_metadataproperty.metadatapropertyid = subur_metadatapropertyvalue.propertyid
+			and itemid = ?
+		where scope is not null
+		and scope !='author'
+		order by metadatapropertyid
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.ItemItemTypeFinderImpl.getItemType">
+	select a.*,b.itemid from subur_itemtype a
+	left outer join subur_itemitemtype b
+		on a.itemtypeid = b.itemtypeid
+		and b.itemid = ?
+	
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getItemType">
+		select * from subur_ItemItemType a, subur_ItemType b
+		where a.itemId = ?
+		and a.itemTypeId = b.itemTypeId
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getItemDetails">
+		SELECT 
+		  * 
+		FROM 
+		  subur_item, 
+		  subur_metadatapropertyvalue
+		WHERE 
+		  subur_item.itemid = subur_metadatapropertyvalue.itemid
+		  and subur_item.itemid=?
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getAuthor">
+		select * from subur_metadataPropertyValue
+		where itemId = ?
+		and propertyId = 3
+		order by 1
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getItemAuthors">
+		select * from subur_itemauthor , subur_author 
+			where subur_itemauthor.authorid = subur_author.authorid
+			and subur_itemauthor.itemid = ?
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getFileEntries">
+		SELECT 
+		  * 
+		FROM 
+		  subur_fileentrytype, 
+		  subur_itemfileentry
+		WHERE 
+		  subur_fileentrytype.typeid = subur_itemfileentry.entrytype
+		  and subur_itemfileentry.itemid=?
+	
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getItemsBySubject">
+		SELECT 
+		  subur_item.itemid, 
+		  subur_item.companyid, 
+		  subur_item.groupid, 
+		  subur_item.userid, 
+		  subur_item.username, 
+		  subur_item.createdate, 
+		  subur_item.modifieddate, 
+		  subur_item.title, 
+		  subur_item.itemabstract, 
+		  subur_item.status
+		  
+		FROM 
+		  public.subur_itemsubject, 
+		  public.subur_item
+		WHERE 
+		  subur_item.itemid = subur_itemsubject.itemid
+		  and subur_itemsubject.subjectid = ?
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.itemCountSubjectByItemType">
+	SELECT subur_itemtype.itemtypeid, 
+       subur_itemtype.itemtypename, 
+       Count(*) AS itemcount 
+	FROM   subur_itemsubject, 
+	       subur_item, 
+	       subur_subjecttree, 
+	       subur_itemtype, 
+	       subur_itemitemtype 
+	WHERE  subur_item.itemid = subur_itemsubject.itemid 
+	       AND subur_item.itemid = subur_itemitemtype.itemid 
+	       AND subur_subjecttree.subjectid = subur_itemsubject.subjectid 
+	       AND subur_itemtype.itemtypeid = subur_itemitemtype.itemtypeid 
+	       AND subur_itemsubject.subjectid = ?
+	GROUP  BY subur_itemtype.itemtypeid, 
+	          subur_itemtype.itemtypename 
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.itemCountSubjectByAuthor">
+		select * from 
+			subur_MetadataValueView
+  		where subjectId = ?
+  		and propertyId = ?
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.AuthorFinderImpl.findByFirstName">
+	
+		SELECT * FROM
+			Subur_Author
+		WHERE
+			[$WHERE$]
+			(lower(Subur_Author.firstName) LIKE ? )
+		ORDER BY 
+			Subur_Author.firstName ASC
+	
+	
+	</sql>
+
+</custom-sql>

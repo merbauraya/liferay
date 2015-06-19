@@ -1,10 +1,17 @@
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic);
+
+@import url(http://fonts.googleapis.com/css?family=Kaushan+Script);
+html,body
+{
+	font-family: 'Source Sans Pro', sans-serif !important;
+}
+
 /*
 .custom-logo{display:block;}
 */
 .logo {display:block;}
-body {
-	font-family:'Open Sans', Arial, sans-serif;
-}
+
 body > .header {
     position: relative;
     z-index: 100;

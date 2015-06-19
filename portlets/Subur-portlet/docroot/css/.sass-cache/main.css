@@ -1,0 +1,17 @@
+.itemView th {
+  padding: 5px;
+  white-space: nowrap;
+  padding: 0.3em 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #f3f3f3; }
+
+.itemView td {
+  padding: 0.3em 0 0.3em 1em;
+  border-bottom: 1px solid #f3f3f3; }
+
+.subject-name-anchor {
+  font-size: 130%;
+  margin-top: 5px;
+  font-weight: bold; }
+

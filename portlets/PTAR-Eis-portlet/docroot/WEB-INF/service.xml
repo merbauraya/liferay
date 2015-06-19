@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.idetronic.ptareis">
+	<author>Mazlan Mat</author>
+	<namespace>eis</namespace>
+
+	<entity local-service="true" remote-service="true" name="UserLibrary" table="user_library" human-name="User library association">
+
+		<!-- PK fields -->
+
+		<column name="username" type="String" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="libraryid" type="long" primary="true"/>
+
+		<!-- Other fields -->
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="field1" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Field2" return-type="Collection">
+			<finder-column name="field2" />
+		</finder>
+	</entity>
+    <entity name="library" local-service="true">
+        <column name="libraryid" type="long" primary="true"></column>
+        <column name="libraryname" type="String"></column>
+        <column name="campusid" type="int"></column>
+        <column name="city" type="String"></column>
+        <column name="state" type="String"></column>
+    </entity>
+</service-builder>

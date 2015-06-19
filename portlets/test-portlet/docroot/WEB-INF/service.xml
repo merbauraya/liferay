@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.idetronic.ruangj">
+	<author>Mazlan Mat</author>
+	<namespace>ruangj</namespace>
+
+	<entity name="Item" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="itemId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+        <column name="title" type="String"></column>
+		<column name="userId" type="long" />
+
+		<column name="companyId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="status" type="int" />
+	
+
+		<!-- Order -->
+
+		
+
+		<!-- Finder methods -->
+        <column name="itemTypeId" type="long"></column>
+
+		<finder name="ItemType" return-type="Collection">
+			<finder-column name="itemType" />
+		</finder>
+		<finder name="Status" return-type="Collection">
+			<finder-column name="status" />
+		</finder>
+	</entity>
+    <entity name="ItemFileEntry" local-service="true">
+        <column name="itemEntryId" type="long" primary="true"></column>
+        <column name="itemId" type="long"></column>
+        <column name="fileEntryId" type="long"></column>
+        <column name="fileType" type="String"></column>
+        <column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+		<finder name="ItemId" return-type="Collection">
+			<finder-column name="itemId" />
+		</finder>
+    </entity>
+    <entity name="ItemType" human-name="Item Type" remote-service="false" local-service="true">
+        <column name="itemTypeId" type="long" primary="true"></column>
+        <column name="itemTypeName" type="String"></column>
+    </entity>
+    <entity name="Subject" local-service="true" human-name="Item Subject" remote-service="false">
+        <column name="subjectId" type="long" primary="true"></column>
+        <column name="subjectName" type="String"></column>
+    </entity>
+    <entity name="ItemSubject" local-service="true" remote-service="false">
+        <column name="itemId" type="long" primary="true"></column>
+        <column name="subjectId" type="long" primary="true"></column>
+    </entity>
+</service-builder>

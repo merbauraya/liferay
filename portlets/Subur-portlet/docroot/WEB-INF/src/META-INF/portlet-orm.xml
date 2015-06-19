@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.idetronic.subur.model.impl.AuthorModelImpl">
+		<attributes>
+			<id name="authorId" />
+			<basic name="groupId" />
+			<basic name="idType" />
+			<basic name="remoteId" />
+			<basic name="firstName" />
+			<basic name="lastName" />
+			<basic name="userId" />
+			<basic name="metadata" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.DivisionModelImpl">
+		<attributes>
+			<id name="divisionId" />
+			<basic name="parentId" />
+			<basic name="divisionName" />
+			<basic name="depositable" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.FileEntryTypeModelImpl">
+		<attributes>
+			<id name="typeId" />
+			<basic name="typeName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ItemAuthorModelImpl">
+		<id-class class="com.idetronic.subur.service.persistence.ItemAuthorPK" />
+		<attributes>
+			<id name="itemId" />
+			<id name="authorId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ItemDivisionModelImpl">
+		<id-class class="com.idetronic.subur.service.persistence.ItemDivisionPK" />
+		<attributes>
+			<id name="itemId" />
+			<id name="divisionId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ItemFileEntryModelImpl">
+		<id-class class="com.idetronic.subur.service.persistence.ItemFileEntryPK" />
+		<attributes>
+			<id name="itemId" />
+			<id name="fileEntryId" />
+			<basic name="entryType" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ItemItemTypeModelImpl">
+		<id-class class="com.idetronic.subur.service.persistence.ItemItemTypePK" />
+		<attributes>
+			<id name="itemId" />
+			<id name="itemTypeId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ItemSubjectModelImpl">
+		<id-class class="com.idetronic.subur.service.persistence.ItemSubjectPK" />
+		<attributes>
+			<id name="itemId" />
+			<id name="subjectId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ItemTypeModelImpl">
+		<attributes>
+			<id name="ItemTypeId" />
+			<basic name="ItemTypeName" />
+			<basic name="itemCount" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ItemTypeTemplateModelImpl">
+		<id-class class="com.idetronic.subur.service.persistence.ItemTypeTemplatePK" />
+		<attributes>
+			<id name="itemTypeId" />
+			<id name="metadataPropertyId" />
+			<basic name="required" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.MetadataPropertyModelImpl">
+		<attributes>
+			<id name="metadataPropertyId" />
+			<basic name="metadataSchemaId" />
+			<basic name="element" />
+			<basic name="scope" />
+			<basic name="note" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.MetadataPropertyValueModelImpl">
+		<attributes>
+			<id name="metadataPropertyValueId" />
+			<basic name="itemId" />
+			<basic name="propertyId" />
+			<basic name="textValue" />
+			<basic name="itemCount" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.MetadataSchemaModelImpl">
+		<attributes>
+			<id name="metadataSchemaId" />
+			<basic name="metadataName" />
+			<basic name="nameSpace" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.SubjectModelImpl">
+		<attributes>
+			<id name="subjectId" />
+			<basic name="parentId" />
+			<basic name="subjectName" />
+			<basic name="lft" />
+			<basic name="rgt" />
+			<basic name="depositable" />
+			<basic name="itemCount" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.SuburItemModelImpl">
+		<attributes>
+			<id name="itemId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="title" />
+			<basic name="itemAbstract" />
+			<basic name="status" />
+			<basic name="Uuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.idetronic.subur.model.impl.AuthorImpl" name="Author">
+		<table name="subur_Author" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.DivisionImpl" name="Division">
+		<table name="subur_Division" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.FileEntryTypeImpl" name="FileEntryType">
+		<table name="subur_FileEntryType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ItemAuthorImpl" name="ItemAuthor">
+		<table name="subur_ItemAuthor" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ItemDivisionImpl" name="ItemDivision">
+		<table name="subur_ItemDivision" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ItemFileEntryImpl" name="ItemFileEntry">
+		<table name="subur_ItemFileEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ItemItemTypeImpl" name="ItemItemType">
+		<table name="subur_ItemItemType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ItemSubjectImpl" name="ItemSubject">
+		<table name="subur_ItemSubject" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ItemTypeImpl" name="ItemType">
+		<table name="subur_ItemType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ItemTypeTemplateImpl" name="ItemTypeTemplate">
+		<table name="subur_ItemTypeTemplate" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.MetadataPropertyImpl" name="MetadataProperty">
+		<table name="subur_MetadataProperty" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.MetadataPropertyValueImpl" name="MetadataPropertyValue">
+		<table name="subur_MetadataPropertyValue" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.MetadataSchemaImpl" name="MetadataSchema">
+		<table name="subur_MetadataSchema" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.SubjectImpl" name="Subject">
+		<table name="subur_Subject" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.SuburItemImpl" name="SuburItem">
+		<table name="subur_item" />
+		<attributes />
+	</entity>
+</entity-mappings>

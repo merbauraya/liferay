@@ -1,11 +1,11 @@
+html, body {
+  font-family: 'Source Sans Pro', sans-serif !important; }
+
 /*
 .custom-logo{display:block;}
 */
 .logo {
   display: block; }
-
-body {
-  font-family: 'Open Sans', Arial, sans-serif; }
 
 body > .header {
   position: relative;

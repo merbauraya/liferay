@@ -28,6 +28,6 @@ box-shadow:none;
     padding: 12px 10px 10px;
 }
 .default footer
-{ background: none repeat scroll 0 0 rgba(44, 37, 8, 0.17);
-	color:inherit;
+{ background-color:#333333;
+	color:#fff;
 }

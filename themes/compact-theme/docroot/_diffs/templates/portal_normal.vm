@@ -74,7 +74,7 @@ $theme.include($body_top_include)
         
  
 	<footer id="footer" class="ftr-sect row">
-		<div class="footer-nav">
+		<div class="footer-nav container">
 	
 			#parse ("$full_templates_path/footer-nav.vm")
 	

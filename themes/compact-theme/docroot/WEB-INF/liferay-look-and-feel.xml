@@ -9,14 +9,22 @@
 		<template-extension>vm</template-extension>
 	
 	
-	<color-scheme id="01" name="Default">
+		<color-scheme id="01" name="Default">
 			<css-class>default</css-class>
 			<color-scheme-images-path>${images-path}/color_schemes/${css-class}</color-scheme-images-path>
 		</color-scheme>
 	
-	
-	<color-scheme id="02" name="Blue">
+		<color-scheme id="02" name="Blue">
 			<css-class>blue</css-class>
+			<color-scheme-images-path>${images-path}/color_schemes/${css-class}</color-scheme-images-path>
+		</color-scheme>
+	
+		<color-scheme id="03" name="TerraCota">
+			<css-class>cota</css-class>
+			<color-scheme-images-path>${images-path}/color_schemes/${css-class}</color-scheme-images-path>
+		</color-scheme>
+		<color-scheme id="04" name="Ocean">
+			<css-class>ocean</css-class>
 			<color-scheme-images-path>${images-path}/color_schemes/${css-class}</color-scheme-images-path>
 		</color-scheme>
 	</theme>

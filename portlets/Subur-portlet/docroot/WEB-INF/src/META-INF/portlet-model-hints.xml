@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<hint-collection name="DESCRIPTION-TEXTAREA">
+		<hint name="display-height">105</hint>
+		<hint name="display-width">500</hint>
+		<hint name="max-length">4000</hint>
+	</hint-collection>
+	<hint-collection name="CLOB">
+		<hint name="max-length">2000000</hint>
+		<hint name="display-width">500</hint>
+		<hint name="display-height">105</hint>
+	</hint-collection>
+	<hint-collection name="TEXT-LONG">
+		<hint name="display-width">200</hint>
+	</hint-collection>
+	<model name="com.idetronic.subur.model.Author">
+		<field name="authorId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="idType" type="int" />
+		<field name="remoteId" type="String" />
+		<field name="firstName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="userId" type="int" />
+		<field name="metadata" type="String" />
+	</model>
+	<model name="com.idetronic.subur.model.Division">
+		<field name="divisionId" type="long" />
+		<field name="parentId" type="long" />
+		<field name="divisionName" type="String" />
+		<field name="depositable" type="boolean" />
+	</model>
+	<model name="com.idetronic.subur.model.FileEntryType">
+		<field name="typeId" type="long" />
+		<field name="typeName" type="String" />
+	</model>
+	<model name="com.idetronic.subur.model.ItemAuthor">
+		<field name="itemId" type="long" />
+		<field name="authorId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.ItemDivision">
+		<field name="itemId" type="long" />
+		<field name="divisionId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.ItemFileEntry">
+		<field name="itemId" type="long" />
+		<field name="fileEntryId" type="long" />
+		<field name="entryType" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.ItemItemType">
+		<field name="itemId" type="long" />
+		<field name="itemTypeId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.ItemSubject">
+		<field name="itemId" type="long" />
+		<field name="subjectId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.ItemType">
+		<field name="ItemTypeId" type="long" />
+		<field name="ItemTypeName" type="String" />
+		<field name="itemCount" type="int" />
+	</model>
+	<model name="com.idetronic.subur.model.ItemTypeTemplate">
+		<field name="itemTypeId" type="long" />
+		<field name="metadataPropertyId" type="long" />
+		<field name="required" type="boolean" />
+	</model>
+	<model name="com.idetronic.subur.model.MetadataProperty">
+		<field name="metadataPropertyId" type="long" />
+		<field name="metadataSchemaId" type="long" />
+		<field name="element" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="scope" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="note" type="String">
+			<hint name="max-length">1024</hint>
+		</field>
+	</model>
+	<model name="com.idetronic.subur.model.MetadataPropertyValue">
+		<field name="metadataPropertyValueId" type="long" />
+		<field name="itemId" type="long" />
+		<field name="propertyId" type="long" />
+		<field name="textValue" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="itemCount" type="int" />
+	</model>
+	<model name="com.idetronic.subur.model.MetadataSchema">
+		<field name="metadataSchemaId" type="long" />
+		<field name="metadataName" type="String">
+			<hint name="max-length">1024</hint>
+		</field>
+		<field name="nameSpace" type="String" />
+	</model>
+	<model name="com.idetronic.subur.model.Subject">
+		<field name="subjectId" type="long" />
+		<field name="parentId" type="long" />
+		<field name="subjectName" type="String" />
+		<field name="lft" type="int" />
+		<field name="rgt" type="int" />
+		<field name="depositable" type="boolean" />
+		<field name="itemCount" type="int" />
+	</model>
+	<model name="com.idetronic.subur.model.SuburItem">
+		<field name="itemId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="title" type="String">
+			<hint name="max-length">255</hint>
+			<hint name="display-width">500</hint>
+			<hint-collection name="TEXT-LONG" />
+		</field>
+		<field name="itemAbstract" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="status" type="int" />
+		<field name="Uuid" type="String" />
+	</model>
+</model-hints>

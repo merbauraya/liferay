@@ -1,3 +1,6 @@
+.aui{
+	background-color:inherit;
+}
 .aui .navbar-inner {
 border-radius:0;
 }
@@ -10,6 +13,11 @@ border-radius:0;
 }
 
 /* overwrite */
+.aui h1{font-size:30px;}
+.aui h2{font-size:25px;}
+.aui h3{font-size:20px;}
+.aui h4{font-size:16px;}
+
 .dockbar-user-notifications .user-notifications-count, .notifications-portlet .user-notifications-count
 {display:inline-block;
 padding: 0 6px;
@@ -66,3 +74,12 @@ margin: 0;}
 /* end overwrite */
 @import url(color_schemes/default.css);
 @import url(color_schemes/blue.css);
+@import url(color_schemes/cota.css);
+@import url(color_schemes/ocean.css);
+/* handle popup and dialog */
+.dialog-iframe-root-node
+{background-color:#fff;}
+body.portal-popup 
+{
+	background-color:#fff !important;
+}

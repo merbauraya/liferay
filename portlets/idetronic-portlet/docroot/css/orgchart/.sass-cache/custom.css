@@ -4,6 +4,9 @@
   margin: 10px;
   padding: 10px; }
 
+#upload-chart li a {
+  fontsize: 110%; }
+
 #show-list {
   cursor: pointer; }
 
@@ -129,5 +132,9 @@
   font-size: 12px !important; }
 
 #upload-chart li {
-  line-height: 20px !important; }
+  line-height: 20px !important;
+  background: linear-gradient(to bottom, #4e525b 0%, #393d44 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+  color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 3px; }
 
