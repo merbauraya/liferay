@@ -16,21 +16,15 @@ package com.idetronic.subur.service.messaging;
 
 import com.idetronic.subur.service.AuthorLocalServiceUtil;
 import com.idetronic.subur.service.ClpSerializer;
-import com.idetronic.subur.service.DivisionLocalServiceUtil;
-import com.idetronic.subur.service.FileEntryTypeLocalServiceUtil;
 import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
-import com.idetronic.subur.service.ItemDivisionLocalServiceUtil;
 import com.idetronic.subur.service.ItemFileEntryLocalServiceUtil;
 import com.idetronic.subur.service.ItemFileEntryServiceUtil;
 import com.idetronic.subur.service.ItemItemTypeLocalServiceUtil;
-import com.idetronic.subur.service.ItemSubjectLocalServiceUtil;
 import com.idetronic.subur.service.ItemTypeLocalServiceUtil;
 import com.idetronic.subur.service.ItemTypeTemplateLocalServiceUtil;
 import com.idetronic.subur.service.MetadataPropertyLocalServiceUtil;
 import com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil;
 import com.idetronic.subur.service.MetadataSchemaLocalServiceUtil;
-import com.idetronic.subur.service.SubjectLocalServiceUtil;
-import com.idetronic.subur.service.SubjectServiceUtil;
 import com.idetronic.subur.service.SuburItemLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -53,20 +47,12 @@ public class ClpMessageListener extends BaseMessageListener {
 				servletContextName.equals(getServletContextName())) {
 			AuthorLocalServiceUtil.clearService();
 
-			DivisionLocalServiceUtil.clearService();
-
-			FileEntryTypeLocalServiceUtil.clearService();
-
 			ItemAuthorLocalServiceUtil.clearService();
-
-			ItemDivisionLocalServiceUtil.clearService();
 
 			ItemFileEntryLocalServiceUtil.clearService();
 
 			ItemFileEntryServiceUtil.clearService();
 			ItemItemTypeLocalServiceUtil.clearService();
-
-			ItemSubjectLocalServiceUtil.clearService();
 
 			ItemTypeLocalServiceUtil.clearService();
 
@@ -78,9 +64,6 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			MetadataSchemaLocalServiceUtil.clearService();
 
-			SubjectLocalServiceUtil.clearService();
-
-			SubjectServiceUtil.clearService();
 			SuburItemLocalServiceUtil.clearService();
 		}
 	}

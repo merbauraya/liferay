@@ -259,18 +259,43 @@ public interface SuburItemLocalService extends BaseLocalService,
 	public com.idetronic.subur.model.SuburItem updateSuburItem(
 		com.idetronic.subur.model.SuburItem suburItem, long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List getItemTypes(long itemId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.idetronic.subur.model.SuburItem> getDraftItems(
-		int start, int end)
+	public java.util.List<com.idetronic.subur.model.SuburItem> getSuburItems(
+		int start, int end, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Publish a subur item
+	*
+	* @param itemId subur Item Id
+	* @return
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	public com.idetronic.subur.model.SuburItem publishItem(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Withdraw item from public viewing
+	*
+	* @param itemId
+	* @return
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	public com.idetronic.subur.model.SuburItem withDrawItem(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDraftItemCount()
+	public int getItemCount(int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

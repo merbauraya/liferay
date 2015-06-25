@@ -24,23 +24,9 @@
 		<field name="userId" type="int" />
 		<field name="metadata" type="String" />
 	</model>
-	<model name="com.idetronic.subur.model.Division">
-		<field name="divisionId" type="long" />
-		<field name="parentId" type="long" />
-		<field name="divisionName" type="String" />
-		<field name="depositable" type="boolean" />
-	</model>
-	<model name="com.idetronic.subur.model.FileEntryType">
-		<field name="typeId" type="long" />
-		<field name="typeName" type="String" />
-	</model>
 	<model name="com.idetronic.subur.model.ItemAuthor">
 		<field name="itemId" type="long" />
 		<field name="authorId" type="long" />
-	</model>
-	<model name="com.idetronic.subur.model.ItemDivision">
-		<field name="itemId" type="long" />
-		<field name="divisionId" type="long" />
 	</model>
 	<model name="com.idetronic.subur.model.ItemFileEntry">
 		<field name="itemId" type="long" />
@@ -50,10 +36,6 @@
 	<model name="com.idetronic.subur.model.ItemItemType">
 		<field name="itemId" type="long" />
 		<field name="itemTypeId" type="long" />
-	</model>
-	<model name="com.idetronic.subur.model.ItemSubject">
-		<field name="itemId" type="long" />
-		<field name="subjectId" type="long" />
 	</model>
 	<model name="com.idetronic.subur.model.ItemType">
 		<field name="ItemTypeId" type="long" />
@@ -94,15 +76,6 @@
 		</field>
 		<field name="nameSpace" type="String" />
 	</model>
-	<model name="com.idetronic.subur.model.Subject">
-		<field name="subjectId" type="long" />
-		<field name="parentId" type="long" />
-		<field name="subjectName" type="String" />
-		<field name="lft" type="int" />
-		<field name="rgt" type="int" />
-		<field name="depositable" type="boolean" />
-		<field name="itemCount" type="int" />
-	</model>
 	<model name="com.idetronic.subur.model.SuburItem">
 		<field name="itemId" type="long" />
 		<field name="companyId" type="long" />
@@ -111,6 +84,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="publishedDate" type="Date" />
 		<field name="title" type="String">
 			<hint name="max-length">255</hint>
 			<hint name="display-width">500</hint>

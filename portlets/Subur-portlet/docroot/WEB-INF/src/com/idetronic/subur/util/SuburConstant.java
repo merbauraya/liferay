@@ -57,9 +57,17 @@ public class SuburConstant {
 	
 	
 	/* Subur Item Status */
-	public static int SUBUR_DRAFT_ITEM = 0;
+	public static int STATUS_DRAFT_ITEM = 0;
+	public static int STATUS_PUBLISHED_ITEM = 1;
+	public static int STATUS_WITHDRAWN_ITEM = 2;
+	public static int STATUS_ANY = -1;
 	
 	
+	/* Subur page */
+	public static String PAGE_UPDATE_ITEM = "/html/deposit.jsp";
+	public static String PAGE_NEW_ITEM = "/html/deposit/new.jsp";
+	public static String PAGE_ADMIN_ITEM = "/html/admin/subur/view.jsp";
+	public static String PAGE_ADMIN_AUTHOR = "/html/admin/author/view.jsp";
 	
 	/* webkeys
 	 * 
@@ -68,7 +76,8 @@ public class SuburConstant {
 	 public static final String TEMP_RANDOM_SUFFIX = "--tempRandomSuffix--";
 	
 	
-	
+	/* custom permission */
+	 public static final String PERMISSION_MANAGE_AUTHOR = "MANAGE_AUTHOR";
 	
 	
 	
@@ -101,10 +110,11 @@ public class SuburConstant {
 	/* Indexer Field Constant */
 	public static String FIELD_YEAR = "yearAdded";
 	public static String FIELD_MONTH = "monthAdded";
-	public static String FIELD_SUBJECT = "subject";
-	public static String FIELD_DIVISION = "division";
+	
 	public static String FIELD_AUTHOR = "author";
 	public static String FIELD_ITEM_TYPE="itemType";
+	public static String FIELD_AUTHOR_FIRST_NAME="authorFirstName";
+	public static String FIELD_AUTHOR_LAST_NAME = "authorLastName";
 	
 	
 	/* Serve Resource Request */
@@ -112,5 +122,11 @@ public class SuburConstant {
 	public static String RESOURCE_AUTHOR_LOOKUP="authorLookup";
 	public static String RESOURCE_ITEM_AUTHOR_LIST="itemAuthorList";
 	
+	/* view mode */
+	public static String VIEW_LIST = "view-title-list";
+	public static String VIEW_TABLE = "view-table-list";
+	public static String VIEW_ABSTRACT = "view-abstract-list";
 	
+	/* DOcument Library temp folder upload */
+	public static String TEMP_UPLOAD_FOLDER = "com.idetronic.subur.Subur.TEMP";
 }

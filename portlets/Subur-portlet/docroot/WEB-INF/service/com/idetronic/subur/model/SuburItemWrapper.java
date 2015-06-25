@@ -56,6 +56,7 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("publishedDate", getPublishedDate());
 		attributes.put("title", getTitle());
 		attributes.put("itemAbstract", getItemAbstract());
 		attributes.put("status", getStatus());
@@ -106,6 +107,12 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Date publishedDate = (Date)attributes.get("publishedDate");
+
+		if (publishedDate != null) {
+			setPublishedDate(publishedDate);
 		}
 
 		String title = (String)attributes.get("title");
@@ -313,6 +320,26 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_suburItem.setModifiedDate(modifiedDate);
+	}
+
+	/**
+	* Returns the published date of this subur item.
+	*
+	* @return the published date of this subur item
+	*/
+	@Override
+	public java.util.Date getPublishedDate() {
+		return _suburItem.getPublishedDate();
+	}
+
+	/**
+	* Sets the published date of this subur item.
+	*
+	* @param publishedDate the published date of this subur item
+	*/
+	@Override
+	public void setPublishedDate(java.util.Date publishedDate) {
+		_suburItem.setPublishedDate(publishedDate);
 	}
 
 	/**

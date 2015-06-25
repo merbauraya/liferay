@@ -190,6 +190,20 @@ public interface SuburItemModel extends BaseModel<SuburItem>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the published date of this subur item.
+	 *
+	 * @return the published date of this subur item
+	 */
+	public Date getPublishedDate();
+
+	/**
+	 * Sets the published date of this subur item.
+	 *
+	 * @param publishedDate the published date of this subur item
+	 */
+	public void setPublishedDate(Date publishedDate);
+
+	/**
 	 * Returns the title of this subur item.
 	 *
 	 * @return the title of this subur item

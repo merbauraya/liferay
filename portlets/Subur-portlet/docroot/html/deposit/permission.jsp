@@ -21,3 +21,23 @@
 	message="set-permission"	
 	label="<%=true %>"	
 />
+<aui:fieldset>
+	<aui:select size="1" multiple="<%=false %>" label="item-status" name="itemStatus">
+
+		<%
+			int itemStatus = item.getStatus();
+		%>
+		
+		<aui:option selected="<%=(itemStatus ==SuburConstant.STATUS_DRAFT_ITEM)  %>" value="<%= SuburConstant.STATUS_DRAFT_ITEM %>">
+			<liferay-ui:message key="status-draft" />
+		</aui:option>
+		<aui:option selected="<%=(itemStatus ==SuburConstant.STATUS_PUBLISHED_ITEM)  %>" value="<%= SuburConstant.STATUS_PUBLISHED_ITEM%>">
+			<liferay-ui:message key="status-published" />
+		</aui:option>
+		<aui:option selected="<%=(itemStatus ==SuburConstant.STATUS_WITHDRAWN_ITEM)  %>" value="<%= SuburConstant.STATUS_WITHDRAWN_ITEM%>">
+			<liferay-ui:message key="status-withdrawn" />
+		</aui:option>
+		
+</aui:select>
+	
+</aui:fieldset>

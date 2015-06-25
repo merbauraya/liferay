@@ -18,6 +18,7 @@
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
+		<column name="publishedDate" type="Date" />
 
 		<!-- Other fields -->
 
@@ -26,6 +27,7 @@
 		
 		<column name="status" type="int" />
 		<column name="Uuid" type="String" />
+		
 		
 		
 		
@@ -54,34 +56,7 @@
 			<finder-column name="itemId"></finder-column>
 		</finder>
     </entity>
-    <entity name="Subject" local-service="true">
-       <column name="subjectId" type="long" primary="true"></column>
-        <column name="parentId" type="long"></column>
-        <column name="subjectName" type="String"></column>
-        <column name="lft" type="int"></column>
-        <column name="rgt" type="int"></column>
-        <column name="depositable" type="boolean"></column>
-        <column name="itemCount" type="int"></column>
-       	
-       	<order by="asc">
-       		<order-column name="subjectName"/>
-       	</order> 	
-        
-        <finder name="depositable" return-type="Collection">
-        	<finder-column name="depositable"></finder-column>
-        </finder>
-    </entity>
-    <entity name="ItemSubject" local-service="true" remote-service="false">
-        <column name="itemId" type="long" primary="true"></column>
-        <column name="subjectId" type="long" primary="true"></column>
-        
-        <finder name="itemId" return-type="Collection">
-			<finder-column name="itemId"></finder-column>
-		</finder>
-		 <finder name="subjectId" return-type="Collection">
-			<finder-column name="subjectId"></finder-column>
-		</finder>
-    </entity>
+    
     <entity name="MetadataSchema" local-service="true" remote-service="false">
         <column name="metadataSchemaId" type="long" primary="true"></column>
         <column name="metadataName" type="String"></column>
@@ -126,29 +101,7 @@
 			<finder-column name="itemTypeId"></finder-column>
 		</finder>
     </entity>
-    <entity name="Division" local-service="true" remote-service="false">
-    	<column name="divisionId" type="long" primary="true"></column>
-    	<column name="parentId" type="long"></column>
-    	<column name="divisionName" type="String"></column>
-    	<column name="depositable" type="boolean"></column>
-    	<finder name="depositable" return-type="Collection">
-        	<finder-column name="depositable"></finder-column>
-        </finder>
-    </entity>
-    <entity name="ItemDivision" local-service="true" remote-service="false">
-    	<column name="itemId" type="long" primary="true"></column>
-    	<column name="divisionId" type="long" primary="true"></column>
-    	<finder name="itemId" return-type="Collection">
-			<finder-column name="itemId"></finder-column>
-		</finder>
-		<finder name="divisionId" return-type="Collection">
-			<finder-column name="divisionId"></finder-column>
-		</finder>
-    </entity>
-    <entity name="FileEntryType" local-service="true" remote-service="false">
-    	<column name="typeId" type="long" primary="true"></column>
-    	<column name="typeName" type="String"></column>
-    </entity>
+   
     <entity name="Author" local-service="true" remote-service="false">
     	<column name="authorId" type="long" primary="true"></column>
     	<column name="groupId" type="long" />

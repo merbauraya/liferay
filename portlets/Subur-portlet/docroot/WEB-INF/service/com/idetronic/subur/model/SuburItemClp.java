@@ -82,6 +82,7 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("publishedDate", getPublishedDate());
 		attributes.put("title", getTitle());
 		attributes.put("itemAbstract", getItemAbstract());
 		attributes.put("status", getStatus());
@@ -132,6 +133,12 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Date publishedDate = (Date)attributes.get("publishedDate");
+
+		if (publishedDate != null) {
+			setPublishedDate(publishedDate);
 		}
 
 		String title = (String)attributes.get("title");
@@ -331,6 +338,29 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 	}
 
 	@Override
+	public Date getPublishedDate() {
+		return _publishedDate;
+	}
+
+	@Override
+	public void setPublishedDate(Date publishedDate) {
+		_publishedDate = publishedDate;
+
+		if (_suburItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _suburItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPublishedDate", Date.class);
+
+				method.invoke(_suburItemRemoteModel, publishedDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getTitle() {
 		return _title;
 	}
@@ -498,6 +528,7 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setPublishedDate(getPublishedDate());
 		clone.setTitle(getTitle());
 		clone.setItemAbstract(getItemAbstract());
 		clone.setStatus(getStatus());
@@ -552,7 +583,7 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{itemId=");
 		sb.append(getItemId());
@@ -568,6 +599,8 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", publishedDate=");
+		sb.append(getPublishedDate());
 		sb.append(", title=");
 		sb.append(getTitle());
 		sb.append(", itemAbstract=");
@@ -583,7 +616,7 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.SuburItem");
@@ -618,6 +651,10 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>publishedDate</column-name><column-value><![CDATA[");
+		sb.append(getPublishedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
 		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
@@ -647,6 +684,7 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private Date _publishedDate;
 	private String _title;
 	private String _itemAbstract;
 	private int _status;

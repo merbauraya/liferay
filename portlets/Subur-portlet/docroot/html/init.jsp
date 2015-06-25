@@ -28,6 +28,7 @@
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
+
 <%@ page import="com.liferay.portal.NoSuchRoleException" %><%@
 page import="com.liferay.portal.kernel.dao.orm.QueryUtil" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
@@ -133,6 +134,15 @@ page import="com.liferay.portal.theme.ThemeDisplay" %>
 <%@ page import="com.liferay.portlet.asset.service.persistence.AssetCategoryUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
+<%@ page import="com.liferay.portal.kernel.util.ArrayUtil"%>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
+<%@ page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %> 
 
 <%@ page import="java.text.Format" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -158,6 +168,7 @@ page import="com.idetronic.subur.service.ItemTypeLocalServiceUtil" %><%@
 page import="com.idetronic.subur.service.SuburItemLocalServiceUtil" %><%@
 page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" %>
 <%@ page import="com.idetronic.subur.service.permission.SuburItemPermission" %>
+<%@ page import="com.idetronic.subur.service.permission.SuburPermission" %>
 <%@ page import="com.idetronic.subur.util.SuburConstant" %>
 <%@ page import="com.idetronic.subur.util.SuburUtil" %>
 <%@ page import="com.idetronic.subur.util.SuburFolderUtil" %>
@@ -199,15 +210,45 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
+<%@ page import="com.liferay.portlet.trash.util.TrashUtil" %>
+<%@ page import="com.liferay.portlet.assetpublisher.util.AssetPublisherUtil" %>
+<%@ page import="com.liferay.util.RSSUtil" %> 
+<%@ page import="com.idetronic.subur.search.SuburSearch" %>
+<%@ page import="com.idetronic.subur.search.SuburDisplayTerms" %>
+
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />
 
 <%
-WindowState windowState = liferayPortletRequest.getWindowState();
-String currentURL = PortalUtil.getCurrentURL(request);
-PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
-Format dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("dd MMM yyyy", locale, timeZone);
-Format timeFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("dd MMM yyyy hh:mm",locale, timeZone);
+	WindowState windowState = liferayPortletRequest.getWindowState();
+	String currentURL = PortalUtil.getCurrentURL(request);
+	PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
+	Format dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("dd MMM yyyy", locale, timeZone);
+	Format timeFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("dd MMM yyyy hh:mm",locale, timeZone);
+	
+	//read preferences
+	String itemToShow = GetterUtil.getString(portletPreferences.getValue("itemToShow", null), "latest");
+	String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", null), "list");
+	String orderByColumn1 = GetterUtil.getString(portletPreferences.getValue("orderByColumn1", "modifiedDate"));
+	String orderByColumn2 = GetterUtil.getString(portletPreferences.getValue("orderByColumn2", "title"));
+	String orderByType1 = GetterUtil.getString(portletPreferences.getValue("orderByType1", "DESC"));
+	String orderByType2 = GetterUtil.getString(portletPreferences.getValue("orderByType2", "ASC"));
+	int delta = GetterUtil.getInteger(portletPreferences.getValue("delta", null), SearchContainer.DEFAULT_DELTA);
+	String paginationType = GetterUtil.getString(portletPreferences.getValue("paginationType", "none"));
+	
+	//default
+	boolean showEditEntryPermissions = true;
+	boolean showSearch = true; 
+	
+	boolean useOrOperatorCategorySearch = GetterUtil.getBoolean(portletPreferences.getValue("useOrOperatorCategorySearch", Boolean.FALSE.toString()));
+	boolean useOrOperatorTagSearch = GetterUtil.getBoolean(portletPreferences.getValue("useOrOperatorTagSearch", Boolean.FALSE.toString()));
+	
+	boolean enableRSS = !PortalUtil.isRSSFeedsEnabled() ? false : GetterUtil.getBoolean(portletPreferences.getValue("enableRss", null));
+	int rssDelta = GetterUtil.getInteger(portletPreferences.getValue("rssDelta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+	String rssDisplayStyle = portletPreferences.getValue("rssDisplayStyle", RSSUtil.DISPLAY_STYLE_ABSTRACT);
+	String rssFeedType = portletPreferences.getValue("rssFeedType", RSSUtil.FEED_TYPE_DEFAULT);
+	String rssName = portletPreferences.getValue("rssName", portletDisplay.getTitle());
 
 %>

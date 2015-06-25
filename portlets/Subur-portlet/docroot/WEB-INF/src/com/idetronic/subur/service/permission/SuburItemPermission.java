@@ -28,4 +28,13 @@ public class SuburItemPermission {
 						SuburItem.class.getName(), item.getItemId(),
 						actionId);
 	}
+	public static boolean contains(PermissionChecker permissionChecker,
+			SuburItem suburItem, String actionId) throws PortalException,
+			SystemException {
+		
+		return permissionChecker
+				.hasPermission(suburItem.getGroupId(),
+						SuburItem.class.getName(), suburItem.getItemId(),
+						actionId);
+	}
 }

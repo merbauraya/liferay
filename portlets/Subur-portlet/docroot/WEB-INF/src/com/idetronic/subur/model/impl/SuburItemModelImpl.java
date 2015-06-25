@@ -69,12 +69,13 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "publishedDate", Types.TIMESTAMP },
 			{ "title", Types.VARCHAR },
 			{ "itemAbstract", Types.CLOB },
 			{ "status", Types.INTEGER },
 			{ "Uuid", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table subur_item (itemId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(255) null,itemAbstract TEXT null,status INTEGER,Uuid VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table subur_item (itemId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,publishedDate DATE null,title VARCHAR(255) null,itemAbstract TEXT null,status INTEGER,Uuid VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table subur_item";
 	public static final String ORDER_BY_JPQL = " ORDER BY suburItem.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY subur_item.createDate ASC";
@@ -140,6 +141,7 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("publishedDate", getPublishedDate());
 		attributes.put("title", getTitle());
 		attributes.put("itemAbstract", getItemAbstract());
 		attributes.put("status", getStatus());
@@ -190,6 +192,12 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Date publishedDate = (Date)attributes.get("publishedDate");
+
+		if (publishedDate != null) {
+			setPublishedDate(publishedDate);
 		}
 
 		String title = (String)attributes.get("title");
@@ -317,6 +325,16 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 	}
 
 	@Override
+	public Date getPublishedDate() {
+		return _publishedDate;
+	}
+
+	@Override
+	public void setPublishedDate(Date publishedDate) {
+		_publishedDate = publishedDate;
+	}
+
+	@Override
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -421,6 +439,7 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 		suburItemImpl.setUserName(getUserName());
 		suburItemImpl.setCreateDate(getCreateDate());
 		suburItemImpl.setModifiedDate(getModifiedDate());
+		suburItemImpl.setPublishedDate(getPublishedDate());
 		suburItemImpl.setTitle(getTitle());
 		suburItemImpl.setItemAbstract(getItemAbstract());
 		suburItemImpl.setStatus(getStatus());
@@ -524,6 +543,15 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 			suburItemCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
+		Date publishedDate = getPublishedDate();
+
+		if (publishedDate != null) {
+			suburItemCacheModel.publishedDate = publishedDate.getTime();
+		}
+		else {
+			suburItemCacheModel.publishedDate = Long.MIN_VALUE;
+		}
+
 		suburItemCacheModel.title = getTitle();
 
 		String title = suburItemCacheModel.title;
@@ -555,7 +583,7 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{itemId=");
 		sb.append(getItemId());
@@ -571,6 +599,8 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", publishedDate=");
+		sb.append(getPublishedDate());
 		sb.append(", title=");
 		sb.append(getTitle());
 		sb.append(", itemAbstract=");
@@ -586,7 +616,7 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.SuburItem");
@@ -619,6 +649,10 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>publishedDate</column-name><column-value><![CDATA[");
+		sb.append(getPublishedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
@@ -656,6 +690,7 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private Date _publishedDate;
 	private String _title;
 	private String _itemAbstract;
 	private int _status;

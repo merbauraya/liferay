@@ -157,6 +157,7 @@ create table subur_item (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	publishedDate DATE null,
 	title VARCHAR(255) null,
 	itemAbstract TEXT null,
 	status INTEGER,

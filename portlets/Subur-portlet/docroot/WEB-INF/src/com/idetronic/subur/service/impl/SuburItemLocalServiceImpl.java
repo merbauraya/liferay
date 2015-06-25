@@ -17,11 +17,8 @@ package com.idetronic.subur.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import com.idetronic.subur.model.Item;
 import com.idetronic.subur.model.SuburItem;
-import com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil;
 import com.idetronic.subur.service.base.SuburItemLocalServiceBaseImpl;
-import com.idetronic.subur.service.persistence.ItemFinderUtil;
 import com.idetronic.subur.service.persistence.SuburItemFinderUtil;
 import com.idetronic.subur.util.SuburConstant;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -36,10 +33,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
-import com.liferay.portlet.asset.service.AssetEntryLocalService;
-import com.liferay.portlet.asset.service.AssetEntryService;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
-import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 /**
  * The implementation of the subur item local service.
@@ -74,65 +69,79 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		suburItem.setModifiedDate(now);
 		suburItem.setTitle(title);
 		suburItem.setItemAbstract(itemAbstract);
-		suburItem.setUuid(serviceContext.getUuid());
+		suburItem.setUuid(PortalUUIDUtil.generate());
 		
 		suburItemPersistence.update(suburItem);
 		
-		resourceLocalService.addResources(suburItem.getCompanyId(), suburItem.getGroupId(), 
-				suburItem.getUserId(), SuburItem.class.getName(), suburItem.getItemId(), 
-				false, true, true);
 		
-		logger.info("addresource-set");
+		
+		
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
                 SuburItem.class);
 
 		indexer.reindex(suburItem);
-		try
-		{
+		//only show item with published status
+		boolean visible = (suburItem.getStatus() == SuburConstant.STATUS_PUBLISHED_ITEM);
+		String itemDescription = null;
+		String summary = null;
+		String url = null;
+		String layoutUuid = null;
 			
-			AssetEntry assetEntry = assetEntryLocalService.updateEntry(userId,
-                    groupId, suburItem.getCreateDate(),
-                    suburItem.getModifiedDate(), SuburItem.class.getName(),
-                    suburItem.getItemId(), suburItem.getUuid(), 0,
-                    serviceContext.getAssetCategoryIds(),
-                    serviceContext.getAssetTagNames(), true, null, null, null,
-                    ContentTypes.TEXT_HTML, suburItem.getTitle(), null, null, null,
-                    null, 0, 0, null, false);
+		resourceLocalService.addResources(suburItem.getCompanyId(), suburItem.getGroupId(), 
+				suburItem.getUserId(), SuburItem.class.getName(), suburItem.getItemId(), 
+				false, true, true);
+		
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(userId,
+                groupId, suburItem.getCreateDate(),
+                suburItem.getModifiedDate(), SuburItem.class.getName(),
+                suburItem.getItemId(), suburItem.getUuid(), 0,
+                serviceContext.getAssetCategoryIds(),
+                serviceContext.getAssetTagNames(), visible, null, null, null,
+                ContentTypes.TEXT_HTML, suburItem.getTitle(), itemDescription, summary, url,
+                layoutUuid, 0, 0, null, false);
                    
-		}catch (Exception e)
-		{
-			logger.error(e);
-		}
 		
 		
-		logger.info("reindex-set");
+		
+		
 		return suburItem;
 	}
-	public SuburItem updateSuburItem(SuburItem suburItem,long userId,ServiceContext serviceContext) throws SystemException
+	@Override
+	public SuburItem updateSuburItem(SuburItem suburItem,long userId,ServiceContext serviceContext) throws PortalException,SystemException 
 	{
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
                 SuburItem.class);
 		long groupId = serviceContext.getScopeGroupId();
+		if (Validator.isNull(suburItem.getPublishedDate()) && suburItem.getStatus() == SuburConstant.STATUS_PUBLISHED_ITEM)
+			suburItem.setPublishedDate(new Date());
+		//only show item with published status
+		boolean visible = (suburItem.getStatus() == SuburConstant.STATUS_PUBLISHED_ITEM);
+		String itemDescription = null;
+		String summary = null;
+		String url = null;
+		String layoutUuid = null;
+		Date publishedDate = suburItem.getPublishedDate();
 		
-		try
-		{
-			indexer.reindex(suburItem);
-			AssetEntry assetEntry = assetEntryLocalService.updateEntry(userId,
-                    groupId, suburItem.getCreateDate(),
-                    suburItem.getModifiedDate(), SuburItem.class.getName(),
-                    suburItem.getItemId(), suburItem.getUuid(), 0,
-                    serviceContext.getAssetCategoryIds(),
-                    serviceContext.getAssetTagNames(), true, null, null, null,
-                    ContentTypes.TEXT_HTML, suburItem.getTitle(), null, null, null,
-                    null, 0, 0, null, false);
-			assetLinkLocalService.updateLinks(userId, assetEntry.getEntryId(),
-                    serviceContext.getAssetLinkEntryIds(),
-                    AssetLinkConstants.TYPE_RELATED);
-			logger.info("cat="+serviceContext.getAssetCategoryIds());
-		}catch (Exception e)
-		{
-			logger.error(e);
-		}
+		indexer.reindex(suburItem);
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(userId,
+                groupId, suburItem.getCreateDate(),
+                suburItem.getModifiedDate(), SuburItem.class.getName(),
+                suburItem.getItemId(), suburItem.getUuid(), 0,
+                serviceContext.getAssetCategoryIds(),
+                serviceContext.getAssetTagNames(), visible, null, null, null,
+                ContentTypes.TEXT_HTML, suburItem.getTitle(), itemDescription, summary, url,
+                layoutUuid, 0, 0, null, false);
+
+		//if status is published, ensure to update asset entry published date
+		if (Validator.isNull(assetEntry.getPublishDate()) && suburItem.getStatus() == SuburConstant.STATUS_PUBLISHED_ITEM)
+			assetEntryLocalService.updateEntry(
+					SuburItem.class.getName(), suburItem.getItemId(), suburItem.getPublishedDate(),
+					true);
+		
+		assetLinkLocalService.updateLinks(userId, assetEntry.getEntryId(),
+                serviceContext.getAssetLinkEntryIds(),
+                AssetLinkConstants.TYPE_RELATED);
+		
 		return suburItemPersistence.update(suburItem);
 		
 	}
@@ -148,13 +157,55 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		return itemType;
 		
 	}
-	public List<SuburItem> getDraftItems(int start,int end) throws SystemException
+	public List<SuburItem> getSuburItems(int start,int end,int status) throws SystemException
 	{
-		return suburItemPersistence.findByStatus(SuburConstant.SUBUR_DRAFT_ITEM,start,end);
+		if (status != SuburConstant.STATUS_ANY)
+			return suburItemPersistence.findByStatus(status,start,end);
+		else
+			return suburItemPersistence.findAll(start, end);
 	}
-	public int getDraftItemCount() throws SystemException
+	/**
+	 * Publish a subur item
+	 * @param itemId subur Item Id
+	 * @return
+	 * @throws SystemException
+	 * @throws PortalException
+	 */
+	public SuburItem publishItem(long itemId) throws SystemException, PortalException
 	{
-		return suburItemPersistence.countByStatus(SuburConstant.SUBUR_DRAFT_ITEM);
+		SuburItem suburItem = suburItemPersistence.fetchByPrimaryKey(itemId);
+		suburItem.setStatus(SuburConstant.STATUS_PUBLISHED_ITEM);
+		suburItem.setPublishedDate(new Date());
+		assetEntryLocalService.updateEntry(
+				SuburItem.class.getName(), suburItem.getItemId(), suburItem.getPublishedDate(),
+				true);
+		return suburItemPersistence.update(suburItem);
+	}
+	
+	/**
+	 * Withdraw item from public viewing
+	 * @param itemId
+	 * @return
+	 * @throws SystemException
+	 * @throws PortalException
+	 */
+	public SuburItem withDrawItem(long itemId) throws SystemException, PortalException
+	{
+		SuburItem suburItem = suburItemPersistence.fetchByPrimaryKey(itemId);
+		suburItem.setStatus(SuburConstant.STATUS_WITHDRAWN_ITEM);
+		assetEntryLocalService.updateEntry(
+				SuburItem.class.getName(), suburItem.getItemId(), null,
+				false);
+		
+		return suburItemPersistence.update(suburItem);
+	}
+	
+	public int getItemCount(int status) throws SystemException
+	{
+		if (status != SuburConstant.STATUS_ANY)
+			return suburItemPersistence.countByStatus(SuburConstant.STATUS_DRAFT_ITEM);
+		else
+			return suburItemPersistence.countAll();
 	}
 	public List<SuburItem> getByGroup(long groupId) throws SystemException
 	{
@@ -176,7 +227,7 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 	public List<SuburItem> getBySubjectId(long subjectId,int start,int end)
 	{
 		List listItems = SuburItemFinderUtil.getItemBySubjectId(subjectId,start,end);
-		logger.info("null="+Validator.isNull(listItems));
+		
 		List<SuburItem> items =  (List)listItems.get(0);
 		return items;
 	}

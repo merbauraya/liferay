@@ -38,7 +38,7 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{itemId=");
 		sb.append(itemId);
@@ -54,6 +54,8 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", publishedDate=");
+		sb.append(publishedDate);
 		sb.append(", title=");
 		sb.append(title);
 		sb.append(", itemAbstract=");
@@ -97,6 +99,13 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 			suburItemImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		if (publishedDate == Long.MIN_VALUE) {
+			suburItemImpl.setPublishedDate(null);
+		}
+		else {
+			suburItemImpl.setPublishedDate(new Date(publishedDate));
+		}
+
 		if (title == null) {
 			suburItemImpl.setTitle(StringPool.BLANK);
 		}
@@ -134,6 +143,7 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
+		publishedDate = objectInput.readLong();
 		title = objectInput.readUTF();
 		itemAbstract = objectInput.readUTF();
 		status = objectInput.readInt();
@@ -157,6 +167,7 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
+		objectOutput.writeLong(publishedDate);
 
 		if (title == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -189,6 +200,7 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public long publishedDate;
 	public String title;
 	public String itemAbstract;
 	public int status;

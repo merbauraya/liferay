@@ -37,6 +37,7 @@ public class SuburItemSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setPublishedDate(model.getPublishedDate());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setItemAbstract(model.getItemAbstract());
 		soapModel.setStatus(model.getStatus());
@@ -149,6 +150,14 @@ public class SuburItemSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public Date getPublishedDate() {
+		return _publishedDate;
+	}
+
+	public void setPublishedDate(Date publishedDate) {
+		_publishedDate = publishedDate;
+	}
+
 	public String getTitle() {
 		return _title;
 	}
@@ -188,6 +197,7 @@ public class SuburItemSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private Date _publishedDate;
 	private String _title;
 	private String _itemAbstract;
 	private int _status;

@@ -285,7 +285,8 @@ public class SuburItemLocalServiceUtil {
 	public static com.idetronic.subur.model.SuburItem updateSuburItem(
 		com.idetronic.subur.model.SuburItem suburItem, long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateSuburItem(suburItem, userId, serviceContext);
 	}
 
@@ -293,15 +294,43 @@ public class SuburItemLocalServiceUtil {
 		return getService().getItemTypes(itemId);
 	}
 
-	public static java.util.List<com.idetronic.subur.model.SuburItem> getDraftItems(
-		int start, int end)
+	public static java.util.List<com.idetronic.subur.model.SuburItem> getSuburItems(
+		int start, int end, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDraftItems(start, end);
+		return getService().getSuburItems(start, end, status);
 	}
 
-	public static int getDraftItemCount()
+	/**
+	* Publish a subur item
+	*
+	* @param itemId subur Item Id
+	* @return
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	public static com.idetronic.subur.model.SuburItem publishItem(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().publishItem(itemId);
+	}
+
+	/**
+	* Withdraw item from public viewing
+	*
+	* @param itemId
+	* @return
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	public static com.idetronic.subur.model.SuburItem withDrawItem(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().withDrawItem(itemId);
+	}
+
+	public static int getItemCount(int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDraftItemCount();
+		return getService().getItemCount(status);
 	}
 
 	public static java.util.List<com.idetronic.subur.model.SuburItem> getByGroup(

@@ -22,41 +22,11 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.idetronic.subur.model.impl.DivisionModelImpl">
-		<attributes>
-			<id name="divisionId" />
-			<basic name="parentId" />
-			<basic name="divisionName" />
-			<basic name="depositable" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.idetronic.subur.model.impl.FileEntryTypeModelImpl">
-		<attributes>
-			<id name="typeId" />
-			<basic name="typeName" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.subur.model.impl.ItemAuthorModelImpl">
 		<id-class class="com.idetronic.subur.service.persistence.ItemAuthorPK" />
 		<attributes>
 			<id name="itemId" />
 			<id name="authorId" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.idetronic.subur.model.impl.ItemDivisionModelImpl">
-		<id-class class="com.idetronic.subur.service.persistence.ItemDivisionPK" />
-		<attributes>
-			<id name="itemId" />
-			<id name="divisionId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -78,16 +48,6 @@
 		<attributes>
 			<id name="itemId" />
 			<id name="itemTypeId" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.idetronic.subur.model.impl.ItemSubjectModelImpl">
-		<id-class class="com.idetronic.subur.service.persistence.ItemSubjectPK" />
-		<attributes>
-			<id name="itemId" />
-			<id name="subjectId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -148,20 +108,6 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.idetronic.subur.model.impl.SubjectModelImpl">
-		<attributes>
-			<id name="subjectId" />
-			<basic name="parentId" />
-			<basic name="subjectName" />
-			<basic name="lft" />
-			<basic name="rgt" />
-			<basic name="depositable" />
-			<basic name="itemCount" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.subur.model.impl.SuburItemModelImpl">
 		<attributes>
 			<id name="itemId" />
@@ -173,6 +119,9 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="publishedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="title" />
@@ -189,20 +138,8 @@
 		<table name="subur_Author" />
 		<attributes />
 	</entity>
-	<entity class="com.idetronic.subur.model.impl.DivisionImpl" name="Division">
-		<table name="subur_Division" />
-		<attributes />
-	</entity>
-	<entity class="com.idetronic.subur.model.impl.FileEntryTypeImpl" name="FileEntryType">
-		<table name="subur_FileEntryType" />
-		<attributes />
-	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemAuthorImpl" name="ItemAuthor">
 		<table name="subur_ItemAuthor" />
-		<attributes />
-	</entity>
-	<entity class="com.idetronic.subur.model.impl.ItemDivisionImpl" name="ItemDivision">
-		<table name="subur_ItemDivision" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemFileEntryImpl" name="ItemFileEntry">
@@ -211,10 +148,6 @@
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemItemTypeImpl" name="ItemItemType">
 		<table name="subur_ItemItemType" />
-		<attributes />
-	</entity>
-	<entity class="com.idetronic.subur.model.impl.ItemSubjectImpl" name="ItemSubject">
-		<table name="subur_ItemSubject" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemTypeImpl" name="ItemType">
@@ -235,10 +168,6 @@
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.MetadataSchemaImpl" name="MetadataSchema">
 		<table name="subur_MetadataSchema" />
-		<attributes />
-	</entity>
-	<entity class="com.idetronic.subur.model.impl.SubjectImpl" name="Subject">
-		<table name="subur_Subject" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.SuburItemImpl" name="SuburItem">

@@ -296,7 +296,8 @@ public class SuburItemLocalServiceWrapper implements SuburItemLocalService,
 	public com.idetronic.subur.model.SuburItem updateSuburItem(
 		com.idetronic.subur.model.SuburItem suburItem, long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _suburItemLocalService.updateSuburItem(suburItem, userId,
 			serviceContext);
 	}
@@ -307,16 +308,46 @@ public class SuburItemLocalServiceWrapper implements SuburItemLocalService,
 	}
 
 	@Override
-	public java.util.List<com.idetronic.subur.model.SuburItem> getDraftItems(
-		int start, int end)
+	public java.util.List<com.idetronic.subur.model.SuburItem> getSuburItems(
+		int start, int end, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _suburItemLocalService.getDraftItems(start, end);
+		return _suburItemLocalService.getSuburItems(start, end, status);
+	}
+
+	/**
+	* Publish a subur item
+	*
+	* @param itemId subur Item Id
+	* @return
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	@Override
+	public com.idetronic.subur.model.SuburItem publishItem(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _suburItemLocalService.publishItem(itemId);
+	}
+
+	/**
+	* Withdraw item from public viewing
+	*
+	* @param itemId
+	* @return
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	@Override
+	public com.idetronic.subur.model.SuburItem withDrawItem(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _suburItemLocalService.withDrawItem(itemId);
 	}
 
 	@Override
-	public int getDraftItemCount()
+	public int getItemCount(int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _suburItemLocalService.getDraftItemCount();
+		return _suburItemLocalService.getItemCount(status);
 	}
 
 	@Override

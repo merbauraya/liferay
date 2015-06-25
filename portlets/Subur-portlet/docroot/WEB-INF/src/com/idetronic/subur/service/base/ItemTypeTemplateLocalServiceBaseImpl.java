@@ -18,14 +18,10 @@ import com.idetronic.subur.model.ItemTypeTemplate;
 import com.idetronic.subur.service.ItemTypeTemplateLocalService;
 import com.idetronic.subur.service.persistence.AuthorFinder;
 import com.idetronic.subur.service.persistence.AuthorPersistence;
-import com.idetronic.subur.service.persistence.DivisionPersistence;
-import com.idetronic.subur.service.persistence.FileEntryTypePersistence;
 import com.idetronic.subur.service.persistence.ItemAuthorPersistence;
-import com.idetronic.subur.service.persistence.ItemDivisionPersistence;
 import com.idetronic.subur.service.persistence.ItemFileEntryPersistence;
 import com.idetronic.subur.service.persistence.ItemItemTypeFinder;
 import com.idetronic.subur.service.persistence.ItemItemTypePersistence;
-import com.idetronic.subur.service.persistence.ItemSubjectPersistence;
 import com.idetronic.subur.service.persistence.ItemTypePersistence;
 import com.idetronic.subur.service.persistence.ItemTypeTemplatePK;
 import com.idetronic.subur.service.persistence.ItemTypeTemplatePersistence;
@@ -33,7 +29,6 @@ import com.idetronic.subur.service.persistence.MetadataPropertyPersistence;
 import com.idetronic.subur.service.persistence.MetadataPropertyValueFinder;
 import com.idetronic.subur.service.persistence.MetadataPropertyValuePersistence;
 import com.idetronic.subur.service.persistence.MetadataSchemaPersistence;
-import com.idetronic.subur.service.persistence.SubjectPersistence;
 import com.idetronic.subur.service.persistence.SuburItemFinder;
 import com.idetronic.subur.service.persistence.SuburItemPersistence;
 
@@ -358,81 +353,6 @@ public abstract class ItemTypeTemplateLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the division local service.
-	 *
-	 * @return the division local service
-	 */
-	public com.idetronic.subur.service.DivisionLocalService getDivisionLocalService() {
-		return divisionLocalService;
-	}
-
-	/**
-	 * Sets the division local service.
-	 *
-	 * @param divisionLocalService the division local service
-	 */
-	public void setDivisionLocalService(
-		com.idetronic.subur.service.DivisionLocalService divisionLocalService) {
-		this.divisionLocalService = divisionLocalService;
-	}
-
-	/**
-	 * Returns the division persistence.
-	 *
-	 * @return the division persistence
-	 */
-	public DivisionPersistence getDivisionPersistence() {
-		return divisionPersistence;
-	}
-
-	/**
-	 * Sets the division persistence.
-	 *
-	 * @param divisionPersistence the division persistence
-	 */
-	public void setDivisionPersistence(DivisionPersistence divisionPersistence) {
-		this.divisionPersistence = divisionPersistence;
-	}
-
-	/**
-	 * Returns the file entry type local service.
-	 *
-	 * @return the file entry type local service
-	 */
-	public com.idetronic.subur.service.FileEntryTypeLocalService getFileEntryTypeLocalService() {
-		return fileEntryTypeLocalService;
-	}
-
-	/**
-	 * Sets the file entry type local service.
-	 *
-	 * @param fileEntryTypeLocalService the file entry type local service
-	 */
-	public void setFileEntryTypeLocalService(
-		com.idetronic.subur.service.FileEntryTypeLocalService fileEntryTypeLocalService) {
-		this.fileEntryTypeLocalService = fileEntryTypeLocalService;
-	}
-
-	/**
-	 * Returns the file entry type persistence.
-	 *
-	 * @return the file entry type persistence
-	 */
-	public FileEntryTypePersistence getFileEntryTypePersistence() {
-		return fileEntryTypePersistence;
-	}
-
-	/**
-	 * Sets the file entry type persistence.
-	 *
-	 * @param fileEntryTypePersistence the file entry type persistence
-	 */
-	public void setFileEntryTypePersistence(
-		FileEntryTypePersistence fileEntryTypePersistence) {
-		this.fileEntryTypePersistence = fileEntryTypePersistence;
-	}
-
-	/**
 	 * Returns the item author local service.
 	 *
 	 * @return the item author local service
@@ -468,44 +388,6 @@ public abstract class ItemTypeTemplateLocalServiceBaseImpl
 	public void setItemAuthorPersistence(
 		ItemAuthorPersistence itemAuthorPersistence) {
 		this.itemAuthorPersistence = itemAuthorPersistence;
-	}
-
-	/**
-	 * Returns the item division local service.
-	 *
-	 * @return the item division local service
-	 */
-	public com.idetronic.subur.service.ItemDivisionLocalService getItemDivisionLocalService() {
-		return itemDivisionLocalService;
-	}
-
-	/**
-	 * Sets the item division local service.
-	 *
-	 * @param itemDivisionLocalService the item division local service
-	 */
-	public void setItemDivisionLocalService(
-		com.idetronic.subur.service.ItemDivisionLocalService itemDivisionLocalService) {
-		this.itemDivisionLocalService = itemDivisionLocalService;
-	}
-
-	/**
-	 * Returns the item division persistence.
-	 *
-	 * @return the item division persistence
-	 */
-	public ItemDivisionPersistence getItemDivisionPersistence() {
-		return itemDivisionPersistence;
-	}
-
-	/**
-	 * Sets the item division persistence.
-	 *
-	 * @param itemDivisionPersistence the item division persistence
-	 */
-	public void setItemDivisionPersistence(
-		ItemDivisionPersistence itemDivisionPersistence) {
-		this.itemDivisionPersistence = itemDivisionPersistence;
 	}
 
 	/**
@@ -619,44 +501,6 @@ public abstract class ItemTypeTemplateLocalServiceBaseImpl
 	 */
 	public void setItemItemTypeFinder(ItemItemTypeFinder itemItemTypeFinder) {
 		this.itemItemTypeFinder = itemItemTypeFinder;
-	}
-
-	/**
-	 * Returns the item subject local service.
-	 *
-	 * @return the item subject local service
-	 */
-	public com.idetronic.subur.service.ItemSubjectLocalService getItemSubjectLocalService() {
-		return itemSubjectLocalService;
-	}
-
-	/**
-	 * Sets the item subject local service.
-	 *
-	 * @param itemSubjectLocalService the item subject local service
-	 */
-	public void setItemSubjectLocalService(
-		com.idetronic.subur.service.ItemSubjectLocalService itemSubjectLocalService) {
-		this.itemSubjectLocalService = itemSubjectLocalService;
-	}
-
-	/**
-	 * Returns the item subject persistence.
-	 *
-	 * @return the item subject persistence
-	 */
-	public ItemSubjectPersistence getItemSubjectPersistence() {
-		return itemSubjectPersistence;
-	}
-
-	/**
-	 * Sets the item subject persistence.
-	 *
-	 * @param itemSubjectPersistence the item subject persistence
-	 */
-	public void setItemSubjectPersistence(
-		ItemSubjectPersistence itemSubjectPersistence) {
-		this.itemSubjectPersistence = itemSubjectPersistence;
 	}
 
 	/**
@@ -865,62 +709,6 @@ public abstract class ItemTypeTemplateLocalServiceBaseImpl
 	public void setMetadataSchemaPersistence(
 		MetadataSchemaPersistence metadataSchemaPersistence) {
 		this.metadataSchemaPersistence = metadataSchemaPersistence;
-	}
-
-	/**
-	 * Returns the subject local service.
-	 *
-	 * @return the subject local service
-	 */
-	public com.idetronic.subur.service.SubjectLocalService getSubjectLocalService() {
-		return subjectLocalService;
-	}
-
-	/**
-	 * Sets the subject local service.
-	 *
-	 * @param subjectLocalService the subject local service
-	 */
-	public void setSubjectLocalService(
-		com.idetronic.subur.service.SubjectLocalService subjectLocalService) {
-		this.subjectLocalService = subjectLocalService;
-	}
-
-	/**
-	 * Returns the subject remote service.
-	 *
-	 * @return the subject remote service
-	 */
-	public com.idetronic.subur.service.SubjectService getSubjectService() {
-		return subjectService;
-	}
-
-	/**
-	 * Sets the subject remote service.
-	 *
-	 * @param subjectService the subject remote service
-	 */
-	public void setSubjectService(
-		com.idetronic.subur.service.SubjectService subjectService) {
-		this.subjectService = subjectService;
-	}
-
-	/**
-	 * Returns the subject persistence.
-	 *
-	 * @return the subject persistence
-	 */
-	public SubjectPersistence getSubjectPersistence() {
-		return subjectPersistence;
-	}
-
-	/**
-	 * Sets the subject persistence.
-	 *
-	 * @param subjectPersistence the subject persistence
-	 */
-	public void setSubjectPersistence(SubjectPersistence subjectPersistence) {
-		this.subjectPersistence = subjectPersistence;
 	}
 
 	/**
@@ -1161,22 +949,10 @@ public abstract class ItemTypeTemplateLocalServiceBaseImpl
 	protected AuthorPersistence authorPersistence;
 	@BeanReference(type = AuthorFinder.class)
 	protected AuthorFinder authorFinder;
-	@BeanReference(type = com.idetronic.subur.service.DivisionLocalService.class)
-	protected com.idetronic.subur.service.DivisionLocalService divisionLocalService;
-	@BeanReference(type = DivisionPersistence.class)
-	protected DivisionPersistence divisionPersistence;
-	@BeanReference(type = com.idetronic.subur.service.FileEntryTypeLocalService.class)
-	protected com.idetronic.subur.service.FileEntryTypeLocalService fileEntryTypeLocalService;
-	@BeanReference(type = FileEntryTypePersistence.class)
-	protected FileEntryTypePersistence fileEntryTypePersistence;
 	@BeanReference(type = com.idetronic.subur.service.ItemAuthorLocalService.class)
 	protected com.idetronic.subur.service.ItemAuthorLocalService itemAuthorLocalService;
 	@BeanReference(type = ItemAuthorPersistence.class)
 	protected ItemAuthorPersistence itemAuthorPersistence;
-	@BeanReference(type = com.idetronic.subur.service.ItemDivisionLocalService.class)
-	protected com.idetronic.subur.service.ItemDivisionLocalService itemDivisionLocalService;
-	@BeanReference(type = ItemDivisionPersistence.class)
-	protected ItemDivisionPersistence itemDivisionPersistence;
 	@BeanReference(type = com.idetronic.subur.service.ItemFileEntryLocalService.class)
 	protected com.idetronic.subur.service.ItemFileEntryLocalService itemFileEntryLocalService;
 	@BeanReference(type = com.idetronic.subur.service.ItemFileEntryService.class)
@@ -1189,10 +965,6 @@ public abstract class ItemTypeTemplateLocalServiceBaseImpl
 	protected ItemItemTypePersistence itemItemTypePersistence;
 	@BeanReference(type = ItemItemTypeFinder.class)
 	protected ItemItemTypeFinder itemItemTypeFinder;
-	@BeanReference(type = com.idetronic.subur.service.ItemSubjectLocalService.class)
-	protected com.idetronic.subur.service.ItemSubjectLocalService itemSubjectLocalService;
-	@BeanReference(type = ItemSubjectPersistence.class)
-	protected ItemSubjectPersistence itemSubjectPersistence;
 	@BeanReference(type = com.idetronic.subur.service.ItemTypeLocalService.class)
 	protected com.idetronic.subur.service.ItemTypeLocalService itemTypeLocalService;
 	@BeanReference(type = ItemTypePersistence.class)
@@ -1215,12 +987,6 @@ public abstract class ItemTypeTemplateLocalServiceBaseImpl
 	protected com.idetronic.subur.service.MetadataSchemaLocalService metadataSchemaLocalService;
 	@BeanReference(type = MetadataSchemaPersistence.class)
 	protected MetadataSchemaPersistence metadataSchemaPersistence;
-	@BeanReference(type = com.idetronic.subur.service.SubjectLocalService.class)
-	protected com.idetronic.subur.service.SubjectLocalService subjectLocalService;
-	@BeanReference(type = com.idetronic.subur.service.SubjectService.class)
-	protected com.idetronic.subur.service.SubjectService subjectService;
-	@BeanReference(type = SubjectPersistence.class)
-	protected SubjectPersistence subjectPersistence;
 	@BeanReference(type = com.idetronic.subur.service.SuburItemLocalService.class)
 	protected com.idetronic.subur.service.SuburItemLocalService suburItemLocalService;
 	@BeanReference(type = SuburItemPersistence.class)

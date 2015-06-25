@@ -17,45 +17,152 @@
 <%@ include file="/html/init.jsp" %>
 
 <liferay-portlet:renderURL varImpl="searchURL">
-        <portlet:param name="mvcPath" value="/html/search/view_search.jsp" />
+        <portlet:param name="mvcPath" value="/html/search/subur_search.jsp" />
 </liferay-portlet:renderURL>
-<liferay-portlet:renderURL varImpl="depositURL">
-        <portlet:param name="mvcPath" value="/html/deposit/new.jsp" />
-</liferay-portlet:renderURL>
-<liferay-portlet:renderURL varImpl="draftDepositURL">
-        <portlet:param name="mvcPath" value="/html/deposit/draft_list.jsp" />
-</liferay-portlet:renderURL>
-<liferay-portlet:renderURL varImpl="bySubjectURL">
-        <portlet:param name="mvcPath" value="/html/by_subject.jsp" />
-</liferay-portlet:renderURL>
+
 
 
 <liferay-portlet:renderURL varImpl="uploadFileURL">
-        <portlet:param name="mvcPath" value="/html/fileupload/upload.jsp" />
+        <portlet:param name="mvcPath" value="/html/fileupload/view.jsp" />
 </liferay-portlet:renderURL>
 
 <liferay-portlet:renderURL varImpl="adminAuthor">
         <portlet:param name="mvcPath" value="/html/admin/author/view.jsp" />
 </liferay-portlet:renderURL>
+
+<liferay-portlet:renderURL varImpl="testPageURL">
+        <portlet:param name="mvcPath" value="/html/test/1.jsp" />
+</liferay-portlet:renderURL>
 <%
 	String itemId = renderRequest.getParameter("itemId");
+	
+	String x = ParamUtil.getString(request, "categoryId");
+	String z = ParamUtil.getString(request, "tag");
+	
+	
+	PortletURL portletURL = renderResponse.createRenderURL();
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
+	
+	if (!paginationType.equals("none")) {
+		searchContainer.setDelta(delta);
+		searchContainer.setDeltaConfigurable(false);
+	}
 
 %>
 
-<a class="btn btn-primary" href="<%= depositURL %>">New Deposit</a>&nbsp; 
+	
 
-<a class="btn btn-primary" href="<%=draftDepositURL %>">Draft Deposit</a>
-<a class="btn btn-primary" href="<%=bySubjectURL %>">Browse By Subject</a>
-<a class="btn btn-primary" href="<%=uploadFileURL %>">Upload File</a>
-<a class="btn btn-primary" href="<%=adminAuthor %>">Author Admin</a>
-<aui:form action="<%= searchURL %>" method="get" name="fm">
-    <liferay-portlet:renderURLParams varImpl="searchURL" />
-
-    <div class="search-form">
-        <span class="aui-search-bar">
-            <aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-entries" type="text" />
-
-            <aui:button type="submit" value="search" />
-        </span>
-    </div>
+<aui:form action="<%=searchURL%>" name="fm" inlineLabel="<%= true %>">
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<%@ include file="/html/admin/subur/top_nav.jsp" %>
 </aui:form>
+<div class="subscribe-action">
+	<c:if test="<%= enableRSS %>">
+		<liferay-portlet:resourceURL varImpl="rssURL">
+			<portlet:param name="struts_action" value="/asset_publisher/rss" />
+		</liferay-portlet:resourceURL>
+
+		<liferay-ui:rss resourceURL="<%= rssURL %>" />
+	</c:if>
+
+</div>
+
+<%
+	boolean filterByTagOrCategory = false;
+	String[] allAssetTagNames = new String[0];
+	String assetTagName = ParamUtil.getString(request, "tag");
+	long siteGroupIds = themeDisplay.getSiteGroupId();
+	String[] assetTagNames = StringUtil.split(assetTagName);
+	
+	AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
+	
+	
+if (Validator.isNotNull(assetTagName)) {
+	allAssetTagNames = new String[] {assetTagName};
+	filterByTagOrCategory = true;
+	long[] assetTagIds = AssetTagLocalServiceUtil.getTagIds(siteGroupIds, allAssetTagNames);
+	if (useOrOperatorTagSearch)
+		assetEntryQuery.setAnyTagIds(assetTagIds);
+	else
+		assetEntryQuery.setAllTagIds(assetTagIds);
+	
+	for (String tagName : assetTagNames)
+		PortalUtil.setPageKeywords(tagName + StringPool.SPACE, request);
+}
+//process category
+	long assetCategoryId = 0L;
+	String assetCategoryTitle = null;
+	String assetVocabularyTitle = null;
+	long[] allAssetCategoryIds = new long[0];
+	
+	String categoryId = ParamUtil.getString(request, "categoryId", StringPool.BLANK);
+	filterByTagOrCategory = Validator.isNotNull(categoryId);
+	
+	String[] categoryIds = StringUtil.split(categoryId);
+	
+	if (categoryIds.length == 1)
+	{
+		assetCategoryId = Long.parseLong(categoryIds[0]);
+		if (assetCategoryId > 0)
+		{
+			allAssetCategoryIds = assetEntryQuery.getAllCategoryIds();
+			if (!ArrayUtil.contains(allAssetCategoryIds, assetCategoryId)) {
+				assetEntryQuery.setAllCategoryIds(ArrayUtil.append(allAssetCategoryIds, assetCategoryId));
+			}
+			
+			AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(assetCategoryId);
+			
+			assetCategory = assetCategory.toEscapedModel();
+		
+			assetCategoryTitle = assetCategory.getTitle(locale);
+		
+			AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+		
+			assetVocabulary = assetVocabulary.toEscapedModel();
+		
+			assetVocabularyTitle = assetVocabulary.getTitle(locale);
+		
+			PortalUtil.setPageKeywords(assetCategoryTitle, request);
+		}
+	} else if (categoryIds.length > 1)
+	{
+		assetCategoryId = Long.parseLong(categoryIds[0]);
+		List<Long> categoryIdsList = new ArrayList<Long>();
+		
+		for(String categoryIdString : categoryIds) {
+		  	long id = Long.parseLong(categoryIdString);
+		  	if (id != 0L) {
+		  		categoryIdsList.add(id);
+		  	}
+		}
+		
+		if (useOrOperatorCategorySearch) {
+			assetEntryQuery.setAnyCategoryIds(ArrayUtil.toLongArray(categoryIdsList));
+		}
+		else {
+			assetEntryQuery.setAllCategoryIds(ArrayUtil.toLongArray(categoryIdsList));
+			
+		}
+	}
+	long[] classNameIds = {20721}; //todo  get this from portlet pref
+	assetEntryQuery.setClassNameIds(classNameIds);
+	assetEntryQuery.setOrderByCol1(orderByColumn1);
+	assetEntryQuery.setOrderByCol2(orderByColumn2);
+	assetEntryQuery.setOrderByType1(orderByType1);
+	assetEntryQuery.setOrderByType2(orderByType2);
+%>
+<div class="portlet-asset-publisher">
+	<%@ include file="/html/view/process_view.jsp" %>
+
+
+<c:if test='<%= !paginationType.equals("none") && (searchContainer.getTotal() > searchContainer.getResults().size()) %>'>
+	
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="<%= paginationType %>" />
+</c:if>	
+	
+	
+	
+</div>
+<%!
+private static Log _log = LogFactoryUtil.getLog("subur.html.view");
+%>

@@ -15,19 +15,14 @@
 package com.idetronic.subur.service;
 
 import com.idetronic.subur.model.AuthorClp;
-import com.idetronic.subur.model.DivisionClp;
-import com.idetronic.subur.model.FileEntryTypeClp;
 import com.idetronic.subur.model.ItemAuthorClp;
-import com.idetronic.subur.model.ItemDivisionClp;
 import com.idetronic.subur.model.ItemFileEntryClp;
 import com.idetronic.subur.model.ItemItemTypeClp;
-import com.idetronic.subur.model.ItemSubjectClp;
 import com.idetronic.subur.model.ItemTypeClp;
 import com.idetronic.subur.model.ItemTypeTemplateClp;
 import com.idetronic.subur.model.MetadataPropertyClp;
 import com.idetronic.subur.model.MetadataPropertyValueClp;
 import com.idetronic.subur.model.MetadataSchemaClp;
-import com.idetronic.subur.model.SubjectClp;
 import com.idetronic.subur.model.SuburItemClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -120,20 +115,8 @@ public class ClpSerializer {
 			return translateInputAuthor(oldModel);
 		}
 
-		if (oldModelClassName.equals(DivisionClp.class.getName())) {
-			return translateInputDivision(oldModel);
-		}
-
-		if (oldModelClassName.equals(FileEntryTypeClp.class.getName())) {
-			return translateInputFileEntryType(oldModel);
-		}
-
 		if (oldModelClassName.equals(ItemAuthorClp.class.getName())) {
 			return translateInputItemAuthor(oldModel);
-		}
-
-		if (oldModelClassName.equals(ItemDivisionClp.class.getName())) {
-			return translateInputItemDivision(oldModel);
 		}
 
 		if (oldModelClassName.equals(ItemFileEntryClp.class.getName())) {
@@ -142,10 +125,6 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals(ItemItemTypeClp.class.getName())) {
 			return translateInputItemItemType(oldModel);
-		}
-
-		if (oldModelClassName.equals(ItemSubjectClp.class.getName())) {
-			return translateInputItemSubject(oldModel);
 		}
 
 		if (oldModelClassName.equals(ItemTypeClp.class.getName())) {
@@ -166,10 +145,6 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals(MetadataSchemaClp.class.getName())) {
 			return translateInputMetadataSchema(oldModel);
-		}
-
-		if (oldModelClassName.equals(SubjectClp.class.getName())) {
-			return translateInputSubject(oldModel);
 		}
 
 		if (oldModelClassName.equals(SuburItemClp.class.getName())) {
@@ -201,40 +176,10 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputDivision(BaseModel<?> oldModel) {
-		DivisionClp oldClpModel = (DivisionClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getDivisionRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
-	public static Object translateInputFileEntryType(BaseModel<?> oldModel) {
-		FileEntryTypeClp oldClpModel = (FileEntryTypeClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getFileEntryTypeRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
 	public static Object translateInputItemAuthor(BaseModel<?> oldModel) {
 		ItemAuthorClp oldClpModel = (ItemAuthorClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getItemAuthorRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
-	public static Object translateInputItemDivision(BaseModel<?> oldModel) {
-		ItemDivisionClp oldClpModel = (ItemDivisionClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getItemDivisionRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -255,16 +200,6 @@ public class ClpSerializer {
 		ItemItemTypeClp oldClpModel = (ItemItemTypeClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getItemItemTypeRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
-	public static Object translateInputItemSubject(BaseModel<?> oldModel) {
-		ItemSubjectClp oldClpModel = (ItemSubjectClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getItemSubjectRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -316,16 +251,6 @@ public class ClpSerializer {
 		MetadataSchemaClp oldClpModel = (MetadataSchemaClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getMetadataSchemaRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
-	public static Object translateInputSubject(BaseModel<?> oldModel) {
-		SubjectClp oldClpModel = (SubjectClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getSubjectRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -397,119 +322,8 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.idetronic.subur.model.impl.DivisionImpl")) {
-			return translateOutputDivision(oldModel);
-		}
-		else if (oldModelClassName.endsWith("Clp")) {
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Method getClpSerializerClassMethod = oldModelClass.getMethod(
-						"getClpSerializerClass");
-
-				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
-
-				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-						BaseModel.class);
-
-				Class<?> oldModelModelClass = oldModel.getModelClass();
-
-				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-						oldModelModelClass.getSimpleName() + "RemoteModel");
-
-				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
-						oldRemoteModel);
-
-				return newModel;
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unable to translate " + oldModelClassName, t);
-				}
-			}
-		}
-
-		if (oldModelClassName.equals(
-					"com.idetronic.subur.model.impl.FileEntryTypeImpl")) {
-			return translateOutputFileEntryType(oldModel);
-		}
-		else if (oldModelClassName.endsWith("Clp")) {
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Method getClpSerializerClassMethod = oldModelClass.getMethod(
-						"getClpSerializerClass");
-
-				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
-
-				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-						BaseModel.class);
-
-				Class<?> oldModelModelClass = oldModel.getModelClass();
-
-				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-						oldModelModelClass.getSimpleName() + "RemoteModel");
-
-				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
-						oldRemoteModel);
-
-				return newModel;
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unable to translate " + oldModelClassName, t);
-				}
-			}
-		}
-
-		if (oldModelClassName.equals(
 					"com.idetronic.subur.model.impl.ItemAuthorImpl")) {
 			return translateOutputItemAuthor(oldModel);
-		}
-		else if (oldModelClassName.endsWith("Clp")) {
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Method getClpSerializerClassMethod = oldModelClass.getMethod(
-						"getClpSerializerClass");
-
-				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
-
-				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-						BaseModel.class);
-
-				Class<?> oldModelModelClass = oldModel.getModelClass();
-
-				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-						oldModelModelClass.getSimpleName() + "RemoteModel");
-
-				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
-						oldRemoteModel);
-
-				return newModel;
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unable to translate " + oldModelClassName, t);
-				}
-			}
-		}
-
-		if (oldModelClassName.equals(
-					"com.idetronic.subur.model.impl.ItemDivisionImpl")) {
-			return translateOutputItemDivision(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -584,43 +398,6 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.idetronic.subur.model.impl.ItemItemTypeImpl")) {
 			return translateOutputItemItemType(oldModel);
-		}
-		else if (oldModelClassName.endsWith("Clp")) {
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Method getClpSerializerClassMethod = oldModelClass.getMethod(
-						"getClpSerializerClass");
-
-				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
-
-				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-						BaseModel.class);
-
-				Class<?> oldModelModelClass = oldModel.getModelClass();
-
-				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-						oldModelModelClass.getSimpleName() + "RemoteModel");
-
-				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
-						oldRemoteModel);
-
-				return newModel;
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unable to translate " + oldModelClassName, t);
-				}
-			}
-		}
-
-		if (oldModelClassName.equals(
-					"com.idetronic.subur.model.impl.ItemSubjectImpl")) {
-			return translateOutputItemSubject(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -841,43 +618,6 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.idetronic.subur.model.impl.SubjectImpl")) {
-			return translateOutputSubject(oldModel);
-		}
-		else if (oldModelClassName.endsWith("Clp")) {
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Method getClpSerializerClassMethod = oldModelClass.getMethod(
-						"getClpSerializerClass");
-
-				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
-
-				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-						BaseModel.class);
-
-				Class<?> oldModelModelClass = oldModel.getModelClass();
-
-				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-						oldModelModelClass.getSimpleName() + "RemoteModel");
-
-				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
-						oldRemoteModel);
-
-				return newModel;
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unable to translate " + oldModelClassName, t);
-				}
-			}
-		}
-
-		if (oldModelClassName.equals(
 					"com.idetronic.subur.model.impl.SuburItemImpl")) {
 			return translateOutputSuburItem(oldModel);
 		}
@@ -998,20 +738,8 @@ public class ClpSerializer {
 			return new com.idetronic.subur.NoSuchAuthorException();
 		}
 
-		if (className.equals("com.idetronic.subur.NoSuchDivisionException")) {
-			return new com.idetronic.subur.NoSuchDivisionException();
-		}
-
-		if (className.equals("com.idetronic.subur.NoSuchFileEntryTypeException")) {
-			return new com.idetronic.subur.NoSuchFileEntryTypeException();
-		}
-
 		if (className.equals("com.idetronic.subur.NoSuchItemAuthorException")) {
 			return new com.idetronic.subur.NoSuchItemAuthorException();
-		}
-
-		if (className.equals("com.idetronic.subur.NoSuchItemDivisionException")) {
-			return new com.idetronic.subur.NoSuchItemDivisionException();
 		}
 
 		if (className.equals("com.idetronic.subur.NoSuchItemFileEntryException")) {
@@ -1020,10 +748,6 @@ public class ClpSerializer {
 
 		if (className.equals("com.idetronic.subur.NoSuchItemItemTypeException")) {
 			return new com.idetronic.subur.NoSuchItemItemTypeException();
-		}
-
-		if (className.equals("com.idetronic.subur.NoSuchItemSubjectException")) {
-			return new com.idetronic.subur.NoSuchItemSubjectException();
 		}
 
 		if (className.equals("com.idetronic.subur.NoSuchItemTypeException")) {
@@ -1050,10 +774,6 @@ public class ClpSerializer {
 			return new com.idetronic.subur.NoSuchMetadataSchemaException();
 		}
 
-		if (className.equals("com.idetronic.subur.NoSuchSubjectException")) {
-			return new com.idetronic.subur.NoSuchSubjectException();
-		}
-
 		if (className.equals("com.idetronic.subur.NoSuchSuburItemException")) {
 			return new com.idetronic.subur.NoSuchSuburItemException();
 		}
@@ -1071,42 +791,12 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateOutputDivision(BaseModel<?> oldModel) {
-		DivisionClp newModel = new DivisionClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setDivisionRemoteModel(oldModel);
-
-		return newModel;
-	}
-
-	public static Object translateOutputFileEntryType(BaseModel<?> oldModel) {
-		FileEntryTypeClp newModel = new FileEntryTypeClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setFileEntryTypeRemoteModel(oldModel);
-
-		return newModel;
-	}
-
 	public static Object translateOutputItemAuthor(BaseModel<?> oldModel) {
 		ItemAuthorClp newModel = new ItemAuthorClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setItemAuthorRemoteModel(oldModel);
-
-		return newModel;
-	}
-
-	public static Object translateOutputItemDivision(BaseModel<?> oldModel) {
-		ItemDivisionClp newModel = new ItemDivisionClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setItemDivisionRemoteModel(oldModel);
 
 		return newModel;
 	}
@@ -1127,16 +817,6 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setItemItemTypeRemoteModel(oldModel);
-
-		return newModel;
-	}
-
-	public static Object translateOutputItemSubject(BaseModel<?> oldModel) {
-		ItemSubjectClp newModel = new ItemSubjectClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setItemSubjectRemoteModel(oldModel);
 
 		return newModel;
 	}
@@ -1188,16 +868,6 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setMetadataSchemaRemoteModel(oldModel);
-
-		return newModel;
-	}
-
-	public static Object translateOutputSubject(BaseModel<?> oldModel) {
-		SubjectClp newModel = new SubjectClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setSubjectRemoteModel(oldModel);
 
 		return newModel;
 	}

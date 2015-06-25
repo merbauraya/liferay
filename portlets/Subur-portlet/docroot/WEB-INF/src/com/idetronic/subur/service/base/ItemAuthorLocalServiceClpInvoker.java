@@ -114,25 +114,25 @@ public class ItemAuthorLocalServiceClpInvoker {
 				"com.idetronic.subur.model.ItemAuthor"
 			};
 
-		_methodName100 = "getBeanIdentifier";
+		_methodName78 = "getBeanIdentifier";
 
-		_methodParameterTypes100 = new String[] {  };
+		_methodParameterTypes78 = new String[] {  };
 
-		_methodName101 = "setBeanIdentifier";
+		_methodName79 = "setBeanIdentifier";
 
-		_methodParameterTypes101 = new String[] { "java.lang.String" };
+		_methodParameterTypes79 = new String[] { "java.lang.String" };
 
-		_methodName106 = "add";
+		_methodName84 = "add";
 
-		_methodParameterTypes106 = new String[] { "long", "long" };
+		_methodParameterTypes84 = new String[] { "long", "long" };
 
-		_methodName107 = "getAuthorId";
+		_methodName85 = "getAuthorId";
 
-		_methodParameterTypes107 = new String[] { "long" };
+		_methodParameterTypes85 = new String[] { "long" };
 
-		_methodName108 = "setItemAuthor";
+		_methodName86 = "setItemAuthor";
 
-		_methodParameterTypes108 = new String[] { "long", "long[][]" };
+		_methodParameterTypes86 = new String[] { "long", "long[][]" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -224,33 +224,33 @@ public class ItemAuthorLocalServiceClpInvoker {
 			return ItemAuthorLocalServiceUtil.updateItemAuthor((com.idetronic.subur.model.ItemAuthor)arguments[0]);
 		}
 
-		if (_methodName100.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			return ItemAuthorLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName101.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			ItemAuthorLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName106.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
 			ItemAuthorLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 
 			return null;
 		}
 
-		if (_methodName107.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
+		if (_methodName85.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
 			return ItemAuthorLocalServiceUtil.getAuthorId(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName108.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
 			ItemAuthorLocalServiceUtil.setItemAuthor(((Long)arguments[0]).longValue(),
 				(long[])arguments[1]);
 
@@ -292,14 +292,14 @@ public class ItemAuthorLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName100;
-	private String[] _methodParameterTypes100;
-	private String _methodName101;
-	private String[] _methodParameterTypes101;
-	private String _methodName106;
-	private String[] _methodParameterTypes106;
-	private String _methodName107;
-	private String[] _methodParameterTypes107;
-	private String _methodName108;
-	private String[] _methodParameterTypes108;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
+	private String _methodName84;
+	private String[] _methodParameterTypes84;
+	private String _methodName85;
+	private String[] _methodParameterTypes85;
+	private String _methodName86;
+	private String[] _methodParameterTypes86;
 }

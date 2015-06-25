@@ -9,7 +9,14 @@
 	pageContext.setAttribute("portletURL", portletURL);
 
 	String portletURLString = portletURL.toString();
+	String redirect = ParamUtil.getString(request, "redirect");
+	String backURL = ParamUtil.getString(request, "backURL", redirect);
 %>
+<liferay-ui:header
+	backURL="<%= backURL %>"
+	localizeTitle="<%= true %>"
+	title='manage-author'
+/>
 
 <aui:form action="<%= portletURLString %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
@@ -29,13 +36,13 @@
 			</portlet:renderURL>
 
 			
-				<liferay-portlet:renderURL varImpl="addAuthorURL">
-					<portlet:param name="jspPage" value="/html/admin/author/edit_author.jsp" />
-					<portlet:param name="redirect" value="<%= viewAuthorsURL %>" />
-				</liferay-portlet:renderURL>
+			<liferay-portlet:renderURL varImpl="addAuthorURL">
+				<portlet:param name="jspPage" value="/html/admin/author/edit_author.jsp" />
+				<portlet:param name="redirect" value="<%= viewAuthorsURL %>" />
+			</liferay-portlet:renderURL>
 
-				 <aui:nav-item href="<%=addAuthorURL.toString() %>" iconCssClass="icon-add"
-                      label="add" selected='<%=true %>' />
+			 <aui:nav-item href="<%=addAuthorURL.toString() %>" iconCssClass="icon-add"
+                     label="add" selected='<%=true %>' />
 			
 		</aui:nav>
 

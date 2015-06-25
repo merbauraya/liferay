@@ -3,19 +3,14 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.idetronic.subur.model.Author" />
-	<import class="com.idetronic.subur.model.Division" />
-	<import class="com.idetronic.subur.model.FileEntryType" />
 	<import class="com.idetronic.subur.model.ItemAuthor" />
-	<import class="com.idetronic.subur.model.ItemDivision" />
 	<import class="com.idetronic.subur.model.ItemFileEntry" />
 	<import class="com.idetronic.subur.model.ItemItemType" />
-	<import class="com.idetronic.subur.model.ItemSubject" />
 	<import class="com.idetronic.subur.model.ItemType" />
 	<import class="com.idetronic.subur.model.ItemTypeTemplate" />
 	<import class="com.idetronic.subur.model.MetadataProperty" />
 	<import class="com.idetronic.subur.model.MetadataPropertyValue" />
 	<import class="com.idetronic.subur.model.MetadataSchema" />
-	<import class="com.idetronic.subur.model.Subject" />
 	<import class="com.idetronic.subur.model.SuburItem" />
 	<class name="com.idetronic.subur.model.impl.AuthorImpl" table="subur_Author">
 		<cache usage="read-write" />
@@ -30,34 +25,11 @@
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="metadata" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.idetronic.subur.model.impl.DivisionImpl" table="subur_Division">
-		<cache usage="read-write" />
-		<id name="divisionId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="parentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="divisionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="depositable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-	</class>
-	<class name="com.idetronic.subur.model.impl.FileEntryTypeImpl" table="subur_FileEntryType">
-		<cache usage="read-write" />
-		<id name="typeId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="typeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
 	<class name="com.idetronic.subur.model.impl.ItemAuthorImpl" table="subur_ItemAuthor">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.idetronic.subur.service.persistence.ItemAuthorPK">
 			<key-property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 			<key-property name="authorId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		</composite-id>
-	</class>
-	<class name="com.idetronic.subur.model.impl.ItemDivisionImpl" table="subur_ItemDivision">
-		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.idetronic.subur.service.persistence.ItemDivisionPK">
-			<key-property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-			<key-property name="divisionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
 	</class>
 	<class name="com.idetronic.subur.model.impl.ItemFileEntryImpl" table="subur_ItemFileEntry">
@@ -73,13 +45,6 @@
 		<composite-id name="primaryKey" class="com.idetronic.subur.service.persistence.ItemItemTypePK">
 			<key-property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 			<key-property name="itemTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		</composite-id>
-	</class>
-	<class name="com.idetronic.subur.model.impl.ItemSubjectImpl" table="subur_ItemSubject">
-		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.idetronic.subur.service.persistence.ItemSubjectPK">
-			<key-property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-			<key-property name="subjectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
 	</class>
 	<class name="com.idetronic.subur.model.impl.ItemTypeImpl" table="subur_ItemType">
@@ -126,18 +91,6 @@
 		<property name="metadataName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="nameSpace" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.idetronic.subur.model.impl.SubjectImpl" table="subur_Subject">
-		<cache usage="read-write" />
-		<id name="subjectId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="parentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="subjectName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="lft" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="rgt" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="depositable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="itemCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-	</class>
 	<class name="com.idetronic.subur.model.impl.SuburItemImpl" table="subur_item">
 		<cache usage="read-write" />
 		<id name="itemId" type="long">
@@ -149,6 +102,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="publishedDate" type="org.hibernate.type.TimestampType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="itemAbstract" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />

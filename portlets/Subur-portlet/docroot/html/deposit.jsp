@@ -26,7 +26,7 @@ String[][] categorySections = {item};
 
 <aui:form method="post" action="<%=depositItemURL%>" name="fm" enctype="multipart/form-data" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "submitForm();" %>'>
 	<aui:input name="itemId" type="hidden" value="<%= suburItem.getItemId() %>"/>
-
+	<aui:input name="redirect" value="<%= redirect%>" type="hidden" />
 	<aui:model-context bean="<%=suburItem%>" model="<%=SuburItem.class%>" />
 
 

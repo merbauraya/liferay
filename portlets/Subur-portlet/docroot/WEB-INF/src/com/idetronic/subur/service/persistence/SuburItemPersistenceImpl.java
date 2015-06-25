@@ -1704,6 +1704,7 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 		suburItemImpl.setUserName(suburItem.getUserName());
 		suburItemImpl.setCreateDate(suburItem.getCreateDate());
 		suburItemImpl.setModifiedDate(suburItem.getModifiedDate());
+		suburItemImpl.setPublishedDate(suburItem.getPublishedDate());
 		suburItemImpl.setTitle(suburItem.getTitle());
 		suburItemImpl.setItemAbstract(suburItem.getItemAbstract());
 		suburItemImpl.setStatus(suburItem.getStatus());

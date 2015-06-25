@@ -9,15 +9,21 @@ import com.idetronic.subur.model.MetadataValue;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil;
@@ -33,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletPreferences;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.jsp.JspWriter;
@@ -45,7 +52,31 @@ public class SuburUtil {
 		List metadata = MetadataPropertyValueLocalServiceUtil.getAdditionalMetadata(0);
 		return metadata;
 	}
-	
+	/**
+	 * Merge related asset id with DLFileEntry id
+	 * @param relatedAsset
+	 * @param fileEntries
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	public static long[] mergeRelatedAssetWithDlFileEntry(long[] relatedAsset,long[] fileEntries) throws PortalException, SystemException
+	{
+		long[] dlFileEntryAssetPK = new long[fileEntries.length];
+		
+		
+		if (fileEntries != null ){
+			for (int i = 0; i < fileEntries.length; i++)
+			{
+				
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(DLFileEntry.class.getName(), fileEntries[i]);
+				dlFileEntryAssetPK[i] = assetEntry.getEntryId();
+			}
+		}
+		relatedAsset = ArrayUtil.append(dlFileEntryAssetPK,relatedAsset);
+		return relatedAsset;
+		
+	}
 	
 	public List getAuthor(long itemId)
 	{
@@ -198,6 +229,10 @@ public class SuburUtil {
 	public static int countAssetVocabularyById(long vocabularyId) throws SystemException
 	{
 		return  SuburItemLocalServiceUtil.countAssetVocabularyById(vocabularyId);
+	}
+	public List<AssetEntry> getAssetEntries(PortletPreferences portletPreferences)
+	{
+		return null;
 	}
 
 }

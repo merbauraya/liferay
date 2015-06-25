@@ -105,25 +105,92 @@ public class Subur extends MVCPortlet {
 		
 		
 	}
-	
-	public void depositItem(ActionRequest request,ActionResponse response) throws PortalException, SystemException
+	/**
+	 * Publish a subur item
+	 * @param request
+	 * @param response
+	 * @throws SystemException 
+	 * @throws PortalException 
+	 * @throws IOException 
+	 */
+	public void publishItem(ActionRequest request,ActionResponse response) throws PortalException, SystemException, IOException
 	{
-		_request = request;
-		long userId = PortalUtil.getUser(request).getUserId();
+		long itemId = ParamUtil.getLong(request, "itemId");
+		String redirect = ParamUtil.getString(request, "redirect");
+		SuburItemLocalServiceUtil.publishItem(itemId);
+		if (Validator.isNotNull(redirect))
+			response.sendRedirect(redirect);
+		
+	}
+	/**
+	 * Withdraw an item from public viewing
+	 * @param request
+	 * @param response
+	 * @throws PortalException
+	 * @throws SystemException
+	 * @throws IOException 
+	 */
+	public void withdrawItem(ActionRequest request,ActionResponse response) throws PortalException, SystemException, IOException
+	{
+		long itemId = ParamUtil.getLong(request, "itemId");
+		String redirect = ParamUtil.getString(request, "redirect");
+		SuburItemLocalServiceUtil.withDrawItem(itemId);
+		if (Validator.isNotNull(redirect))
+			response.sendRedirect(redirect);
+	}
+	/**
+	 * delete Subur Item /or move to thrash if supported
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	public void deleteItem(ActionRequest request,ActionResponse response) throws IOException
+	{
+		String cmd = ParamUtil.getString(request, Constants.CMD);
+		String redirect = ParamUtil.getString(request, "redirect");
+		if (cmd.equals(Constants.DELETE)){
+				//process delete todo
+		}
+		else if (cmd.equals(Constants.MOVE_TO_TRASH)){
+			//todo process thrash
+		}
+		if (Validator.isNotNull(redirect))
+			response.sendRedirect(redirect);
+		
+	}
+	
+	/**
+	 * 
+	 * @param actionRequest
+	 * @param actionResponse
+	 * @throws PortalException
+	 * @throws SystemException
+	 * @throws IOException 
+	 */
+	public void depositItem(ActionRequest actionRequest,ActionResponse actionResponse) throws PortalException, SystemException, IOException
+	{
+		_request = actionRequest;
+		long userId = PortalUtil.getUser(actionRequest).getUserId();
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-		         SuburItem.class.getName(), request);
+		         SuburItem.class.getName(), actionRequest);
 		
 		
-		themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+		themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(actionRequest);
+		logger.info(DLFileEntry.class.getName());
+		
+		
 		
 		long itemId = ParamUtil.getLong(uploadRequest, "itemId");
+		String redirect = ParamUtil.getString(uploadRequest, "redirect");
 		File file = uploadRequest.getFile("itemFile");
 		String sourceFile = uploadRequest.getFileName("itemFile");
 		//logger.info("sourceFile="+sourceFile);
 		//logger.info("file="+file);
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String subjects = ParamUtil.getString(uploadRequest, "subject");
+		int itemStatus = ParamUtil.getInteger(uploadRequest, "itemStatus");
 		
 		String itemAbstract = ParamUtil.getString(uploadRequest, "itemAbstract");
 		long divisionId = ParamUtil.getLong(uploadRequest, "division");
@@ -132,15 +199,24 @@ public class Subur extends MVCPortlet {
 		String authorIdsString = ParamUtil.getString(uploadRequest, "authorsSearchContainerPrimaryKeys");
 		String assetLinkEntryIdsString = ParamUtil.getString(uploadRequest,
 				"assetLinksSearchContainerPrimaryKeys");
+		
+		//selected temp file for upload
+		String[] selectedFiles = uploadRequest.getParameterValues("selectUploadedFileCheckbox");
+		long[] fileEntries = null;		
+		if (selectedFiles != null)
+			fileEntries = processTempFile(selectedFiles,actionRequest,themeDisplay);
+		
+		long[] assetLinkEntryIds = null;
+		
 		if (assetLinkEntryIdsString != null) {
-			long[] assetLinkEntryIds = StringUtil.split(
+			assetLinkEntryIds = StringUtil.split(
 				assetLinkEntryIdsString, 0L);
 
-			serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
+			
 		}
+		assetLinkEntryIds = SuburUtil.mergeRelatedAssetWithDlFileEntry(assetLinkEntryIds, fileEntries);
 
-		logger.info(assetLinkEntryIdsString);
-		
+		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);		
 		
 		long[] authorIds = StringUtil.split(GetterUtil.getString(authorIdsString), 0L);
 		
@@ -160,12 +236,14 @@ public class Subur extends MVCPortlet {
 		}
 		
 		String tags = ParamUtil.getString(uploadRequest, "assetTagNames");
-		logger.info(tags);
+		
 		String[] tagNamesArr = null;
 		if (!tags.isEmpty())
 		{
 			tagNamesArr = tags.split(",");
 		}
+		
+		
 		
 		
 		try {
@@ -174,16 +252,22 @@ public class Subur extends MVCPortlet {
 			//		themeDisplay.getScopeGroupId(), title, itemAbstract,serviceContext);
 			suburItem.setTitle(title);
 			suburItem.setItemAbstract(itemAbstract);
+			suburItem.setStatus(itemStatus);
 			//SuburItemLocalServiceUtil.updateSuburItem(suburItem);
 			serviceContext.setAssetTagNames(tagNamesArr);
 			serviceContext.setAssetCategoryIds(catIds);
 			SuburItemLocalServiceUtil.updateSuburItem(suburItem, userId, serviceContext);
 			ItemAuthorLocalServiceUtil.setItemAuthor(itemId, authorIds);
 			
+			
+		
+			
 			if (Validator.isNotNull(sourceFile))
 				attachItemFile(suburItem,file);
 			setItemType(suburItem.getItemId(),uploadRequest);
-			//addSubject(item.getItemId(), subjects);
+			
+			if (Validator.isNotNull(redirect))
+				actionResponse.sendRedirect(redirect);
 			
 		} catch (PortalException e) {
 			//SessionErrors.add(request, e.getClass().getName());
@@ -255,68 +339,7 @@ public class Subur extends MVCPortlet {
 			return "success";
 			}
 	
-	
-	private void addDivision(long itemId,long divisionId) throws SystemException
-	{
-		ItemDivisionLocalServiceUtil.addItemDivision(itemId, divisionId);
-	}
-	
-	
-	/* Add subject to the item
-	 * subjects - comma separated subject id
-	 * 
-	 * 
-	 */
-	private void addSubject(long itemId,String subjects) throws SystemException, NumberFormatException, PortalException
-	{
-		ArrayList itemSubject = new ArrayList(Arrays.asList(subjects.split(","))); 
-		ItemSubjectLocalServiceUtil.addItemSubject(itemId,itemSubject);
 		
-		
-		
-	}
-	private void addAuthor(long itemId,UploadPortletRequest request,PortletResponse response) throws SystemException, NoSuchMetadataPropertyValueException
-	{
-		/* handle author */
-		
-		
-		String authorIndexesString = ParamUtil.getString(request, "authorsIndexes");
-		logger.info("author="+authorIndexesString);
-		if (Validator.isNull(authorIndexesString)) {
-			
-			return;
-		}
-		Set<Long> authorEntryIds = new HashSet<Long>();
-		int[] authorEntriesIndexes = StringUtil.split(
-				authorIndexesString, 0);
-		
-		
-		for (int authorEntriesIndex : authorEntriesIndexes)
-		{
-			long authorEntryId = ParamUtil.getLong(
-					request, "authorEntryId" + authorEntriesIndex);
-			String firstName = ParamUtil.getString(request, "firstName" + authorEntriesIndex);
-			logger.info(firstName);
-			
-			String lastName = ParamUtil.getString(request, "lastName" + authorEntriesIndex);
-			logger.info(lastName);
-			
-			if (authorEntryId <= 0)
-			{
-				MetadataPropertyValueLocalServiceUtil.addMetadataPropertyValue(itemId, 
-						SuburConstant.METADATA_CONTRIBUTOR_AUTHOR, 
-						SuburUtil.getName(firstName, lastName));
-			}else
-			{
-				MetadataPropertyValueLocalServiceUtil.updateMetadataPropertyValue(authorEntryId, 
-						itemId,SuburConstant.METADATA_CONTRIBUTOR_AUTHOR, 
-						SuburUtil.getName(firstName, lastName));
-			}
-		}
-		
-		
-		
-	}
 	private void setOtherTitle(long itemId,String otherTitle) throws SystemException
 	{
 		MetadataPropertyValueLocalServiceUtil.addMetadataPropertyValue(itemId, 
@@ -433,6 +456,83 @@ public class Subur extends MVCPortlet {
           return jsonResults.toString();
 		
 	}
+	private long[] processTempFile(String[] selectedFile,ActionRequest actionRequest, ThemeDisplay themeDisplay)
+	{
+		
+		
+		List<FileEntry> tempFileEntrys = new ArrayList<FileEntry>();
+		logger.info("processTmp");
+		long[] fileEntries = null;
+		
+		long folderId = SuburFolderUtil.getFolderId(actionRequest, themeDisplay);
+		String changeLog = StringPool.BLANK;
+		String description = StringPool.BLANK;
+		boolean incrementCounter = false;
+		
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(actionRequest);
+
+		try
+	    {
+	        
+	        long userId = themeDisplay.getUserId();
+	        long groupId = themeDisplay.getScopeGroupId();
+	        
+	        
+
+	        if(selectedFile != null)
+	        {
+	            for(int i = 0; i < selectedFile.length; ++i)
+	            {
+	                FileEntry tmpfile = TempFileUtil.getTempFile(themeDisplay.getScopeGroupId(), themeDisplay.getUserId(), selectedFile[i], SuburConstant.TEMP_UPLOAD_FOLDER);
+	                if(tmpfile!=null && tmpfile.getTitle()!=null && (!tmpfile.getTitle().equals("")))
+	                {
+	                    tempFileEntrys.add(tmpfile);
+	                    System.out.println("file: " + tmpfile.getTitle());
+	                }
+	            }
+	        }
+	        fileEntries = new long[tempFileEntrys.size()];
+	        for (int i = 0; i < tempFileEntrys.size(); i++)  //(FileEntry tmpFileEntry : tempFileEntrys)
+	        {
+	        	FileEntry tmpFileEntry = tempFileEntrys.get(i);
+	        	long fileEntryId = tmpFileEntry.getFileEntryId();
+	        	File file = DLFileEntryLocalServiceUtil.getFile(userId, fileEntryId, tmpFileEntry.getVersion(), incrementCounter);
+
+	        	
+	        	String version = tmpFileEntry.getVersion();
+	        	String sourceFileName = file.getName();
+	        	String title = tmpFileEntry.getTitle();
+	        	String mimeType = tmpFileEntry.getMimeType();
+	        	
+	        	//InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(themeDisplay.getUserId(),fileEntry.getFileEntryId(), fileEntry.getVersion());
+	        	//DLFileEntryLocalServiceUtil.addFileEntry(userId, groupId, repositoryId, folderId, sourceFileName, mimeType, title, description, changeLog, fileEntryTypeId, fieldsMap, file, is, size, new ServiceContext());
+		        FileEntry fileEntry = DLAppServiceUtil.addFileEntry(themeDisplay.getScopeGroupId(), folderId, sourceFileName, mimeType, title, description, changeLog, file,  new ServiceContext());
+		        logger.info(fileEntry.getFileEntryId()+ fileEntry.getTitle());
+		        fileEntries[i] = fileEntry.getFileEntryId();
+	        }
+	        
+	        
+	    }
+	    catch (Exception e) 
+	    {
+	        e.printStackTrace();
+	        
+	    }
+	    finally
+	    {
+	        //delete all tmp files uploaded in liferay tmp folder
+	        for (FileEntry tmp : tempFileEntrys) 
+	        {
+	            try 
+	            {
+	                TempFileUtil.deleteTempFile(tmp.getFileEntryId());
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+		return fileEntries;
+	}
 	
 	private long uploadFile(ResourceRequest resourceRequest,
             ResourceResponse resourceResponse) throws IOException {
@@ -514,7 +614,7 @@ public class Subur extends MVCPortlet {
 	    }
 	    actionResponse.setRenderParameter("mvcPath","/jsp/viewList.jsp");
 	}
-	public void manageFileUpload(ActionRequest request,ActionResponse response) throws Exception
+	public void manageTempFileUpload(ActionRequest request,ActionResponse response) throws Exception
 	{
 		
 		logger.info("manage file upload");
@@ -522,10 +622,12 @@ public class Subur extends MVCPortlet {
 		//upload file in liferay tmp folder
 	    UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(request);
 	    ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-	    long folderId = SuburFolderUtil.getFolderId(request, themeDisplay);// .xxx();  ParamUtil.getLong(uploadPortletRequest, "folderId");
+	    //long folderId = SuburFolderUtil.getFolderId(request, themeDisplay);// .xxx();  ParamUtil.getLong(uploadPortletRequest, "folderId");
+	    long folderId = ParamUtil.getLong(uploadPortletRequest, "folderId");
+
 	    String sourceFileName = uploadPortletRequest.getFileName("file");
 	    long itemId=ParamUtil.getLong(request, "suburItemId");
-	    logger.info("itemid="+itemId);
+	    
 	    File file;
 	    String title = sourceFileName;
 	    String description = null;
@@ -539,8 +641,16 @@ public class Subur extends MVCPortlet {
 	        file = uploadPortletRequest.getFile("file");
 	        String mimeType = MimeTypesUtil.getContentType(file);
 	        String contentType = uploadPortletRequest.getContentType("file");
-	        FileEntry fileEntry = DLAppServiceUtil.addFileEntry(themeDisplay.getScopeGroupId(), folderId, sourceFileName, mimeType, title, description, changeLog, file,  new ServiceContext());
+	        //FileEntry fileEntry = DLAppServiceUtil.addFileEntry(themeDisplay.getScopeGroupId(), folderId, sourceFileName, mimeType, title, description, changeLog, file,  new ServiceContext());
 	        
+	        DLAppServiceUtil.addTempFileEntry(themeDisplay.getScopeGroupId(), folderId, sourceFileName,SuburConstant.TEMP_UPLOAD_FOLDER, inputStream, contentType);
+	        
+	        JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+	        jsonObject.put("name", sourceFileName);
+	        jsonObject.put("title", sourceFileName);
+	        writeJSON(request, response, jsonObject);
+	        
+	        /*
 	        long fileEntryId = fileEntry.getFileEntryId();
 	        //attach uploaded file to item
 	        ItemFileEntryLocalServiceUtil.add(itemId, fileEntryId, 0);
@@ -551,11 +661,11 @@ public class Subur extends MVCPortlet {
 	        JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 	        jsonObject.put("name", sourceFileName);
 	        jsonObject.put("title", sourceFileName);
-	        writeJSON(request, response, jsonObject);
+	        writeJSON(request, response, jsonObject);*/
 	    }
 	    catch (Exception e)
 	    {
-	    	logger.error(e);
+	    	
 	    	UploadException uploadException =(UploadException)request.getAttribute(WebKeys.UPLOAD_EXCEPTION);
 	        if ((uploadException != null) &&uploadException.isExceededSizeLimit()) 
 	        {
@@ -572,6 +682,13 @@ public class Subur extends MVCPortlet {
 	        StreamUtil.cleanUp(inputStream);
 	    }
 	}
+	/**
+	 * Delete temp uploaded files
+	 * @param actionRequest
+	 * @param actionResponse
+	 * @throws IOException
+	 * @throws PortletException
+	 */
 	public void deleteTempFile(ActionRequest actionRequest,ActionResponse actionResponse) throws IOException, PortletException 
 	{
 	    //delete file from liferay tmp folder, before uploaded
@@ -583,11 +700,12 @@ public class Subur extends MVCPortlet {
 	    JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 	    try 
 	    {
-	    	FileEntry fileEntry = DLAppServiceUtil.getFileEntry(themeDisplay.getScopeGroupId(), folderId, fileName) ;
+	    	DLAppServiceUtil.deleteTempFileEntry(themeDisplay.getScopeGroupId(), folderId, fileName,SuburConstant.TEMP_UPLOAD_FOLDER);
+	    	//FileEntry fileEntry = DLAppServiceUtil.getFileEntry(themeDisplay.getScopeGroupId(), folderId, fileName) ;
 	    	
-	    	ItemFileEntryLocalServiceUtil.delete(itemId,fileEntry.getFileEntryId());
-	    	DLAppServiceUtil.deleteFileEntry(fileEntry.getFileEntryId());
-	    	
+	    	//ItemFileEntryLocalServiceUtil.delete(itemId,fileEntry.getFileEntryId());
+	    	//DLAppServiceUtil.deleteFileEntry(fileEntry.getFileEntryId());
+	    	//DLAppServiceUtil.deleteTempFileEntry(groupId, folderId, fileName, tempFolderName);
 	    	//DLAppServiceUtil.deleteFileEntryByTitle(themeDisplay.getScopeGroupId(), folderId, fileName);
 	    	//DLAppServiceUtil.deleteTempFileEntry(themeDisplay.getScopeGroupId(), folderId, fileName,_TEMP_FOLDER_NAME_ATTACHMENT);
 	        jsonObject.put("deleted", Boolean.TRUE);

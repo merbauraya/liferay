@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.idetronic.subur.model.Author;
 import com.idetronic.subur.model.ItemDivision;
 import com.idetronic.subur.model.ItemItemType;
@@ -34,6 +35,7 @@ import com.idetronic.subur.service.ItemSubjectLocalServiceUtil;
 import com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil;
 import com.idetronic.subur.service.SuburItemLocalServiceUtil;
 import com.idetronic.subur.service.persistence.ItemActionableDynamicQuery;
+import com.idetronic.subur.service.persistence.SuburItemActionableDynamicQuery;
 import com.idetronic.subur.util.SuburConstant;
 
 public class SuburIndexer extends BaseIndexer {
@@ -98,9 +100,13 @@ public class SuburIndexer extends BaseIndexer {
          long[] authorIds = ItemAuthorLocalServiceUtil.getAuthorId(item.getItemId());
          List<Author> authors = AuthorLocalServiceUtil.getAuthors(authorIds);
          String[] authorString = new String[authors.size()];
+         String[] authorFirstName = new String[authors.size()];
+         String[] authorLastName = new String[authors.size()];
          for (int i = 0; i < authors.size();i++)
          {
-        	 authorString[i] = authors.get(i).getLastName() + "," + authors.get(i).getFirstName();
+        	 authorString[i] = authors.get(i).getLastName() + StringPool.SPACE + authors.get(i).getFirstName();
+        	 authorFirstName[i] = authors.get(i).getFirstName();
+        	 authorLastName[i] = authors.get(i).getLastName();
          }
          //List authorList = MetadataPropertyValueLocalServiceUtil.getAuthor(item.getItemId());
          
@@ -108,16 +114,13 @@ public class SuburIndexer extends BaseIndexer {
          
          
          Field authorField = new Field(SuburConstant.FIELD_AUTHOR, authorString );
+         Field authorFirstNameField = new Field(SuburConstant.FIELD_AUTHOR_FIRST_NAME,authorFirstName);
+         Field authorLastNameField = new Field(SuburConstant.FIELD_AUTHOR_LAST_NAME,authorLastName);
          
          //authorField.setTokenized(true);
          document.add(authorField);
-         //get subject
-        /* List<ItemSubject> itemSubjects = ItemSubjectLocalServiceUtil.getByItemId(item.getItemId());
-         for (ItemSubject itemSubject : itemSubjects)
-         {
-        	 document.addKeyword(SuburConstant.FIELD_SUBJECT, itemSubject.getSubjectId());
-         }
-         */
+         document.add(authorFirstNameField);
+         document.add(authorLastNameField);
          
 
          return document;
@@ -141,7 +144,7 @@ public class SuburIndexer extends BaseIndexer {
         Document document = getDocument(item);
 
         SearchEngineUtil.updateDocument(
-                getSearchEngineId(), item.getCompanyId(), document);
+                getSearchEngineId(), item.getCompanyId(), document,true);
 		
 	}
 
@@ -165,7 +168,7 @@ public class SuburIndexer extends BaseIndexer {
 
 		final Collection<Document> documents = new ArrayList<Document>();
 		
-		ActionableDynamicQuery actionableDynamicQuery = new ItemActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new SuburItemActionableDynamicQuery() {
 		
 		    @Override
 		    protected void addCriteria(DynamicQuery dynamicQuery) {
@@ -186,8 +189,7 @@ public class SuburIndexer extends BaseIndexer {
 		
 		actionableDynamicQuery.performActions();
 		
-		SearchEngineUtil.updateDocuments(getSearchEngineId(), companyId,
-		            documents);
+		SearchEngineUtil.updateDocuments(getSearchEngineId(), companyId,documents,true);
 		}
 	@Override
 	protected String getPortletId(SearchContext arg0) {

@@ -55,10 +55,10 @@
                 params: {
                     groupId: <%= scopeGroupId %>,
                     folderId: <%= DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>,
-                    tempFolderName: 'com.idetronic.subur.Subur._TEMP_FOLDER_NAME_ATTACHMENT'
+                    tempFolderName: '<%=SuburConstant.TEMP_UPLOAD_FOLDER%>'
                 }
             },
-            uploadFile: '<liferay-portlet:actionURL name="manageFileUpload" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="suburItemId" value="<%=String.valueOf(itemId) %>" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD_TEMP %>" /><portlet:param name="folderId" value="<%= String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>" /></liferay-portlet:actionURL>&ticketKey=<%= ticket.getKey() %><liferay-ui:input-permissions-params modelName="<%= DLFileEntryConstants.getClassName() %>" />'
+            uploadFile: '<liferay-portlet:actionURL name="manageTempFileUpload" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="suburItemId" value="<%=String.valueOf(itemId) %>" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD_TEMP %>" /><portlet:param name="folderId" value="<%= String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>" /></liferay-portlet:actionURL>&ticketKey=<%= ticket.getKey() %><liferay-ui:input-permissions-params modelName="<%= DLFileEntryConstants.getClassName() %>" />'
         }
     );
     
