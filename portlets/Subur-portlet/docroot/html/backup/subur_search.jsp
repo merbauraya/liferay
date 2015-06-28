@@ -7,12 +7,7 @@
 <%@ page import="com.liferay.portal.kernel.search.BooleanClause" %>
 <%@ page import="com.liferay.portal.kernel.search.BooleanClauseFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.Query" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchResultUtil" %>
 <%@ page import="com.idetronic.subur.search.SuburSearchUtil" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchResult" %>
-<%@ page import="com.liferay.portal.kernel.search.Summary" %>
-<%@ page import="com.liferay.util.MathUtil" %>
-
 
 
 <%
@@ -49,18 +44,6 @@
 
     
 </aui:form>
-<%
-	PortletURL portletURL = renderResponse.createRenderURL();
-
-	portletURL.setParameter("jspPage", SuburConstant.PAGE_SUBUR_SEARCH);
-	portletURL.setParameter("redirect", redirect);
-	portletURL.setParameter("keywords", keywords);
-	%>
-
-<liferay-ui:search-container
-		emptyResultsMessage='<%= LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>") %>'
-		iteratorURL="<%= portletURL %>"
-	>
 
 <%
         SearchContext searchContext = SearchContextFactory.getInstance(request);
@@ -99,7 +82,7 @@
 	    QueryConfig queryConfig = new QueryConfig();
 
 		queryConfig.setHighlightEnabled(true);
-		queryConfig.setHitsProcessingEnabled(true);
+
 		searchContext.setQueryConfig(queryConfig);
 	    
 	    
@@ -111,50 +94,49 @@
         Indexer indexer = IndexerRegistryUtil.getIndexer(SuburItem.class);
 
         Hits hits = indexer.search(searchContext);
-        searchContainer.setTotal(hits.getLength());
-        
-        PortletURL hitURL = renderResponse.createRenderURL();
+		//Hits hits =  SearchEngineUtil.search(searchContext, fullQuery); 
+        List<SuburItem> items = new ArrayList<SuburItem>();
 
-		hitURL.setParameter("struts_action", "/blogs/view_entry");
-		hitURL.setParameter("redirect", currentURL);
-		for (String s: hits.getQueryTerms())
-			out.print("terms="+s);
+        for (int i = 0; i < hits.getDocs().length; i++) {
+                Document doc = hits.doc(i);
+
+                long itemId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+
+                SuburItem item = null;
+				
+                try {
+                	item = SuburItemLocalServiceUtil.fetchSuburItem(itemId);
+                } catch (SystemException se) {
+                        _log.error(se.getLocalizedMessage());
+                }
+
+                items.add(item);
+        }
+       
 %>
-	<liferay-ui:search-container-results
-			results="<%= SearchResultUtil.getSearchResults(hits, locale, hitURL) %>"
-		/>
-	<liferay-ui:search-container-row
-			className="com.liferay.portal.kernel.search.SearchResult"
-			modelVar="searchResult"
-		>
-        	<%
-			SuburItem entry = SuburItemLocalServiceUtil.getSuburItem(searchResult.getClassPK());
 
-			entry = entry.toEscapedModel();
+<liferay-ui:search-container delta="10" emptyResultsMessage="no-entries-were-found">
+        <liferay-ui:search-container-results
+                results="<%= items %>"
+                total="<%= items.size() %>"
+        />
 
-			Summary summary = searchResult.getSummary();
-			String searchDescription = entry.getSearchDescription(); 
-			%>
-        	<portlet:renderURL var="rowURL" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
-				<portlet:param name="jspPage" value="/html/renderer/item_full.jsp" />
-				<portlet:param name="itemId" value="<%= String.valueOf(entry.getItemId())%>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="urlTitle" value="<%= StringPool.BLANK %>" />
-			</portlet:renderURL>
-        <liferay-ui:app-view-search-entry
-				cssClass='<%= MathUtil.isEven(index) ? "search" : "search alt" %>'
-				description="<%= (searchDescription  != StringPool.BLANK) ? searchDescription : entry.getItemAbstract() %>"
-				queryTerms="<%= hits.getQueryTerms() %>"
-				thumbnailSrc="<%= StringPool.BLANK %>"
-				title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : entry.getTitle() %>"
-				url="<%= rowURL %>"
-			/>
-		</liferay-ui:search-container-row> 
+        <liferay-ui:search-container-row
+                className="com.idetronic.subur.model.SuburItem"
+                keyProperty="itemId" modelVar="item" escapedModel="<%=true%>">
+                <liferay-ui:search-container-column-text name="Entry" value="<%=Long.toString(item.getItemId())%>" />
 
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="more" />
-	</liferay-ui:search-container>
-        
-		
+                <liferay-ui:search-container-column-text property="title" />
+
+                
+
+                <liferay-ui:search-container-column-jsp
+            path="/html/action/item_actions.jsp"
+            align="right" />
+        </liferay-ui:search-container-row>
+
+        <liferay-ui:search-iterator />
+</liferay-ui:search-container>
 
 <%
         if (Validator.isNotNull(keywords)) {

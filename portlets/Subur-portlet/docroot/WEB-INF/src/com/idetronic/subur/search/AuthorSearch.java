@@ -45,8 +45,8 @@ public class AuthorSearch extends SearchContainer<Author> {
 	public static final String EMPTY_RESULTS_MESSAGE = "no-authors-were-found";
 	
 
-	public static List<String> headerNames = new ArrayList<>();
-	public static Map<String, String> orderableHeaders = new HashMap<>();
+	public static List<String> headerNames = new ArrayList<String>();
+	public static Map<String, String> orderableHeaders = new HashMap<String,String>();
 
 	static {
 		headerNames.add("firstName");

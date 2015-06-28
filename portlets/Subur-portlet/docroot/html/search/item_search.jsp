@@ -14,11 +14,16 @@
 >
 	<aui:fieldset>
 		
-		<aui:input name="<%= suburDisplayTerms.TITLE %>" size="20" value="<%= suburDisplayTerms.getTitle() %>" />
-
+		<aui:input inlineLabel ="left" inlineField="<%= true %>" name="<%= suburDisplayTerms.TITLE %>" size="20" value="<%= suburDisplayTerms.getTitle() %>" />
+		
+		<aui:field-wrapper>
+			
+			<aui:input inlineLabel ="left" inlineField="true" name="<%= suburDisplayTerms.AUTHOR_FIRST_NAME %>" size="30" value="<%= suburDisplayTerms.getAuthorFirstName() %>" />
+			<aui:input last="<%=true %>" inlineLabel ="left" inlineField="<%= true %>" name="<%= suburDisplayTerms.AUTHOR_LAST_NAME %>" size="30" value="<%= suburDisplayTerms.getAuthorLastName() %>" />
+		</aui:field-wrapper>
 		<aui:input name="<%= suburDisplayTerms.AUTHOR %>" size="20" value="<%= suburDisplayTerms.getAuthor() %>" />
 		
-		<aui:input name="<%= suburDisplayTerms.YEAR_PUBLISHED %>" size="20" value="<%= suburDisplayTerms.getYear() %>" />
+		<aui:input label="yearPublished" name="<%= suburDisplayTerms.YEAR_PUBLISHED %>" size="20" value="<%= suburDisplayTerms.getYear() %>" />
 		
 		
 	</aui:fieldset>

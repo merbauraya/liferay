@@ -29,6 +29,7 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,8 +65,8 @@ public class SuburUtil {
 	{
 		long[] dlFileEntryAssetPK = new long[fileEntries.length];
 		
-		
-		if (fileEntries != null ){
+		//process newly upload files, if any
+		if (fileEntries.length > 0 ){
 			for (int i = 0; i < fileEntries.length; i++)
 			{
 				
@@ -73,6 +74,7 @@ public class SuburUtil {
 				dlFileEntryAssetPK[i] = assetEntry.getEntryId();
 			}
 		}
+		
 		relatedAsset = ArrayUtil.append(dlFileEntryAssetPK,relatedAsset);
 		return relatedAsset;
 		
@@ -86,6 +88,16 @@ public class SuburUtil {
 		//authorQuery.add(PropertyFactoryUtil.forName(propertyName))
 		//List<Object> authors = MetadataValueLocalServiceUtil.
 		return null;
+	}
+	public static String getAuhorDisplayName(String firstName,String lastName)
+	{
+		if (Validator.isBlank(lastName) || Validator.isNull(lastName))
+		{
+			return lastName +",";
+		}else
+		{
+			return lastName + "," + firstName;
+		}
 	}
 	public static String getName(String firstName,String lastName)
 	{
@@ -107,11 +119,11 @@ public class SuburUtil {
 		}
 		if (name.equals(","))
 			return StringPool.BLANK;
-		logger.info("name="+name);
+		
 		String[] names = name.split(",");
 		if (names.length < 2)
 			return StringPool.BLANK;
-		logger.info("length="+names.length);
+		
 		return names[1];
 		
 	}
@@ -134,105 +146,18 @@ public class SuburUtil {
 		return StringPool.BLANK;
 		
 	}
-	public static TreeNode<Division> showDivisionTree(JspWriter out,
-			long divisionId) throws SystemException, IOException
-	{
-		long rootKey = 0;
-		List<Division> divisions = DivisionLocalServiceUtil.findAll();
-		
-		
-		
-		HashMap<Long,Division> divs = new HashMap<Long,Division>();
-		HashMap<Long,TreeNode> nodes = new HashMap<Long,TreeNode>();
-		
-        Map<Long, List<Division>> m = new LinkedHashMap<Long, List<Division>>();
-        
-        Map<Long, TreeNode> k = new LinkedHashMap<Long, TreeNode>();
-        TreeNode<Division> rootNode;
-        
-		
-		
-		
-		//map parent to child
-		for(Division division: divisions)
-		{
-			List<Division> div = m.get(division.getParentId());
-			divs.put(division.getDivisionId(), division);//  = m.get(division.getParentId());
-			
-			if (division.getParentId() ==0)
-			{
-				logger.info("found root");
-				rootKey = division.getDivisionId();
-				rootNode = new TreeNode(division);
-				nodes.put(division.getDivisionId(), rootNode);
-				
-			}
-			else
-			{
-				Division parent = divs.get(division.getParentId());
-				TreeNode parentNode = nodes.get(division.getParentId());
-				TreeNode node = new TreeNode(division);
-				parentNode.addChild(node);
-				nodes.put(division.getDivisionId(), node);
-				//logger.info(division.getDivisionId());
-				
-			}
-			
-			if (div == null)
-			{
-				m.put(division.getParentId(), div=new ArrayList<Division>());
-			}
-			div.add(division);
-			
-		}
-		
-		TreeNode returnNode = nodes.get(rootKey);
-		
-		buildOrder(out, returnNode,divisionId,0);
-		
-		
-		
-		
-		return returnNode;
-	}
-	private static void buildOrder(JspWriter out,TreeNode<Division> node,
-			long divisionId,int level) throws IOException
-	{
-		
-		Division div = node.data;
-		String divName = StringPool.BLANK;
-		for (int i=0;i<level*2;i++)
-			divName = divName + "&nbsp;";
-		
-		divName=divName + div.getDivisionName();
-		
-		if (!div.isDepositable())
-		{
-			out.print("<optgroup label=\""+divName+"\">");
-		}else
-		{
-			String selected = StringPool.BLANK;
-			if (Validator.equals(divisionId, div.getDivisionId()))
-				selected = "selected";
-			out.print("<option value='"+div.getDivisionId()+"' " +selected + ">"+divName+"</option>");
-		}
-			
-		//logger.info(level + " ::" + div.getDivisionId() + " :: " + div.getDivisionName());
-		for (int i = 0;i<node.getNumberOfChildren();i++)
-				{
-					buildOrder(out,node.getChildAt(i),divisionId,level+1);
-				}
-		
-		if (!div.isDepositable())
-			out.print("</optgroup>");
-	}
+	
 	public static int countAssetVocabularyById(long vocabularyId) throws SystemException
 	{
 		return  SuburItemLocalServiceUtil.countAssetVocabularyById(vocabularyId);
 	}
-	public List<AssetEntry> getAssetEntries(PortletPreferences portletPreferences)
+	
+	public static byte[] inputStreamToByteArray(InputStream is) throws IOException
 	{
-		return null;
+		
+	    byte[] targetArray = new byte[is.available()];
+	    is.read(targetArray);
+	    return targetArray;
 	}
 
 }

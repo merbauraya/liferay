@@ -4,8 +4,8 @@
 <taglib>
 	<tlib-version>1.0</tlib-version>
 	<jsp-version>1.1</jsp-version>
-	<short-name>liferay-ui</short-name>
-	<uri>http://liferay.com/tld/subur</uri>
+	<short-name>subur</short-name>
+	<uri>http://idetronic.com.my/tld/subur</uri>
 
 	
 
@@ -18,6 +18,35 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>viewAuthorURL</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
 		
 	</tag>
+	<tag>
+		<name>item-asset-links</name>
+		<tag-class>com.idetronic.subur.taglib.AssetLinkTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>assetEntryId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>serveFileURL</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>nameSpace</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		
+	</tag>
+	
 </taglib>

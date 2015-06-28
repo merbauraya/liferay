@@ -293,6 +293,35 @@ public class ItemAuthorLocalServiceUtil {
 	}
 
 	/**
+	* Get list of author for the given item Id
+	*
+	* @param itemId
+	* @return list of author
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	public static java.util.List<com.idetronic.subur.model.Author> getAuthors(
+		long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAuthors(itemId);
+	}
+
+	/**
+	* Get an array of author for a given item id
+	*
+	* @param itemId
+	* @return array of Author
+	* @throws PortalException
+	* @throws SystemException
+	*/
+	public static com.idetronic.subur.model.Author[] getAuthorArray(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAuthorArray(itemId);
+	}
+
+	/**
 	* Set Item author based on given itemid and array of author ids
 	*
 	* @param itemId to be updated

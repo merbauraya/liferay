@@ -68,6 +68,7 @@ public class SuburConstant {
 	public static String PAGE_NEW_ITEM = "/html/deposit/new.jsp";
 	public static String PAGE_ADMIN_ITEM = "/html/admin/subur/view.jsp";
 	public static String PAGE_ADMIN_AUTHOR = "/html/admin/author/view.jsp";
+	public static String PAGE_SUBUR_SEARCH = "/html/search/subur_search.jsp";
 	
 	/* webkeys
 	 * 
@@ -102,25 +103,27 @@ public class SuburConstant {
 	
 	
 	/* File entry Type */
-	public static int FILE_ENTRY_COVER_PAGE = 1;
-	public static int FILE_ENTRY_MAIN_DOCUMENT = 2;
+	public static final int FILE_ENTRY_COVER_PAGE = 1;
+	public static final int FILE_ENTRY_MAIN_DOCUMENT = 2;
 	
 	
 	
 	/* Indexer Field Constant */
-	public static String FIELD_YEAR = "yearAdded";
-	public static String FIELD_MONTH = "monthAdded";
+	public static final String FIELD_YEAR = "yearAdded";
+	public static final String FIELD_MONTH = "monthAdded";
 	
-	public static String FIELD_AUTHOR = "author";
-	public static String FIELD_ITEM_TYPE="itemType";
-	public static String FIELD_AUTHOR_FIRST_NAME="authorFirstName";
-	public static String FIELD_AUTHOR_LAST_NAME = "authorLastName";
+	public static final String FIELD_AUTHOR = "author";
+	public static final String FIELD_ITEM_TYPE="itemType";
+	public static final String FIELD_AUTHOR_FIRST_NAME="authorFirstName";
+	public static final String FIELD_AUTHOR_LAST_NAME = "authorLastName";
+	public static final String FIELD_TITLE_SORTABLE = "title_sortable";
 	
 	
 	/* Serve Resource Request */
 	public static String RESOURCE_UPLOAD_FILE="0";
 	public static String RESOURCE_AUTHOR_LOOKUP="authorLookup";
 	public static String RESOURCE_ITEM_AUTHOR_LIST="itemAuthorList";
+	public static String RESOURCE_SERVE_FILE="serveFile";
 	
 	/* view mode */
 	public static String VIEW_LIST = "view-title-list";
@@ -128,5 +131,5 @@ public class SuburConstant {
 	public static String VIEW_ABSTRACT = "view-abstract-list";
 	
 	/* DOcument Library temp folder upload */
-	public static String TEMP_UPLOAD_FOLDER = "com.idetronic.subur.Subur.TEMP";
+	public static final String TEMP_UPLOAD_FOLDER = "com.idetronic.subur.Subur.TEMP";
 }

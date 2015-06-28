@@ -319,6 +319,25 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		}
 	}
 
+	@Override
+	public java.lang.String getDisplayName() {
+		try {
+			String methodName = "getDisplayName";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getAuthorRemoteModel() {
 		return _authorRemoteModel;
 	}

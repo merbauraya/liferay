@@ -43,10 +43,10 @@
 	%>
 </aui:select>
 
-<aui:input type="text" name="title">
+<aui:input type="text" name="title" cssClass="field subur-title">
 
 </aui:input>
-<aui:input type="textarea" name="itemAbstract"></aui:input>
+<aui:input type="textarea" name="itemAbstract" autoSize="<%= true %>"></aui:input>
 
 <div class="control-group">
 	<aui:input type="text" name="otherTitle" label="Other Title"></aui:input>

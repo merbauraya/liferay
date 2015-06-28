@@ -33,6 +33,11 @@
 <liferay-portlet:renderURL varImpl="testPageURL">
         <portlet:param name="mvcPath" value="/html/test/1.jsp" />
 </liferay-portlet:renderURL>
+<liferay-portlet:resourceURL varImpl="xURL" id="serveFile">
+        <portlet:param name="fileAssetId" value="25044" />
+</liferay-portlet:resourceURL>
+
+
 <%
 	String itemId = renderRequest.getParameter("itemId");
 	
@@ -50,7 +55,7 @@
 
 %>
 
-	
+
 
 <aui:form action="<%=searchURL%>" name="fm" inlineLabel="<%= true %>">
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />

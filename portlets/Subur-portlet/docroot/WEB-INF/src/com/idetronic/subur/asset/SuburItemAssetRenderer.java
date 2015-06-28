@@ -2,6 +2,9 @@ package com.idetronic.subur.asset;
 
 import java.util.Locale;
 
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -11,8 +14,15 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 
 public class SuburItemAssetRenderer extends BaseAssetRenderer {
@@ -114,7 +124,24 @@ public class SuburItemAssetRenderer extends BaseAssetRenderer {
 		renderRequest.setAttribute("suburItem", _suburItem);
         return page;
     }
+    public String getURLViewInContext(
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse,
+			String noSuchEntryRedirect) throws Exception {
+		
+		PortletConfig portletConfig = (PortletConfig) liferayPortletRequest.getAttribute(JavaConstants.JAVAX_PORTLET_CONFIG);
+		ThemeDisplay themeDisplay= (ThemeDisplay)liferayPortletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		//String portletName = portletConfig.getPortletName();
+		String portletName = "Subur_WAR_Suburportlet";
+		long plid = PortalUtil.getPlidFromPortletId(themeDisplay.getScopeGroupId(), portletName);
+		PortletURL portletURL = PortletURLFactoryUtil.create(liferayPortletRequest, portletName, plid,PortletRequest.RENDER_PHASE);
+		portletURL.setParameter("jspPage", "/html/renderer/item_full.jsp");
+		portletURL.setParameter("itemId", String.valueOf(_suburItem.getItemId()));
+		//portletURL.setParameter("urlTitle", _ _eprint.getUrlTitle());
 
+		return portletURL.toString();
+		//return noSuchEntryRedirect;
+	}
     
     private static final Log _log = LogFactoryUtil.getLog(SuburItemAssetRenderer.class);
 

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.idetronic.subur.model.Author;
 import com.idetronic.subur.model.ItemDivision;
 import com.idetronic.subur.model.ItemItemType;
@@ -104,9 +105,9 @@ public class SuburIndexer extends BaseIndexer {
          String[] authorLastName = new String[authors.size()];
          for (int i = 0; i < authors.size();i++)
          {
-        	 authorString[i] = authors.get(i).getLastName() + StringPool.SPACE + authors.get(i).getFirstName();
-        	 authorFirstName[i] = authors.get(i).getFirstName();
-        	 authorLastName[i] = authors.get(i).getLastName();
+        	 authorString[i] =  authors.get(i).getLastName() + StringPool.SPACE + authors.get(i).getFirstName();
+        	 authorFirstName[i] = StringUtil.toLowerCase(authors.get(i).getFirstName());
+        	 authorLastName[i] = StringUtil.toLowerCase(authors.get(i).getLastName());
          }
          //List authorList = MetadataPropertyValueLocalServiceUtil.getAuthor(item.getItemId());
          

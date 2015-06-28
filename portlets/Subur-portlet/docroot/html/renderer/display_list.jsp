@@ -7,7 +7,7 @@
 	int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 	String itemId = (String)request.getAttribute("view.jsp-itemId");
 %>
-<liferay-portlet:renderURL varImpl="viewURL">
+<liferay-portlet:renderURL varImpl="viewURL" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
         <portlet:param name="mvcPath" value="/html/renderer/item_full.jsp" />
         <portlet:param name="itemId" value="<%=itemId %>"/>
 </liferay-portlet:renderURL>

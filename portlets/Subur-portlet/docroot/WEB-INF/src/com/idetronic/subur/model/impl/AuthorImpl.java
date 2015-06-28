@@ -14,6 +14,8 @@
 
 package com.idetronic.subur.model.impl;
 
+import com.idetronic.subur.util.SuburUtil;
+
 /**
  * The extended model implementation for the Author service. Represents a row in the &quot;subur_Author&quot; database table, with each column mapped to a property of this class.
  *
@@ -30,5 +32,9 @@ public class AuthorImpl extends AuthorBaseImpl {
 	 * Never reference this class directly. All methods that expect a author model instance should use the {@link com.idetronic.subur.model.Author} interface instead.
 	 */
 	public AuthorImpl() {
+	}
+	public String getDisplayName()
+	{
+		return SuburUtil.getAuhorDisplayName(getFirstName(), getLastName());
 	}
 }

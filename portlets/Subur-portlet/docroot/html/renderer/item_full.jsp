@@ -1,4 +1,5 @@
 <%@include file="/html/init.jsp"%>
+<%@ page import="javax.portlet.ResourceURL" %>
 
 <%
 	long itemId = ParamUtil.getLong(request,"itemId");
@@ -23,10 +24,92 @@
 	
 	
 %>
-<div>
+<div class="item-detail">
 	<div class="item-title">
 		<h3><%= suburItem.getTitle() %></h3>
 	</div>
+	
+	<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.DELETE) || SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.PERMISSIONS) || SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.UPDATE) %>">
+		<div>
+			<ul class="edit-actions entry icons-container lfr-meta-actions">
+				<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.UPDATE) %>">
+					<li class="edit-entry">
+						<portlet:renderURL var="editEntryURL">
+							<portlet:param name="jspPage" value="<%= SuburConstant.PAGE_UPDATE_ITEM %>" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="backURL" value="<%= currentURL %>" />
+							<portlet:param name="itemId" value="<%= String.valueOf(suburItem.getItemId()) %>" />
+						</portlet:renderURL>
+	
+						<liferay-ui:icon
+							image="edit"
+							label="<%= true %>"
+							url="<%= editEntryURL %>"
+						/>
+					</li>
+				</c:if>
+	
+				<c:if test="<%= showEditEntryPermissions && SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.PERMISSIONS) %>">
+					<li class="edit-entry-permissions">
+						<liferay-security:permissionsURL
+							modelResource="<%= SuburItem.class.getName() %>"
+							modelResourceDescription="<%= suburItem.getTitle() %>"
+							resourceGroupId="<%= String.valueOf(suburItem.getGroupId()) %>"
+							resourcePrimKey="<%= String.valueOf(suburItem.getItemId()) %>"
+							var="permissionsEntryURL"
+							windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+						/>
+	
+						<liferay-ui:icon
+							image="permissions"
+							label="<%= true %>"
+							method="get"
+							url="<%= permissionsEntryURL %>"
+							useDialog="<%= true %>"
+						/>
+					</li>
+				</c:if>
+	
+				<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.DELETE) %>">
+					<li class="delete-entry">
+						<portlet:renderURL var="viewURL">
+							<portlet:param name="struts_action" value="/blogs/view" />
+						</portlet:renderURL>
+	
+						<portlet:actionURL var="deleteEntryURL" name="deleteItem">
+							<portlet:param name="<%= Constants.CMD %>" value="<%= TrashUtil.isTrashEnabled(scopeGroupId) ? Constants.MOVE_TO_TRASH : Constants.DELETE %>" />
+							<portlet:param name="redirect" value="<%= viewURL %>" />
+							<portlet:param name="itemId" value="<%= String.valueOf(suburItem.getItemId()) %>" />
+						</portlet:actionURL>
+	
+						<liferay-ui:icon-delete
+							label="<%= true %>"
+							trash="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>"
+							url="<%= deleteEntryURL %>"
+						/>
+					</li>
+				</c:if>
+				<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.UPDATE) %>">
+					<li class="withdraw-item">
+						<portlet:renderURL var="viewURL">
+							<portlet:param name="struts_action" value="/blogs/view" />
+						</portlet:renderURL>
+	
+						<portlet:actionURL var="withdrawItemURL" name="withdrawItem">
+							<portlet:param name="redirect" value="<%= viewURL %>" />
+							<portlet:param name="itemId" value="<%= String.valueOf(suburItem.getItemId()) %>" />
+						</portlet:actionURL>
+	
+						<liferay-ui:icon
+							label="<%= true %>"
+							image="withdraw"
+							url="<%= withdrawItemURL %>"
+						/>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+	</c:if>
 	<div class="item-date">
 		<%
 			
@@ -37,98 +120,18 @@
 				<%=dateFormatDate.format(suburItem.getPublishedDate()) %>
 			</c:if>
 	</div>
-	<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.DELETE) || SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.PERMISSIONS) || SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.UPDATE) %>">
-		<ul class="edit-actions entry icons-container lfr-meta-actions">
-			<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.UPDATE) %>">
-				<li class="edit-entry">
-					<portlet:renderURL var="editEntryURL">
-						<portlet:param name="jspPage" value="<%= SuburConstant.PAGE_UPDATE_ITEM %>" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="backURL" value="<%= currentURL %>" />
-						<portlet:param name="itemId" value="<%= String.valueOf(suburItem.getItemId()) %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon
-						image="edit"
-						label="<%= true %>"
-						url="<%= editEntryURL %>"
-					/>
-				</li>
-			</c:if>
-
-			<c:if test="<%= showEditEntryPermissions && SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.PERMISSIONS) %>">
-				<li class="edit-entry-permissions">
-					<liferay-security:permissionsURL
-						modelResource="<%= SuburItem.class.getName() %>"
-						modelResourceDescription="<%= suburItem.getTitle() %>"
-						resourceGroupId="<%= String.valueOf(suburItem.getGroupId()) %>"
-						resourcePrimKey="<%= String.valueOf(suburItem.getItemId()) %>"
-						var="permissionsEntryURL"
-						windowState="<%= LiferayWindowState.POP_UP.toString() %>"
-					/>
-
-					<liferay-ui:icon
-						image="permissions"
-						label="<%= true %>"
-						method="get"
-						url="<%= permissionsEntryURL %>"
-						useDialog="<%= true %>"
-					/>
-				</li>
-			</c:if>
-
-			<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.DELETE) %>">
-				<li class="delete-entry">
-					<portlet:renderURL var="viewURL">
-						<portlet:param name="struts_action" value="/blogs/view" />
-					</portlet:renderURL>
-
-					<portlet:actionURL var="deleteEntryURL" name="deleteItem">
-						<portlet:param name="<%= Constants.CMD %>" value="<%= TrashUtil.isTrashEnabled(scopeGroupId) ? Constants.MOVE_TO_TRASH : Constants.DELETE %>" />
-						<portlet:param name="redirect" value="<%= viewURL %>" />
-						<portlet:param name="itemId" value="<%= String.valueOf(suburItem.getItemId()) %>" />
-					</portlet:actionURL>
-
-					<liferay-ui:icon-delete
-						label="<%= true %>"
-						trash="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>"
-						url="<%= deleteEntryURL %>"
-					/>
-				</li>
-			</c:if>
-			<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.UPDATE) %>">
-				<li class="withdraw-item">
-					<portlet:renderURL var="viewURL">
-						<portlet:param name="struts_action" value="/blogs/view" />
-					</portlet:renderURL>
-
-					<portlet:actionURL var="withdrawItemURL" name="withdrawItem">
-						<portlet:param name="redirect" value="<%= viewURL %>" />
-						<portlet:param name="itemId" value="<%= String.valueOf(suburItem.getItemId()) %>" />
-					</portlet:actionURL>
-
-					<liferay-ui:icon
-						label="<%= true %>"
-						image="withdraw"
-						url="<%= withdrawItemURL %>"
-					/>
-				</li>
-			</c:if>
-		</ul>
-	</c:if>
-	<div class="item-author">
-		<span class="hide-accessible">Author</span>
-		<%
-			long[] authorIds = ItemAuthorLocalServiceUtil.getAuthorId(itemId);
-			List<Author> authors = AuthorLocalServiceUtil.getAuthors(authorIds);
-			for (Author author: authors)
-			{
-		%>
-				<%=SuburUtil.getName(author.getFirstName(),author.getLastName()) %>
-		
-		<%	} %>
 	
-	</div>
+	<div class="item-author">
+		<%
+			PortletURL viewAuthorURL = renderResponse.createRenderURL();
+			viewAuthorURL.setParameter("jspPage", "/html/view_author.jsp");
+		%>	
+		<subur:item-author-display 
+			itemId="<%=itemId %>" 
+			viewAuthorURL ="<%=viewAuthorURL %>"	
+		/>
+	</div>	
+
 	<div class="asset-categorization-display">
 		<label>Tags</label>
 		<liferay-ui:asset-tags-summary
@@ -146,12 +149,19 @@
 	<div class="item-abstract">
 		<%=suburItem.getItemAbstract() %>
 	</div>
-	<div>
+	<div class="item-asset-links">
 		
-		<liferay-ui:asset-links
+		
+		<%
+			PortletURL serveFileURL = renderResponse.createActionURL();
+			serveFileURL.setParameter("id", "serveFile");
+			serveFileURL.setParameter("javax.portlet.action", "serveFile");
+			String nameSpace = renderResponse.getNamespace();
+		%>	
+		<subur:item-asset-links
 			assetEntryId="<%= assetEntry.getEntryId() %>"
-			className="<%= SuburItem.class.getName() %>"
-			classPK="<%= suburItem.getPrimaryKey() %>"
+			serveFileURL="<%= serveFileURL %>"
+			nameSpace="<%= nameSpace %>"
 							
 		/>
 						

@@ -21,6 +21,8 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.idetronic.subur.model.Author;
 import com.idetronic.subur.model.SuburItem;
@@ -45,8 +47,10 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
+import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -67,10 +71,14 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -200,13 +208,15 @@ public class Subur extends MVCPortlet {
 		String assetLinkEntryIdsString = ParamUtil.getString(uploadRequest,
 				"assetLinksSearchContainerPrimaryKeys");
 		
+		logger.info(assetLinkEntryIdsString);
+		
 		//selected temp file for upload
 		String[] selectedFiles = uploadRequest.getParameterValues("selectUploadedFileCheckbox");
-		long[] fileEntries = null;		
+		long[] fileEntries = {};		
 		if (selectedFiles != null)
 			fileEntries = processTempFile(selectedFiles,actionRequest,themeDisplay);
 		
-		long[] assetLinkEntryIds = null;
+		long[] assetLinkEntryIds = {};
 		
 		if (assetLinkEntryIdsString != null) {
 			assetLinkEntryIds = StringUtil.split(
@@ -214,6 +224,7 @@ public class Subur extends MVCPortlet {
 
 			
 		}
+		logger.info(assetLinkEntryIdsString + "xxx" + assetLinkEntryIds.length );
 		assetLinkEntryIds = SuburUtil.mergeRelatedAssetWithDlFileEntry(assetLinkEntryIds, fileEntries);
 
 		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);		
@@ -317,6 +328,95 @@ public class Subur extends MVCPortlet {
 		
 		
 	}
+	/**
+	 * Serve DLFileEntry for download rather than opening in DL Portlet
+	 * Param given is Asset Entry id
+	 * @param actionRequest
+	 * @param actionResponse
+	 * @throws SystemException 
+	 * @throws PortalException 
+	 */
+	public void serveFile(ActionRequest actionRequest,ActionResponse actionResponse) 
+	{
+		
+		long fileAssetId = ParamUtil.getLong(actionRequest, "fileAssetId");
+		
+		
+		HttpServletResponse response =  PortalUtil.getHttpServletResponse(actionResponse);
+		HttpServletRequest request =  PortalUtil.getHttpServletRequest(actionRequest);
+		
+		AssetEntry assetEntry;
+		try {
+			assetEntry = AssetEntryLocalServiceUtil.getAssetEntry(fileAssetId);
+			long dlFileEntryId = assetEntry.getClassPK();
+			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.fetchDLFileEntry(dlFileEntryId);// .getFile(userId, dlFileEntryId, version, incrementCounter);
+			FileEntry fe = DLAppServiceUtil.getFileEntry(dlFileEntryId);
+			String version = fe.getVersion();
+			
+			FileVersion fv = fe.getFileVersion(version);
+			InputStream fis = fv.getContentStream(true);
+			String fileName = fv.getTitle();
+			long contentLength = fv.getSize();
+			String contentType = fv.getMimeType();
+			
+			
+			//InputStream is = fileEntry.getContentStream();
+			//String version = fileEntry.getVersion();
+			//DLFileVersion fileVersion = fileEntry.getFileVersion(version);
+			//InputStream is = fileVersion.getContentStream(true);
+			
+			logger.info(contentType+ "::" + contentLength);
+			//byte[] fileContent = SuburUtil.inputStreamToByteArray(is);
+			String contentDispositionType = "attachment; filename= " + fileName;
+			
+			ServletResponseUtil.sendFile(request, response, fileName, fis,contentLength,contentType,contentDispositionType);
+			
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally
+		{
+			try {
+				ServletResponseUtil.write(response, "Error serving file");
+			} catch (IOException e1) {
+				logger.error(e1);
+				
+			}
+		}
+		
+		
+		
+
+		
+		
+		
+		/*
+		try
+		{
+			
+		
+		}catch (Exception e)
+		{
+			logger.error(e);
+			
+			try {
+				ServletResponseUtil.write(response, "Error serving file");
+			} catch (IOException e1) {
+				logger.error(e1);
+				
+			}
+		}
+		*/
+		
+		
+	}
+	
 	public String fileUpload (RenderRequest request, RenderResponse response, PortletRequest portletRequest) {
 			PortletSession portletSession = request.getPortletSession(false);
 			long uploadFolderId = 0;
@@ -363,10 +463,7 @@ public class Subur extends MVCPortlet {
 		
 	}
 	
-	private void depositItem(PortletRequest request)
-	{
-		//QueryParser queryParser = new QueryParser(FIELD_CONTENTS, new StandardAnalyzer());
-	}
+	
 	public void serveResource(ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse) throws IOException,
 			PortletException 
@@ -378,10 +475,11 @@ public class Subur extends MVCPortlet {
 		//logger.info(resource);
 		String resourceId = resourceRequest.getResourceID();
 		logger.info(resourceId);
-		if (Validator.equals(resourceId, SuburConstant.RESOURCE_AUTHOR_LOOKUP))
+		if (Validator.equals(resourceId, SuburConstant.RESOURCE_SERVE_FILE))
 		{
-			out.print(authorLookup(resourceRequest,resourceResponse));
+			serveFile(resourceRequest,resourceResponse);
 		}
+		return null;
 		/*
 		if (Validator.equals(resourceId, SuburConstant.RESOURCE_ITEM_AUTHOR_LIST))
 		{
@@ -407,62 +505,25 @@ public class Subur extends MVCPortlet {
 			}
 			out.print(jSubject.toString());
 		}
-		if (Validator.equals(resource,"depositableSubject"))
-		{
-			try {
-				String jSubjects = SubjectLocalServiceUtil.getDepositableJson();
-				out.print(jSubjects);
-				
-			} catch (SystemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-		}else if (Validator.equals(resource, "subject"))
-		{
-			long selectedSubject = ParamUtil.getLong(resourceRequest, "subjectId");
-		}else if (Validator.equals(resource,"author"))
-		{
-			
-		}
+		
 	
 		
 	}
 	
-	private String authorLookup(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
-		JSONArray jsonResults = JSONFactoryUtil.createJSONArray();
-		//String<> x = resourceRequest.
-		String keyword = ParamUtil.getString(resourceRequest, "keyword");
-		
-		
-		
-		
-		long itemId = ParamUtil.getLong(resourceRequest, "itemId");
-		logger.info("keywrd="+ keyword);
-		JSONObject jsonCells = JSONFactoryUtil.createJSONObject();
-		  jsonCells.put("key", "1");
-          jsonCells.put("name", "New York, USA");
-          jsonResults.put(jsonCells);
-          jsonCells = JSONFactoryUtil.createJSONObject();
-          jsonCells.put("key", "2");
-          jsonCells.put("name", "Delhi, India");
-          jsonResults.put(jsonCells);
-          jsonCells = JSONFactoryUtil.createJSONObject();
-          jsonCells.put("key", "3");
-          jsonCells.put("name", "Hyderabad, India");
-          jsonResults.put(jsonCells);
-          
-          return jsonResults.toString();
-		
-	}
+	/**
+	 * Move selected temporary file into appropriate folder during item update
+	 * @param selectedFile list of selected temporary file id
+	 * @param actionRequest
+	 * @param themeDisplay
+	 * @return
+	 */
 	private long[] processTempFile(String[] selectedFile,ActionRequest actionRequest, ThemeDisplay themeDisplay)
 	{
 		
 		
 		List<FileEntry> tempFileEntrys = new ArrayList<FileEntry>();
-		logger.info("processTmp");
-		long[] fileEntries = null;
+		
+		long[] fileEntries = {};
 		
 		long folderId = SuburFolderUtil.getFolderId(actionRequest, themeDisplay);
 		String changeLog = StringPool.BLANK;

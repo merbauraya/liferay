@@ -1,0 +1,41 @@
+
+.aui .navbar .nav > li {
+    float: left;
+}
+.aui .control-group.field-wrapper
+{
+	display:inline-block;
+}
+.aui li {
+	line-height:25px;
+}
+.aui .control-group.field-wrapper .control-label
+{
+	display:inline-block;
+	float:left;
+}
+.aui .control-group.field-wrapper .field  
+{
+	display:inline-block;
+}
+.aui .edit-actions {
+    list-style: outside none none;
+    margin-left: 0;
+    margin-right: 0;
+}
+.aui .edit-actions li {
+    float: left;
+    margin-right: 10px;
+}
+.aui .asset-categorization-display > label
+{
+	font-weight:bold;
+}
+.aui .item-author
+{
+	clear:both;
+}
+.aui .item-detail div {
+	clear:both;
+	margin:10px;
+}

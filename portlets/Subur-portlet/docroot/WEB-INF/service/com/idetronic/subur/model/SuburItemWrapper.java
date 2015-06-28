@@ -527,6 +527,11 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 	}
 
 	@Override
+	public java.lang.String getSearchDescription() {
+		return _suburItem.getSearchDescription();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

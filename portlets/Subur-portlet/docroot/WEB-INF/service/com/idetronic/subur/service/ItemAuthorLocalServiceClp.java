@@ -131,9 +131,17 @@ public class ItemAuthorLocalServiceClp implements ItemAuthorLocalService {
 
 		_methodParameterTypes20 = new String[] { "long" };
 
-		_methodName21 = "setItemAuthor";
+		_methodName21 = "getAuthors";
 
-		_methodParameterTypes21 = new String[] { "long", "long[][]" };
+		_methodParameterTypes21 = new String[] { "long" };
+
+		_methodName22 = "getAuthorArray";
+
+		_methodParameterTypes22 = new String[] { "long" };
+
+		_methodName23 = "setItemAuthor";
+
+		_methodParameterTypes23 = new String[] { "long", "long[][]" };
 	}
 
 	@Override
@@ -743,11 +751,78 @@ public class ItemAuthorLocalServiceClp implements ItemAuthorLocalService {
 	}
 
 	@Override
+	public java.util.List<com.idetronic.subur.model.Author> getAuthors(
+		long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] { itemId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.idetronic.subur.model.Author>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.idetronic.subur.model.Author[] getAuthorArray(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22, new Object[] { itemId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.idetronic.subur.model.Author[])ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public void setItemAuthor(long itemId, long[] authorIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableLocalService.invokeMethod(_methodName21,
-				_methodParameterTypes21,
+			_invokableLocalService.invokeMethod(_methodName23,
+				_methodParameterTypes23,
 				new Object[] { itemId, ClpSerializer.translateInput(authorIds) });
 		}
 		catch (Throwable t) {
@@ -810,4 +885,8 @@ public class ItemAuthorLocalServiceClp implements ItemAuthorLocalService {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
 }

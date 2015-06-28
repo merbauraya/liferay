@@ -452,6 +452,25 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		}
 	}
 
+	@Override
+	public java.lang.String getSearchDescription() {
+		try {
+			String methodName = "getSearchDescription";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getSuburItemRemoteModel() {
 		return _suburItemRemoteModel;
 	}

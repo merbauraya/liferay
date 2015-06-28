@@ -84,7 +84,7 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	 * @throws SystemException
 	 */
 	public List<Author> getAuthors(long[] authorIds) throws PortalException, SystemException  {
-		List<Author> authors = new ArrayList<>(authorIds.length);
+		List<Author> authors = new ArrayList<Author>(authorIds.length);
 		for (long authorId : authorIds)
 		{
 			Author author = getAuthor(authorId);

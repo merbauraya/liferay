@@ -396,6 +396,11 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 	}
 
 	@Override
+	public java.lang.String getDisplayName() {
+		return _author.getDisplayName();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

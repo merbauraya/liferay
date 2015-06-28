@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://idetronic.com.my/tld/subur</taglib-uri>
+			<taglib-location>/WEB-INF/tld/subur.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+	<context-param>
+		<param-name>portalContextConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/context/custom-spring.xml</param-value>
+	</context-param>
 </web-app>

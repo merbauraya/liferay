@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -84,6 +85,41 @@ public class ItemAuthorLocalServiceImpl extends ItemAuthorLocalServiceBaseImpl {
 		return authors;
 		
 	}
+	/**
+	 * Get list of author for the given item Id
+	 * @param itemId
+	 * @return list of author
+	 * @throws SystemException 
+	 * @throws PortalException 
+	 */
+	
+	public List<Author> getAuthors(long itemId) throws PortalException, SystemException
+	{
+		long[] authorIds = getAuthorId(itemId);
+		return AuthorLocalServiceUtil.getAuthors(authorIds);
+		
+	}
+	/**
+	 * Get an array of author for a given item id
+	 * @param itemId
+	 * @return array of Author
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	public Author[] getAuthorArray(long itemId) throws PortalException, SystemException
+	{
+		long[] authorIds = getAuthorId(itemId);
+		List<Author> authors = AuthorLocalServiceUtil.getAuthors(authorIds);
+		Author[] authorArray = new Author[authors.size()];
+		
+		for (int i = 0; i < authors.size(); i++)
+			authorArray[i] = authors.get(i);
+		
+		return authorArray;
+				
+		
+	}
+	
 	/**
 	 * Set Item author based on given itemid and array of author ids
 	 * @param itemId to be updated

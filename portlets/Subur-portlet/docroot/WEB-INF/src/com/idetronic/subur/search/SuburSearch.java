@@ -18,8 +18,8 @@ public class SuburSearch extends SearchContainer<SuburItem> {
 	public static final String EMPTY_RESULTS_MESSAGE = "no-item-were-found";
 	
 
-	public static List<String> headerNames = new ArrayList<>();
-	public static Map<String, String> orderableHeaders = new HashMap<>();
+	public static List<String> headerNames = new ArrayList<String>();
+	public static Map<String, String> orderableHeaders = new HashMap<String,String>();
 
 	
 	public SuburSearch(PortletRequest portletRequest, PortletURL iteratorURL) {
@@ -29,6 +29,7 @@ public class SuburSearch extends SearchContainer<SuburItem> {
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		SuburDisplayTerms displayTerms = (SuburDisplayTerms)getDisplayTerms();
+		
 	}
 
 }

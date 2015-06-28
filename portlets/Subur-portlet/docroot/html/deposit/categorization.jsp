@@ -6,13 +6,13 @@
 </portlet:resourceURL>
 <%
 	SuburItem item = (SuburItem)request.getAttribute("suburItem");
-	List<ItemSubject> itemSubjects = ItemSubjectLocalServiceUtil.getByItemId(item.getItemId());
-	List<ItemDivision> itemDivisions = ItemDivisionLocalServiceUtil.getByItemId(item.getItemId());
+	//List<ItemSubject> itemSubjects = ItemSubjectLocalServiceUtil.getByItemId(item.getItemId());
+	//List<ItemDivision> itemDivisions = ItemDivisionLocalServiceUtil.getByItemId(item.getItemId());
 	
-	List<Division> divisions = DivisionLocalServiceUtil.getDepositable();
-	long divisionId = 0;
-	for (ItemDivision itemDivision: itemDivisions)
-		divisionId = itemDivision.getDivisionId();
+	//List<Division> divisions = DivisionLocalServiceUtil.getDepositable();
+	//long divisionId = 0;
+	//for (ItemDivision itemDivision: itemDivisions)
+	//	divisionId = itemDivision.getDivisionId();
 
 	List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
 	List<AssetCategory> categories = new ArrayList<AssetCategory>();
@@ -87,13 +87,5 @@
 <input type="hidden" name="tagNames" id="<portlet:namespace/>tagNames" value=""/>		
 
 
-<aui:select name="division" label="Division">
-	<%
-	
-	TreeNode divTree = SuburUtil.showDivisionTree(out,divisionId);
-	%>
-	
-	
-	
-</aui:select>
+
 
