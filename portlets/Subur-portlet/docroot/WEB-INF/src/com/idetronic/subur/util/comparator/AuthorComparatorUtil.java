@@ -17,19 +17,19 @@ public class AuthorComparatorUtil {
 		OrderByComparator orderByComparator = null;
 	   
 	   
-		if (orderByCol.equalsIgnoreCase("First Name")) {
+		if (orderByCol.equalsIgnoreCase("firstName")) {
 	    
 			orderByComparator = new AuthorFirstNameComparator(orderByAsc);
 		} 
-		/*
-	   else if (orderByCol.equalsIgnoreCase("Last Name")) {
+		
+	   else if (orderByCol.equalsIgnoreCase("lastName")) {
 	    
-	    orderByComparator = new LastNameComparator(orderByAsc);
+	    orderByComparator = new AuthorLastNameComparator(orderByAsc);
 	   }
-	   else if (orderByCol.equalsIgnoreCase("Screen Name")) {
+	   else if (orderByCol.equalsIgnoreCase("itemCount")) {
 	    
-	    orderByComparator = new ScreenNameComparator(orderByAsc);
-	   }
+	    orderByComparator = new AuthorItemCountComparator(orderByAsc);
+	   }/*
 	   else if (orderByCol.equalsIgnoreCase("Job Title")) {
 	    
 	    orderByComparator = new JobTitleComparator(orderByAsc);

@@ -143,7 +143,7 @@ page import="com.liferay.portal.theme.ThemeDisplay" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
 <%@ page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %> 
-
+<%@ page import="com.liferay.portal.service.ClassNameLocalServiceUtil" %>
 <%@ page import="java.text.Format" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -159,7 +159,9 @@ page import="java.util.Map" %>
 page import="javax.portlet.PortletURL" %><%@
 page import="javax.portlet.WindowState" %>
 
-<%@page import="com.idetronic.subur.model.ItemType" %><%@
+<%@page import="com.idetronic.subur.model.ItemType" %>
+<%@ page import="com.idetronic.subur.model.Expertise" %>
+<%@
 page import="com.idetronic.subur.model.ItemItemType" %><%@
 page import="com.idetronic.subur.model.SuburItem" %><%@
 page import="com.idetronic.subur.model.MetadataPropertyValue" %><%@
@@ -189,6 +191,10 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 <%@ page import="com.idetronic.subur.model.Division" %>
 <%@ page import="com.idetronic.subur.model.ItemDivision" %>
 <%@ page import="com.idetronic.subur.util.TreeNode" %>
+<%@ page import="com.idetronic.subur.search.AuthorSearch" %>
+<%@ page import="com.idetronic.subur.search.AuthorSearchTerms" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.SearchEntry" %>
+<%@ page import="com.idetronic.subur.search.AuthorDisplayTerms" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
@@ -216,6 +222,10 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 <%@ page import="com.liferay.util.RSSUtil" %> 
 <%@ page import="com.idetronic.subur.search.SuburSearch" %>
 <%@ page import="com.idetronic.subur.search.SuburDisplayTerms" %>
+<%@ page import="javax.portlet.PortletResponse" %>
+<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
+<%@
+page import="com.liferay.portal.kernel.util.JavaConstants" %>
 
 <portlet:defineObjects />
 
@@ -227,7 +237,8 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 	PortletURL currentURLObj = PortletURLUtil.getCurrent(liferayPortletRequest, liferayPortletResponse);
 	Format dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("dd MMM yyyy", locale, timeZone);
 	Format timeFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("dd MMM yyyy hh:mm",locale, timeZone);
-	
+	Format yearFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("yyyy",locale, timeZone);
+
 	//read preferences
 	String itemToShow = GetterUtil.getString(portletPreferences.getValue("itemToShow", null), "latest");
 	String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", null), "list");
@@ -237,7 +248,8 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 	String orderByType2 = GetterUtil.getString(portletPreferences.getValue("orderByType2", "ASC"));
 	int delta = GetterUtil.getInteger(portletPreferences.getValue("delta", null), SearchContainer.DEFAULT_DELTA);
 	String paginationType = GetterUtil.getString(portletPreferences.getValue("paginationType", "none"));
-	
+	String authorTitleString = GetterUtil.getString(portletPreferences.getValue("authorTitle",StringPool.BLANK), StringPool.BLANK);
+			
 	//default
 	boolean showEditEntryPermissions = true;
 	boolean showSearch = true; 

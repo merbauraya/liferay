@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing Author in entity cache.
  *
@@ -35,12 +37,16 @@ import java.io.ObjectOutput;
 public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{authorId=");
 		sb.append(authorId);
 		sb.append(", groupId=");
 		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
+		sb.append(", title=");
+		sb.append(title);
 		sb.append(", idType=");
 		sb.append(idType);
 		sb.append(", remoteId=");
@@ -53,6 +59,12 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 		sb.append(userId);
 		sb.append(", metadata=");
 		sb.append(metadata);
+		sb.append(", lastPublishedDate=");
+		sb.append(lastPublishedDate);
+		sb.append(", itemCount=");
+		sb.append(itemCount);
+		sb.append(", personalSite=");
+		sb.append(personalSite);
 		sb.append("}");
 
 		return sb.toString();
@@ -64,6 +76,15 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 
 		authorImpl.setAuthorId(authorId);
 		authorImpl.setGroupId(groupId);
+		authorImpl.setCompanyId(companyId);
+
+		if (title == null) {
+			authorImpl.setTitle(StringPool.BLANK);
+		}
+		else {
+			authorImpl.setTitle(title);
+		}
+
 		authorImpl.setIdType(idType);
 
 		if (remoteId == null) {
@@ -96,6 +117,22 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 			authorImpl.setMetadata(metadata);
 		}
 
+		if (lastPublishedDate == Long.MIN_VALUE) {
+			authorImpl.setLastPublishedDate(null);
+		}
+		else {
+			authorImpl.setLastPublishedDate(new Date(lastPublishedDate));
+		}
+
+		authorImpl.setItemCount(itemCount);
+
+		if (personalSite == null) {
+			authorImpl.setPersonalSite(StringPool.BLANK);
+		}
+		else {
+			authorImpl.setPersonalSite(personalSite);
+		}
+
 		authorImpl.resetOriginalValues();
 
 		return authorImpl;
@@ -105,12 +142,17 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		authorId = objectInput.readLong();
 		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
+		title = objectInput.readUTF();
 		idType = objectInput.readInt();
 		remoteId = objectInput.readUTF();
 		firstName = objectInput.readUTF();
 		lastName = objectInput.readUTF();
 		userId = objectInput.readInt();
 		metadata = objectInput.readUTF();
+		lastPublishedDate = objectInput.readLong();
+		itemCount = objectInput.readInt();
+		personalSite = objectInput.readUTF();
 	}
 
 	@Override
@@ -118,6 +160,15 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 		throws IOException {
 		objectOutput.writeLong(authorId);
 		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
+
+		if (title == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(title);
+		}
+
 		objectOutput.writeInt(idType);
 
 		if (remoteId == null) {
@@ -149,14 +200,29 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 		else {
 			objectOutput.writeUTF(metadata);
 		}
+
+		objectOutput.writeLong(lastPublishedDate);
+		objectOutput.writeInt(itemCount);
+
+		if (personalSite == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(personalSite);
+		}
 	}
 
 	public long authorId;
 	public long groupId;
+	public long companyId;
+	public String title;
 	public int idType;
 	public String remoteId;
 	public String firstName;
 	public String lastName;
 	public int userId;
 	public String metadata;
+	public long lastPublishedDate;
+	public int itemCount;
+	public String personalSite;
 }

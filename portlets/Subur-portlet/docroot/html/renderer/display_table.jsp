@@ -9,7 +9,7 @@
 	String itemId = (String)request.getAttribute("view.jsp-itemId");
 %>
 <liferay-portlet:renderURL varImpl="viewURL">
-        <portlet:param name="mvcPath" value="/html/renderer/item_full.jsp" />
+        <portlet:param name="jspPage" value="/html/renderer/item_full.jsp" />
         <portlet:param name="itemId" value="<%=itemId %>"/>
 </liferay-portlet:renderURL>
 
@@ -21,12 +21,17 @@
 			<liferay-ui:message key="title" />
 		</th>
 		<th class="table-header">
+			<liferay-ui:message key="item-type" />
+		</th>
+		<th class="table-header">
 			<liferay-ui:message key="author" />
 		</th>
 		<th class="table-header">
 			<liferay-ui:message key="published-date" />
 		</th>
-		
+		<th class="table-header">
+			<liferay-ui:message key="view-count" />
+		</th>
 		
 	</tr>
 	</thead>
@@ -45,17 +50,36 @@
 			</c:otherwise>
 		</c:choose>
 	</td>
-
+	<td>
+	
+		<%
+			PortletURL viewItemTypeURL = renderResponse.createRenderURL();
+		%>
+		<subur:item-itemtype-display 
+			itemId="<%= Long.valueOf(itemId) %>" 
+			viewItemTypeURL ="<%=viewItemTypeURL %>"	
+		/>
+	</td>
 	<td class="table-cell">
-		List of author (taglib?)
+		<%
+			PortletURL viewAuthorURL = renderResponse.createRenderURL();
+			viewAuthorURL.setParameter("jspPage", "/html/authornavigator/view_author.jsp");
+		%>	
+	
+		<subur:item-author-display 
+			itemId="<%= Long.valueOf(itemId) %>" 
+			viewAuthorURL ="<%=viewAuthorURL %>"	
+		/>
 	</td>
 
 		
 	<td class="table-cell">
 		<%=dateFormatDate.format(assetEntry.getPublishDate()) %>
 	</td>
-
-		
+	<td>
+	<%= assetEntry.getViewCount() %>
+	
+	</td>	
 
 	
 	

@@ -1,5 +1,6 @@
+<%@ include file="/html/init.jsp" %>
 <%@page import="javax.portlet.ResourceResponse"%>
-<%@ include file="/html/item.jsp" %>
+
 
 <portlet:resourceURL var="subjectListURL">
 	<portlet:param name="resource" value="depositableSubject" />

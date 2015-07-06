@@ -3,6 +3,8 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.idetronic.subur.model.Author" />
+	<import class="com.idetronic.subur.model.AuthorExpertise" />
+	<import class="com.idetronic.subur.model.Expertise" />
 	<import class="com.idetronic.subur.model.ItemAuthor" />
 	<import class="com.idetronic.subur.model.ItemFileEntry" />
 	<import class="com.idetronic.subur.model.ItemItemType" />
@@ -18,12 +20,38 @@
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="idType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="remoteId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="firstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="metadata" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lastPublishedDate" type="org.hibernate.type.TimestampType" />
+		<property name="itemCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="personalSite" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.AuthorExpertiseImpl" table="subur_AuthorExpertise">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.idetronic.subur.service.persistence.AuthorExpertisePK">
+			<key-property name="authorId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="expertiseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+	</class>
+	<class name="com.idetronic.subur.model.impl.ExpertiseImpl" table="subur_Expertise">
+		<cache usage="read-write" />
+		<id name="expertiseId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="expertiseName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="indexedName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="authorCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.idetronic.subur.model.impl.ItemAuthorImpl" table="subur_ItemAuthor">
 		<cache usage="read-write" />

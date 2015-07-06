@@ -51,7 +51,7 @@ public class AuthorSearch extends SearchContainer<Author> {
 	static {
 		headerNames.add("firstName");
 		headerNames.add("lastName");
-
+		headerNames.add("lastPublishedDate");
 
 
 		orderableHeaders.put("firstName", "firstName");
@@ -71,6 +71,7 @@ public class AuthorSearch extends SearchContainer<Author> {
 			//AuthorDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(AuthorDisplayTerms.FIRSTNAME, displayTerms.getFirstName());
 		iteratorURL.setParameter(AuthorDisplayTerms.LASTNAME, displayTerms.getLastName());
+		//iteratorURL.setParameter(AuthorDisplayTerms.LAST_PUBLISHED_DATE, displayTerms.getLastPublishedDate());
 		//iteratorURL.setParameter(
 			//RoleDisplayTerms.TYPE, String.valueOf(displayTerms.getType()));
 
@@ -95,7 +96,7 @@ public class AuthorSearch extends SearchContainer<Author> {
 			}
 			else {
 				orderByCol = preferences.getValue(
-					PortletKeys.ROLES_ADMIN, "authors-order-by-col", "First Name");
+					PortletKeys.ROLES_ADMIN, "authors-order-by-col", "firstName");
 				orderByType = preferences.getValue(
 					PortletKeys.ROLES_ADMIN, "authors-order-by-type", "asc");
 			}

@@ -1,5 +1,5 @@
 
-<%@ include file="/html/item.jsp" %>
+<%@ include file="/html/init.jsp" %>
 <%@ page import="com.idetronic.subur.search.AuthorSearch" %>
 <%@ page import="com.idetronic.subur.search.AuthorSearchTerms" %>
 
@@ -29,7 +29,9 @@
 	%>
 	<liferay-ui:search-container-results>
 		<%
-		List<Author> authors = AuthorLocalServiceUtil.search(searchTerms.getKeywords(),searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+		List<Author> authors = AuthorLocalServiceUtil.search(searchTerms.getKeywords(),
+				themeDisplay.getCompanyId(),themeDisplay.getScopeGroupId(),
+				searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 		total = authors.size();
 		searchContainer.setTotal(total);
 		results = ListUtil.subList(authors, searchContainer.getStart(), searchContainer.getEnd());
@@ -46,7 +48,7 @@
 		>
 		
 		<liferay-ui:search-container-column-text
-				name="First Name"
+				name="firstName"
 				value="<%= HtmlUtil.escape(author.getFirstName()) %>"
 				orderable="<%= true %>"
 		/>

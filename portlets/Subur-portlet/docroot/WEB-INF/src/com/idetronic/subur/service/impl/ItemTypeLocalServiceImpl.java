@@ -17,8 +17,10 @@ package com.idetronic.subur.service.impl;
 import java.util.List;
 
 import com.idetronic.subur.model.ItemType;
+import com.idetronic.subur.service.ItemTypeLocalServiceUtil;
 import com.idetronic.subur.service.base.ItemTypeLocalServiceBaseImpl;
 import com.idetronic.subur.service.persistence.SuburItemFinderUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the item type local service.
@@ -40,10 +42,28 @@ public class ItemTypeLocalServiceImpl extends ItemTypeLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.idetronic.subur.service.ItemTypeLocalServiceUtil} to access the item type local service.
 	 */
+	
+	public void decrementCounter(long itemTypeId) throws SystemException
+	{
+		ItemType itemType = itemTypePersistence.fetchByPrimaryKey(itemTypeId);
+		int newCount = itemType.getItemCount() -1 ;
+		itemType.setItemCount(newCount);
+		itemTypePersistence.update(itemType);
+	}
+	public void incrementCounter(long itemTypeId) throws SystemException
+	{
+		ItemType itemType = itemTypePersistence.fetchByPrimaryKey(itemTypeId);
+		int newCount = itemType.getItemCount() +1 ;
+		itemType.setItemCount(newCount);
+		itemTypePersistence.update(itemType);
+		
+		
+	}
 	public List getBySubjectId(long subjectId)
 	{
 		List listItems = SuburItemFinderUtil.itemCountByItemTypeInSubject(subjectId);
 		List<ItemType> itemTypes = (List)listItems.get(0);
 		return itemTypes;
+		
 	}
 }

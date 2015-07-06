@@ -69,6 +69,8 @@ public class SuburConstant {
 	public static String PAGE_ADMIN_ITEM = "/html/admin/subur/view.jsp";
 	public static String PAGE_ADMIN_AUTHOR = "/html/admin/author/view.jsp";
 	public static String PAGE_SUBUR_SEARCH = "/html/search/subur_search.jsp";
+	public static String PAGE_AUTHOR_VIEW_DETAILS = "/html/author/view/jsp";
+	
 	
 	/* webkeys
 	 * 
@@ -99,8 +101,15 @@ public class SuburConstant {
 	/* get item count by author for any given subject id */
 	public static String SQL_ITEM_COUNT_BY_AUTHOR_IN_SUBJECT=SuburItemFinderImpl.class.getName()+ ".itemCountSubjectByAuthor";
 	/* find author by first Name */
-	public static String SQL_AUTHOR_BY_FIRST_NAME=AuthorFinderImpl.class.getName()+ ".findByFirstName";
-	
+	public static String SQL_AUTHOR_BY_FIRST_NAME = AuthorFinderImpl.class.getName()+ ".findByFirstName";
+	public static String SQL_AUTHOR_FIND_BY_NAME = AuthorFinderImpl.class.getName()+  ".findByName";
+	public static String SQL_AUTHOR_COUNT_BY_NAME = AuthorFinderImpl.class.getName()+ ".totalByName";
+	/* search for both first name and lastname */
+	public static String SQL_AUTHOR_FIND_BY_NAME_AND = AuthorFinderImpl.class.getName()+ ".byFirstNameAndLastName";
+	/* result count for both first name and last name */
+	public static String SQL_AUTHOR_COUNT_BY_NAME_AND = AuthorFinderImpl.class.getName()+ ".countFirstNameAndLastName";
+	public static String SQL_AUTHOR_ITEM_COUNT_BY_G_C = AuthorFinderImpl.class.getName()+".countItemByGroupCompany";
+	public static String SQL_AUTHOR_FIND_BY_G_C = AuthorFinderImpl.class.getName() + ".findByCompanyGroup";
 	
 	/* File entry Type */
 	public static final int FILE_ENTRY_COVER_PAGE = 1;

@@ -56,7 +56,6 @@ String[][] categorySections = {item};
     categoryNames="<%= _CATEGORY_NAMES %>"
     categorySections="<%= categorySections %>"
     formName="fm"
-    htmlTop="<%=htmlTop %>"
     htmlBottom="<%=htmlBottom %>"
     jspPath="/html/deposit/" 
     showButtons="<%=true %>"

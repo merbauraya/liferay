@@ -275,6 +275,16 @@ public class ItemTypeLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static void decrementCounter(long itemTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().decrementCounter(itemTypeId);
+	}
+
+	public static void incrementCounter(long itemTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().incrementCounter(itemTypeId);
+	}
+
 	public static java.util.List getBySubjectId(long subjectId) {
 		return getService().getBySubjectId(subjectId);
 	}

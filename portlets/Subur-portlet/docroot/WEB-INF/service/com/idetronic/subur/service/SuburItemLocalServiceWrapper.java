@@ -285,21 +285,37 @@ public class SuburItemLocalServiceWrapper implements SuburItemLocalService,
 	@Override
 	public com.idetronic.subur.model.SuburItem addItem(long userId,
 		long groupId, java.lang.String title, java.lang.String itemAbstract,
+		long[] itemTypeId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _suburItemLocalService.addItem(userId, groupId, title,
-			itemAbstract, serviceContext);
+			itemAbstract, itemTypeId, serviceContext);
 	}
 
 	@Override
 	public com.idetronic.subur.model.SuburItem updateSuburItem(
 		com.idetronic.subur.model.SuburItem suburItem, long userId,
+		long[] itemTypeIds, long[] authorIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _suburItemLocalService.updateSuburItem(suburItem, userId,
-			serviceContext);
+			itemTypeIds, authorIds, serviceContext);
+	}
+
+	@Override
+	public void deleteItem(long itemId)
+		throws com.idetronic.subur.NoSuchSuburItemException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_suburItemLocalService.deleteItem(itemId);
+	}
+
+	@Override
+	public void deleteItem(com.idetronic.subur.model.SuburItem suburItem)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_suburItemLocalService.deleteItem(suburItem);
 	}
 
 	@Override

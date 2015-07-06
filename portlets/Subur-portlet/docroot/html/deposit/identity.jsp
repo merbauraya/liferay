@@ -1,38 +1,42 @@
-<%@ include file="/html/item.jsp" %>
+<%@ include file="/html/init.jsp" %>
+<%@page import="java.util.Arrays" %>
 <%
 	
 	//List<ItemType> itemTypes = ItemTypeLocalServiceUtil.getItemTypes(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	SuburItem item = (SuburItem)request.getAttribute("suburItem");
 	
-	List itemItemTypes =  ItemItemTypeLocalServiceUtil.getByItemId(item.getItemId());  //ItemItemTypeLocalServiceUtil.getByItemId(item.getItemId());
-
-	
-	List vType = new ArrayList();
+	//List itemItemTypes =  ItemItemTypeLocalServiceUtil.getByItemId(item.getItemId());  //ItemItemTypeLocalServiceUtil.getByItemId(item.getItemId());
 	
 	
-	List<ItemType> itemTypes = (List)itemItemTypes.get(0);
-	List<ItemItemType> selectedItemTypes = (List)itemItemTypes.get(1);
-	for (ItemItemType k : selectedItemTypes)
-		out.print("id="+ k.getItemId() + "::"+ k.getItemTypeId());
+	List<ItemType> itemTypes2 = ItemTypeLocalServiceUtil.getItemTypes(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	List<ItemItemType> itemItemType2 = ItemItemTypeLocalServiceUtil.itemTypeByItemid(item.getItemId());
+	
+	Long[] selectedItemType = new Long[itemItemType2.size()];
+	for (int i = 0; i < itemItemType2.size() ; i++)
+	{
+		selectedItemType[i] = itemItemType2.get(i).getItemTypeId();
+		
+	}
+	
+	
+	
+	
+	
+	//List<ItemType> itemTypes = (List)itemItemTypes.get(0);
+	//List<ItemItemType> selectedItemTypes = (List)itemItemTypes.get(1);
+	
 	
 %>
 <aui:model-context bean="<%= item %>" model="<%= SuburItem.class %>" />
 
-<aui:select size="5" multiple="<%=true %>" label="item-type" name="itemType" onchange='<%= renderResponse.getNamespace() + "itemType();" %>'>
+<aui:select size="5" multiple="<%=true %>" label="item-type" name="itemType">
 
 	
-	<%for (ItemType itemType: itemTypes) 
+	<%for (ItemType itemType: itemTypes2) 
 	{
-		boolean selected=false;
-		for (ItemItemType iType: selectedItemTypes)
-		{
-			if (iType.getItemTypeId() == itemType.getItemTypeId())
-			{
-				if (Validator.isNotNull(iType.getItemId()) || iType.getItemId()!= 0)
-					selected = true;
-				break;
-			}
-		}
+		boolean selected = Arrays.asList(selectedItemType).contains(new Long(itemType.getItemTypeId()));
+		
+		
 		
 	%>
 		<aui:option selected="<%=selected %>" value="<%= itemType.getItemTypeId() %>">

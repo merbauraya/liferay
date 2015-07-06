@@ -295,9 +295,28 @@ public class ItemItemTypeLocalServiceWrapper implements ItemItemTypeLocalService
 	}
 
 	@Override
-	public void setItemItemType(long itemId, java.lang.String[] itemTypeStrings)
+	public void addItemItemType(long itemId, long[] itemTypeIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_itemItemTypeLocalService.setItemItemType(itemId, itemTypeStrings);
+		_itemItemTypeLocalService.addItemItemType(itemId, itemTypeIds);
+	}
+
+	@Override
+	public void addItemItemType(long itemId, java.lang.String[] itemTypeStrings)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_itemItemTypeLocalService.addItemItemType(itemId, itemTypeStrings);
+	}
+
+	@Override
+	public void updateItemItemType(long itemId, long[] itemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_itemItemTypeLocalService.updateItemItemType(itemId, itemTypeIds);
+	}
+
+	@Override
+	public void updateItemItemType(long itemId,
+		java.lang.String[] itemTypeStrings)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_itemItemTypeLocalService.updateItemItemType(itemId, itemTypeStrings);
 	}
 
 	/**
@@ -314,8 +333,19 @@ public class ItemItemTypeLocalServiceWrapper implements ItemItemTypeLocalService
 	}
 
 	/**
+	* Get item type for an item, and return it in object array
+	*
+	* @param itemId to search for
+	* @return array of ItemType for an item
+	*/
+	@Override
+	public java.lang.Object[] getByItemIdArray(long itemId) {
+		return _itemItemTypeLocalService.getByItemIdArray(itemId);
+	}
+
+	/**
 	* @param itemId - Subur Item Id
-	* @return List of ItemType
+	* @return List of ItemItemType
 	* @throws SystemException
 	*/
 	@Override

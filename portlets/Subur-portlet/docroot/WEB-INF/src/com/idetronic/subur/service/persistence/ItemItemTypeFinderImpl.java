@@ -30,13 +30,13 @@ public class ItemItemTypeFinderImpl extends BasePersistenceImpl<ItemItemType> im
 		SessionFactory  sessionFactory = null;
 		try
 		{
-			logger.info("opening session");
+			
 			//sessionFactory = (SessionFactory)PortalBeanLocatorUtil.locate("liferaySessionFactory");
 			
 			session = openSession();// sessionFactory.openSession();
-			logger.info("session opened");
+			
 			String sql =  CustomSQLUtil.get(SuburConstant.SQL_ITEM_ITEMTYPE);
-			logger.info(sql);
+			
 			SQLQuery q = session.createSQLQuery(sql);
 	        q.setCacheable(false);
 	        q.addEntity("ItemType_",ItemTypeImpl.class);
@@ -58,7 +58,7 @@ public class ItemItemTypeFinderImpl extends BasePersistenceImpl<ItemItemType> im
 	        
 	     
 	        
-	        return objectList;
+	        return (List) objectList.get(0);
 	        //return (List) q.list();
 		}catch (Exception e)
 		{

@@ -1,10 +1,14 @@
 package com.idetronic.subur.search;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import com.idetronic.subur.model.SuburItem;
 import com.idetronic.subur.service.ItemAuthorLocalService;
+import com.idetronic.subur.service.persistence.SuburItemQuery;
 import com.idetronic.subur.util.SuburConstant;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -18,6 +22,8 @@ import com.liferay.portal.kernel.search.StringQueryFactoryUtil;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -27,15 +33,26 @@ public class SuburSearchUtil {
 	
 	private static Log logger = LogFactoryUtil.getLog(SuburSearchUtil.class);
 	
-	private static String keywords;
-	private static String author;
-	private static String title;
-	private static String yearPublished;
+	private static String keywords = StringPool.BLANK;
+	private static String author =StringPool.BLANK;
+	private static String title = StringPool.BLANK;
+	private static String yearPublished = StringPool.BLANK;
+	private static String monthPublished = StringPool.BLANK;
 	private static String andOperator;
 	private static boolean advanceSearch;
 	private static boolean matchAllField;
 	private static String authorFirstName;
 	private static String authorLastName;
+	private static long itemType;
+	
+	private static long[] anyTagIds = new long[0];
+	private static long[] allTagIds = new long[0];
+	private static long[] anyCategoryIds = new long[0];
+	private static long[] allCategoryIds = new long[0];
+	private static long[] allItemTypeIds = new long[0];
+	private static long[] anyItemTypeIds = new long[0];
+	private static boolean visible = true;
+	
 	private static String className = SuburItem.class.getName();
 	
 	
@@ -43,9 +60,19 @@ public class SuburSearchUtil {
 	public static Query buildSearchQuery(HttpServletRequest request, SearchContext searchContext)
 	{
 		getSearchParams(request);
+		
+		
+		//String z = sb.toString();
+		//logger.info(z);
+		//String z = "+(entryClassName:com.idetronic.subur.model.SuburItem) +(authorFirstName:{mazlan* zzz*}authorLastName:jongk* )";
+		//return StringQueryFactoryUtil.create(z);
 		return StringQueryFactoryUtil.create(buildQuery());
 	}
-	
+	public static Query buildSearchQuery(SuburItemQuery itemQuery)
+	{
+		getSearchParams(itemQuery);
+		return StringQueryFactoryUtil.create(buildQuery());
+	}
 	
 	private static void getSearchParams(HttpServletRequest request)
 	{
@@ -58,8 +85,52 @@ public class SuburSearchUtil {
 		matchAllField = Validator.equals(andOperator, "1");
 		authorFirstName = ParamUtil.getString(request,"authorFirstName");
 		authorLastName = ParamUtil.getString(request,"authorLastName");
-		logger.info("xx="+andOperator);
+		itemType = ParamUtil.getLong(request, SuburDisplayTerms.ITEM_TYPE);
+		String itemTypeString = ParamUtil.getString(request, SuburConstant.FIELD_ITEM_TYPE);
 		
+		if (!itemTypeString.equals("0"))
+			buildItemTypeIdParam(itemTypeString);
+		
+		
+		
+		
+	}
+	private static void buildItemTypeIdParam(String itemTypeString)
+	{
+		List<Long> itemtypeIdList = new ArrayList<Long>();
+		String[] itemTypes = StringUtil.split(itemTypeString);
+		
+		if (itemTypes.length > 0)
+		{
+			for(String itemType : itemTypes) {
+			  	long id = Long.parseLong(itemType);
+			  	if (id != 0L) {
+			  		itemtypeIdList.add(id);
+			  	}
+			}
+		}
+		
+		
+		
+		if (matchAllField)
+			allItemTypeIds = ArrayUtil.toLongArray(itemtypeIdList);
+		else
+			anyItemTypeIds = ArrayUtil.toLongArray(itemtypeIdList);
+	}
+	private static void getSearchParams(SuburItemQuery itemQuery)
+	{
+		keywords = itemQuery.getKeywords();
+		title = itemQuery.getTitle();
+		yearPublished = String.valueOf(itemQuery.getYearPublished());
+		authorFirstName = itemQuery.getAuthorFirstName();
+		authorLastName = itemQuery.getAuthorLastName();
+		anyItemTypeIds = itemQuery.getAnyItemTypeIds();
+		allItemTypeIds = itemQuery.getAllItemTypeIds();
+		anyTagIds = itemQuery.getAnyTagIds();
+		allTagIds = itemQuery.getAllTagIds();
+		anyCategoryIds = itemQuery.getAnyCategoryIds();
+		allCategoryIds = itemQuery.getAllCategoryIds();
+		visible = itemQuery.isVisible();
 	}
 	
 	private static String buildQuery()
@@ -74,8 +145,6 @@ public class SuburSearchUtil {
 			stringBuilder.append(buildAllCriteria());
 			stringBuilder.append(")");
 			
-			
-			
 		}
 		logger.info(stringBuilder.toString());
 		return stringBuilder.toString();
@@ -87,9 +156,15 @@ public class SuburSearchUtil {
 		String[] fieldArray  = {Field.TITLE,
 				SuburConstant.FIELD_AUTHOR_FIRST_NAME,
 				SuburConstant.FIELD_AUTHOR_LAST_NAME,
-				SuburConstant.FIELD_YEAR
-				
+				SuburConstant.FIELD_YEAR,
+				SuburConstant.FIELD_ITEM_TYPE,
+				SuburConstant.FIELD_MONTH,
+				Field.ASSET_CATEGORY_ID,
+				Field.ASSET_TAG_IDS,
+				Field.GROUP_ID,
+				Field.VIEW_COUNT
 		};
+		
 		
 		String query = StringPool.BLANK;
 		for (String field : fieldArray)
@@ -102,7 +177,7 @@ public class SuburSearchUtil {
 	private static String buildFieldCriteria(String fieldName)
 	{
 		
-		String qry = matchAllField ? "+".concat(fieldName).concat(":") : fieldName.concat(":");
+		String qry = matchAllField ? "+".concat(fieldName).concat(":") : " "+ fieldName.concat(":");
 		logger.info(matchAllField+ fieldName + " :: "+ qry);
 		
 		
@@ -111,7 +186,7 @@ public class SuburSearchUtil {
 			if (Validator.isNull(title))
 				return StringPool.BLANK;
 			else
-				qry = qry.concat(StringUtil.toLowerCase(suffixWithStar(title)).concat(StringPool.SPACE));
+				qry = qry.concat(handleStringTerm(title).concat(StringPool.SPACE));
 
 		}
 		else if (fieldName.equalsIgnoreCase(SuburConstant.FIELD_AUTHOR_FIRST_NAME))
@@ -122,7 +197,8 @@ public class SuburSearchUtil {
 				
 			}else {
 				
-				qry = qry.concat(StringUtil.toLowerCase(suffixWithStar(authorFirstName)).concat(StringPool.SPACE));
+				qry = qry.concat(handleStringTerm(authorFirstName).concat(StringPool.SPACE));
+				//qry = qry.concat(StringUtil.toLowerCase(suffixWithStar(authorFirstName)).concat(StringPool.PLUS).concat("zzz*"));
 				
 			}
 		}else if (fieldName.equalsIgnoreCase(SuburConstant.FIELD_AUTHOR_LAST_NAME))
@@ -130,7 +206,7 @@ public class SuburSearchUtil {
 			if (Validator.isNull(authorLastName))
 				qry = StringPool.BLANK;
 			else
-				qry = qry.concat(StringUtil.toLowerCase(suffixWithStar(authorLastName)).concat(StringPool.SPACE));
+				qry = qry.concat(handleStringTerm(authorLastName).concat(StringPool.SPACE));
 			
 		}else if (fieldName.equalsIgnoreCase(SuburConstant.FIELD_YEAR))
 		{
@@ -139,13 +215,67 @@ public class SuburSearchUtil {
 			else
 				qry = qry.concat(yearPublished).concat(StringPool.SPACE);
 			
-		}
+		}else if (fieldName.equalsIgnoreCase(SuburDisplayTerms.ITEM_TYPE))
+		{
+			if (itemType > 0)
+				qry = qry.concat(String.valueOf(itemType)).concat(StringPool.SPACE);
+			else
+				qry =  StringPool.BLANK;
+					
+		}else if (fieldName.equals(Field.ASSET_CATEGORY_IDS))
+			qry = buildAnyAllCriteria(allCategoryIds,anyCategoryIds,Field.ASSET_CATEGORY_IDS);//   buildAssetCategoryIdsCriteria();
+		else if (fieldName.equals(Field.ASSET_TAG_IDS))
+			qry = buildAnyAllCriteria(anyTagIds,allTagIds,Field.ASSET_TAG_IDS);
+		else if (fieldName.equals(SuburConstant.FIELD_ITEM_TYPE))
+			qry = buildAnyAllCriteria(anyItemTypeIds,allItemTypeIds,SuburConstant.FIELD_ITEM_TYPE);
+		else
+			qry = StringPool.BLANK;
 		
 		
 		logger.info(qry);
 		return qry;
 		
 		
+	}
+	
+	private static String buildAnyAllCriteria(long[] anyIds,long[] allIds,String fieldName)
+	{
+		StringBuilder sb = new StringBuilder();
+		if (anyIds.length > 0)
+		{
+			for (int i = 0; i < anyIds.length; i++)
+			{
+				sb.append(fieldName);
+				sb.append(CharPool.SEMICOLON);
+				sb.append(anyIds[i]);
+				sb.append(CharPool.SPACE);
+				
+			}
+		}
+		if (allIds.length > 0)
+		{
+			for (int i = 0; i < allIds.length; i++)
+			{
+				sb.append(CharPool.PLUS);
+				sb.append(fieldName);
+				sb.append(CharPool.SEMICOLON);
+				sb.append(allIds[i]);
+				sb.append(CharPool.SPACE);
+				
+			}
+		}
+		
+		return sb.toString();
+		
+	}
+	private static String handleStringTerm(String term)
+	{
+		return suffixWithStar(handleSpace(term)).toLowerCase();
+	}
+	private static String handleSpace(String criteria)
+	{
+		criteria = criteria.replace(CharPool.SPACE, CharPool.QUESTION);
+		return criteria;
 	}
 	public static String suffixWithStar(String value)
 	{

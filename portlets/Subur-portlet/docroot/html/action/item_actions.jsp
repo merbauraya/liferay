@@ -1,7 +1,7 @@
 <%@ include file="/html/init.jsp"%>
 
 <%
-	String mvcPath = ParamUtil.getString(request, "mvcPath");
+	String mvcPath = ParamUtil.getString(request, "jspPage");
 	ResultRow row = (ResultRow) request
 	.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 	SuburItem item = (SuburItem) row.getObject();
@@ -13,7 +13,7 @@
 		<portlet:renderURL var="editURL">
 			<portlet:param name="itemId"
 				value="<%=String.valueOf(item.getItemId())%>" />
-			<portlet:param name="mvcPath"
+			<portlet:param name="jspPage"
 				value="/html/edit.jsp" />
 		</portlet:renderURL>
 		

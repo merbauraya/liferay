@@ -105,19 +105,35 @@
     <entity name="Author" local-service="true" remote-service="false">
     	<column name="authorId" type="long" primary="true"></column>
     	<column name="groupId" type="long" />
+    	<column name="companyId" type="long" />
+    	<column name="title" type="String" />
     	<column name="idType" type="int"></column>
     	<column name="remoteId" type="String"></column>
     	<column name="firstName" type="String"></column>
     	<column name="lastName" type="String"></column>
     	<column name="userId" type="int"></column>
     	<column name="metadata" type="String"></column>
+    	<column name="lastPublishedDate" type="Date"></column>
+    	<column name="itemCount" type="int"></column>
+    	<column name="personalSite" type="String"></column>
+    	<finder name="Group" return-type="Collection">
+    		<finder-column name="groupId"></finder-column>
+    	</finder>
+    	<finder name="CompanyGroup" return-type="Collection">
+    		<finder-column name="companyId"></finder-column>
+    		<finder-column name="groupId"></finder-column>
+    		
+    	</finder>
     	<finder name="idType" return-type="Collection">
     		<finder-column name="idType"></finder-column>
     	</finder>
     	<finder name="firstName" return-type="Collection">
-    		<finder-column name="firstName"></finder-column>
+    		<finder-column name="firstName" comparator="LIKE"></finder-column>
     	</finder>
+    	<finder name="lastName" return-type="Collection">
+    		<finder-column name="lastName" comparator="LIKE"></finder-column>
     	
+    	</finder>
     </entity>
     <entity name="ItemAuthor" local-service="true" remote-service="false">
     	<column name="itemId" type="long" primary="true"></column>
@@ -129,5 +145,33 @@
     		<finder-column name="authorId"></finder-column>
     	</finder>
     </entity>
-    
+    <entity name="Expertise" local-service="true" remote-service="true">
+    	<column name="expertiseId" type="long" primary="true"></column>
+    	<column name="groupId" type="long"></column>
+    	<column name="companyId" type="long"></column>
+    	<column name="userId" type="long"></column>
+    	<column name="createDate" type="Date"></column>
+    	<column name="expertiseName" type="String"></column>
+    	<column name="indexedName" type="String"></column>
+    	<column name="modifiedDate" type="Date"></column>
+    	<column name="authorCount" type="int"></column>
+    	<finder name="Group" return-type="Collection">
+    		<finder-column name="groupId"></finder-column>
+    	</finder>
+    	<finder name="GroupName" return-type="Expertise" unique="true">
+    		<finder-column name="groupId"></finder-column>
+    		<finder-column name="indexedName"></finder-column>
+    	</finder>
+    	
+    </entity>
+    <entity name="AuthorExpertise" local-service="true" remote-service="false">
+    	<column name="authorId" type="long" primary="true"></column>
+        <column name="expertiseId" type="long" primary="true"></column>
+         <finder name="Author" return-type="Collection">
+			<finder-column name="authorId"></finder-column>
+		</finder>
+		<finder name="Expertise" return-type="Collection">
+			<finder-column name="expertiseId"></finder-column>
+		</finder>
+    </entity>
 </service-builder>

@@ -11,18 +11,48 @@
 		<indexer-class>com.idetronic.subur.search.SuburIndexer</indexer-class>
 		<asset-renderer-factory>com.idetronic.subur.asset.SuburItemAssetRendererFactory</asset-renderer-factory>
 		<header-portlet-css>/css/main.css</header-portlet-css>
-		<header-portlet-css>/css/bootstrap-tagsinput.css</header-portlet-css>
+
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		
 		<footer-portlet-javascript>/js/jquery-1.11.0.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/utils.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/tokenizers.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/bloodhound.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/bootstrap-tagsinput.min.js</footer-portlet-javascript>
+
+
 		
 		<css-class-wrapper>Subur-portlet</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
+	</portlet>
+	<portlet>
+		<portlet-name>author-navigator</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>
+			/css/authornavigator/main.css
+		</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/authornavigator/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>author-navigator-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>item-type</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>item-type-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>1</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
+		<instanceable>true</instanceable>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>subur-multi-categories</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

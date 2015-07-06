@@ -48,5 +48,46 @@
 		
 		
 	</tag>
+	<tag>
+		<name>item-itemtype-display</name>
+		<tag-class>com.idetronic.subur.taglib.ItemItemTypeTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>itemId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>viewItemTypeURL</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showHeader</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		
+	</tag>
+	<tag>
+		<name>item-categorization-filter</name>
+		<tag-class>com.idetronic.subur.taglib.ItemCategorizationFilterTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>assetType</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>portletURL</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		
+		
+	</tag>
+	
 	
 </taglib>

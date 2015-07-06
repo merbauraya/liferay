@@ -17,6 +17,7 @@ package com.idetronic.subur.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,12 +51,17 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 
 		attributes.put("authorId", getAuthorId());
 		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("title", getTitle());
 		attributes.put("idType", getIdType());
 		attributes.put("remoteId", getRemoteId());
 		attributes.put("firstName", getFirstName());
 		attributes.put("lastName", getLastName());
 		attributes.put("userId", getUserId());
 		attributes.put("metadata", getMetadata());
+		attributes.put("lastPublishedDate", getLastPublishedDate());
+		attributes.put("itemCount", getItemCount());
+		attributes.put("personalSite", getPersonalSite());
 
 		return attributes;
 	}
@@ -72,6 +78,18 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 
 		if (groupId != null) {
 			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
 		}
 
 		Integer idType = (Integer)attributes.get("idType");
@@ -108,6 +126,24 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 
 		if (metadata != null) {
 			setMetadata(metadata);
+		}
+
+		Date lastPublishedDate = (Date)attributes.get("lastPublishedDate");
+
+		if (lastPublishedDate != null) {
+			setLastPublishedDate(lastPublishedDate);
+		}
+
+		Integer itemCount = (Integer)attributes.get("itemCount");
+
+		if (itemCount != null) {
+			setItemCount(itemCount);
+		}
+
+		String personalSite = (String)attributes.get("personalSite");
+
+		if (personalSite != null) {
+			setPersonalSite(personalSite);
 		}
 	}
 
@@ -169,6 +205,46 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 	@Override
 	public void setGroupId(long groupId) {
 		_author.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this author.
+	*
+	* @return the company ID of this author
+	*/
+	@Override
+	public long getCompanyId() {
+		return _author.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this author.
+	*
+	* @param companyId the company ID of this author
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_author.setCompanyId(companyId);
+	}
+
+	/**
+	* Returns the title of this author.
+	*
+	* @return the title of this author
+	*/
+	@Override
+	public java.lang.String getTitle() {
+		return _author.getTitle();
+	}
+
+	/**
+	* Sets the title of this author.
+	*
+	* @param title the title of this author
+	*/
+	@Override
+	public void setTitle(java.lang.String title) {
+		_author.setTitle(title);
 	}
 
 	/**
@@ -289,6 +365,66 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 	@Override
 	public void setMetadata(java.lang.String metadata) {
 		_author.setMetadata(metadata);
+	}
+
+	/**
+	* Returns the last published date of this author.
+	*
+	* @return the last published date of this author
+	*/
+	@Override
+	public java.util.Date getLastPublishedDate() {
+		return _author.getLastPublishedDate();
+	}
+
+	/**
+	* Sets the last published date of this author.
+	*
+	* @param lastPublishedDate the last published date of this author
+	*/
+	@Override
+	public void setLastPublishedDate(java.util.Date lastPublishedDate) {
+		_author.setLastPublishedDate(lastPublishedDate);
+	}
+
+	/**
+	* Returns the item count of this author.
+	*
+	* @return the item count of this author
+	*/
+	@Override
+	public int getItemCount() {
+		return _author.getItemCount();
+	}
+
+	/**
+	* Sets the item count of this author.
+	*
+	* @param itemCount the item count of this author
+	*/
+	@Override
+	public void setItemCount(int itemCount) {
+		_author.setItemCount(itemCount);
+	}
+
+	/**
+	* Returns the personal site of this author.
+	*
+	* @return the personal site of this author
+	*/
+	@Override
+	public java.lang.String getPersonalSite() {
+		return _author.getPersonalSite();
+	}
+
+	/**
+	* Sets the personal site of this author.
+	*
+	* @param personalSite the personal site of this author
+	*/
+	@Override
+	public void setPersonalSite(java.lang.String personalSite) {
+		_author.setPersonalSite(personalSite);
 	}
 
 	@Override

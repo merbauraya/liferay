@@ -23,6 +23,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the Author service. Represents a row in the &quot;subur_Author&quot; database table, with each column mapped to a property of this class.
  *
@@ -84,6 +86,35 @@ public interface AuthorModel extends BaseModel<Author> {
 	 * @param groupId the group ID of this author
 	 */
 	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this author.
+	 *
+	 * @return the company ID of this author
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this author.
+	 *
+	 * @param companyId the company ID of this author
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the title of this author.
+	 *
+	 * @return the title of this author
+	 */
+	@AutoEscape
+	public String getTitle();
+
+	/**
+	 * Sets the title of this author.
+	 *
+	 * @param title the title of this author
+	 */
+	public void setTitle(String title);
 
 	/**
 	 * Returns the id type of this author.
@@ -172,6 +203,49 @@ public interface AuthorModel extends BaseModel<Author> {
 	 * @param metadata the metadata of this author
 	 */
 	public void setMetadata(String metadata);
+
+	/**
+	 * Returns the last published date of this author.
+	 *
+	 * @return the last published date of this author
+	 */
+	public Date getLastPublishedDate();
+
+	/**
+	 * Sets the last published date of this author.
+	 *
+	 * @param lastPublishedDate the last published date of this author
+	 */
+	public void setLastPublishedDate(Date lastPublishedDate);
+
+	/**
+	 * Returns the item count of this author.
+	 *
+	 * @return the item count of this author
+	 */
+	public int getItemCount();
+
+	/**
+	 * Sets the item count of this author.
+	 *
+	 * @param itemCount the item count of this author
+	 */
+	public void setItemCount(int itemCount);
+
+	/**
+	 * Returns the personal site of this author.
+	 *
+	 * @return the personal site of this author
+	 */
+	@AutoEscape
+	public String getPersonalSite();
+
+	/**
+	 * Sets the personal site of this author.
+	 *
+	 * @param personalSite the personal site of this author
+	 */
+	public void setPersonalSite(String personalSite);
 
 	@Override
 	public boolean isNew();

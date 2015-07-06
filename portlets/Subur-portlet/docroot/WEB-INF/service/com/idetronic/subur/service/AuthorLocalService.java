@@ -251,7 +251,86 @@ public interface AuthorLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	public long addAuthor(java.lang.String firstName,
-		java.lang.String lastName, java.lang.String remoteId, int idType)
+		java.lang.String lastName, java.lang.String title,
+		java.lang.String remoteId, int idType, long userId, long groupId,
+		java.lang.String[] expertiseNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void setExpertises(long authorId,
+		java.util.List<com.idetronic.subur.model.Expertise> expertises)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Update existing author, throw Exception if author not found or update fails
+	*
+	* @param authorId
+	* @param firstName
+	* @param lastName
+	* @param remoteId
+	* @param idType
+	* @param userId
+	* @param groupId
+	* @return
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	public com.idetronic.subur.model.Author updateAuthor(long authorId,
+		java.lang.String title, java.lang.String firstName,
+		java.lang.String lastName, java.lang.String remoteId, int idType,
+		long userId, long groupId, java.lang.String[] expertiseNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Find all item under a given author
+	*
+	* @param groupId
+	* @param authorId
+	* @param start
+	* @param end
+	* @param status Item status
+	* @param obc
+	* @return
+	* @throws SystemException
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.idetronic.subur.model.SuburItem> getItemByAuthorGroup(
+		long groupId, long authorId, int start, int end, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Find and return all associated expertise for the author
+	*
+	* @param authorId to seearch for
+	* @return List of Expertise
+	* @throws SystemException
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.idetronic.subur.model.Expertise> getExpertises(
+		long authorId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Update author latest posting
+	*
+	* @param suburItem
+	* @throws SystemException
+	*/
+	public void updateAuthorPosting(
+		com.idetronic.subur.model.SuburItem suburItem)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Increment item count and last posted date for an author
+	* Usually called during new item creation
+	*
+	* @param authorId
+	* @return new item count for the author
+	* @throws SystemException if author cannot be found or fail during update
+	*/
+	public int updateNewPosting(long authorId, java.util.Date newPostDate)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -268,9 +347,50 @@ public interface AuthorLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Update all author with up to date item count
+	*
+	* @param companyId
+	* @param groupId
+	*/
+	public void updateAllItemCount(long companyId, long groupId);
+
+	/**
+	* Decrement item count for the author
+	*/
+	public void decrementItemCount(long authorId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getSearchCount(java.lang.String keyword, long companyId,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getSearchCount(java.lang.String keyword, long companyId,
+		long groupId, java.lang.String firstName, java.lang.String lastName,
+		boolean isAdvancedSearch, boolean isAndOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.idetronic.subur.model.SuburItem> getSuburItems(
+		long authorId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.idetronic.subur.model.Author> search(
-		java.lang.String keyword, int start, int end,
+		java.lang.String keyword, long companyId, long groupId,
+		java.lang.String firstName, java.lang.String lastName,
+		boolean isAdvancedSearch, boolean isAndOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.idetronic.subur.model.Author> search(
+		java.lang.String keyword, long companyId, long groupId, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.idetronic.subur.model.Author> findByGroupCompany(
+		long companyId, long groupId, int start, int end);
 }

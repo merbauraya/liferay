@@ -14,12 +14,23 @@ create table item (
 create table subur_Author (
 	authorId LONG not null primary key,
 	groupId LONG,
+	companyId LONG,
+	title VARCHAR(75) null,
 	idType INTEGER,
 	remoteId VARCHAR(75) null,
 	firstName VARCHAR(75) null,
 	lastName VARCHAR(75) null,
 	userId INTEGER,
-	metadata VARCHAR(75) null
+	metadata VARCHAR(75) null,
+	lastPublishedDate DATE null,
+	itemCount INTEGER,
+	personalSite VARCHAR(75) null
+);
+
+create table subur_AuthorExpertise (
+	authorId LONG not null,
+	expertiseId LONG not null,
+	primary key (authorId, expertiseId)
 );
 
 create table subur_Division (
@@ -27,6 +38,18 @@ create table subur_Division (
 	parentId LONG,
 	divisionName VARCHAR(75) null,
 	depositable BOOLEAN
+);
+
+create table subur_Expertise (
+	expertiseId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	expertiseName VARCHAR(75) null,
+	indexedName VARCHAR(75) null,
+	modifiedDate DATE null,
+	authorCount INTEGER
 );
 
 create table subur_FileEntryType (

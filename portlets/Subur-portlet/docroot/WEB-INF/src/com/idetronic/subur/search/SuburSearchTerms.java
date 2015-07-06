@@ -9,10 +9,10 @@ public class SuburSearchTerms extends SuburDisplayTerms {
 		super(portletRequest);
 
 		title = DAOParamUtil.getString(portletRequest, "title");
-		author = DAOParamUtil.getString(portletRequest, "author");
 		year = DAOParamUtil.getString(portletRequest, "year");
 		authorFirstName = DAOParamUtil.getString(portletRequest, "authorFirstName");
 		authorLastName = DAOParamUtil.getString(portletRequest, "authorLastName");
+		itemType = DAOParamUtil.getLong(portletRequest, ITEM_TYPE);
 	}
 
 }

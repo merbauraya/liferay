@@ -17,6 +17,7 @@ package com.idetronic.subur.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,12 +32,17 @@ public class AuthorSoap implements Serializable {
 
 		soapModel.setAuthorId(model.getAuthorId());
 		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setTitle(model.getTitle());
 		soapModel.setIdType(model.getIdType());
 		soapModel.setRemoteId(model.getRemoteId());
 		soapModel.setFirstName(model.getFirstName());
 		soapModel.setLastName(model.getLastName());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setMetadata(model.getMetadata());
+		soapModel.setLastPublishedDate(model.getLastPublishedDate());
+		soapModel.setItemCount(model.getItemCount());
+		soapModel.setPersonalSite(model.getPersonalSite());
 
 		return soapModel;
 	}
@@ -105,6 +111,22 @@ public class AuthorSoap implements Serializable {
 		_groupId = groupId;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	public int getIdType() {
 		return _idType;
 	}
@@ -153,12 +175,41 @@ public class AuthorSoap implements Serializable {
 		_metadata = metadata;
 	}
 
+	public Date getLastPublishedDate() {
+		return _lastPublishedDate;
+	}
+
+	public void setLastPublishedDate(Date lastPublishedDate) {
+		_lastPublishedDate = lastPublishedDate;
+	}
+
+	public int getItemCount() {
+		return _itemCount;
+	}
+
+	public void setItemCount(int itemCount) {
+		_itemCount = itemCount;
+	}
+
+	public String getPersonalSite() {
+		return _personalSite;
+	}
+
+	public void setPersonalSite(String personalSite) {
+		_personalSite = personalSite;
+	}
+
 	private long _authorId;
 	private long _groupId;
+	private long _companyId;
+	private String _title;
 	private int _idType;
 	private String _remoteId;
 	private String _firstName;
 	private String _lastName;
 	private int _userId;
 	private String _metadata;
+	private Date _lastPublishedDate;
+	private int _itemCount;
+	private String _personalSite;
 }

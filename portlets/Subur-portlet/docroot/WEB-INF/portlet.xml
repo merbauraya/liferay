@@ -38,6 +38,126 @@
 		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
 		<supported-public-render-parameter>resetCur</supported-public-render-parameter>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
+		<supported-public-render-parameter>itemTypeId</supported-public-render-parameter>
+		<supported-public-render-parameter>authorId</supported-public-render-parameter>
+	</portlet>
+	<portlet>
+		<portlet-name>author-navigator</portlet-name>
+		<display-name>Subur Author Navigator</display-name>
+		<portlet-class>
+			com.idetronic.subur.AuthorNavigatorPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/authornavigator/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/authornavigator/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Subur Author Navigator</title>
+			<short-title>Author Navigator</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+		<supported-public-render-parameter>authorId</supported-public-render-parameter>
+		<supported-public-render-parameter>resetCur</supported-public-render-parameter>
+	</portlet>
+	<portlet>
+		<portlet-name>item-type</portlet-name>
+		<display-name>Subur Item Type Navigation</display-name>
+		<portlet-class>com.idetronic.subur.ItemTypeNavigationPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/itemtype-navigation/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/itemtype-nagivation/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Item Type Navigation</title>
+			<short-title>Item Type</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+		<supported-public-render-parameter>itemTypeId</supported-public-render-parameter>
+		<supported-public-render-parameter>resetCur</supported-public-render-parameter>
+	</portlet>
+	<portlet>
+		<portlet-name>1</portlet-name>
+		<display-name>Multi Categories Navigation</display-name>
+		<portlet-class>
+			com.idetronic.subur.CategoriesNavigationPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/multi_categories/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/multi_categories/configuration.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.categories.Language</resource-bundle>
+		<portlet-info>
+			<title>Multi Categories Navigation</title>
+			<short-title>1</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
+		<supported-public-render-parameter>resetCur</supported-public-render-parameter>
 	</portlet>
 	<public-render-parameter>
 		<identifier>categoryId</identifier>
@@ -55,4 +175,14 @@
 		<identifier>tags</identifier>
 		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:tags</qname>
 	</public-render-parameter>
+	<public-render-parameter>
+		<identifier>itemTypeId</identifier>
+		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:itemTypeId</qname>
+	</public-render-parameter>
+	<public-render-parameter>
+		<identifier>authorId</identifier>
+		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:authorId</qname>
+	</public-render-parameter>
+
+
 </portlet-app>

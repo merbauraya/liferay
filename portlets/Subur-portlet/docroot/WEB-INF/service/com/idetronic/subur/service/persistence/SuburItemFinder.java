@@ -22,13 +22,10 @@ public interface SuburItemFinder {
 
 	public java.util.List getItemDetails(long itemId);
 
-	public java.util.List getFileEntries(long itemId);
-
-	public java.util.List getItemBySubjectId(long subjectId, int start, int end);
-
-	public java.util.List itemCountByItemTypeInSubject(long subjectId);
+	public java.util.List<com.idetronic.subur.model.SuburItem> findByAuthorGroup(
+		long groupId, long authorId, int start, int end, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List getItemAuthors(long itemId);
-
-	public java.util.List itemCountByAuthorInSubject(long subjectId);
 }

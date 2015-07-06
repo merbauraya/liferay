@@ -127,17 +127,33 @@ public class ItemItemTypeLocalServiceClp implements ItemItemTypeLocalService {
 
 		_methodParameterTypes19 = new String[] { "long", "long" };
 
-		_methodName20 = "setItemItemType";
+		_methodName20 = "addItemItemType";
 
-		_methodParameterTypes20 = new String[] { "long", "java.lang.String[][]" };
+		_methodParameterTypes20 = new String[] { "long", "long[][]" };
 
-		_methodName21 = "getByItemId";
+		_methodName21 = "addItemItemType";
 
-		_methodParameterTypes21 = new String[] { "long" };
+		_methodParameterTypes21 = new String[] { "long", "java.lang.String[][]" };
 
-		_methodName22 = "itemTypeByItemid";
+		_methodName22 = "updateItemItemType";
 
-		_methodParameterTypes22 = new String[] { "long" };
+		_methodParameterTypes22 = new String[] { "long", "long[][]" };
+
+		_methodName23 = "updateItemItemType";
+
+		_methodParameterTypes23 = new String[] { "long", "java.lang.String[][]" };
+
+		_methodName24 = "getByItemId";
+
+		_methodParameterTypes24 = new String[] { "long" };
+
+		_methodName25 = "getByItemIdArray";
+
+		_methodParameterTypes25 = new String[] { "long" };
+
+		_methodName26 = "itemTypeByItemid";
+
+		_methodParameterTypes26 = new String[] { "long" };
 	}
 
 	@Override
@@ -724,11 +740,91 @@ public class ItemItemTypeLocalServiceClp implements ItemItemTypeLocalService {
 	}
 
 	@Override
-	public void setItemItemType(long itemId, java.lang.String[] itemTypeStrings)
+	public void addItemItemType(long itemId, long[] itemTypeIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			_invokableLocalService.invokeMethod(_methodName20,
 				_methodParameterTypes20,
+				new Object[] { itemId, ClpSerializer.translateInput(itemTypeIds) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void addItemItemType(long itemId, java.lang.String[] itemTypeStrings)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName21,
+				_methodParameterTypes21,
+				new Object[] {
+					itemId,
+					
+				ClpSerializer.translateInput(itemTypeStrings)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void updateItemItemType(long itemId, long[] itemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName22,
+				_methodParameterTypes22,
+				new Object[] { itemId, ClpSerializer.translateInput(itemTypeIds) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void updateItemItemType(long itemId,
+		java.lang.String[] itemTypeStrings)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName23,
+				_methodParameterTypes23,
 				new Object[] {
 					itemId,
 					
@@ -758,8 +854,8 @@ public class ItemItemTypeLocalServiceClp implements ItemItemTypeLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21, new Object[] { itemId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24, new Object[] { itemId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -781,13 +877,36 @@ public class ItemItemTypeLocalServiceClp implements ItemItemTypeLocalService {
 	}
 
 	@Override
+	public java.lang.Object[] getByItemIdArray(long itemId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25, new Object[] { itemId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.Object[])ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public java.util.List<com.idetronic.subur.model.ItemItemType> itemTypeByItemid(
 		long itemId) throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22, new Object[] { itemId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26, new Object[] { itemId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -853,4 +972,12 @@ public class ItemItemTypeLocalServiceClp implements ItemItemTypeLocalService {
 	private String[] _methodParameterTypes21;
 	private String _methodName22;
 	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }

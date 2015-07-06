@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_subur_AuthorExpertiseService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.subur.idetronic.com" xmlns:cmp-ns="http://model.subur.idetronic.com" qname="ns:ArrayOf_tns2_AuthorExpertiseSoap" type="java:com.idetronic.subur.model.AuthorExpertiseSoap[]" innerType="cmp-ns:AuthorExpertiseSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.subur.idetronic.com" qname="ns:AuthorExpertiseSoap" type="java:com.idetronic.subur.model.AuthorExpertiseSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.subur.idetronic.com" xmlns:rtns="urn:http.service.subur.idetronic.com" xmlns:tns2="http://model.subur.idetronic.com" name="getGroupExpertise" qname="operNS:getGroupExpertise" returnQName="getGroupExpertiseReturn" returnType="rtns:ArrayOf_tns2_AuthorExpertiseSoap" returnItemType="tns2:AuthorExpertiseSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="getGroupExpertise" />
+		<parameter name="className" value="com.idetronic.subur.service.http.AuthorExpertiseServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.subur.idetronic.com,urn:http.service.subur.idetronic.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="AuthorExpertiseServiceSoap" />
+		<parameter name="wsdlServiceElement" value="AuthorExpertiseServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_subur_AuthorExpertiseService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.subur.idetronic.com" />
+	</service>
+</deployment>

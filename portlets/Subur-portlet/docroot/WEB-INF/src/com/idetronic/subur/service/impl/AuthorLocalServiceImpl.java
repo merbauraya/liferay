@@ -24,14 +24,26 @@ import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.idetronic.subur.NoSuchAuthorException;
 import com.idetronic.subur.Subur;
 import com.idetronic.subur.model.Author;
+import com.idetronic.subur.model.AuthorExpertise;
+import com.idetronic.subur.model.Expertise;
+import com.idetronic.subur.model.SuburItem;
+import com.idetronic.subur.search.AuthorSearchTerms;
+import com.idetronic.subur.service.AuthorExpertiseLocalServiceUtil;
+import com.idetronic.subur.service.ExpertiseLocalServiceUtil;
+import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
 import com.idetronic.subur.service.base.AuthorLocalServiceBaseImpl;
+import com.idetronic.subur.service.persistence.AuthorExpertisePK;
 import com.idetronic.subur.service.persistence.AuthorFinder;
 import com.idetronic.subur.service.persistence.AuthorFinderUtil;
+import com.idetronic.subur.service.persistence.SuburItemFinderUtil;
+import com.idetronic.subur.util.SuburConstant;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -39,6 +51,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 /**
@@ -62,19 +78,200 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.idetronic.subur.service.AuthorLocalServiceUtil} to access the author local service.
 	 */
 	private static Log logger = LogFactoryUtil.getLog(AuthorLocalServiceImpl.class);
-	public long addAuthor(String firstName,String lastName,String remoteId,int idType) throws SystemException
+	
+	
+	
+	public long addAuthor(String firstName,String lastName,String title,
+			String remoteId,int idType,
+			long userId, long groupId,String[] expertiseNames) throws SystemException, PortalException
 	{
+		
+		User user = userLocalService.getUserById(userId);
+		
 		Date now = new Date();
 		long authorId = counterLocalService.increment();
 		Author author = authorPersistence.create(authorId);
 		author.setFirstName(firstName);
 		author.setLastName(lastName);
+		author.setTitle(title);
+		author.setRemoteId(remoteId);
+		author.setIdType(idType);
+		author.setCompanyId(user.getCompanyId());
+		author.setGroupId(groupId);
+		author.setItemCount(0);
+		
+		
+		if (expertiseNames != null)
+		{
+			long siteGroupId = PortalUtil.getSiteGroupId(groupId);
+			Group siteGroup = GroupLocalServiceUtil.getGroup(siteGroupId);
+			
+			List<Expertise> expertises = ExpertiseLocalServiceUtil.checkExpertises(userId, siteGroup, expertiseNames);
+			
+			for (Expertise expertise : expertises)
+			{
+				expertiseLocalService.incrementAuthorCount(expertise.getExpertiseId());
+			}
+			setExpertises(authorId,expertises);
+		}
+		authorPersistence.update(author);
+		
+		return authorId;
+		
+	}
+	@Override
+	public void setExpertises(long authorId, List<Expertise> expertises) throws SystemException
+	{
+		//remove existing/old expertises , if any
+		authorExpertisePersistence.removeByAuthor(authorId);
+		
+		for (Expertise expertise : expertises)
+		{
+			AuthorExpertisePK pk = new AuthorExpertisePK();
+			pk.setAuthorId(authorId);
+			pk.setExpertiseId(expertise.getExpertiseId());
+			AuthorExpertise authorExpertise = AuthorExpertiseLocalServiceUtil.createAuthorExpertise(pk);
+			AuthorExpertiseLocalServiceUtil.updateAuthorExpertise(authorExpertise);
+			
+		}
+		
+	}
+	/**
+	 * Update existing author, throw Exception if author not found or update fails
+	 * @param authorId
+	 * @param firstName
+	 * @param lastName
+	 * @param remoteId
+	 * @param idType
+	 * @param userId
+	 * @param groupId
+	 * @return
+	 * @throws SystemException
+	 * @throws PortalException 
+	 */
+	public Author updateAuthor(long authorId,String title,String firstName,
+				String lastName,
+				String remoteId,int idType,
+				long userId, long groupId,
+				String[] expertiseNames) throws SystemException, PortalException
+	{
+		Author author = authorPersistence.fetchByPrimaryKey(authorId);
+		author.setTitle(title);
+		author.setFirstName(firstName);
+		author.setLastName(lastName);
 		author.setRemoteId(remoteId);
 		author.setIdType(idType);
 		
-		authorPersistence.update(author);
-		return authorId;
+		if (expertiseNames != null)
+		{
+			long siteGroupId = PortalUtil.getSiteGroupId(groupId);
+			Group siteGroup = GroupLocalServiceUtil.getGroup(siteGroupId);
+			
+			//get existing author expertise and decrement the count
+			List<Expertise> oldExpertises = getExpertises(authorId);
+			List<Expertise> newExpertises = ExpertiseLocalServiceUtil.checkExpertises(userId, siteGroup, expertiseNames);
+
+			
+			for (Expertise expertise: oldExpertises)
+			{
+				if (!newExpertises.contains(expertise))
+					expertiseLocalService.decrementAuthorCount(expertise.getExpertiseId());
+				
+					
+			}
+			
+			for (Expertise expertise: newExpertises)
+			{
+				if (!oldExpertises.contains(expertise))
+					expertiseLocalService.incrementAuthorCount(expertise.getExpertiseId());
+			}
+			
+			
+			setExpertises(authorId,newExpertises);
+		}
 		
+		
+		
+		authorPersistence.update(author);
+		return author;
+
+	}
+	/**
+	 * Find all item under a given author
+	 * @param groupId
+	 * @param authorId
+	 * @param start
+	 * @param end
+	 * @param status Item status
+	 * @param obc
+	 * @return
+	 * @throws SystemException
+	 */
+	@Override
+	public List<SuburItem> getItemByAuthorGroup(long groupId,long authorId,
+			int start, int end, int status, OrderByComparator obc) throws SystemException
+			
+	{
+		
+		return SuburItemFinderUtil.findByAuthorGroup(groupId, authorId, start, end, status, obc);
+	
+	}
+	/**
+	 * Find and return all associated expertise for the author
+	 * @param authorId to seearch for
+	 * @return List of Expertise
+	 * @throws SystemException
+	 */
+	public List<Expertise> getExpertises(long authorId) throws SystemException
+	{
+		List<AuthorExpertise> authorExpertises = authorExpertisePersistence.findByAuthor(authorId);
+		List<Expertise> expertises = new ArrayList<Expertise>(authorExpertises.size());
+		
+		for (AuthorExpertise authorExpertise: authorExpertises)
+		{
+			Expertise expertise = expertisePersistence.fetchByPrimaryKey(authorExpertise.getExpertiseId());
+			expertises.add(expertise);
+		}
+		return expertises;
+		
+		
+	}
+	
+	/**
+	 * Update author latest posting
+	 * @param suburItem
+	 * @throws SystemException
+	 */
+	public void updateAuthorPosting(SuburItem suburItem) throws SystemException
+	{
+		
+		if (suburItem.getStatus() != SuburConstant.STATUS_PUBLISHED_ITEM)
+			return;
+		long[] authors = ItemAuthorLocalServiceUtil.getAuthorId(suburItem.getItemId());
+		
+		for (long authorId : authors)
+		{
+			updateNewPosting(authorId,suburItem.getPublishedDate());
+		}
+	}
+	
+	/**
+	 * Increment item count and last posted date for an author
+	 * Usually called during new item creation
+	 * @param authorId
+	 * @return new item count for the author
+	 * @throws SystemException if author cannot be found or fail during update
+	 */
+	public int updateNewPosting(long authorId,Date newPostDate) throws SystemException
+	{
+		
+		
+		Author author = authorPersistence.fetchByPrimaryKey(authorId);
+		int newCount = author.getItemCount() + 1;
+		author.setItemCount(newCount);
+		author.setLastPublishedDate(newPostDate);
+		authorPersistence.update(author);
+		return newCount;
 	}
 	/**
 	 * Return all authors with the primary keys
@@ -92,37 +289,154 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		}
 		return authors;
 	}
-	
-	private String authorLookup(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
-		JSONArray jsonResults = JSONFactoryUtil.createJSONArray();
-		//String<> x = resourceRequest.
-		String keyword = ParamUtil.getString(resourceRequest, "keyword");
+	/**
+	 * Update all author with up to date item count
+	 * @param companyId
+	 * @param groupId
+	 */
+	public void updateAllItemCount(long companyId,long groupId)
+	{
+		List authorItemCounts = AuthorFinderUtil.getItemCountByGroupCompanyScalar(companyId, groupId);
+		String serilizeString = null;
+		JSONArray authorJsonArray = null;
 		
-		
-		
-		
-		long itemId = ParamUtil.getLong(resourceRequest, "itemId");
-		logger.info("keywrd="+ keyword);
-		JSONObject jsonCells = JSONFactoryUtil.createJSONObject();
-		  jsonCells.put("key", "1");
-          jsonCells.put("name", "New York, USA");
-          jsonResults.put(jsonCells);
-          jsonCells = JSONFactoryUtil.createJSONObject();
-          jsonCells.put("key", "2");
-          jsonCells.put("name", "Delhi, India");
-          jsonResults.put(jsonCells);
-          jsonCells = JSONFactoryUtil.createJSONObject();
-          jsonCells.put("key", "3");
-          jsonCells.put("name", "Hyderabad, India");
-          jsonResults.put(jsonCells);
-          
-          return jsonResults.toString();
+		for (Object elemObject : authorItemCounts)
+		{
+			serilizeString = JSONFactoryUtil.serialize(elemObject);
+			try {
+				authorJsonArray = JSONFactoryUtil.createJSONArray(serilizeString);
+				long authorId = authorJsonArray.getLong(0);
+				int itemCount = authorJsonArray.getInt(1);
+				Author author = authorPersistence.fetchByPrimaryKey(authorId);
+				author.setItemCount(itemCount);
+				authorPersistence.update(author);
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
-	public List<Author> search(String keyword,int start, int end, OrderByComparator obc) throws SystemException
+	/**
+	 * Decrement item count for the author
+	 */
+	public void decrementItemCount(long authorId) throws SystemException
+	{
+		Author author;
+		try {
+			author = authorPersistence.findByPrimaryKey(authorId);
+			int newItemCount = author.getItemCount() -1;
+			author.setItemCount(newItemCount);
+			authorPersistence.update(author);
+			
+		} catch (NoSuchAuthorException e) {
+			logger.warn(e);
+		}
+		
+	}
+	/**
+	 * 
+	 */
+	public int getSearchCount(String keyword,long companyId,long groupId) throws SystemException
+	{
+		
+		if (Validator.isNotNull(keyword) || Validator.isBlank(keyword))
+			return authorPersistence.countByCompanyGroup(companyId,groupId);//, companyId);//
+		else
+			return AuthorFinderUtil.getTotalByName(keyword, companyId, groupId);
+	}
+	
+	public int getSearchCount(String keyword,long companyId,long groupId,
+			String firstName, String lastName,
+			boolean isAdvancedSearch,boolean isAndOperator,
+			int start, int end, OrderByComparator obc)
+	{
+		try {
+			return AuthorFinderUtil.countByFistNameLastName(companyId, groupId, firstName, lastName, isAndOperator, start, end, obc);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		
+	}
+	
+	public List<SuburItem> getSuburItems(long authorId,int start,int end,OrderByComparator obc)
+	{
+		
+	}
+	
+	
+	public List<Author> search(String keyword,long companyId,long groupId,
+			String firstName, String lastName,
+			boolean isAdvancedSearch,boolean isAndOperator,
+			int start, int end, OrderByComparator obc) throws SystemException
 	{
 		String[] keywords = null;
-		if (Validator.isNotNull(keyword))
+		
+		boolean matchAll;
+		if (isAdvancedSearch)
+		{
+			return advanceSearch(keyword,companyId,groupId,
+			firstName,lastName,isAndOperator, start, end,  obc);
+			
+			
+		}else
+		{
+		
+			if (Validator.isNotNull(keyword) && !Validator.isBlank(keyword))
+				keywords = CustomSQLUtil.keywords(keyword);
+			else
+			{
+				return authorPersistence.findAll(start, end, obc);
+			}
+				
+			try {
+				return AuthorFinderUtil.findByName(keyword, companyId,groupId,start, end, obc);
+				//return AuthorFinderUtil.findByFirstName(keywords,new LinkedHashMap<String, Object>(), start, end, obc);
+			} catch (SystemException e) {
+				
+				
+				throw new SystemException(e);
+			}
+		}
+	}
+	
+	/**
+	 * Perform advance search
+	 * @param keyword
+	 * @param companyId
+	 * @param groupId
+	 * @param firstName
+	 * @param lastName
+	 * @param isAndOperator
+	 * @param start
+	 * @param end
+	 * @param obc
+	 * @return
+	 * @throws SystemException
+	 */
+	private List<Author> advanceSearch(String keyword,long companyId,long groupId,
+			String firstName,String lastName,boolean isAndOperator,
+			int start, int end, OrderByComparator obc) throws SystemException
+	{
+		
+		
+		return AuthorFinderUtil.findByFistNameLastName(companyId, groupId, 
+				firstName, lastName, isAndOperator, start, end, obc);
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public List<Author> search(String keyword,long companyId,long groupId,
+			int start, int end, OrderByComparator obc) throws SystemException
+	{
+		String[] keywords = null;
+		if (Validator.isNotNull(keyword) && !Validator.isBlank(keyword))
 			keywords = CustomSQLUtil.keywords(keyword);
 		else
 		{
@@ -130,11 +444,17 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		}
 			
 		try {
-			return AuthorFinderUtil.findByFirstName(keywords,new LinkedHashMap<String, Object>(), start, end, obc);
+			return AuthorFinderUtil.findByName(keyword, companyId,groupId,start, end, obc);
+			//return AuthorFinderUtil.findByFirstName(keywords,new LinkedHashMap<String, Object>(), start, end, obc);
 		} catch (SystemException e) {
 			
-			logger.error(e);
+			
 			throw new SystemException(e);
 		}
+		
+	}
+	public List<Author> findByGroupCompany(long companyId,long groupId,int start,int end)
+	{
+		return AuthorFinderUtil.findByCompanyGroup(companyId,groupId,start,end);
 	}
 }

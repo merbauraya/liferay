@@ -1,4 +1,4 @@
-<%@ include file="/html/item.jsp" %>
+<%@ include file="/html/init.jsp" %>
 <%
 	String itemId = renderRequest.getParameter("itemId");
 	
@@ -8,7 +8,7 @@
 %>
 <portlet:actionURL name="newItem" var="depositItemURL"/>
 <aui:form method="post" action="<%=depositItemURL%>" name="fm">
-	<aui:select size="5" multiple="<%=true %>" label="item-type" name="itemType" onchange='<%= renderResponse.getNamespace() + "itemType();" %>'>
+	<aui:select size="5" multiple="<%=true %>" label="item-type" name="itemType">
 
 		
 		<%for (ItemType itemType: itemTypes) 
@@ -23,7 +23,7 @@
 	</aui:select>
 
 	<aui:input type="text" name="title"></aui:input>
-	<aui:input name="itemAbstract"></aui:input>
+	<aui:input type="textarea" name="itemAbstract"></aui:input>
 
 	<div class="control-group">
 		<aui:input type="text" name="otherTitle"></aui:input>

@@ -33,6 +33,7 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,14 +61,19 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "authorId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "title", Types.VARCHAR },
 			{ "idType", Types.INTEGER },
 			{ "remoteId", Types.VARCHAR },
 			{ "firstName", Types.VARCHAR },
 			{ "lastName", Types.VARCHAR },
 			{ "userId", Types.INTEGER },
-			{ "metadata", Types.VARCHAR }
+			{ "metadata", Types.VARCHAR },
+			{ "lastPublishedDate", Types.TIMESTAMP },
+			{ "itemCount", Types.INTEGER },
+			{ "personalSite", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table subur_Author (authorId LONG not null primary key,groupId LONG,idType INTEGER,remoteId VARCHAR(75) null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,userId INTEGER,metadata VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table subur_Author (authorId LONG not null primary key,groupId LONG,companyId LONG,title VARCHAR(75) null,idType INTEGER,remoteId VARCHAR(75) null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,userId INTEGER,metadata VARCHAR(75) null,lastPublishedDate DATE null,itemCount INTEGER,personalSite VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table subur_Author";
 	public static final String ORDER_BY_JPQL = " ORDER BY author.authorId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY subur_Author.authorId ASC";
@@ -83,9 +89,12 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.idetronic.subur.model.Author"),
 			true);
-	public static long FIRSTNAME_COLUMN_BITMASK = 1L;
-	public static long IDTYPE_COLUMN_BITMASK = 2L;
-	public static long AUTHORID_COLUMN_BITMASK = 4L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
+	public static long FIRSTNAME_COLUMN_BITMASK = 2L;
+	public static long GROUPID_COLUMN_BITMASK = 4L;
+	public static long IDTYPE_COLUMN_BITMASK = 8L;
+	public static long LASTNAME_COLUMN_BITMASK = 16L;
+	public static long AUTHORID_COLUMN_BITMASK = 32L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.idetronic.subur.model.Author"));
 
@@ -128,12 +137,17 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 
 		attributes.put("authorId", getAuthorId());
 		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("title", getTitle());
 		attributes.put("idType", getIdType());
 		attributes.put("remoteId", getRemoteId());
 		attributes.put("firstName", getFirstName());
 		attributes.put("lastName", getLastName());
 		attributes.put("userId", getUserId());
 		attributes.put("metadata", getMetadata());
+		attributes.put("lastPublishedDate", getLastPublishedDate());
+		attributes.put("itemCount", getItemCount());
+		attributes.put("personalSite", getPersonalSite());
 
 		return attributes;
 	}
@@ -150,6 +164,18 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 
 		if (groupId != null) {
 			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
 		}
 
 		Integer idType = (Integer)attributes.get("idType");
@@ -187,6 +213,24 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		if (metadata != null) {
 			setMetadata(metadata);
 		}
+
+		Date lastPublishedDate = (Date)attributes.get("lastPublishedDate");
+
+		if (lastPublishedDate != null) {
+			setLastPublishedDate(lastPublishedDate);
+		}
+
+		Integer itemCount = (Integer)attributes.get("itemCount");
+
+		if (itemCount != null) {
+			setItemCount(itemCount);
+		}
+
+		String personalSite = (String)attributes.get("personalSite");
+
+		if (personalSite != null) {
+			setPersonalSite(personalSite);
+		}
 	}
 
 	@Override
@@ -206,7 +250,56 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 
 	@Override
 	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
+		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
+	}
+
+	@Override
+	public String getTitle() {
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
 	}
 
 	@Override
@@ -283,7 +376,17 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 
 	@Override
 	public void setLastName(String lastName) {
+		_columnBitmask |= LASTNAME_COLUMN_BITMASK;
+
+		if (_originalLastName == null) {
+			_originalLastName = _lastName;
+		}
+
 		_lastName = lastName;
+	}
+
+	public String getOriginalLastName() {
+		return GetterUtil.getString(_originalLastName);
 	}
 
 	@Override
@@ -311,13 +414,48 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		_metadata = metadata;
 	}
 
+	@Override
+	public Date getLastPublishedDate() {
+		return _lastPublishedDate;
+	}
+
+	@Override
+	public void setLastPublishedDate(Date lastPublishedDate) {
+		_lastPublishedDate = lastPublishedDate;
+	}
+
+	@Override
+	public int getItemCount() {
+		return _itemCount;
+	}
+
+	@Override
+	public void setItemCount(int itemCount) {
+		_itemCount = itemCount;
+	}
+
+	@Override
+	public String getPersonalSite() {
+		if (_personalSite == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _personalSite;
+		}
+	}
+
+	@Override
+	public void setPersonalSite(String personalSite) {
+		_personalSite = personalSite;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			Author.class.getName(), getPrimaryKey());
 	}
 
@@ -344,12 +482,17 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 
 		authorImpl.setAuthorId(getAuthorId());
 		authorImpl.setGroupId(getGroupId());
+		authorImpl.setCompanyId(getCompanyId());
+		authorImpl.setTitle(getTitle());
 		authorImpl.setIdType(getIdType());
 		authorImpl.setRemoteId(getRemoteId());
 		authorImpl.setFirstName(getFirstName());
 		authorImpl.setLastName(getLastName());
 		authorImpl.setUserId(getUserId());
 		authorImpl.setMetadata(getMetadata());
+		authorImpl.setLastPublishedDate(getLastPublishedDate());
+		authorImpl.setItemCount(getItemCount());
+		authorImpl.setPersonalSite(getPersonalSite());
 
 		authorImpl.resetOriginalValues();
 
@@ -402,11 +545,21 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 	public void resetOriginalValues() {
 		AuthorModelImpl authorModelImpl = this;
 
+		authorModelImpl._originalGroupId = authorModelImpl._groupId;
+
+		authorModelImpl._setOriginalGroupId = false;
+
+		authorModelImpl._originalCompanyId = authorModelImpl._companyId;
+
+		authorModelImpl._setOriginalCompanyId = false;
+
 		authorModelImpl._originalIdType = authorModelImpl._idType;
 
 		authorModelImpl._setOriginalIdType = false;
 
 		authorModelImpl._originalFirstName = authorModelImpl._firstName;
+
+		authorModelImpl._originalLastName = authorModelImpl._lastName;
 
 		authorModelImpl._columnBitmask = 0;
 	}
@@ -418,6 +571,16 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		authorCacheModel.authorId = getAuthorId();
 
 		authorCacheModel.groupId = getGroupId();
+
+		authorCacheModel.companyId = getCompanyId();
+
+		authorCacheModel.title = getTitle();
+
+		String title = authorCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
+			authorCacheModel.title = null;
+		}
 
 		authorCacheModel.idType = getIdType();
 
@@ -455,17 +618,40 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 			authorCacheModel.metadata = null;
 		}
 
+		Date lastPublishedDate = getLastPublishedDate();
+
+		if (lastPublishedDate != null) {
+			authorCacheModel.lastPublishedDate = lastPublishedDate.getTime();
+		}
+		else {
+			authorCacheModel.lastPublishedDate = Long.MIN_VALUE;
+		}
+
+		authorCacheModel.itemCount = getItemCount();
+
+		authorCacheModel.personalSite = getPersonalSite();
+
+		String personalSite = authorCacheModel.personalSite;
+
+		if ((personalSite != null) && (personalSite.length() == 0)) {
+			authorCacheModel.personalSite = null;
+		}
+
 		return authorCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{authorId=");
 		sb.append(getAuthorId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", title=");
+		sb.append(getTitle());
 		sb.append(", idType=");
 		sb.append(getIdType());
 		sb.append(", remoteId=");
@@ -478,6 +664,12 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		sb.append(getUserId());
 		sb.append(", metadata=");
 		sb.append(getMetadata());
+		sb.append(", lastPublishedDate=");
+		sb.append(getLastPublishedDate());
+		sb.append(", itemCount=");
+		sb.append(getItemCount());
+		sb.append(", personalSite=");
+		sb.append(getPersonalSite());
 		sb.append("}");
 
 		return sb.toString();
@@ -485,7 +677,7 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.Author");
@@ -498,6 +690,14 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>idType</column-name><column-value><![CDATA[");
@@ -523,6 +723,18 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 			"<column><column-name>metadata</column-name><column-value><![CDATA[");
 		sb.append(getMetadata());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPublishedDate</column-name><column-value><![CDATA[");
+		sb.append(getLastPublishedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>itemCount</column-name><column-value><![CDATA[");
+		sb.append(getItemCount());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>personalSite</column-name><column-value><![CDATA[");
+		sb.append(getPersonalSite());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -533,6 +745,12 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Author.class };
 	private long _authorId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
+	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
+	private String _title;
 	private int _idType;
 	private int _originalIdType;
 	private boolean _setOriginalIdType;
@@ -540,8 +758,12 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 	private String _firstName;
 	private String _originalFirstName;
 	private String _lastName;
+	private String _originalLastName;
 	private int _userId;
 	private String _metadata;
+	private Date _lastPublishedDate;
+	private int _itemCount;
+	private String _personalSite;
 	private long _columnBitmask;
 	private Author _escapedModel;
 }

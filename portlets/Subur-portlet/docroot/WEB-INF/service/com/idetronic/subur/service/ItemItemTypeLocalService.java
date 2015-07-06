@@ -258,7 +258,17 @@ public interface ItemItemTypeLocalService extends BaseLocalService,
 		long itemTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void setItemItemType(long itemId, java.lang.String[] itemTypeStrings)
+	public void addItemItemType(long itemId, long[] itemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addItemItemType(long itemId, java.lang.String[] itemTypeStrings)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateItemItemType(long itemId, long[] itemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateItemItemType(long itemId,
+		java.lang.String[] itemTypeStrings)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -273,8 +283,17 @@ public interface ItemItemTypeLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Get item type for an item, and return it in object array
+	*
+	* @param itemId to search for
+	* @return array of ItemType for an item
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.Object[] getByItemIdArray(long itemId);
+
+	/**
 	* @param itemId - Subur Item Id
-	* @return List of ItemType
+	* @return List of ItemItemType
 	* @throws SystemException
 	*/
 	public java.util.List<com.idetronic.subur.model.ItemItemType> itemTypeByItemid(

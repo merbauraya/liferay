@@ -1,22 +1,48 @@
-.itemView
-{
+.Subur-portlet {
+	.item-header {
+		border-bottom: 1px solid #ccc;
+    	padding: 0 0 8px;
+	}
+	.item-title {
+		font-size: 22px;
+    	line-height: 27px;
+    	margin: 0;
 	
-}
-.itemView  th{
-	padding:5px;
-	white-space:nowrap;
-	padding: 0.3em 0;
-	text-align:left;
-	vertical-align:top;
-	border-bottom: 1px solid #f3f3f3;
-}
-.itemView td{
-	padding: 0.3em 0 0.3em 1em;
-	border-bottom: 1px solid #f3f3f3;
-}
-.subject-name-anchor
-{
-	font-size:130%;
-	margin-top:5px;
-	font-weight:bold;
+	}
+	.item-permission {
+	
+	}
+	.item-date
+	{
+	background: url(@theme_image_path@/common/date.png) no-repeat 0 50%;
+		color: #999;
+		padding-left: 25px;
+	}
+	.item-item-type > label
+	{
+		font-weight:bold;
+	}
+	.item-type-summary > a
+	{
+		margin-right:3px;
+	}
+	.item-author
+	{
+	background: url(@theme_image_path@/common/user_icon.png) no-repeat 0 50%;
+		color: #999;
+		padding-left: 25px;
+	}
+	.item-detail div {
+    	clear: both;
+    	margin-bottom: 10px;
+	}
+	ul {
+		margin: 0px 0px 5px 5px;
+	}
+	li {
+		list-style-type:none;
+		
+	}
+	
+	
 }

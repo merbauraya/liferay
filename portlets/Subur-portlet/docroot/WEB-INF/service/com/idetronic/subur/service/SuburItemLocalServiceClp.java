@@ -118,55 +118,65 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 
 		_methodParameterTypes19 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"long[][]", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName20 = "updateSuburItem";
 
 		_methodParameterTypes20 = new String[] {
-				"com.idetronic.subur.model.SuburItem", "long",
-				"com.liferay.portal.service.ServiceContext"
+				"com.idetronic.subur.model.SuburItem", "long", "long[][]",
+				"long[][]", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName21 = "getItemTypes";
+		_methodName21 = "deleteItem";
 
 		_methodParameterTypes21 = new String[] { "long" };
 
-		_methodName22 = "getSuburItems";
+		_methodName22 = "deleteItem";
 
-		_methodParameterTypes22 = new String[] { "int", "int", "int" };
+		_methodParameterTypes22 = new String[] {
+				"com.idetronic.subur.model.SuburItem"
+			};
 
-		_methodName23 = "publishItem";
+		_methodName23 = "getItemTypes";
 
 		_methodParameterTypes23 = new String[] { "long" };
 
-		_methodName24 = "withDrawItem";
+		_methodName24 = "getSuburItems";
 
-		_methodParameterTypes24 = new String[] { "long" };
+		_methodParameterTypes24 = new String[] { "int", "int", "int" };
 
-		_methodName25 = "getItemCount";
+		_methodName25 = "publishItem";
 
-		_methodParameterTypes25 = new String[] { "int" };
+		_methodParameterTypes25 = new String[] { "long" };
 
-		_methodName26 = "getByGroup";
+		_methodName26 = "withDrawItem";
 
 		_methodParameterTypes26 = new String[] { "long" };
 
-		_methodName27 = "getDetails";
+		_methodName27 = "getItemCount";
 
-		_methodParameterTypes27 = new String[] { "long" };
+		_methodParameterTypes27 = new String[] { "int" };
 
-		_methodName28 = "getFileEntry";
+		_methodName28 = "getByGroup";
 
 		_methodParameterTypes28 = new String[] { "long" };
 
-		_methodName29 = "getBySubjectId";
+		_methodName29 = "getDetails";
 
-		_methodParameterTypes29 = new String[] { "long", "int", "int" };
+		_methodParameterTypes29 = new String[] { "long" };
 
-		_methodName30 = "countAssetVocabularyById";
+		_methodName30 = "getFileEntry";
 
 		_methodParameterTypes30 = new String[] { "long" };
+
+		_methodName31 = "getBySubjectId";
+
+		_methodParameterTypes31 = new String[] { "long", "int", "int" };
+
+		_methodName32 = "countAssetVocabularyById";
+
+		_methodParameterTypes32 = new String[] { "long" };
 	}
 
 	@Override
@@ -718,6 +728,7 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 	@Override
 	public com.idetronic.subur.model.SuburItem addItem(long userId,
 		long groupId, java.lang.String title, java.lang.String itemAbstract,
+		long[] itemTypeId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -734,6 +745,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 					ClpSerializer.translateInput(title),
 						
 					ClpSerializer.translateInput(itemAbstract),
+						
+					ClpSerializer.translateInput(itemTypeId),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -764,6 +777,7 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 	@Override
 	public com.idetronic.subur.model.SuburItem updateSuburItem(
 		com.idetronic.subur.model.SuburItem suburItem, long userId,
+		long[] itemTypeIds, long[] authorIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -776,6 +790,10 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 						ClpSerializer.translateInput(suburItem),
 						
 					userId,
+						
+					ClpSerializer.translateInput(itemTypeIds),
+						
+					ClpSerializer.translateInput(authorIds),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -804,12 +822,71 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 	}
 
 	@Override
+	public void deleteItem(long itemId)
+		throws com.idetronic.subur.NoSuchSuburItemException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName21,
+				_methodParameterTypes21, new Object[] { itemId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.idetronic.subur.NoSuchSuburItemException) {
+				throw (com.idetronic.subur.NoSuchSuburItemException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void deleteItem(com.idetronic.subur.model.SuburItem suburItem)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName22,
+				_methodParameterTypes22,
+				new Object[] { ClpSerializer.translateInput(suburItem) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
 	public java.util.List getItemTypes(long itemId) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21, new Object[] { itemId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23, new Object[] { itemId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -833,8 +910,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22, new Object[] { start, end, status });
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24, new Object[] { start, end, status });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -862,8 +939,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName23,
-					_methodParameterTypes23, new Object[] { itemId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25, new Object[] { itemId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -895,8 +972,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName24,
-					_methodParameterTypes24, new Object[] { itemId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26, new Object[] { itemId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -927,8 +1004,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName25,
-					_methodParameterTypes25, new Object[] { status });
+			returnObj = _invokableLocalService.invokeMethod(_methodName27,
+					_methodParameterTypes27, new Object[] { status });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -956,8 +1033,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName26,
-					_methodParameterTypes26, new Object[] { groupId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName28,
+					_methodParameterTypes28, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -983,8 +1060,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27, new Object[] { itemId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29, new Object[] { itemId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1006,8 +1083,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName28,
-					_methodParameterTypes28, new Object[] { itemId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30, new Object[] { itemId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1030,8 +1107,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName29,
-					_methodParameterTypes29,
+			returnObj = _invokableLocalService.invokeMethod(_methodName31,
+					_methodParameterTypes31,
 					new Object[] { subjectId, start, end });
 		}
 		catch (Throwable t) {
@@ -1055,8 +1132,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName30,
-					_methodParameterTypes30, new Object[] { vocabularyId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName32,
+					_methodParameterTypes32, new Object[] { vocabularyId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1138,4 +1215,8 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 	private String[] _methodParameterTypes29;
 	private String _methodName30;
 	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
 }

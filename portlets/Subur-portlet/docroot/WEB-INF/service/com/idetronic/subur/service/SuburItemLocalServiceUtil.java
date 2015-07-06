@@ -275,19 +275,36 @@ public class SuburItemLocalServiceUtil {
 
 	public static com.idetronic.subur.model.SuburItem addItem(long userId,
 		long groupId, java.lang.String title, java.lang.String itemAbstract,
+		long[] itemTypeId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addItem(userId, groupId, title, itemAbstract, serviceContext);
+				   .addItem(userId, groupId, title, itemAbstract, itemTypeId,
+			serviceContext);
 	}
 
 	public static com.idetronic.subur.model.SuburItem updateSuburItem(
 		com.idetronic.subur.model.SuburItem suburItem, long userId,
+		long[] itemTypeIds, long[] authorIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateSuburItem(suburItem, userId, serviceContext);
+		return getService()
+				   .updateSuburItem(suburItem, userId, itemTypeIds, authorIds,
+			serviceContext);
+	}
+
+	public static void deleteItem(long itemId)
+		throws com.idetronic.subur.NoSuchSuburItemException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteItem(itemId);
+	}
+
+	public static void deleteItem(com.idetronic.subur.model.SuburItem suburItem)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteItem(suburItem);
 	}
 
 	public static java.util.List getItemTypes(long itemId) {

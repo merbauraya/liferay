@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -39,7 +40,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -83,6 +83,1020 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
 			AuthorModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUP = new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
+			AuthorModelImpl.FINDER_CACHE_ENABLED, AuthorImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroup",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUP = new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
+			AuthorModelImpl.FINDER_CACHE_ENABLED, AuthorImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroup",
+			new String[] { Long.class.getName() },
+			AuthorModelImpl.GROUPID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUP = new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
+			AuthorModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroup",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the authors where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findByGroup(long groupId) throws SystemException {
+		return findByGroup(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the authors where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @return the range of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findByGroup(long groupId, int start, int end)
+		throws SystemException {
+		return findByGroup(groupId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the authors where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findByGroup(long groupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUP;
+			finderArgs = new Object[] { groupId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUP;
+			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+		}
+
+		List<Author> list = (List<Author>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Author author : list) {
+				if ((groupId != author.getGroupId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_AUTHOR_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUP_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(AuthorModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (!pagination) {
+					list = (List<Author>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Author>(list);
+				}
+				else {
+					list = (List<Author>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first author in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author findByGroup_First(long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = fetchByGroup_First(groupId, orderByComparator);
+
+		if (author != null) {
+			return author;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAuthorException(msg.toString());
+	}
+
+	/**
+	 * Returns the first author in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching author, or <code>null</code> if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author fetchByGroup_First(long groupId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Author> list = findByGroup(groupId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last author in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author findByGroup_Last(long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = fetchByGroup_Last(groupId, orderByComparator);
+
+		if (author != null) {
+			return author;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAuthorException(msg.toString());
+	}
+
+	/**
+	 * Returns the last author in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching author, or <code>null</code> if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author fetchByGroup_Last(long groupId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByGroup(groupId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Author> list = findByGroup(groupId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the authors before and after the current author in the ordered set where groupId = &#63;.
+	 *
+	 * @param authorId the primary key of the current author
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a author with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author[] findByGroup_PrevAndNext(long authorId, long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = findByPrimaryKey(authorId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Author[] array = new AuthorImpl[3];
+
+			array[0] = getByGroup_PrevAndNext(session, author, groupId,
+					orderByComparator, true);
+
+			array[1] = author;
+
+			array[2] = getByGroup_PrevAndNext(session, author, groupId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Author getByGroup_PrevAndNext(Session session, Author author,
+		long groupId, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_AUTHOR_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUP_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(AuthorModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(author);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Author> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the authors where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByGroup(long groupId) throws SystemException {
+		for (Author author : findByGroup(groupId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(author);
+		}
+	}
+
+	/**
+	 * Returns the number of authors where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByGroup(long groupId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUP;
+
+		Object[] finderArgs = new Object[] { groupId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_AUTHOR_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUP_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_GROUP_GROUPID_2 = "author.groupId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYGROUP =
+		new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
+			AuthorModelImpl.FINDER_CACHE_ENABLED, AuthorImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyGroup",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYGROUP =
+		new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
+			AuthorModelImpl.FINDER_CACHE_ENABLED, AuthorImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyGroup",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			AuthorModelImpl.COMPANYID_COLUMN_BITMASK |
+			AuthorModelImpl.GROUPID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYGROUP = new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
+			AuthorModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyGroup",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the authors where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @return the matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findByCompanyGroup(long companyId, long groupId)
+		throws SystemException {
+		return findByCompanyGroup(companyId, groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the authors where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @return the range of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findByCompanyGroup(long companyId, long groupId,
+		int start, int end) throws SystemException {
+		return findByCompanyGroup(companyId, groupId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the authors where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findByCompanyGroup(long companyId, long groupId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYGROUP;
+			finderArgs = new Object[] { companyId, groupId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYGROUP;
+			finderArgs = new Object[] {
+					companyId, groupId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Author> list = (List<Author>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Author author : list) {
+				if ((companyId != author.getCompanyId()) ||
+						(groupId != author.getGroupId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_AUTHOR_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYGROUP_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_COMPANYGROUP_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(AuthorModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(groupId);
+
+				if (!pagination) {
+					list = (List<Author>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Author>(list);
+				}
+				else {
+					list = (List<Author>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first author in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author findByCompanyGroup_First(long companyId, long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = fetchByCompanyGroup_First(companyId, groupId,
+				orderByComparator);
+
+		if (author != null) {
+			return author;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", groupId=");
+		msg.append(groupId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAuthorException(msg.toString());
+	}
+
+	/**
+	 * Returns the first author in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching author, or <code>null</code> if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author fetchByCompanyGroup_First(long companyId, long groupId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Author> list = findByCompanyGroup(companyId, groupId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last author in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author findByCompanyGroup_Last(long companyId, long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = fetchByCompanyGroup_Last(companyId, groupId,
+				orderByComparator);
+
+		if (author != null) {
+			return author;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", groupId=");
+		msg.append(groupId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAuthorException(msg.toString());
+	}
+
+	/**
+	 * Returns the last author in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching author, or <code>null</code> if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author fetchByCompanyGroup_Last(long companyId, long groupId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByCompanyGroup(companyId, groupId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Author> list = findByCompanyGroup(companyId, groupId, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the authors before and after the current author in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param authorId the primary key of the current author
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a author with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author[] findByCompanyGroup_PrevAndNext(long authorId,
+		long companyId, long groupId, OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = findByPrimaryKey(authorId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Author[] array = new AuthorImpl[3];
+
+			array[0] = getByCompanyGroup_PrevAndNext(session, author,
+					companyId, groupId, orderByComparator, true);
+
+			array[1] = author;
+
+			array[2] = getByCompanyGroup_PrevAndNext(session, author,
+					companyId, groupId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Author getByCompanyGroup_PrevAndNext(Session session,
+		Author author, long companyId, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_AUTHOR_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYGROUP_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYGROUP_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(AuthorModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(author);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Author> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the authors where companyId = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByCompanyGroup(long companyId, long groupId)
+		throws SystemException {
+		for (Author author : findByCompanyGroup(companyId, groupId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(author);
+		}
+	}
+
+	/**
+	 * Returns the number of authors where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @return the number of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByCompanyGroup(long companyId, long groupId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYGROUP;
+
+		Object[] finderArgs = new Object[] { companyId, groupId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_AUTHOR_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYGROUP_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_COMPANYGROUP_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_COMPANYGROUP_COMPANYID_2 = "author.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_COMPANYGROUP_GROUPID_2 = "author.groupId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_IDTYPE = new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
 			AuthorModelImpl.FINDER_CACHE_ENABLED, AuthorImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByidType",
@@ -578,19 +1592,14 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIRSTNAME =
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_FIRSTNAME =
 		new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
-			AuthorModelImpl.FINDER_CACHE_ENABLED, AuthorImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByfirstName",
-			new String[] { String.class.getName() },
-			AuthorModelImpl.FIRSTNAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_FIRSTNAME = new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
 			AuthorModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByfirstName",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByfirstName",
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns all the authors where firstName = &#63;.
+	 * Returns all the authors where firstName LIKE &#63;.
 	 *
 	 * @param firstName the first name
 	 * @return the matching authors
@@ -604,7 +1613,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Returns a range of all the authors where firstName = &#63;.
+	 * Returns a range of all the authors where firstName LIKE &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -623,7 +1632,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Returns an ordered range of all the authors where firstName = &#63;.
+	 * Returns an ordered range of all the authors where firstName LIKE &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -643,23 +1652,17 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIRSTNAME;
-			finderArgs = new Object[] { firstName };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_FIRSTNAME;
-			finderArgs = new Object[] { firstName, start, end, orderByComparator };
-		}
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_FIRSTNAME;
+		finderArgs = new Object[] { firstName, start, end, orderByComparator };
 
 		List<Author> list = (List<Author>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if ((list != null) && !list.isEmpty()) {
 			for (Author author : list) {
-				if (!Validator.equals(firstName, author.getFirstName())) {
+				if (!StringUtil.wildcardMatches(author.getFirstName(),
+							firstName, CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, true)) {
 					list = null;
 
 					break;
@@ -749,7 +1752,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Returns the first author in the ordered set where firstName = &#63;.
+	 * Returns the first author in the ordered set where firstName LIKE &#63;.
 	 *
 	 * @param firstName the first name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -780,7 +1783,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Returns the first author in the ordered set where firstName = &#63;.
+	 * Returns the first author in the ordered set where firstName LIKE &#63;.
 	 *
 	 * @param firstName the first name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -800,7 +1803,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Returns the last author in the ordered set where firstName = &#63;.
+	 * Returns the last author in the ordered set where firstName LIKE &#63;.
 	 *
 	 * @param firstName the first name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -831,7 +1834,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Returns the last author in the ordered set where firstName = &#63;.
+	 * Returns the last author in the ordered set where firstName LIKE &#63;.
 	 *
 	 * @param firstName the first name
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -858,7 +1861,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Returns the authors before and after the current author in the ordered set where firstName = &#63;.
+	 * Returns the authors before and after the current author in the ordered set where firstName LIKE &#63;.
 	 *
 	 * @param authorId the primary key of the current author
 	 * @param firstName the first name
@@ -1017,7 +2020,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Removes all the authors where firstName = &#63; from the database.
+	 * Removes all the authors where firstName LIKE &#63; from the database.
 	 *
 	 * @param firstName the first name
 	 * @throws SystemException if a system exception occurred
@@ -1031,7 +2034,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
-	 * Returns the number of authors where firstName = &#63;.
+	 * Returns the number of authors where firstName LIKE &#63;.
 	 *
 	 * @param firstName the first name
 	 * @return the number of matching authors
@@ -1039,7 +2042,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	 */
 	@Override
 	public int countByfirstName(String firstName) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_FIRSTNAME;
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_FIRSTNAME;
 
 		Object[] finderArgs = new Object[] { firstName };
 
@@ -1097,9 +2100,529 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_FIRSTNAME_FIRSTNAME_1 = "author.firstName IS NULL";
-	private static final String _FINDER_COLUMN_FIRSTNAME_FIRSTNAME_2 = "author.firstName = ?";
-	private static final String _FINDER_COLUMN_FIRSTNAME_FIRSTNAME_3 = "(author.firstName IS NULL OR author.firstName = '')";
+	private static final String _FINDER_COLUMN_FIRSTNAME_FIRSTNAME_1 = "author.firstName LIKE NULL";
+	private static final String _FINDER_COLUMN_FIRSTNAME_FIRSTNAME_2 = "author.firstName LIKE ?";
+	private static final String _FINDER_COLUMN_FIRSTNAME_FIRSTNAME_3 = "(author.firstName IS NULL OR author.firstName LIKE '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_LASTNAME = new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
+			AuthorModelImpl.FINDER_CACHE_ENABLED, AuthorImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBylastName",
+			new String[] {
+				String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_LASTNAME =
+		new FinderPath(AuthorModelImpl.ENTITY_CACHE_ENABLED,
+			AuthorModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countBylastName",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns all the authors where lastName LIKE &#63;.
+	 *
+	 * @param lastName the last name
+	 * @return the matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findBylastName(String lastName)
+		throws SystemException {
+		return findBylastName(lastName, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the authors where lastName LIKE &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param lastName the last name
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @return the range of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findBylastName(String lastName, int start, int end)
+		throws SystemException {
+		return findBylastName(lastName, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the authors where lastName LIKE &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param lastName the last name
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> findBylastName(String lastName, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_LASTNAME;
+		finderArgs = new Object[] { lastName, start, end, orderByComparator };
+
+		List<Author> list = (List<Author>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Author author : list) {
+				if (!StringUtil.wildcardMatches(author.getLastName(), lastName,
+							CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, true)) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_AUTHOR_WHERE);
+
+			boolean bindLastName = false;
+
+			if (lastName == null) {
+				query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_1);
+			}
+			else if (lastName.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_3);
+			}
+			else {
+				bindLastName = true;
+
+				query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(AuthorModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindLastName) {
+					qPos.add(lastName);
+				}
+
+				if (!pagination) {
+					list = (List<Author>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Author>(list);
+				}
+				else {
+					list = (List<Author>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first author in the ordered set where lastName LIKE &#63;.
+	 *
+	 * @param lastName the last name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author findBylastName_First(String lastName,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = fetchBylastName_First(lastName, orderByComparator);
+
+		if (author != null) {
+			return author;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("lastName=");
+		msg.append(lastName);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAuthorException(msg.toString());
+	}
+
+	/**
+	 * Returns the first author in the ordered set where lastName LIKE &#63;.
+	 *
+	 * @param lastName the last name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching author, or <code>null</code> if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author fetchBylastName_First(String lastName,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Author> list = findBylastName(lastName, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last author in the ordered set where lastName LIKE &#63;.
+	 *
+	 * @param lastName the last name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author findBylastName_Last(String lastName,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = fetchBylastName_Last(lastName, orderByComparator);
+
+		if (author != null) {
+			return author;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("lastName=");
+		msg.append(lastName);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAuthorException(msg.toString());
+	}
+
+	/**
+	 * Returns the last author in the ordered set where lastName LIKE &#63;.
+	 *
+	 * @param lastName the last name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching author, or <code>null</code> if a matching author could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author fetchBylastName_Last(String lastName,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countBylastName(lastName);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Author> list = findBylastName(lastName, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the authors before and after the current author in the ordered set where lastName LIKE &#63;.
+	 *
+	 * @param authorId the primary key of the current author
+	 * @param lastName the last name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a author with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author[] findBylastName_PrevAndNext(long authorId, String lastName,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		Author author = findByPrimaryKey(authorId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Author[] array = new AuthorImpl[3];
+
+			array[0] = getBylastName_PrevAndNext(session, author, lastName,
+					orderByComparator, true);
+
+			array[1] = author;
+
+			array[2] = getBylastName_PrevAndNext(session, author, lastName,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Author getBylastName_PrevAndNext(Session session, Author author,
+		String lastName, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_AUTHOR_WHERE);
+
+		boolean bindLastName = false;
+
+		if (lastName == null) {
+			query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_1);
+		}
+		else if (lastName.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_3);
+		}
+		else {
+			bindLastName = true;
+
+			query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(AuthorModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindLastName) {
+			qPos.add(lastName);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(author);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Author> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the authors where lastName LIKE &#63; from the database.
+	 *
+	 * @param lastName the last name
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeBylastName(String lastName) throws SystemException {
+		for (Author author : findBylastName(lastName, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(author);
+		}
+	}
+
+	/**
+	 * Returns the number of authors where lastName LIKE &#63;.
+	 *
+	 * @param lastName the last name
+	 * @return the number of matching authors
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countBylastName(String lastName) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_LASTNAME;
+
+		Object[] finderArgs = new Object[] { lastName };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_AUTHOR_WHERE);
+
+			boolean bindLastName = false;
+
+			if (lastName == null) {
+				query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_1);
+			}
+			else if (lastName.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_3);
+			}
+			else {
+				bindLastName = true;
+
+				query.append(_FINDER_COLUMN_LASTNAME_LASTNAME_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindLastName) {
+					qPos.add(lastName);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_LASTNAME_LASTNAME_1 = "author.lastName LIKE NULL";
+	private static final String _FINDER_COLUMN_LASTNAME_LASTNAME_2 = "author.lastName LIKE ?";
+	private static final String _FINDER_COLUMN_LASTNAME_LASTNAME_3 = "(author.lastName IS NULL OR author.lastName LIKE '')";
 
 	public AuthorPersistenceImpl() {
 		setModelClass(Author.class);
@@ -1324,6 +2847,46 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 
 		else {
 			if ((authorModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUP.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						authorModelImpl.getOriginalGroupId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUP, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUP,
+					args);
+
+				args = new Object[] { authorModelImpl.getGroupId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUP, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUP,
+					args);
+			}
+
+			if ((authorModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYGROUP.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						authorModelImpl.getOriginalCompanyId(),
+						authorModelImpl.getOriginalGroupId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYGROUP,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYGROUP,
+					args);
+
+				args = new Object[] {
+						authorModelImpl.getCompanyId(),
+						authorModelImpl.getGroupId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYGROUP,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYGROUP,
+					args);
+			}
+
+			if ((authorModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IDTYPE.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] { authorModelImpl.getOriginalIdType() };
 
@@ -1335,25 +2898,6 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_IDTYPE, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IDTYPE,
-					args);
-			}
-
-			if ((authorModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIRSTNAME.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						authorModelImpl.getOriginalFirstName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FIRSTNAME,
-					args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIRSTNAME,
-					args);
-
-				args = new Object[] { authorModelImpl.getFirstName() };
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FIRSTNAME,
-					args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FIRSTNAME,
 					args);
 			}
 		}
@@ -1376,12 +2920,17 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 
 		authorImpl.setAuthorId(author.getAuthorId());
 		authorImpl.setGroupId(author.getGroupId());
+		authorImpl.setCompanyId(author.getCompanyId());
+		authorImpl.setTitle(author.getTitle());
 		authorImpl.setIdType(author.getIdType());
 		authorImpl.setRemoteId(author.getRemoteId());
 		authorImpl.setFirstName(author.getFirstName());
 		authorImpl.setLastName(author.getLastName());
 		authorImpl.setUserId(author.getUserId());
 		authorImpl.setMetadata(author.getMetadata());
+		authorImpl.setLastPublishedDate(author.getLastPublishedDate());
+		authorImpl.setItemCount(author.getItemCount());
+		authorImpl.setPersonalSite(author.getPersonalSite());
 
 		return authorImpl;
 	}

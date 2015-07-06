@@ -14,8 +14,11 @@
 
 package com.idetronic.subur.service.messaging;
 
+import com.idetronic.subur.service.AuthorExpertiseLocalServiceUtil;
 import com.idetronic.subur.service.AuthorLocalServiceUtil;
 import com.idetronic.subur.service.ClpSerializer;
+import com.idetronic.subur.service.ExpertiseLocalServiceUtil;
+import com.idetronic.subur.service.ExpertiseServiceUtil;
 import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
 import com.idetronic.subur.service.ItemFileEntryLocalServiceUtil;
 import com.idetronic.subur.service.ItemFileEntryServiceUtil;
@@ -47,6 +50,11 @@ public class ClpMessageListener extends BaseMessageListener {
 				servletContextName.equals(getServletContextName())) {
 			AuthorLocalServiceUtil.clearService();
 
+			AuthorExpertiseLocalServiceUtil.clearService();
+
+			ExpertiseLocalServiceUtil.clearService();
+
+			ExpertiseServiceUtil.clearService();
 			ItemAuthorLocalServiceUtil.clearService();
 
 			ItemFileEntryLocalServiceUtil.clearService();

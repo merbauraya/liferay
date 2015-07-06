@@ -1,10 +1,24 @@
 create index IX_3793AB1 on item (groupId);
 create index IX_28461BFF on item (status);
 
+create index IX_A3F7E5D5 on subur_Author (companyId, groupId);
 create index IX_88B92498 on subur_Author (firstName);
+create index IX_13641B8D on subur_Author (firstName, lastName);
+create index IX_5AD12237 on subur_Author (groupId);
+create index IX_852A2991 on subur_Author (groupId, companyId);
 create index IX_1B15B1FC on subur_Author (idType);
+create index IX_1E27D908 on subur_Author (lastName);
+
+create index IX_874C6104 on subur_AuthorExpertise (authorId);
+create index IX_B844D872 on subur_AuthorExpertise (expertiseId);
+create index IX_9E529FE0 on subur_AuthorExpertise (groupId);
+create unique index IX_6C3A3E0C on subur_AuthorExpertise (groupId, expertiseName);
 
 create index IX_943EF53 on subur_Division (depositable);
+
+create index IX_498CB735 on subur_Expertise (groupId);
+create unique index IX_A61DF217 on subur_Expertise (groupId, expertiseName);
+create unique index IX_800D6737 on subur_Expertise (groupId, indexedName);
 
 create index IX_80652B2F on subur_Item (groupId);
 create index IX_2FA0D6B7 on subur_Item (itemTypeId);

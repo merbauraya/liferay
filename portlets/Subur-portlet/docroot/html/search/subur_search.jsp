@@ -79,7 +79,19 @@
 	    	stringQuery = SuburSearchUtil.buildSearchQuery(request, searchContext);
 	    	BooleanClause clause = BooleanClauseFactoryUtil.create(searchContext, stringQuery, BooleanClauseOccur.MUST.getName());
     		searchContext.setBooleanClauses(new BooleanClause[] {clause});
-	    	
+    		String keywordList;
+    		StringBuilder sb = new StringBuilder();
+    		if (!Validator.isBlank(title))
+    			sb.append(title).append(StringPool.SPACE);
+    		if (!Validator.isBlank(authorFirstName))
+    			sb.append(authorFirstName).append(StringPool.SPACE);
+    		if (!Validator.isBlank(authorLastName))
+    			sb.append(authorLastName).append(StringPool.SPACE);
+    		if (!Validator.isBlank(year))
+    			sb.append(year).append(StringPool.SPACE);
+    		
+    		
+    		searchContext.setKeywords(sb.toString());
 	    
 	    }else
 	    {
@@ -102,11 +114,10 @@
 		queryConfig.setHitsProcessingEnabled(true);
 		searchContext.setQueryConfig(queryConfig);
 	    
-	    
-        searchContext.setKeywords(keywords);
+		
         searchContext.setAttribute("paginationType", "more");
-        searchContext.setStart(0);
-        searchContext.setEnd(10);
+        searchContext.setStart(searchContainer.getStart());
+        searchContext.setEnd(searchContainer.getEnd());
         //_log.info(fullQuery.toString());
         Indexer indexer = IndexerRegistryUtil.getIndexer(SuburItem.class);
 
@@ -117,8 +128,8 @@
 
 		hitURL.setParameter("struts_action", "/blogs/view_entry");
 		hitURL.setParameter("redirect", currentURL);
-		for (String s: hits.getQueryTerms())
-			out.print("terms="+s);
+		searchContainer.setTotal(hits.getLength());
+		
 %>
 	<liferay-ui:search-container-results
 			results="<%= SearchResultUtil.getSearchResults(hits, locale, hitURL) %>"

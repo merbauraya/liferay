@@ -81,6 +81,11 @@
 	
 	
 	</liferay-ui:panel>
+	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="suburAuthorDisplayCategoriesPanel" persistState="<%= true %>" title="author-title">
+			
+		<aui:input value="<%= authorTitleString %>" label="author-title-list" name="preferences--authorTitle--" />
+				
+	</liferay-ui:panel>
 	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="suburSubscriptionPanel" persistState="<%= true %>" title="subscription">
 			
 		<c:if test="<%= PortalUtil.isRSSFeedsEnabled() %>">

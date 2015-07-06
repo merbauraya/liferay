@@ -5,4 +5,11 @@
 	<category name="category.sample">
 		<portlet id="Subur" />
 	</category>
+	<category name="category.content">
+		<portlet id="author-navigator"></portlet>
+	</category>
+	<category name="Subur">
+		<portlet id="item-type"></portlet>
+		<portlet id="1"></portlet>
+	</category>
 </display>

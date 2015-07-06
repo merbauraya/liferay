@@ -32,4 +32,7 @@ public interface SuburItem extends SuburItemModel, PersistedModel {
 	 * Never modify this interface directly. Add methods to {@link com.idetronic.subur.model.impl.SuburItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.lang.String getSearchDescription();
+
+	public java.util.List<com.idetronic.subur.model.ItemType> getItemTypes()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

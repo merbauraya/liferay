@@ -283,6 +283,18 @@ public class ItemTypeLocalServiceWrapper implements ItemTypeLocalService,
 	}
 
 	@Override
+	public void decrementCounter(long itemTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_itemTypeLocalService.decrementCounter(itemTypeId);
+	}
+
+	@Override
+	public void incrementCounter(long itemTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_itemTypeLocalService.incrementCounter(itemTypeId);
+	}
+
+	@Override
 	public java.util.List getBySubjectId(long subjectId) {
 		return _itemTypeLocalService.getBySubjectId(subjectId);
 	}

@@ -37,13 +37,19 @@
         <portlet:param name="fileAssetId" value="25044" />
 </liferay-portlet:resourceURL>
 
-
 <%
 	String itemId = renderRequest.getParameter("itemId");
 	
 	String x = ParamUtil.getString(request, "categoryId");
 	String z = ParamUtil.getString(request, "tag");
+	String y = ParamUtil.getString(request,"itemTypeId");
+	String authorId =  ParamUtil.getString(request,"authorId");
+	out.print("it="+y +"::"+ authorId);
 	
+	Map<String,String[]> paramMaps = liferayPortletRequest.getParameterMap();
+	//paramMaps.toString();
+	
+	//out.print("pp="+liferayPortletRequest.getHttpServletRequest().getQueryString());
 	
 	PortletURL portletURL = renderResponse.createRenderURL();
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
@@ -73,13 +79,29 @@
 </div>
 
 <%
+	
+	String itemTypeId = ParamUtil.getString(request, "itemTypeId");
+	String[] itemTypeIds = StringUtil.split(itemTypeId);
+
 	boolean filterByTagOrCategory = false;
+	
+
 	String[] allAssetTagNames = new String[0];
 	String assetTagName = ParamUtil.getString(request, "tag");
+	
 	long siteGroupIds = themeDisplay.getSiteGroupId();
 	String[] assetTagNames = StringUtil.split(assetTagName);
 	
 	AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
+	Map<String, Object> attributes = new HashMap<String, Object>();
+	attributes.put("itemType", 1);
+	assetEntryQuery.setAttribute("itemType", 1);
+	
+	
+	//assetEntryQuery.setAttributes(attributes);
+	//assetEntry.setModelAttributes(attributes);
+	//assetEntryLocalService.updateAssetEntry(assetEntry);
+	
 	
 	
 if (Validator.isNotNull(assetTagName)) {
@@ -101,7 +123,7 @@ if (Validator.isNotNull(assetTagName)) {
 	long[] allAssetCategoryIds = new long[0];
 	
 	String categoryId = ParamUtil.getString(request, "categoryId", StringPool.BLANK);
-	filterByTagOrCategory = Validator.isNotNull(categoryId);
+	filterByTagOrCategory = filterByTagOrCategory? true: Validator.isNotNull(categoryId);
 	
 	String[] categoryIds = StringUtil.split(categoryId);
 	
@@ -149,14 +171,15 @@ if (Validator.isNotNull(assetTagName)) {
 			
 		}
 	}
-	long[] classNameIds = {20721}; //todo  get this from portlet pref
+	long clId = ClassNameLocalServiceUtil.getClassNameId(SuburItem.class.getName());
+	long[] classNameIds = {clId}; 
 	assetEntryQuery.setClassNameIds(classNameIds);
 	assetEntryQuery.setOrderByCol1(orderByColumn1);
 	assetEntryQuery.setOrderByCol2(orderByColumn2);
 	assetEntryQuery.setOrderByType1(orderByType1);
 	assetEntryQuery.setOrderByType2(orderByType2);
 %>
-<div class="portlet-asset-publisher">
+<div class="">
 	<%@ include file="/html/view/process_view.jsp" %>
 
 

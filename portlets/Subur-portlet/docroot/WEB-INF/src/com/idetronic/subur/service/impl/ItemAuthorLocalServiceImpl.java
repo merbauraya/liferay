@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.idetronic.subur.NoSuchAuthorException;
 import com.idetronic.subur.model.Author;
 import com.idetronic.subur.model.ItemAuthor;
 import com.idetronic.subur.service.AuthorLocalServiceUtil;
@@ -135,8 +136,13 @@ public class ItemAuthorLocalServiceImpl extends ItemAuthorLocalServiceBaseImpl {
 		{
 			newAuthorIds.add(authorIds[i]);
 		}
+		//ensure author item count is reflected
+		List<ItemAuthor> itemAuthors = itemAuthorPersistence.findByitemId(itemId);
+		for (ItemAuthor itemAuthor: itemAuthors)
+			AuthorLocalServiceUtil.decrementItemCount(itemAuthor.getAuthorId());
 		
 		itemAuthorPersistence.removeByitemId(itemId);
+		
 		Iterator<Long> authorIterator = newAuthorIds.iterator();
 		while (authorIterator.hasNext())
 		{

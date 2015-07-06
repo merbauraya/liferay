@@ -1,4 +1,4 @@
-<%@ include file="/html/item.jsp" %>
+<%@ include file="/html/init.jsp" %>
 
 
 <%

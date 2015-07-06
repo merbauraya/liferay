@@ -17,9 +17,11 @@ package com.idetronic.subur.model.impl;
 import java.util.List;
 
 import com.idetronic.subur.model.Author;
+import com.idetronic.subur.model.ItemType;
 import com.idetronic.subur.search.SuburSearchUtil;
 import com.idetronic.subur.service.AuthorLocalServiceUtil;
 import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
+import com.idetronic.subur.service.ItemItemTypeLocalServiceUtil;
 import com.idetronic.subur.util.SuburUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -48,22 +50,10 @@ public class SuburItemImpl extends SuburItemBaseImpl {
 	
 	public SuburItemImpl() {
 	}
-	/*
-	public String getEntryImageURL(ThemeDisplay themeDisplay) {
-		
-		if (!isSmallImage()) {
-			return null;
-		}
-		if (Validator.isNotNull(getSmallImageURL())) {
-			return getSmallImageURL();
-		}
-
-		return themeDisplay.getPathImage() + "/subur/item?img_id=" +
-			getSmallImageId() + "&t=" +
-				WebServerServletTokenUtil.getToken(getSmallImageId());
-
-	}
-	}*/
+	
+	/**
+	 * 
+	 */
 	public String getSearchDescription()
 	{
 		String authorDescription = "Author :".concat(StringPool.SPACE);
@@ -85,6 +75,11 @@ public class SuburItemImpl extends SuburItemBaseImpl {
 		}
 		
 		
-;		return (authorDescription);
+		return (authorDescription);
+	}
+	public List<ItemType> getItemTypes() throws SystemException
+	{
+		return ItemItemTypeLocalServiceUtil.getByItemId(getItemId());
+		
 	}
 }

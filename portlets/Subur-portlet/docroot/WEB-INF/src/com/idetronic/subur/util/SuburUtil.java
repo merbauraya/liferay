@@ -141,11 +141,7 @@ public class SuburUtil {
 	}
 	
 	
-	public static String getItemTypeText(long itemId)
-	{
-		return StringPool.BLANK;
-		
-	}
+	
 	
 	public static int countAssetVocabularyById(long vocabularyId) throws SystemException
 	{
@@ -158,6 +154,10 @@ public class SuburUtil {
 	    byte[] targetArray = new byte[is.available()];
 	    is.read(targetArray);
 	    return targetArray;
+	}
+	public void dummy()
+	{
+		//AssetEntryLocalServiceUtil.getEntry(className, classPK)
 	}
 
 }

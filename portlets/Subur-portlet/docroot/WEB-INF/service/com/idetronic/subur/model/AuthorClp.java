@@ -28,6 +28,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,12 +75,17 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 		attributes.put("authorId", getAuthorId());
 		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("title", getTitle());
 		attributes.put("idType", getIdType());
 		attributes.put("remoteId", getRemoteId());
 		attributes.put("firstName", getFirstName());
 		attributes.put("lastName", getLastName());
 		attributes.put("userId", getUserId());
 		attributes.put("metadata", getMetadata());
+		attributes.put("lastPublishedDate", getLastPublishedDate());
+		attributes.put("itemCount", getItemCount());
+		attributes.put("personalSite", getPersonalSite());
 
 		return attributes;
 	}
@@ -96,6 +102,18 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 		if (groupId != null) {
 			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
 		}
 
 		Integer idType = (Integer)attributes.get("idType");
@@ -132,6 +150,24 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 		if (metadata != null) {
 			setMetadata(metadata);
+		}
+
+		Date lastPublishedDate = (Date)attributes.get("lastPublishedDate");
+
+		if (lastPublishedDate != null) {
+			setLastPublishedDate(lastPublishedDate);
+		}
+
+		Integer itemCount = (Integer)attributes.get("itemCount");
+
+		if (itemCount != null) {
+			setItemCount(itemCount);
+		}
+
+		String personalSite = (String)attributes.get("personalSite");
+
+		if (personalSite != null) {
+			setPersonalSite(personalSite);
 		}
 	}
 
@@ -174,6 +210,52 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 				Method method = clazz.getMethod("setGroupId", long.class);
 
 				method.invoke(_authorRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_authorRemoteModel, companyId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getTitle() {
+		return _title;
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setTitle", String.class);
+
+				method.invoke(_authorRemoteModel, title);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -320,6 +402,76 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 	}
 
 	@Override
+	public Date getLastPublishedDate() {
+		return _lastPublishedDate;
+	}
+
+	@Override
+	public void setLastPublishedDate(Date lastPublishedDate) {
+		_lastPublishedDate = lastPublishedDate;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setLastPublishedDate",
+						Date.class);
+
+				method.invoke(_authorRemoteModel, lastPublishedDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getItemCount() {
+		return _itemCount;
+	}
+
+	@Override
+	public void setItemCount(int itemCount) {
+		_itemCount = itemCount;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setItemCount", int.class);
+
+				method.invoke(_authorRemoteModel, itemCount);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getPersonalSite() {
+		return _personalSite;
+	}
+
+	@Override
+	public void setPersonalSite(String personalSite) {
+		_personalSite = personalSite;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPersonalSite", String.class);
+
+				method.invoke(_authorRemoteModel, personalSite);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public java.lang.String getDisplayName() {
 		try {
 			String methodName = "getDisplayName";
@@ -409,12 +561,17 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 		clone.setAuthorId(getAuthorId());
 		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
+		clone.setTitle(getTitle());
 		clone.setIdType(getIdType());
 		clone.setRemoteId(getRemoteId());
 		clone.setFirstName(getFirstName());
 		clone.setLastName(getLastName());
 		clone.setUserId(getUserId());
 		clone.setMetadata(getMetadata());
+		clone.setLastPublishedDate(getLastPublishedDate());
+		clone.setItemCount(getItemCount());
+		clone.setPersonalSite(getPersonalSite());
 
 		return clone;
 	}
@@ -467,12 +624,16 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{authorId=");
 		sb.append(getAuthorId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", title=");
+		sb.append(getTitle());
 		sb.append(", idType=");
 		sb.append(getIdType());
 		sb.append(", remoteId=");
@@ -485,6 +646,12 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		sb.append(getUserId());
 		sb.append(", metadata=");
 		sb.append(getMetadata());
+		sb.append(", lastPublishedDate=");
+		sb.append(getLastPublishedDate());
+		sb.append(", itemCount=");
+		sb.append(getItemCount());
+		sb.append(", personalSite=");
+		sb.append(getPersonalSite());
 		sb.append("}");
 
 		return sb.toString();
@@ -492,7 +659,7 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.Author");
@@ -505,6 +672,14 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>idType</column-name><column-value><![CDATA[");
@@ -530,6 +705,18 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 			"<column><column-name>metadata</column-name><column-value><![CDATA[");
 		sb.append(getMetadata());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPublishedDate</column-name><column-value><![CDATA[");
+		sb.append(getLastPublishedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>itemCount</column-name><column-value><![CDATA[");
+		sb.append(getItemCount());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>personalSite</column-name><column-value><![CDATA[");
+		sb.append(getPersonalSite());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -538,12 +725,17 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 	private long _authorId;
 	private long _groupId;
+	private long _companyId;
+	private String _title;
 	private int _idType;
 	private String _remoteId;
 	private String _firstName;
 	private String _lastName;
 	private int _userId;
 	private String _metadata;
+	private Date _lastPublishedDate;
+	private int _itemCount;
+	private String _personalSite;
 	private BaseModel<?> _authorRemoteModel;
 	private Class<?> _clpSerializerClass = com.idetronic.subur.service.ClpSerializer.class;
 }

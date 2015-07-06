@@ -106,67 +106,77 @@ public class SuburItemLocalServiceClpInvoker {
 				"com.idetronic.subur.model.SuburItem"
 			};
 
-		_methodName88 = "getBeanIdentifier";
+		_methodName100 = "getBeanIdentifier";
 
-		_methodParameterTypes88 = new String[] {  };
+		_methodParameterTypes100 = new String[] {  };
 
-		_methodName89 = "setBeanIdentifier";
+		_methodName101 = "setBeanIdentifier";
 
-		_methodParameterTypes89 = new String[] { "java.lang.String" };
+		_methodParameterTypes101 = new String[] { "java.lang.String" };
 
-		_methodName94 = "addItem";
+		_methodName106 = "addItem";
 
-		_methodParameterTypes94 = new String[] {
+		_methodParameterTypes106 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"long[][]", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName95 = "updateSuburItem";
+		_methodName107 = "updateSuburItem";
 
-		_methodParameterTypes95 = new String[] {
-				"com.idetronic.subur.model.SuburItem", "long",
-				"com.liferay.portal.service.ServiceContext"
+		_methodParameterTypes107 = new String[] {
+				"com.idetronic.subur.model.SuburItem", "long", "long[][]",
+				"long[][]", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName96 = "getItemTypes";
+		_methodName108 = "deleteItem";
 
-		_methodParameterTypes96 = new String[] { "long" };
+		_methodParameterTypes108 = new String[] { "long" };
 
-		_methodName97 = "getSuburItems";
+		_methodName109 = "deleteItem";
 
-		_methodParameterTypes97 = new String[] { "int", "int", "int" };
+		_methodParameterTypes109 = new String[] {
+				"com.idetronic.subur.model.SuburItem"
+			};
 
-		_methodName98 = "publishItem";
+		_methodName110 = "getItemTypes";
 
-		_methodParameterTypes98 = new String[] { "long" };
+		_methodParameterTypes110 = new String[] { "long" };
 
-		_methodName99 = "withDrawItem";
+		_methodName111 = "getSuburItems";
 
-		_methodParameterTypes99 = new String[] { "long" };
+		_methodParameterTypes111 = new String[] { "int", "int", "int" };
 
-		_methodName100 = "getItemCount";
+		_methodName112 = "publishItem";
 
-		_methodParameterTypes100 = new String[] { "int" };
+		_methodParameterTypes112 = new String[] { "long" };
 
-		_methodName101 = "getByGroup";
+		_methodName113 = "withDrawItem";
 
-		_methodParameterTypes101 = new String[] { "long" };
+		_methodParameterTypes113 = new String[] { "long" };
 
-		_methodName102 = "getDetails";
+		_methodName114 = "getItemCount";
 
-		_methodParameterTypes102 = new String[] { "long" };
+		_methodParameterTypes114 = new String[] { "int" };
 
-		_methodName103 = "getFileEntry";
+		_methodName115 = "getByGroup";
 
-		_methodParameterTypes103 = new String[] { "long" };
+		_methodParameterTypes115 = new String[] { "long" };
 
-		_methodName104 = "getBySubjectId";
+		_methodName116 = "getDetails";
 
-		_methodParameterTypes104 = new String[] { "long", "int", "int" };
+		_methodParameterTypes116 = new String[] { "long" };
 
-		_methodName105 = "countAssetVocabularyById";
+		_methodName117 = "getFileEntry";
 
-		_methodParameterTypes105 = new String[] { "long" };
+		_methodParameterTypes117 = new String[] { "long" };
+
+		_methodName118 = "getBySubjectId";
+
+		_methodParameterTypes118 = new String[] { "long", "int", "int" };
+
+		_methodName119 = "countAssetVocabularyById";
+
+		_methodParameterTypes119 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -258,84 +268,100 @@ public class SuburItemLocalServiceClpInvoker {
 			return SuburItemLocalServiceUtil.updateSuburItem((com.idetronic.subur.model.SuburItem)arguments[0]);
 		}
 
-		if (_methodName88.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+		if (_methodName100.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName89.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
+		if (_methodName101.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
 			SuburItemLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName94.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
+		if (_methodName106.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
 			return SuburItemLocalServiceUtil.addItem(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				(long[])arguments[4],
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
+		}
+
+		if (_methodName107.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
+			return SuburItemLocalServiceUtil.updateSuburItem((com.idetronic.subur.model.SuburItem)arguments[0],
+				((Long)arguments[1]).longValue(), (long[])arguments[2],
+				(long[])arguments[3],
 				(com.liferay.portal.service.ServiceContext)arguments[4]);
 		}
 
-		if (_methodName95.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
-			return SuburItemLocalServiceUtil.updateSuburItem((com.idetronic.subur.model.SuburItem)arguments[0],
-				((Long)arguments[1]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
+		if (_methodName108.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
+			SuburItemLocalServiceUtil.deleteItem(((Long)arguments[0]).longValue());
+
+			return null;
 		}
 
-		if (_methodName96.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+		if (_methodName109.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes109, parameterTypes)) {
+			SuburItemLocalServiceUtil.deleteItem((com.idetronic.subur.model.SuburItem)arguments[0]);
+
+			return null;
+		}
+
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getItemTypes(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName97.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+		if (_methodName111.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getSuburItems(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName98.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+		if (_methodName112.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
 			return SuburItemLocalServiceUtil.publishItem(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName99.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+		if (_methodName113.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
 			return SuburItemLocalServiceUtil.withDrawItem(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName100.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+		if (_methodName114.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes114, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getItemCount(((Integer)arguments[0]).intValue());
 		}
 
-		if (_methodName101.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+		if (_methodName115.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes115, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getByGroup(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName102.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+		if (_methodName116.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes116, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getDetails(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName103.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
+		if (_methodName117.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes117, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getFileEntry(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName104.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
+		if (_methodName118.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes118, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getBySubjectId(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName105.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
+		if (_methodName119.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes119, parameterTypes)) {
 			return SuburItemLocalServiceUtil.countAssetVocabularyById(((Long)arguments[0]).longValue());
 		}
 
@@ -374,32 +400,36 @@ public class SuburItemLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName88;
-	private String[] _methodParameterTypes88;
-	private String _methodName89;
-	private String[] _methodParameterTypes89;
-	private String _methodName94;
-	private String[] _methodParameterTypes94;
-	private String _methodName95;
-	private String[] _methodParameterTypes95;
-	private String _methodName96;
-	private String[] _methodParameterTypes96;
-	private String _methodName97;
-	private String[] _methodParameterTypes97;
-	private String _methodName98;
-	private String[] _methodParameterTypes98;
-	private String _methodName99;
-	private String[] _methodParameterTypes99;
 	private String _methodName100;
 	private String[] _methodParameterTypes100;
 	private String _methodName101;
 	private String[] _methodParameterTypes101;
-	private String _methodName102;
-	private String[] _methodParameterTypes102;
-	private String _methodName103;
-	private String[] _methodParameterTypes103;
-	private String _methodName104;
-	private String[] _methodParameterTypes104;
-	private String _methodName105;
-	private String[] _methodParameterTypes105;
+	private String _methodName106;
+	private String[] _methodParameterTypes106;
+	private String _methodName107;
+	private String[] _methodParameterTypes107;
+	private String _methodName108;
+	private String[] _methodParameterTypes108;
+	private String _methodName109;
+	private String[] _methodParameterTypes109;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
+	private String _methodName111;
+	private String[] _methodParameterTypes111;
+	private String _methodName112;
+	private String[] _methodParameterTypes112;
+	private String _methodName113;
+	private String[] _methodParameterTypes113;
+	private String _methodName114;
+	private String[] _methodParameterTypes114;
+	private String _methodName115;
+	private String[] _methodParameterTypes115;
+	private String _methodName116;
+	private String[] _methodParameterTypes116;
+	private String _methodName117;
+	private String[] _methodParameterTypes117;
+	private String _methodName118;
+	private String[] _methodParameterTypes118;
+	private String _methodName119;
+	private String[] _methodParameterTypes119;
 }

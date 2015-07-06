@@ -9,7 +9,6 @@ public class AuthorSearchTerms extends AuthorDisplayTerms{
 	public AuthorSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		description = DAOParamUtil.getString(portletRequest, DESCRIPTION);
 		firstName = DAOParamUtil.getString(portletRequest, FIRSTNAME);
 		lastName = DAOParamUtil.getString(portletRequest, LASTNAME);
 	}

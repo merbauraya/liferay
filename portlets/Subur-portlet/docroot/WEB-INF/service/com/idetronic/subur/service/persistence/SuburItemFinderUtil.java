@@ -29,25 +29,16 @@ public class SuburItemFinderUtil {
 		return getFinder().getItemDetails(itemId);
 	}
 
-	public static java.util.List getFileEntries(long itemId) {
-		return getFinder().getFileEntries(itemId);
-	}
-
-	public static java.util.List getItemBySubjectId(long subjectId, int start,
-		int end) {
-		return getFinder().getItemBySubjectId(subjectId, start, end);
-	}
-
-	public static java.util.List itemCountByItemTypeInSubject(long subjectId) {
-		return getFinder().itemCountByItemTypeInSubject(subjectId);
+	public static java.util.List<com.idetronic.subur.model.SuburItem> findByAuthorGroup(
+		long groupId, long authorId, int start, int end, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByAuthorGroup(groupId, authorId, start, end, status, obc);
 	}
 
 	public static java.util.List getItemAuthors(long itemId) {
 		return getFinder().getItemAuthors(itemId);
-	}
-
-	public static java.util.List itemCountByAuthorInSubject(long subjectId) {
-		return getFinder().itemCountByAuthorInSubject(subjectId);
 	}
 
 	public static SuburItemFinder getFinder() {

@@ -25,12 +25,12 @@
 	
 %>
 <div class="item-detail">
-	<div class="item-title">
-		<h3><%= suburItem.getTitle() %></h3>
+	<div class="item-header">
+		
+		<h1 class="item-title"><%= suburItem.getTitle() %></h1>
 	</div>
-	
 	<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.DELETE) || SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.PERMISSIONS) || SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.UPDATE) %>">
-		<div>
+		<div class="item-permission">
 			<ul class="edit-actions entry icons-container lfr-meta-actions">
 				<c:if test="<%= SuburItemPermission.contains(permissionChecker, suburItem, ActionKeys.UPDATE) %>">
 					<li class="edit-entry">
@@ -124,14 +124,22 @@
 	<div class="item-author">
 		<%
 			PortletURL viewAuthorURL = renderResponse.createRenderURL();
-			viewAuthorURL.setParameter("jspPage", "/html/view_author.jsp");
+			viewAuthorURL.setParameter("jspPage", "/html/authornavigator/view_author.jsp");
 		%>	
 		<subur:item-author-display 
 			itemId="<%=itemId %>" 
 			viewAuthorURL ="<%=viewAuthorURL %>"	
 		/>
 	</div>	
-
+	<%
+		PortletURL viewItemTypeURL = renderResponse.createRenderURL();
+	%>
+	<subur:item-itemtype-display 
+			itemId="<%= Long.valueOf(itemId) %>" 
+			viewItemTypeURL ="<%=viewItemTypeURL %>"	
+			showHeader= "<%= true %>"
+		/>
+	
 	<div class="asset-categorization-display">
 		<label>Tags</label>
 		<liferay-ui:asset-tags-summary

@@ -250,6 +250,12 @@ public interface ItemTypeLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	public void decrementCounter(long itemTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void incrementCounter(long itemTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List getBySubjectId(long subjectId);
 }

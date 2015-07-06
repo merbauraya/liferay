@@ -471,6 +471,25 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		}
 	}
 
+	@Override
+	public java.util.List<com.idetronic.subur.model.ItemType> getItemTypes() {
+		try {
+			String methodName = "getItemTypes";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.util.List<com.idetronic.subur.model.ItemType> returnObj = (java.util.List<com.idetronic.subur.model.ItemType>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getSuburItemRemoteModel() {
 		return _suburItemRemoteModel;
 	}

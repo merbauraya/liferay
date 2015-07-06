@@ -35,7 +35,7 @@
 {
 	clear:both;
 }
-.aui .item-detail div {
-	clear:both;
-	margin:10px;
+.aui .tag-selected
+{
+	font-weight: bold;
 }

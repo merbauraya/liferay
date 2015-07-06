@@ -85,6 +85,7 @@
 			<portlet:actionURL var="deleteItemURL" name="deleteItem">
 				<portlet:param name="itemId" value="<%=String.valueOf(item.getItemId()) %>" />
 				<portlet:param name="redirect" value="<%=portletURL.toString() %>"/>
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			</portlet:actionURL>
 			
 			<portlet:actionURL var="publishItemURL" name="publishItem">

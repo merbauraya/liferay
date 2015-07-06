@@ -16,8 +16,11 @@ package com.idetronic.subur.service.base;
 
 import com.idetronic.subur.model.ItemType;
 import com.idetronic.subur.service.ItemTypeLocalService;
+import com.idetronic.subur.service.persistence.AuthorExpertisePersistence;
 import com.idetronic.subur.service.persistence.AuthorFinder;
 import com.idetronic.subur.service.persistence.AuthorPersistence;
+import com.idetronic.subur.service.persistence.ExpertiseFinder;
+import com.idetronic.subur.service.persistence.ExpertisePersistence;
 import com.idetronic.subur.service.persistence.ItemAuthorPersistence;
 import com.idetronic.subur.service.persistence.ItemFileEntryPersistence;
 import com.idetronic.subur.service.persistence.ItemItemTypeFinder;
@@ -340,6 +343,119 @@ public abstract class ItemTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 */
 	public void setAuthorFinder(AuthorFinder authorFinder) {
 		this.authorFinder = authorFinder;
+	}
+
+	/**
+	 * Returns the author expertise local service.
+	 *
+	 * @return the author expertise local service
+	 */
+	public com.idetronic.subur.service.AuthorExpertiseLocalService getAuthorExpertiseLocalService() {
+		return authorExpertiseLocalService;
+	}
+
+	/**
+	 * Sets the author expertise local service.
+	 *
+	 * @param authorExpertiseLocalService the author expertise local service
+	 */
+	public void setAuthorExpertiseLocalService(
+		com.idetronic.subur.service.AuthorExpertiseLocalService authorExpertiseLocalService) {
+		this.authorExpertiseLocalService = authorExpertiseLocalService;
+	}
+
+	/**
+	 * Returns the author expertise persistence.
+	 *
+	 * @return the author expertise persistence
+	 */
+	public AuthorExpertisePersistence getAuthorExpertisePersistence() {
+		return authorExpertisePersistence;
+	}
+
+	/**
+	 * Sets the author expertise persistence.
+	 *
+	 * @param authorExpertisePersistence the author expertise persistence
+	 */
+	public void setAuthorExpertisePersistence(
+		AuthorExpertisePersistence authorExpertisePersistence) {
+		this.authorExpertisePersistence = authorExpertisePersistence;
+	}
+
+	/**
+	 * Returns the expertise local service.
+	 *
+	 * @return the expertise local service
+	 */
+	public com.idetronic.subur.service.ExpertiseLocalService getExpertiseLocalService() {
+		return expertiseLocalService;
+	}
+
+	/**
+	 * Sets the expertise local service.
+	 *
+	 * @param expertiseLocalService the expertise local service
+	 */
+	public void setExpertiseLocalService(
+		com.idetronic.subur.service.ExpertiseLocalService expertiseLocalService) {
+		this.expertiseLocalService = expertiseLocalService;
+	}
+
+	/**
+	 * Returns the expertise remote service.
+	 *
+	 * @return the expertise remote service
+	 */
+	public com.idetronic.subur.service.ExpertiseService getExpertiseService() {
+		return expertiseService;
+	}
+
+	/**
+	 * Sets the expertise remote service.
+	 *
+	 * @param expertiseService the expertise remote service
+	 */
+	public void setExpertiseService(
+		com.idetronic.subur.service.ExpertiseService expertiseService) {
+		this.expertiseService = expertiseService;
+	}
+
+	/**
+	 * Returns the expertise persistence.
+	 *
+	 * @return the expertise persistence
+	 */
+	public ExpertisePersistence getExpertisePersistence() {
+		return expertisePersistence;
+	}
+
+	/**
+	 * Sets the expertise persistence.
+	 *
+	 * @param expertisePersistence the expertise persistence
+	 */
+	public void setExpertisePersistence(
+		ExpertisePersistence expertisePersistence) {
+		this.expertisePersistence = expertisePersistence;
+	}
+
+	/**
+	 * Returns the expertise finder.
+	 *
+	 * @return the expertise finder
+	 */
+	public ExpertiseFinder getExpertiseFinder() {
+		return expertiseFinder;
+	}
+
+	/**
+	 * Sets the expertise finder.
+	 *
+	 * @param expertiseFinder the expertise finder
+	 */
+	public void setExpertiseFinder(ExpertiseFinder expertiseFinder) {
+		this.expertiseFinder = expertiseFinder;
 	}
 
 	/**
@@ -939,6 +1055,18 @@ public abstract class ItemTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected AuthorPersistence authorPersistence;
 	@BeanReference(type = AuthorFinder.class)
 	protected AuthorFinder authorFinder;
+	@BeanReference(type = com.idetronic.subur.service.AuthorExpertiseLocalService.class)
+	protected com.idetronic.subur.service.AuthorExpertiseLocalService authorExpertiseLocalService;
+	@BeanReference(type = AuthorExpertisePersistence.class)
+	protected AuthorExpertisePersistence authorExpertisePersistence;
+	@BeanReference(type = com.idetronic.subur.service.ExpertiseLocalService.class)
+	protected com.idetronic.subur.service.ExpertiseLocalService expertiseLocalService;
+	@BeanReference(type = com.idetronic.subur.service.ExpertiseService.class)
+	protected com.idetronic.subur.service.ExpertiseService expertiseService;
+	@BeanReference(type = ExpertisePersistence.class)
+	protected ExpertisePersistence expertisePersistence;
+	@BeanReference(type = ExpertiseFinder.class)
+	protected ExpertiseFinder expertiseFinder;
 	@BeanReference(type = com.idetronic.subur.service.ItemAuthorLocalService.class)
 	protected com.idetronic.subur.service.ItemAuthorLocalService itemAuthorLocalService;
 	@BeanReference(type = ItemAuthorPersistence.class)

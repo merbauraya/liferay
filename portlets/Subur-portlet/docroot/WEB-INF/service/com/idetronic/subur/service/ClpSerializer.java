@@ -15,6 +15,8 @@
 package com.idetronic.subur.service;
 
 import com.idetronic.subur.model.AuthorClp;
+import com.idetronic.subur.model.AuthorExpertiseClp;
+import com.idetronic.subur.model.ExpertiseClp;
 import com.idetronic.subur.model.ItemAuthorClp;
 import com.idetronic.subur.model.ItemFileEntryClp;
 import com.idetronic.subur.model.ItemItemTypeClp;
@@ -115,6 +117,14 @@ public class ClpSerializer {
 			return translateInputAuthor(oldModel);
 		}
 
+		if (oldModelClassName.equals(AuthorExpertiseClp.class.getName())) {
+			return translateInputAuthorExpertise(oldModel);
+		}
+
+		if (oldModelClassName.equals(ExpertiseClp.class.getName())) {
+			return translateInputExpertise(oldModel);
+		}
+
 		if (oldModelClassName.equals(ItemAuthorClp.class.getName())) {
 			return translateInputItemAuthor(oldModel);
 		}
@@ -170,6 +180,26 @@ public class ClpSerializer {
 		AuthorClp oldClpModel = (AuthorClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getAuthorRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputAuthorExpertise(BaseModel<?> oldModel) {
+		AuthorExpertiseClp oldClpModel = (AuthorExpertiseClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getAuthorExpertiseRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputExpertise(BaseModel<?> oldModel) {
+		ExpertiseClp oldClpModel = (ExpertiseClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getExpertiseRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -287,6 +317,80 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.idetronic.subur.model.impl.AuthorImpl")) {
 			return translateOutputAuthor(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.idetronic.subur.model.impl.AuthorExpertiseImpl")) {
+			return translateOutputAuthorExpertise(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.idetronic.subur.model.impl.ExpertiseImpl")) {
+			return translateOutputExpertise(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -738,6 +842,15 @@ public class ClpSerializer {
 			return new com.idetronic.subur.NoSuchAuthorException();
 		}
 
+		if (className.equals(
+					"com.idetronic.subur.NoSuchAuthorExpertiseException")) {
+			return new com.idetronic.subur.NoSuchAuthorExpertiseException();
+		}
+
+		if (className.equals("com.idetronic.subur.NoSuchExpertiseException")) {
+			return new com.idetronic.subur.NoSuchExpertiseException();
+		}
+
 		if (className.equals("com.idetronic.subur.NoSuchItemAuthorException")) {
 			return new com.idetronic.subur.NoSuchItemAuthorException();
 		}
@@ -787,6 +900,26 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setAuthorRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputAuthorExpertise(BaseModel<?> oldModel) {
+		AuthorExpertiseClp newModel = new AuthorExpertiseClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setAuthorExpertiseRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputExpertise(BaseModel<?> oldModel) {
+		ExpertiseClp newModel = new ExpertiseClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setExpertiseRemoteModel(oldModel);
 
 		return newModel;
 	}

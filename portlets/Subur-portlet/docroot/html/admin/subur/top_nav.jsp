@@ -18,7 +18,7 @@
 						<portlet:param name="jspPage" value="<%= SuburConstant.PAGE_NEW_ITEM %>" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="backURL" value="<%= currentURL %>" />
-						<portlet:param name="windowState" value="<%=LiferayWindowState.MAXIMIZED.toString() %>" /> 
+						 
 					</portlet:renderURL>
 					<aui:nav-item href="<%= addItemURL %>" label="add-subur-item" name="addItemButton" />
 				</c:if>
@@ -61,7 +61,7 @@
 		<c:if test="<%= showSearch %>">
 	        <aui:nav-bar-search cssClass="pull-right">
 				<liferay-ui:search-form
-					page="/html/search/item_search.jsp"
+					page="/html/search/item_form.jsp"
 					 searchContainer="<%= suburSearchContainer %>"
 					 servletContext="<%= this.getServletConfig().getServletContext() %>"
 						/>

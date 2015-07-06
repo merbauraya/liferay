@@ -11,15 +11,53 @@
 		<attributes>
 			<id name="authorId" />
 			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="title" />
 			<basic name="idType" />
 			<basic name="remoteId" />
 			<basic name="firstName" />
 			<basic name="lastName" />
 			<basic name="userId" />
 			<basic name="metadata" />
+			<basic name="lastPublishedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="itemCount" />
+			<basic name="personalSite" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.AuthorExpertiseModelImpl">
+		<id-class class="com.idetronic.subur.service.persistence.AuthorExpertisePK" />
+		<attributes>
+			<id name="authorId" />
+			<id name="expertiseId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ExpertiseModelImpl">
+		<attributes>
+			<id name="expertiseId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="expertiseName" />
+			<basic name="indexedName" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="authorCount" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.subur.model.impl.ItemAuthorModelImpl">
@@ -136,6 +174,14 @@
 	</mapped-superclass>
 	<entity class="com.idetronic.subur.model.impl.AuthorImpl" name="Author">
 		<table name="subur_Author" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.AuthorExpertiseImpl" name="AuthorExpertise">
+		<table name="subur_AuthorExpertise" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ExpertiseImpl" name="Expertise">
+		<table name="subur_Expertise" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemAuthorImpl" name="ItemAuthor">

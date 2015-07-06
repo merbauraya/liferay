@@ -975,4 +975,11 @@
 	body.yui3-skin-sam .yui3-widget-mask {
 		@include opacity(0.8);
 	}
+	.icons-container {
+    clear: both;
+    height: auto;
+    margin-top: 1em;
+    overflow: hidden;
+    width: auto;
+}
 }

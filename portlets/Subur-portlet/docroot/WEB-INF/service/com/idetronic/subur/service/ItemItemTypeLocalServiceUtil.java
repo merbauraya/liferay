@@ -281,10 +281,26 @@ public class ItemItemTypeLocalServiceUtil {
 		return getService().addItemType(itemId, itemTypeId);
 	}
 
-	public static void setItemItemType(long itemId,
+	public static void addItemItemType(long itemId, long[] itemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addItemItemType(itemId, itemTypeIds);
+	}
+
+	public static void addItemItemType(long itemId,
 		java.lang.String[] itemTypeStrings)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().setItemItemType(itemId, itemTypeStrings);
+		getService().addItemItemType(itemId, itemTypeStrings);
+	}
+
+	public static void updateItemItemType(long itemId, long[] itemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().updateItemItemType(itemId, itemTypeIds);
+	}
+
+	public static void updateItemItemType(long itemId,
+		java.lang.String[] itemTypeStrings)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().updateItemItemType(itemId, itemTypeStrings);
 	}
 
 	/**
@@ -300,8 +316,18 @@ public class ItemItemTypeLocalServiceUtil {
 	}
 
 	/**
+	* Get item type for an item, and return it in object array
+	*
+	* @param itemId to search for
+	* @return array of ItemType for an item
+	*/
+	public static java.lang.Object[] getByItemIdArray(long itemId) {
+		return getService().getByItemIdArray(itemId);
+	}
+
+	/**
 	* @param itemId - Subur Item Id
-	* @return List of ItemType
+	* @return List of ItemItemType
 	* @throws SystemException
 	*/
 	public static java.util.List<com.idetronic.subur.model.ItemItemType> itemTypeByItemid(

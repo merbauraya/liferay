@@ -17,12 +17,32 @@
 	<model name="com.idetronic.subur.model.Author">
 		<field name="authorId" type="long" />
 		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="title" type="String" />
 		<field name="idType" type="int" />
 		<field name="remoteId" type="String" />
 		<field name="firstName" type="String" />
 		<field name="lastName" type="String" />
 		<field name="userId" type="int" />
 		<field name="metadata" type="String" />
+		<field name="lastPublishedDate" type="Date" />
+		<field name="itemCount" type="int" />
+		<field name="personalSite" type="String" />
+	</model>
+	<model name="com.idetronic.subur.model.AuthorExpertise">
+		<field name="authorId" type="long" />
+		<field name="expertiseId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.Expertise">
+		<field name="expertiseId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="expertiseName" type="String" />
+		<field name="indexedName" type="String" />
+		<field name="modifiedDate" type="Date" />
+		<field name="authorCount" type="int" />
 	</model>
 	<model name="com.idetronic.subur.model.ItemAuthor">
 		<field name="itemId" type="long" />

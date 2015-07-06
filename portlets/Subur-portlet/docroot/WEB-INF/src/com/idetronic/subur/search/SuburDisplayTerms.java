@@ -14,6 +14,7 @@ public class SuburDisplayTerms extends DisplayTerms{
 	public static final String YEAR_PUBLISHED = "year";
 	public static final String AUTHOR_FIRST_NAME = "authorFirstName";
 	public static final String AUTHOR_LAST_NAME = "authorLastName";
+	public static final String ITEM_TYPE = "itemType";
 	
 	
 	protected String title;
@@ -21,7 +22,7 @@ public class SuburDisplayTerms extends DisplayTerms{
 	protected String year;
 	protected String authorFirstName;
 	protected String authorLastName;
-	
+	protected long itemType;
 	public SuburDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
@@ -30,7 +31,13 @@ public class SuburDisplayTerms extends DisplayTerms{
 		year = ParamUtil.getString(portletRequest, YEAR_PUBLISHED);
 		authorFirstName = ParamUtil.getString(portletRequest, AUTHOR_FIRST_NAME);
 		authorLastName = ParamUtil.getString(portletRequest, AUTHOR_LAST_NAME);
+		itemType = ParamUtil.getLong(portletRequest, ITEM_TYPE);
 	}
+	public long getItemType()
+	{
+		return itemType;
+	}
+	
 	public String getTitle()
 	{
 		return title;

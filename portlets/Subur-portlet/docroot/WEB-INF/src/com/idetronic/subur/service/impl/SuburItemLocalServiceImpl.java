@@ -15,9 +15,15 @@
 package com.idetronic.subur.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.idetronic.subur.NoSuchSuburItemException;
 import com.idetronic.subur.model.SuburItem;
+import com.idetronic.subur.service.AuthorLocalServiceUtil;
+import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
+import com.idetronic.subur.service.ItemItemTypeLocalServiceUtil;
 import com.idetronic.subur.service.base.SuburItemLocalServiceBaseImpl;
 import com.idetronic.subur.service.persistence.SuburItemFinderUtil;
 import com.idetronic.subur.util.SuburConstant;
@@ -29,6 +35,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -52,8 +59,9 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
  */
 public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 	private static Log logger = LogFactoryUtil.getLog(SuburItemLocalServiceImpl.class);
+	
 	public SuburItem addItem(long userId,long groupId,String title,String itemAbstract,
-			ServiceContext serviceContext) throws PortalException, SystemException
+			long[] itemTypeId,ServiceContext serviceContext) throws PortalException, SystemException
 	{
 		User user = userLocalService.getUserById(userId);
 		
@@ -72,10 +80,9 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		suburItem.setUuid(PortalUUIDUtil.generate());
 		
 		suburItemPersistence.update(suburItem);
+		ItemItemTypeLocalServiceUtil.addItemItemType(itemId, itemTypeId);
 		
-		
-		
-		
+				
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
                 SuburItem.class);
 
@@ -100,20 +107,25 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
                 ContentTypes.TEXT_HTML, suburItem.getTitle(), itemDescription, summary, url,
                 layoutUuid, 0, 0, null, false);
                    
-		
-		
-		
+		Map<String, Object> attributes = new HashMap<String, Object>();
+		attributes.put("itemType", 1);
+		assetEntry.setModelAttributes(attributes);
+		assetEntryLocalService.updateAssetEntry(assetEntry);
 		
 		return suburItem;
 	}
+	
 	@Override
-	public SuburItem updateSuburItem(SuburItem suburItem,long userId,ServiceContext serviceContext) throws PortalException,SystemException 
+	public SuburItem updateSuburItem(SuburItem suburItem,long userId,
+			long[] itemTypeIds, long[] authorIds, ServiceContext serviceContext) throws PortalException,SystemException 
 	{
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
                 SuburItem.class);
 		long groupId = serviceContext.getScopeGroupId();
+		
 		if (Validator.isNull(suburItem.getPublishedDate()) && suburItem.getStatus() == SuburConstant.STATUS_PUBLISHED_ITEM)
 			suburItem.setPublishedDate(new Date());
+		
 		//only show item with published status
 		boolean visible = (suburItem.getStatus() == SuburConstant.STATUS_PUBLISHED_ITEM);
 		String itemDescription = null;
@@ -142,14 +154,54 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
                 serviceContext.getAssetLinkEntryIds(),
                 AssetLinkConstants.TYPE_RELATED);
 		
+		ItemAuthorLocalServiceUtil.setItemAuthor(suburItem.getItemId(), authorIds);
+		AuthorLocalServiceUtil.updateAuthorPosting(suburItem);
+		
+		
+		
+		
+		
+		
+		ItemItemTypeLocalServiceUtil.updateItemItemType(suburItem.getItemId(),itemTypeIds);
 		return suburItemPersistence.update(suburItem);
 		
 	}
-	/*
-	public List getAuthor(long itemId)
+	
+	public void deleteItem(long itemId) throws SystemException, NoSuchSuburItemException
 	{
-		return MetadataPropertyValueLocalServiceUtil.getAuthor(itemId);
-	}*/
+		SuburItem suburItem = suburItemPersistence.findByPrimaryKey(itemId);
+		suburItemLocalService.deleteSuburItem(suburItem);
+		
+	}
+	public void deleteItem(SuburItem suburItem) throws SystemException, PortalException
+	{
+		
+		
+		resourceLocalService.deleteResource(suburItem.getCompanyId(),SuburItem.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,suburItem.getItemId());
+		
+		
+		
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
+			SuburItem.class.getName(), suburItem.getItemId());
+		
+		
+
+		suburItemPersistence.remove(suburItem);
+		
+		
+		// Indexer
+
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			SuburItem.class);
+
+		indexer.delete(suburItem);
+				
+				
+	}
+	
 	public List getItemTypes(long itemId)
 	{
 		List itemList =  SuburItemFinderUtil.getItemTypes(itemId);// .getItemTypes(itemId);
@@ -207,6 +259,7 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		else
 			return suburItemPersistence.countAll();
 	}
+	
 	public List<SuburItem> getByGroup(long groupId) throws SystemException
 	{
 		return suburItemPersistence.findByGroupId(groupId);

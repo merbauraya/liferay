@@ -4,6 +4,12 @@
 	<bean id="com.idetronic.subur.service.AuthorLocalService" class="com.idetronic.subur.service.impl.AuthorLocalServiceImpl" />
 	<bean id="com.idetronic.subur.service.persistence.AuthorPersistence" class="com.idetronic.subur.service.persistence.AuthorPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.subur.service.persistence.AuthorFinder" class="com.idetronic.subur.service.persistence.AuthorFinderImpl" parent="basePersistence" />
+	<bean id="com.idetronic.subur.service.AuthorExpertiseLocalService" class="com.idetronic.subur.service.impl.AuthorExpertiseLocalServiceImpl" />
+	<bean id="com.idetronic.subur.service.persistence.AuthorExpertisePersistence" class="com.idetronic.subur.service.persistence.AuthorExpertisePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.subur.service.ExpertiseLocalService" class="com.idetronic.subur.service.impl.ExpertiseLocalServiceImpl" />
+	<bean id="com.idetronic.subur.service.ExpertiseService" class="com.idetronic.subur.service.impl.ExpertiseServiceImpl" />
+	<bean id="com.idetronic.subur.service.persistence.ExpertisePersistence" class="com.idetronic.subur.service.persistence.ExpertisePersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.subur.service.persistence.ExpertiseFinder" class="com.idetronic.subur.service.persistence.ExpertiseFinderImpl" parent="basePersistence" />
 	<bean id="com.idetronic.subur.service.ItemAuthorLocalService" class="com.idetronic.subur.service.impl.ItemAuthorLocalServiceImpl" />
 	<bean id="com.idetronic.subur.service.persistence.ItemAuthorPersistence" class="com.idetronic.subur.service.persistence.ItemAuthorPersistenceImpl" parent="basePersistence" />
 	<bean id="com.idetronic.subur.service.ItemFileEntryLocalService" class="com.idetronic.subur.service.impl.ItemFileEntryLocalServiceImpl" />

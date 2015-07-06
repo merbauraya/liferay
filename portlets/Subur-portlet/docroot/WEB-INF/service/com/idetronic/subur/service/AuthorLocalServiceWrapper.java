@@ -282,10 +282,107 @@ public class AuthorLocalServiceWrapper implements AuthorLocalService,
 
 	@Override
 	public long addAuthor(java.lang.String firstName,
-		java.lang.String lastName, java.lang.String remoteId, int idType)
+		java.lang.String lastName, java.lang.String title,
+		java.lang.String remoteId, int idType, long userId, long groupId,
+		java.lang.String[] expertiseNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _authorLocalService.addAuthor(firstName, lastName, title,
+			remoteId, idType, userId, groupId, expertiseNames);
+	}
+
+	@Override
+	public void setExpertises(long authorId,
+		java.util.List<com.idetronic.subur.model.Expertise> expertises)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _authorLocalService.addAuthor(firstName, lastName, remoteId,
-			idType);
+		_authorLocalService.setExpertises(authorId, expertises);
+	}
+
+	/**
+	* Update existing author, throw Exception if author not found or update fails
+	*
+	* @param authorId
+	* @param firstName
+	* @param lastName
+	* @param remoteId
+	* @param idType
+	* @param userId
+	* @param groupId
+	* @return
+	* @throws SystemException
+	* @throws PortalException
+	*/
+	@Override
+	public com.idetronic.subur.model.Author updateAuthor(long authorId,
+		java.lang.String title, java.lang.String firstName,
+		java.lang.String lastName, java.lang.String remoteId, int idType,
+		long userId, long groupId, java.lang.String[] expertiseNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _authorLocalService.updateAuthor(authorId, title, firstName,
+			lastName, remoteId, idType, userId, groupId, expertiseNames);
+	}
+
+	/**
+	* Find all item under a given author
+	*
+	* @param groupId
+	* @param authorId
+	* @param start
+	* @param end
+	* @param status Item status
+	* @param obc
+	* @return
+	* @throws SystemException
+	*/
+	@Override
+	public java.util.List<com.idetronic.subur.model.SuburItem> getItemByAuthorGroup(
+		long groupId, long authorId, int start, int end, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _authorLocalService.getItemByAuthorGroup(groupId, authorId,
+			start, end, status, obc);
+	}
+
+	/**
+	* Find and return all associated expertise for the author
+	*
+	* @param authorId to seearch for
+	* @return List of Expertise
+	* @throws SystemException
+	*/
+	@Override
+	public java.util.List<com.idetronic.subur.model.Expertise> getExpertises(
+		long authorId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _authorLocalService.getExpertises(authorId);
+	}
+
+	/**
+	* Update author latest posting
+	*
+	* @param suburItem
+	* @throws SystemException
+	*/
+	@Override
+	public void updateAuthorPosting(
+		com.idetronic.subur.model.SuburItem suburItem)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_authorLocalService.updateAuthorPosting(suburItem);
+	}
+
+	/**
+	* Increment item count and last posted date for an author
+	* Usually called during new item creation
+	*
+	* @param authorId
+	* @return new item count for the author
+	* @throws SystemException if author cannot be found or fail during update
+	*/
+	@Override
+	public int updateNewPosting(long authorId, java.util.Date newPostDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _authorLocalService.updateNewPosting(authorId, newPostDate);
 	}
 
 	/**
@@ -304,12 +401,76 @@ public class AuthorLocalServiceWrapper implements AuthorLocalService,
 		return _authorLocalService.getAuthors(authorIds);
 	}
 
+	/**
+	* Update all author with up to date item count
+	*
+	* @param companyId
+	* @param groupId
+	*/
+	@Override
+	public void updateAllItemCount(long companyId, long groupId) {
+		_authorLocalService.updateAllItemCount(companyId, groupId);
+	}
+
+	/**
+	* Decrement item count for the author
+	*/
+	@Override
+	public void decrementItemCount(long authorId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_authorLocalService.decrementItemCount(authorId);
+	}
+
+	@Override
+	public int getSearchCount(java.lang.String keyword, long companyId,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _authorLocalService.getSearchCount(keyword, companyId, groupId);
+	}
+
+	@Override
+	public int getSearchCount(java.lang.String keyword, long companyId,
+		long groupId, java.lang.String firstName, java.lang.String lastName,
+		boolean isAdvancedSearch, boolean isAndOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		return _authorLocalService.getSearchCount(keyword, companyId, groupId,
+			firstName, lastName, isAdvancedSearch, isAndOperator, start, end,
+			obc);
+	}
+
+	@Override
+	public java.util.List<com.idetronic.subur.model.SuburItem> getSuburItems(
+		long authorId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc) {
+		return _authorLocalService.getSuburItems(authorId, start, end, obc);
+	}
+
 	@Override
 	public java.util.List<com.idetronic.subur.model.Author> search(
-		java.lang.String keyword, int start, int end,
+		java.lang.String keyword, long companyId, long groupId,
+		java.lang.String firstName, java.lang.String lastName,
+		boolean isAdvancedSearch, boolean isAndOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _authorLocalService.search(keyword, start, end, obc);
+		return _authorLocalService.search(keyword, companyId, groupId,
+			firstName, lastName, isAdvancedSearch, isAndOperator, start, end,
+			obc);
+	}
+
+	@Override
+	public java.util.List<com.idetronic.subur.model.Author> search(
+		java.lang.String keyword, long companyId, long groupId, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _authorLocalService.search(keyword, companyId, groupId, start,
+			end, obc);
+	}
+
+	@Override
+	public java.util.List<com.idetronic.subur.model.Author> findByGroupCompany(
+		long companyId, long groupId, int start, int end) {
+		return _authorLocalService.findByGroupCompany(companyId, groupId,
+			start, end);
 	}
 
 	/**

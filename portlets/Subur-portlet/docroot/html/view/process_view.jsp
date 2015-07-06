@@ -1,10 +1,8 @@
-<c:if test="<%=filterByTagOrCategory%>">
-	<liferay-ui:categorization-filter
-			assetType="content"
-			portletURL="<%= portletURL %>"
-		/>
-</c:if>
 
+<subur:item-categorization-filter
+	assetType="item"
+	portletURL="<%= portletURL%>"
+/>
 
 <% 
 	int end = searchContainer.getEnd();
