@@ -35,7 +35,7 @@ public class ItemCategorizationFilterTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("subur:item-categorization-filter:portletURL", getPortletURL());
 		request.setAttribute("subur:item-categorization-filter:assetType", getAssetType());
-		logger.info(getAssetType());
+		
 	}
 	
 	@Override

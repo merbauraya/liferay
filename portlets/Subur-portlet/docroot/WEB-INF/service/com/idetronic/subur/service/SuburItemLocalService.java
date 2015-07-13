@@ -313,16 +313,36 @@ public interface SuburItemLocalService extends BaseLocalService,
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List getDetails(long itemId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List getFileEntry(long itemId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.idetronic.subur.model.SuburItem> getBySubjectId(
-		long subjectId, int start, int end);
-
 	public int countAssetVocabularyById(long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getEntriesCount(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Add download info for the Item
+	*/
+	public void addDownloadStats(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Add view stats info the Item and increment Asset Entry view counter
+	*
+	* @param itemId
+	* @throws PortalException
+	* @throws SystemException
+	*/
+	public void addViewStat(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

@@ -20,11 +20,11 @@
 			<div class="author-expertise">
 				<span class="title">Research Interest </span>
 				<c:if test="<%=expertises.size() > 0 %>">
-					<ul>
+					<ul class="taglib-categorization-filter">
 						<%	for (Expertise expertise : expertises) 
 							{	
 						%>
-								<li><%=expertise.getExpertiseName() %>
+								<li class="asset-entry"><%=expertise.getExpertiseName() %>
 						<%
 						
 							}

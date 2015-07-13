@@ -1,0 +1,17 @@
+<style type="text/css">
+	.aui .color-scheme-default #header-wrapper, .aui .color-scheme-dashboard #subbanner, .aui .color-scheme-dashboard #heading {
+		background-color: $theme_color_main;
+	}
+
+	.aui #banner .site-title .icon-stack-base, .aui #banner .site-title .site-name {
+		color: $theme_color_main;
+	}
+
+	.aui .portal-normal a, .aui .portal-normal h2, .aui #subbanner {
+		color: $theme_color_highlight;
+	}
+
+	.aui #navigation .nav .dropdown-menu {
+		background: $theme_color_highlight;
+	}
+</style>

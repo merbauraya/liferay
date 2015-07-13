@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.idetronic.subur.model.SuburItem;
 import com.idetronic.subur.service.ItemAuthorLocalService;
-import com.idetronic.subur.service.persistence.SuburItemQuery;
+import com.idetronic.subur.search.SuburItemQuery;
 import com.idetronic.subur.util.SuburConstant;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -16,6 +16,7 @@ import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.StringQueryFactoryUtil;
@@ -56,7 +57,115 @@ public class SuburSearchUtil {
 	private static String className = SuburItem.class.getName();
 	
 	
+	public Hits search(SuburItemQuery itemQuery)
+	{
+		getSearchParams(itemQuery);
+		
+		return null;
+	}
 	
+	private static String buildQuery(SuburItemQuery itemQuery)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("+(entryClassName:").append(className).append(") ");
+		
+		if (itemQuery.getAnyTagIds().length > 0) {
+			sb.append("+(assetTagIds:");
+			for (int i = 0; i < itemQuery.getAnyTagIds().length ; i++)
+			{
+				sb.append(itemQuery.getAnyTagIds()[i]);
+				if (i+1 < itemQuery.getAnyTagIds().length)
+					sb.append(" assetTagIds:");
+				
+			}
+			sb.append(") ");
+
+		}
+		if (itemQuery.getAnyCategoryIds().length > 0)
+		{
+			sb.append("+(assetCategoryIds:");
+			for (int i = 0; i < itemQuery.getAnyCategoryIds().length ; i++)
+			{
+				sb.append(itemQuery.getAnyCategoryIds()[i]);
+				if (i+1 < itemQuery.getAnyCategoryIds().length)
+					sb.append(" assetCategoryIds:");
+				
+			}
+			sb.append(") ");
+			
+			
+		}
+		
+		if (itemQuery.getAllCategoryIds().length > 0)
+		{
+			sb.append("+(assetCategoryIds:");
+			for (int i = 0; i < itemQuery.getAllCategoryIds().length ; i++)
+			{
+				sb.append(itemQuery.getAllCategoryIds()[i]);
+				if (i+1 < itemQuery.getAllCategoryIds().length)
+					sb.append(" +assetCategoryIds:");
+			}
+			sb.append(") ");
+			
+			
+		}
+		//all tags
+		if (itemQuery.getAllTagIds().length > 0) {
+			sb.append("+(assetTagIds:");
+			for (int i = 0; i < itemQuery.getAllTagIds().length ; i++)
+			{
+				sb.append(itemQuery.getAllTagIds()[i]);
+				if (i+1 < itemQuery.getAllTagIds().length)
+					sb.append(" +assetTagIds:");
+			}
+			sb.append(") ");
+
+		}
+		//any item types
+		
+		if (itemQuery.getAnyItemTypeIds().length>0)
+		{
+			sb.append("+(itemType:");
+			for (int i = 0; i < itemQuery.getAnyItemTypeIds().length; i++)
+			{
+				sb.append(itemQuery.getAnyItemTypeIds()[i]);
+				if (i+1 < itemQuery.getAnyItemTypeIds().length )
+					sb.append(" itemType:");
+			}
+			sb.append(") ");
+		}
+		//all item Type
+		if (itemQuery.getAllItemTypeIds().length > 0)
+		{
+			sb.append("+(itemType:");
+			for (int i = 0; i < itemQuery.getAllItemTypeIds().length; i++)
+			{
+				sb.append(itemQuery.getAllItemTypeIds()[i]);
+				if (i+1 < itemQuery.getAllItemTypeIds().length )
+					sb.append(" itemType:");
+			}
+			sb.append(") ");
+		}
+		//year published
+		if (itemQuery.getYearPublished() > 0)
+		{
+			sb.append("+(yearAdded:"+ itemQuery.getYearPublished() + ") ");
+		}
+		if (!itemQuery.getAuthorFirstName().isEmpty())
+		{
+			sb.append("+(authorFirstName:"+ StringUtil.toLowerCase(itemQuery.getAuthorFirstName()) + "*) ");
+		}
+		
+		return sb.toString();
+		//itemType = itemQuery.
+	}
+	
+	/**
+	 * Build lucene query syntax based on the request params
+	 * @param request
+	 * @param searchContext
+	 * @return
+	 */
 	public static Query buildSearchQuery(HttpServletRequest request, SearchContext searchContext)
 	{
 		getSearchParams(request);
@@ -88,6 +197,7 @@ public class SuburSearchUtil {
 		itemType = ParamUtil.getLong(request, SuburDisplayTerms.ITEM_TYPE);
 		String itemTypeString = ParamUtil.getString(request, SuburConstant.FIELD_ITEM_TYPE);
 		
+		logger.info("it="+itemType + "::"+itemTypeString);
 		if (!itemTypeString.equals("0"))
 			buildItemTypeIdParam(itemTypeString);
 		
@@ -138,7 +248,8 @@ public class SuburSearchUtil {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("+(entryClassName:").append(className).append(") ");
 		if (Validator.isNotNull(authorFirstName) || Validator.isNotNull(authorLastName)
-				|| Validator.isNotNull(title) || Validator.isNotNull(yearPublished))
+				|| Validator.isNotNull(title) || Validator.isNotNull(yearPublished)
+				|| allItemTypeIds.length > 0 || anyItemTypeIds.length > 0 )
 
 		{
 			stringBuilder.append("+(");
@@ -217,6 +328,7 @@ public class SuburSearchUtil {
 			
 		}else if (fieldName.equalsIgnoreCase(SuburDisplayTerms.ITEM_TYPE))
 		{
+			logger.info("ixx");
 			if (itemType > 0)
 				qry = qry.concat(String.valueOf(itemType)).concat(StringPool.SPACE);
 			else

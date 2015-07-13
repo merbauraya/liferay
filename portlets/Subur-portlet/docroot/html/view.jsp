@@ -44,13 +44,8 @@
 	String z = ParamUtil.getString(request, "tag");
 	String y = ParamUtil.getString(request,"itemTypeId");
 	String authorId =  ParamUtil.getString(request,"authorId");
-	out.print("it="+y +"::"+ authorId);
 	
-	Map<String,String[]> paramMaps = liferayPortletRequest.getParameterMap();
-	//paramMaps.toString();
-	
-	//out.print("pp="+liferayPortletRequest.getHttpServletRequest().getQueryString());
-	
+
 	PortletURL portletURL = renderResponse.createRenderURL();
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
 	
@@ -58,7 +53,8 @@
 		searchContainer.setDelta(delta);
 		searchContainer.setDeltaConfigurable(false);
 	}
-
+	
+	searchContainer.setEmptyResultsMessage("no-results-found");
 %>
 
 
@@ -171,6 +167,8 @@ if (Validator.isNotNull(assetTagName)) {
 			
 		}
 	}
+	
+	
 	long clId = ClassNameLocalServiceUtil.getClassNameId(SuburItem.class.getName());
 	long[] classNameIds = {clId}; 
 	assetEntryQuery.setClassNameIds(classNameIds);
@@ -180,7 +178,7 @@ if (Validator.isNotNull(assetTagName)) {
 	assetEntryQuery.setOrderByType2(orderByType2);
 %>
 <div class="">
-	<%@ include file="/html/view/process_view.jsp" %>
+	<%@ include file="/html/view/process_view_l.jsp" %>
 
 
 <c:if test='<%= !paginationType.equals("none") && (searchContainer.getTotal() > searchContainer.getResults().size()) %>'>

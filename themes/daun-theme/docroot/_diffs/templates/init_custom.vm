@@ -1,0 +1,40 @@
+#set ($site_subheading = $theme_settings.getProperty('site-subheading'))
+#set ($site_header_icon = $theme_settings.getProperty('site-header-icon'))
+#set ($theme_color_main = $theme_settings.getProperty('theme-color-main'))
+#set ($theme_color_highlight = $theme_settings.getProperty('theme-color-highlight'))
+
+#if ($getterUtil.getBoolean($theme_settings.getProperty('show_logo')))
+	#set($show_logo = true)
+#end
+
+#if ($getterUtil.getBoolean($theme_settings.getProperty('show_breadcrumb')))
+	#set($show_breadcrumb = true)
+#end
+
+
+#if ($getterUtil.getBoolean($theme_settings.getProperty('template-show-subheading')))
+	#set ($site_show_subheading = true)
+#end
+
+
+#if (!$getterUtil.getBoolean($theme_settings.getProperty('portlet-setup-show-borders-default')))
+	#set ($css_class = "${css_class} borderless-default")
+#end
+
+#set ($show_dockbar = $is_signed_in)
+
+#if ($getterUtil.getBoolean($theme_settings.getProperty('hide-dockbar')))
+	#set ($show_dockbar = $is_signed_in && $permissionChecker.isGroupAdmin($group_id))
+#end
+
+#set ($show_link_user_personal_menu = !$show_dockbar && $getterUtil.getBoolean($theme_settings.getProperty('show-link-user-personal-menu')))
+
+#set ($default_color_scheme = $theme_display.getColorScheme().getCssClass() == 'default' && !($is_signed_in && $getterUtil.getBoolean($theme_settings.getProperty('dashboard-view-for-logged-in-users'))))
+
+#if ($default_color_scheme)
+	#set ($css_class = "${css_class} color-scheme-default")
+#else
+	#set ($css_class = "${css_class} color-scheme-dashboard")
+#end
+
+#set ($show_search_field = $getterUtil.getBoolean($theme_settings.getProperty('show-search-field')))

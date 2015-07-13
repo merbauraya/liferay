@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.idetronic.subur.model.Author" />
 	<import class="com.idetronic.subur.model.AuthorExpertise" />
+	<import class="com.idetronic.subur.model.DownloadSummary" />
 	<import class="com.idetronic.subur.model.Expertise" />
 	<import class="com.idetronic.subur.model.ItemAuthor" />
 	<import class="com.idetronic.subur.model.ItemFileEntry" />
@@ -13,7 +14,16 @@
 	<import class="com.idetronic.subur.model.MetadataProperty" />
 	<import class="com.idetronic.subur.model.MetadataPropertyValue" />
 	<import class="com.idetronic.subur.model.MetadataSchema" />
+	<import class="com.idetronic.subur.model.StatDownloadCategory" />
+	<import class="com.idetronic.subur.model.StatDownloadItemType" />
+	<import class="com.idetronic.subur.model.StatDownloadPeriod" />
+	<import class="com.idetronic.subur.model.StatDownloadTag" />
+	<import class="com.idetronic.subur.model.StatViewCategory" />
+	<import class="com.idetronic.subur.model.StatViewItemType" />
+	<import class="com.idetronic.subur.model.StatViewPeriod" />
+	<import class="com.idetronic.subur.model.StatViewTag" />
 	<import class="com.idetronic.subur.model.SuburItem" />
+	<import class="com.idetronic.subur.model.ViewSummary" />
 	<class name="com.idetronic.subur.model.impl.AuthorImpl" table="subur_Author">
 		<cache usage="read-write" />
 		<id name="authorId" type="long">
@@ -38,6 +48,16 @@
 			<key-property name="authorId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 			<key-property name="expertiseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
+	</class>
+	<class name="com.idetronic.subur.model.impl.DownloadSummaryImpl" table="subur_DownloadSummary">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.idetronic.subur.model.impl.ExpertiseImpl" table="subur_Expertise">
 		<cache usage="read-write" />
@@ -119,6 +139,78 @@
 		<property name="metadataName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="nameSpace" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
+	<class name="com.idetronic.subur.model.impl.StatDownloadCategoryImpl" table="subur_StatDownloadCategory">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="categoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.StatDownloadItemTypeImpl" table="subur_StatDownloadItemType">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="itemTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.StatDownloadPeriodImpl" table="subur_StatDownloadPeriod">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.StatDownloadTagImpl" table="subur_StatDownloadTag">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="tagId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.StatViewCategoryImpl" table="subur_StatViewCategory">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="categoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.StatViewItemTypeImpl" table="subur_StatViewItemType">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="itemTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.StatViewPeriodImpl" table="subur_StatViewPeriod">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.StatViewTagImpl" table="subur_StatViewTag">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="tagId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
 	<class name="com.idetronic.subur.model.impl.SuburItemImpl" table="subur_item">
 		<cache usage="read-write" />
 		<id name="itemId" type="long">
@@ -135,5 +227,15 @@
 		<property name="itemAbstract" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="Uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.idetronic.subur.model.impl.ViewSummaryImpl" table="subur_ViewSummary">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="itemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="perMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="perYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 </hibernate-mapping>

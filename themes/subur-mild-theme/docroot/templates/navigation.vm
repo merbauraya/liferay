@@ -1,0 +1,125 @@
+<nav class="$nav_css_class navbar site-navigation" id="navigation" role="navigation">
+	<div class="navbar-inner">
+		<div class="nav-helpers">
+			<ol class="nav nav-pills">
+				<li class="nav-item-sitenavigationtoggle">
+					<a href="#"><i class="icon-reorder"></i> #language ("menu")</a>
+				</li>
+				#if ($show_dockbar)
+					<li class="nav-item-dockbartoggle">
+						<a href="#"><i class="icon-gear"></i></a>
+					</li>
+				#end
+			</ol>
+		</div>
+
+		<div class="collapse nav-collapse">
+			<ul aria-label="#language ("site-pages")" class="nav nav-collapse nav-pills" role="menubar">
+				#if ($show_search_field && $default_color_scheme)
+					<li id="sitesearch" class="nav-item-search site-search-collapsed">
+						#parse ("$full_templates_path/search.vm")
+					</li>
+				#end
+
+				#foreach ($nav_item in $nav_items)
+						#set ($nav_item_attr_selected="")
+						#set ($nav_item_attr_has_popup="")
+						#set ($nav_item_caret="")
+						#set ($nav_item_css_class="lfr-nav-item")
+						#set ($nav_item_link_css_class="")
+
+					#if ($nav_item.isSelected())
+						#set ($nav_item_attr_selected="aria-selected='true'")
+						#set ($nav_item_css_class="$nav_item_css_class selected active")
+					#end
+
+					#if ($nav_item.hasChildren())
+						#set ($nav_item_attr_has_popup="aria-haspopup='true'")
+						#set ($nav_item_caret='<b class="icon-caret-down"></b>')
+						#set ($nav_item_css_class="$nav_item_css_class dropdown")
+						#set ($nav_item_link_css_class="dropdown-toggle")
+					#end
+
+					<li class="$nav_item_css_class" id="layout_$nav_item.getLayoutId()" $nav_item_attr_selected role="presentation">
+						<a aria-labelledby="layout_$nav_item.getLayoutId()" $nav_item_attr_has_popup class="$nav_item_link_css_class" href="$nav_item.getURL()" $nav_item.getTarget() role="menuitem">
+							<span>$nav_item.icon() $nav_item.getName() $nav_item_caret</span>
+						</a>
+
+						#if ($nav_item.hasChildren())
+							<ul class="dropdown-menu child-menu" role="menu">
+								#foreach ($nav_child in $nav_item.getChildren())
+									#set ($nav_child_attr_selected="")
+									#set ($nav_child_css_class="lfr-nav-item")
+
+									#if ($nav_child.isSelected())
+										#set ($nav_child_attr_selected="aria-selected='true'")
+										#set ($nav_child_css_class="selected")
+									#end
+
+									<li class="$nav_child_css_class" id="layout_$nav_child.getLayoutId()" $nav_child_attr_selected role="presentation">
+										<a aria-labelledby="layout_$nav_child.getLayoutId()" href="$nav_child.getURL()" $nav_child.getTarget() role="menuitem">$nav_child.getName()</a>
+									</li>
+								#end
+							</ul>
+						#end
+					</li>
+				#end
+
+				#if ($show_link_user_personal_menu)
+					<li>
+						<a href="#" id="personal-menu">#language ("my-places")</a>
+						<ul class="dropdown-menu child-menu" role="menu">
+							$my_sites_portlet_url.setParameter("groupId", "$user.getGroupId()")
+							#if ($user.hasPublicLayouts())
+								$my_sites_portlet_url.setParameter("privateLayout", "false")
+
+								<li>
+									<a href="$htmlUtil.escape($my_sites_portlet_url.toString())">
+										<span class="site-name">#language ("my-profile")</span>
+									</a>
+								</li>
+							#end
+							#if ($user.hasPrivateLayouts())
+								$my_sites_portlet_url.setParameter("privateLayout", "true")
+
+								<li>
+									<a href="$htmlUtil.escape($my_sites_portlet_url.toString())">
+										<span class="site-name">#language ("my-dashboard")</span>
+									</a>
+								</li>
+							#end
+							<li>
+								<a href="$my_account_url" title="#language ("my-account")" id="navigation-my-account-url">
+									<span class="site-name">#language ("my-account")</span>
+								</a>
+								<script>
+									Liferay.delegateClick('navigation-my-account-url', Liferay.Util.openInDialog);
+								</script>
+							</li>
+						</ul>
+					</li>
+				#end
+
+				#if (!$is_signed_in)
+					<li>
+						<a data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
+					</li>
+				#else
+					<li>
+						<a href="$themeDisplay.getURLSignOut()" id="sign-out">#language ("sign-out")</a>
+					</li>
+				#end
+
+				#if ($show_dockbar)
+					<li class="nav-item-dockbartoggle">
+						<a href="#"><i class="icon-gear"></i></a>
+					</li>
+				#end
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<script>
+	Liferay.Data.NAV_LIST_SELECTOR = '.navbar-inner .nav-collapse > ul';
+</script>

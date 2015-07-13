@@ -39,6 +39,20 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.DownloadSummaryModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="itemId" />
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<basic name="status" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.subur.model.impl.ExpertiseModelImpl">
 		<attributes>
 			<id name="expertiseId" />
@@ -146,6 +160,110 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.StatDownloadCategoryModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<basic name="categoryId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.StatDownloadItemTypeModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<basic name="itemTypeId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.StatDownloadPeriodModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="itemId" />
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.StatDownloadTagModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<basic name="tagId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.StatViewCategoryModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<basic name="categoryId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.StatViewItemTypeModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<basic name="itemTypeId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.StatViewPeriodModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="itemId" />
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.StatViewTagModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<basic name="tagId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.subur.model.impl.SuburItemModelImpl">
 		<attributes>
 			<id name="itemId" />
@@ -172,12 +290,30 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.ViewSummaryModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="itemId" />
+			<basic name="perMonth" />
+			<basic name="perYear" />
+			<basic name="status" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.idetronic.subur.model.impl.AuthorImpl" name="Author">
 		<table name="subur_Author" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.AuthorExpertiseImpl" name="AuthorExpertise">
 		<table name="subur_AuthorExpertise" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.DownloadSummaryImpl" name="DownloadSummary">
+		<table name="subur_DownloadSummary" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ExpertiseImpl" name="Expertise">
@@ -216,8 +352,44 @@
 		<table name="subur_MetadataSchema" />
 		<attributes />
 	</entity>
+	<entity class="com.idetronic.subur.model.impl.StatDownloadCategoryImpl" name="StatDownloadCategory">
+		<table name="subur_StatDownloadCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.StatDownloadItemTypeImpl" name="StatDownloadItemType">
+		<table name="subur_StatDownloadItemType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.StatDownloadPeriodImpl" name="StatDownloadPeriod">
+		<table name="subur_StatDownloadPeriod" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.StatDownloadTagImpl" name="StatDownloadTag">
+		<table name="subur_StatDownloadTag" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.StatViewCategoryImpl" name="StatViewCategory">
+		<table name="subur_StatViewCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.StatViewItemTypeImpl" name="StatViewItemType">
+		<table name="subur_StatViewItemType" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.StatViewPeriodImpl" name="StatViewPeriod">
+		<table name="subur_StatViewPeriod" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.StatViewTagImpl" name="StatViewTag">
+		<table name="subur_StatViewTag" />
+		<attributes />
+	</entity>
 	<entity class="com.idetronic.subur.model.impl.SuburItemImpl" name="SuburItem">
 		<table name="subur_item" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.ViewSummaryImpl" name="ViewSummary">
+		<table name="subur_ViewSummary" />
 		<attributes />
 	</entity>
 </entity-mappings>

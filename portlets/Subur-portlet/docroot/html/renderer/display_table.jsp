@@ -30,7 +30,7 @@
 			<liferay-ui:message key="published-date" />
 		</th>
 		<th class="table-header">
-			<liferay-ui:message key="view-count" />
+			<liferay-ui:message key="views" />
 		</th>
 		
 	</tr>

@@ -19,6 +19,7 @@ import com.idetronic.subur.service.ItemTypeLocalService;
 import com.idetronic.subur.service.persistence.AuthorExpertisePersistence;
 import com.idetronic.subur.service.persistence.AuthorFinder;
 import com.idetronic.subur.service.persistence.AuthorPersistence;
+import com.idetronic.subur.service.persistence.DownloadSummaryPersistence;
 import com.idetronic.subur.service.persistence.ExpertiseFinder;
 import com.idetronic.subur.service.persistence.ExpertisePersistence;
 import com.idetronic.subur.service.persistence.ItemAuthorPersistence;
@@ -31,8 +32,17 @@ import com.idetronic.subur.service.persistence.MetadataPropertyPersistence;
 import com.idetronic.subur.service.persistence.MetadataPropertyValueFinder;
 import com.idetronic.subur.service.persistence.MetadataPropertyValuePersistence;
 import com.idetronic.subur.service.persistence.MetadataSchemaPersistence;
+import com.idetronic.subur.service.persistence.StatDownloadCategoryPersistence;
+import com.idetronic.subur.service.persistence.StatDownloadItemTypePersistence;
+import com.idetronic.subur.service.persistence.StatDownloadPeriodPersistence;
+import com.idetronic.subur.service.persistence.StatDownloadTagPersistence;
+import com.idetronic.subur.service.persistence.StatViewCategoryPersistence;
+import com.idetronic.subur.service.persistence.StatViewItemTypePersistence;
+import com.idetronic.subur.service.persistence.StatViewPeriodPersistence;
+import com.idetronic.subur.service.persistence.StatViewTagPersistence;
 import com.idetronic.subur.service.persistence.SuburItemFinder;
 import com.idetronic.subur.service.persistence.SuburItemPersistence;
+import com.idetronic.subur.service.persistence.ViewSummaryPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -381,6 +391,44 @@ public abstract class ItemTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setAuthorExpertisePersistence(
 		AuthorExpertisePersistence authorExpertisePersistence) {
 		this.authorExpertisePersistence = authorExpertisePersistence;
+	}
+
+	/**
+	 * Returns the download summary local service.
+	 *
+	 * @return the download summary local service
+	 */
+	public com.idetronic.subur.service.DownloadSummaryLocalService getDownloadSummaryLocalService() {
+		return downloadSummaryLocalService;
+	}
+
+	/**
+	 * Sets the download summary local service.
+	 *
+	 * @param downloadSummaryLocalService the download summary local service
+	 */
+	public void setDownloadSummaryLocalService(
+		com.idetronic.subur.service.DownloadSummaryLocalService downloadSummaryLocalService) {
+		this.downloadSummaryLocalService = downloadSummaryLocalService;
+	}
+
+	/**
+	 * Returns the download summary persistence.
+	 *
+	 * @return the download summary persistence
+	 */
+	public DownloadSummaryPersistence getDownloadSummaryPersistence() {
+		return downloadSummaryPersistence;
+	}
+
+	/**
+	 * Sets the download summary persistence.
+	 *
+	 * @param downloadSummaryPersistence the download summary persistence
+	 */
+	public void setDownloadSummaryPersistence(
+		DownloadSummaryPersistence downloadSummaryPersistence) {
+		this.downloadSummaryPersistence = downloadSummaryPersistence;
 	}
 
 	/**
@@ -818,6 +866,329 @@ public abstract class ItemTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the stat download category local service.
+	 *
+	 * @return the stat download category local service
+	 */
+	public com.idetronic.subur.service.StatDownloadCategoryLocalService getStatDownloadCategoryLocalService() {
+		return statDownloadCategoryLocalService;
+	}
+
+	/**
+	 * Sets the stat download category local service.
+	 *
+	 * @param statDownloadCategoryLocalService the stat download category local service
+	 */
+	public void setStatDownloadCategoryLocalService(
+		com.idetronic.subur.service.StatDownloadCategoryLocalService statDownloadCategoryLocalService) {
+		this.statDownloadCategoryLocalService = statDownloadCategoryLocalService;
+	}
+
+	/**
+	 * Returns the stat download category persistence.
+	 *
+	 * @return the stat download category persistence
+	 */
+	public StatDownloadCategoryPersistence getStatDownloadCategoryPersistence() {
+		return statDownloadCategoryPersistence;
+	}
+
+	/**
+	 * Sets the stat download category persistence.
+	 *
+	 * @param statDownloadCategoryPersistence the stat download category persistence
+	 */
+	public void setStatDownloadCategoryPersistence(
+		StatDownloadCategoryPersistence statDownloadCategoryPersistence) {
+		this.statDownloadCategoryPersistence = statDownloadCategoryPersistence;
+	}
+
+	/**
+	 * Returns the stat download item type local service.
+	 *
+	 * @return the stat download item type local service
+	 */
+	public com.idetronic.subur.service.StatDownloadItemTypeLocalService getStatDownloadItemTypeLocalService() {
+		return statDownloadItemTypeLocalService;
+	}
+
+	/**
+	 * Sets the stat download item type local service.
+	 *
+	 * @param statDownloadItemTypeLocalService the stat download item type local service
+	 */
+	public void setStatDownloadItemTypeLocalService(
+		com.idetronic.subur.service.StatDownloadItemTypeLocalService statDownloadItemTypeLocalService) {
+		this.statDownloadItemTypeLocalService = statDownloadItemTypeLocalService;
+	}
+
+	/**
+	 * Returns the stat download item type persistence.
+	 *
+	 * @return the stat download item type persistence
+	 */
+	public StatDownloadItemTypePersistence getStatDownloadItemTypePersistence() {
+		return statDownloadItemTypePersistence;
+	}
+
+	/**
+	 * Sets the stat download item type persistence.
+	 *
+	 * @param statDownloadItemTypePersistence the stat download item type persistence
+	 */
+	public void setStatDownloadItemTypePersistence(
+		StatDownloadItemTypePersistence statDownloadItemTypePersistence) {
+		this.statDownloadItemTypePersistence = statDownloadItemTypePersistence;
+	}
+
+	/**
+	 * Returns the stat download period local service.
+	 *
+	 * @return the stat download period local service
+	 */
+	public com.idetronic.subur.service.StatDownloadPeriodLocalService getStatDownloadPeriodLocalService() {
+		return statDownloadPeriodLocalService;
+	}
+
+	/**
+	 * Sets the stat download period local service.
+	 *
+	 * @param statDownloadPeriodLocalService the stat download period local service
+	 */
+	public void setStatDownloadPeriodLocalService(
+		com.idetronic.subur.service.StatDownloadPeriodLocalService statDownloadPeriodLocalService) {
+		this.statDownloadPeriodLocalService = statDownloadPeriodLocalService;
+	}
+
+	/**
+	 * Returns the stat download period persistence.
+	 *
+	 * @return the stat download period persistence
+	 */
+	public StatDownloadPeriodPersistence getStatDownloadPeriodPersistence() {
+		return statDownloadPeriodPersistence;
+	}
+
+	/**
+	 * Sets the stat download period persistence.
+	 *
+	 * @param statDownloadPeriodPersistence the stat download period persistence
+	 */
+	public void setStatDownloadPeriodPersistence(
+		StatDownloadPeriodPersistence statDownloadPeriodPersistence) {
+		this.statDownloadPeriodPersistence = statDownloadPeriodPersistence;
+	}
+
+	/**
+	 * Returns the stat download tag local service.
+	 *
+	 * @return the stat download tag local service
+	 */
+	public com.idetronic.subur.service.StatDownloadTagLocalService getStatDownloadTagLocalService() {
+		return statDownloadTagLocalService;
+	}
+
+	/**
+	 * Sets the stat download tag local service.
+	 *
+	 * @param statDownloadTagLocalService the stat download tag local service
+	 */
+	public void setStatDownloadTagLocalService(
+		com.idetronic.subur.service.StatDownloadTagLocalService statDownloadTagLocalService) {
+		this.statDownloadTagLocalService = statDownloadTagLocalService;
+	}
+
+	/**
+	 * Returns the stat download tag persistence.
+	 *
+	 * @return the stat download tag persistence
+	 */
+	public StatDownloadTagPersistence getStatDownloadTagPersistence() {
+		return statDownloadTagPersistence;
+	}
+
+	/**
+	 * Sets the stat download tag persistence.
+	 *
+	 * @param statDownloadTagPersistence the stat download tag persistence
+	 */
+	public void setStatDownloadTagPersistence(
+		StatDownloadTagPersistence statDownloadTagPersistence) {
+		this.statDownloadTagPersistence = statDownloadTagPersistence;
+	}
+
+	/**
+	 * Returns the stat view category local service.
+	 *
+	 * @return the stat view category local service
+	 */
+	public com.idetronic.subur.service.StatViewCategoryLocalService getStatViewCategoryLocalService() {
+		return statViewCategoryLocalService;
+	}
+
+	/**
+	 * Sets the stat view category local service.
+	 *
+	 * @param statViewCategoryLocalService the stat view category local service
+	 */
+	public void setStatViewCategoryLocalService(
+		com.idetronic.subur.service.StatViewCategoryLocalService statViewCategoryLocalService) {
+		this.statViewCategoryLocalService = statViewCategoryLocalService;
+	}
+
+	/**
+	 * Returns the stat view category persistence.
+	 *
+	 * @return the stat view category persistence
+	 */
+	public StatViewCategoryPersistence getStatViewCategoryPersistence() {
+		return statViewCategoryPersistence;
+	}
+
+	/**
+	 * Sets the stat view category persistence.
+	 *
+	 * @param statViewCategoryPersistence the stat view category persistence
+	 */
+	public void setStatViewCategoryPersistence(
+		StatViewCategoryPersistence statViewCategoryPersistence) {
+		this.statViewCategoryPersistence = statViewCategoryPersistence;
+	}
+
+	/**
+	 * Returns the stat view item type local service.
+	 *
+	 * @return the stat view item type local service
+	 */
+	public com.idetronic.subur.service.StatViewItemTypeLocalService getStatViewItemTypeLocalService() {
+		return statViewItemTypeLocalService;
+	}
+
+	/**
+	 * Sets the stat view item type local service.
+	 *
+	 * @param statViewItemTypeLocalService the stat view item type local service
+	 */
+	public void setStatViewItemTypeLocalService(
+		com.idetronic.subur.service.StatViewItemTypeLocalService statViewItemTypeLocalService) {
+		this.statViewItemTypeLocalService = statViewItemTypeLocalService;
+	}
+
+	/**
+	 * Returns the stat view item type persistence.
+	 *
+	 * @return the stat view item type persistence
+	 */
+	public StatViewItemTypePersistence getStatViewItemTypePersistence() {
+		return statViewItemTypePersistence;
+	}
+
+	/**
+	 * Sets the stat view item type persistence.
+	 *
+	 * @param statViewItemTypePersistence the stat view item type persistence
+	 */
+	public void setStatViewItemTypePersistence(
+		StatViewItemTypePersistence statViewItemTypePersistence) {
+		this.statViewItemTypePersistence = statViewItemTypePersistence;
+	}
+
+	/**
+	 * Returns the stat view period local service.
+	 *
+	 * @return the stat view period local service
+	 */
+	public com.idetronic.subur.service.StatViewPeriodLocalService getStatViewPeriodLocalService() {
+		return statViewPeriodLocalService;
+	}
+
+	/**
+	 * Sets the stat view period local service.
+	 *
+	 * @param statViewPeriodLocalService the stat view period local service
+	 */
+	public void setStatViewPeriodLocalService(
+		com.idetronic.subur.service.StatViewPeriodLocalService statViewPeriodLocalService) {
+		this.statViewPeriodLocalService = statViewPeriodLocalService;
+	}
+
+	/**
+	 * Returns the stat view period remote service.
+	 *
+	 * @return the stat view period remote service
+	 */
+	public com.idetronic.subur.service.StatViewPeriodService getStatViewPeriodService() {
+		return statViewPeriodService;
+	}
+
+	/**
+	 * Sets the stat view period remote service.
+	 *
+	 * @param statViewPeriodService the stat view period remote service
+	 */
+	public void setStatViewPeriodService(
+		com.idetronic.subur.service.StatViewPeriodService statViewPeriodService) {
+		this.statViewPeriodService = statViewPeriodService;
+	}
+
+	/**
+	 * Returns the stat view period persistence.
+	 *
+	 * @return the stat view period persistence
+	 */
+	public StatViewPeriodPersistence getStatViewPeriodPersistence() {
+		return statViewPeriodPersistence;
+	}
+
+	/**
+	 * Sets the stat view period persistence.
+	 *
+	 * @param statViewPeriodPersistence the stat view period persistence
+	 */
+	public void setStatViewPeriodPersistence(
+		StatViewPeriodPersistence statViewPeriodPersistence) {
+		this.statViewPeriodPersistence = statViewPeriodPersistence;
+	}
+
+	/**
+	 * Returns the stat view tag local service.
+	 *
+	 * @return the stat view tag local service
+	 */
+	public com.idetronic.subur.service.StatViewTagLocalService getStatViewTagLocalService() {
+		return statViewTagLocalService;
+	}
+
+	/**
+	 * Sets the stat view tag local service.
+	 *
+	 * @param statViewTagLocalService the stat view tag local service
+	 */
+	public void setStatViewTagLocalService(
+		com.idetronic.subur.service.StatViewTagLocalService statViewTagLocalService) {
+		this.statViewTagLocalService = statViewTagLocalService;
+	}
+
+	/**
+	 * Returns the stat view tag persistence.
+	 *
+	 * @return the stat view tag persistence
+	 */
+	public StatViewTagPersistence getStatViewTagPersistence() {
+		return statViewTagPersistence;
+	}
+
+	/**
+	 * Sets the stat view tag persistence.
+	 *
+	 * @param statViewTagPersistence the stat view tag persistence
+	 */
+	public void setStatViewTagPersistence(
+		StatViewTagPersistence statViewTagPersistence) {
+		this.statViewTagPersistence = statViewTagPersistence;
+	}
+
+	/**
 	 * Returns the subur item local service.
 	 *
 	 * @return the subur item local service
@@ -871,6 +1242,44 @@ public abstract class ItemTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 */
 	public void setSuburItemFinder(SuburItemFinder suburItemFinder) {
 		this.suburItemFinder = suburItemFinder;
+	}
+
+	/**
+	 * Returns the view summary local service.
+	 *
+	 * @return the view summary local service
+	 */
+	public com.idetronic.subur.service.ViewSummaryLocalService getViewSummaryLocalService() {
+		return viewSummaryLocalService;
+	}
+
+	/**
+	 * Sets the view summary local service.
+	 *
+	 * @param viewSummaryLocalService the view summary local service
+	 */
+	public void setViewSummaryLocalService(
+		com.idetronic.subur.service.ViewSummaryLocalService viewSummaryLocalService) {
+		this.viewSummaryLocalService = viewSummaryLocalService;
+	}
+
+	/**
+	 * Returns the view summary persistence.
+	 *
+	 * @return the view summary persistence
+	 */
+	public ViewSummaryPersistence getViewSummaryPersistence() {
+		return viewSummaryPersistence;
+	}
+
+	/**
+	 * Sets the view summary persistence.
+	 *
+	 * @param viewSummaryPersistence the view summary persistence
+	 */
+	public void setViewSummaryPersistence(
+		ViewSummaryPersistence viewSummaryPersistence) {
+		this.viewSummaryPersistence = viewSummaryPersistence;
 	}
 
 	/**
@@ -1059,6 +1468,10 @@ public abstract class ItemTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.idetronic.subur.service.AuthorExpertiseLocalService authorExpertiseLocalService;
 	@BeanReference(type = AuthorExpertisePersistence.class)
 	protected AuthorExpertisePersistence authorExpertisePersistence;
+	@BeanReference(type = com.idetronic.subur.service.DownloadSummaryLocalService.class)
+	protected com.idetronic.subur.service.DownloadSummaryLocalService downloadSummaryLocalService;
+	@BeanReference(type = DownloadSummaryPersistence.class)
+	protected DownloadSummaryPersistence downloadSummaryPersistence;
 	@BeanReference(type = com.idetronic.subur.service.ExpertiseLocalService.class)
 	protected com.idetronic.subur.service.ExpertiseLocalService expertiseLocalService;
 	@BeanReference(type = com.idetronic.subur.service.ExpertiseService.class)
@@ -1105,12 +1518,50 @@ public abstract class ItemTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.idetronic.subur.service.MetadataSchemaLocalService metadataSchemaLocalService;
 	@BeanReference(type = MetadataSchemaPersistence.class)
 	protected MetadataSchemaPersistence metadataSchemaPersistence;
+	@BeanReference(type = com.idetronic.subur.service.StatDownloadCategoryLocalService.class)
+	protected com.idetronic.subur.service.StatDownloadCategoryLocalService statDownloadCategoryLocalService;
+	@BeanReference(type = StatDownloadCategoryPersistence.class)
+	protected StatDownloadCategoryPersistence statDownloadCategoryPersistence;
+	@BeanReference(type = com.idetronic.subur.service.StatDownloadItemTypeLocalService.class)
+	protected com.idetronic.subur.service.StatDownloadItemTypeLocalService statDownloadItemTypeLocalService;
+	@BeanReference(type = StatDownloadItemTypePersistence.class)
+	protected StatDownloadItemTypePersistence statDownloadItemTypePersistence;
+	@BeanReference(type = com.idetronic.subur.service.StatDownloadPeriodLocalService.class)
+	protected com.idetronic.subur.service.StatDownloadPeriodLocalService statDownloadPeriodLocalService;
+	@BeanReference(type = StatDownloadPeriodPersistence.class)
+	protected StatDownloadPeriodPersistence statDownloadPeriodPersistence;
+	@BeanReference(type = com.idetronic.subur.service.StatDownloadTagLocalService.class)
+	protected com.idetronic.subur.service.StatDownloadTagLocalService statDownloadTagLocalService;
+	@BeanReference(type = StatDownloadTagPersistence.class)
+	protected StatDownloadTagPersistence statDownloadTagPersistence;
+	@BeanReference(type = com.idetronic.subur.service.StatViewCategoryLocalService.class)
+	protected com.idetronic.subur.service.StatViewCategoryLocalService statViewCategoryLocalService;
+	@BeanReference(type = StatViewCategoryPersistence.class)
+	protected StatViewCategoryPersistence statViewCategoryPersistence;
+	@BeanReference(type = com.idetronic.subur.service.StatViewItemTypeLocalService.class)
+	protected com.idetronic.subur.service.StatViewItemTypeLocalService statViewItemTypeLocalService;
+	@BeanReference(type = StatViewItemTypePersistence.class)
+	protected StatViewItemTypePersistence statViewItemTypePersistence;
+	@BeanReference(type = com.idetronic.subur.service.StatViewPeriodLocalService.class)
+	protected com.idetronic.subur.service.StatViewPeriodLocalService statViewPeriodLocalService;
+	@BeanReference(type = com.idetronic.subur.service.StatViewPeriodService.class)
+	protected com.idetronic.subur.service.StatViewPeriodService statViewPeriodService;
+	@BeanReference(type = StatViewPeriodPersistence.class)
+	protected StatViewPeriodPersistence statViewPeriodPersistence;
+	@BeanReference(type = com.idetronic.subur.service.StatViewTagLocalService.class)
+	protected com.idetronic.subur.service.StatViewTagLocalService statViewTagLocalService;
+	@BeanReference(type = StatViewTagPersistence.class)
+	protected StatViewTagPersistence statViewTagPersistence;
 	@BeanReference(type = com.idetronic.subur.service.SuburItemLocalService.class)
 	protected com.idetronic.subur.service.SuburItemLocalService suburItemLocalService;
 	@BeanReference(type = SuburItemPersistence.class)
 	protected SuburItemPersistence suburItemPersistence;
 	@BeanReference(type = SuburItemFinder.class)
 	protected SuburItemFinder suburItemFinder;
+	@BeanReference(type = com.idetronic.subur.service.ViewSummaryLocalService.class)
+	protected com.idetronic.subur.service.ViewSummaryLocalService viewSummaryLocalService;
+	@BeanReference(type = ViewSummaryPersistence.class)
+	protected ViewSummaryPersistence viewSummaryPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

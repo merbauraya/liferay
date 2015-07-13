@@ -11,5 +11,6 @@
 	<category name="Subur">
 		<portlet id="item-type"></portlet>
 		<portlet id="1"></portlet>
+		<portlet id="subur-statistic"></portlet>
 	</category>
 </display>

@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <custom-sql>
 	
-	<sql id="com.idetronic.subur.service.persistence.MetadataPropertyValueFinderImpl.getAdditionalMetadata">
-		SELECT 
-		  subur_metadataproperty.metadatapropertyid, 
-		  subur_metadatapropertyvalue.itemid, 
-		  subur_metadataproperty.scope, 
-		  subur_metadataproperty.element,
-		  subur_metadatapropertyvalue.textvalue
-		  
-		FROM 
-		  public.subur_metadataproperty
-		left outer join subur_metadatapropertyvalue on
-			subur_metadataproperty.metadatapropertyid = subur_metadatapropertyvalue.propertyid
-			and itemid = ?
-		where scope is not null
-		and scope !='author'
-		order by metadatapropertyid
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinder.findByAndCategoryIds">
+	
+			EXISTS
+				(
+					SELECT
+						1
+					FROM
+						AssetEntries_AssetCategories
+					WHERE
+						(AssetEntries_AssetCategories.entryId = AssetEntry.entryId) AND
+						(AssetEntries_AssetCategories.categoryId IN ([$CATEGORY_ID$]))
+				)
+		
+	
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinder.findByAndTagIds">
+		
+			SELECT
+				DISTINCT AssetEntries_AssetTags.entryId
+			FROM
+				AssetEntries_AssetTags
+			WHERE
+				([$TAG_ID$])
+		
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.SuburItemFinder.findByAndItemTypeIds">
+		
+			EXISTS
+				(
+					SELECT
+						1
+					FROM
+						Subur_ItemItemType
+					WHERE
+						(Subur_ItemItemType.itemId = AssetEntry.classPK) AND
+						(Subur_ItemItemType.itemTypeId IN ([$ITEMTYPE_ID$]))
+				)
+		
 	
 	</sql>
 	<sql id="com.idetronic.subur.service.persistence.ItemItemTypeFinderImpl.getItemType">
@@ -165,4 +189,5 @@
 	</sql>
 	
 	<!--  end expertise finder -->
+	
 </custom-sql>

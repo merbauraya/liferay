@@ -37,13 +37,16 @@ String categoryId = ParamUtil.getString(request, "categoryId", StringPool.BLANK)
 if (categoryId.equals("0")) {
   categoryId = StringPool.BLANK;
 }
+String treeBoxId =renderResponse.getNamespace() + "taglibMultiAssetCategoriesNavigationPanel";
 
+	
 String[] categoryIds = StringUtil.split(categoryId);
 
 %>
 
 <%
 long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayTemplateDDMTemplateId(displayStyleGroupId, displayStyle);
+
 %>
 
 <c:choose>
@@ -69,6 +72,7 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 		<%= PortletDisplayTemplateUtil.renderDDMTemplate(pageContext, portletDisplayDDMTemplateId, ddmTemplateAssetVocabularies) %>
 	</c:when>
 	<c:otherwise>
+		
 		<liferay-ui:panel-container cssClass="taglib-asset-categories-navigation" extended="<%= true %>"
 			 id='<%= renderResponse.getNamespace() + "taglibMultiAssetCategoriesNavigationPanel" %>' 
 			 persistState="<%= true %>">
@@ -87,10 +91,12 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 			%>
 					<c:choose>
 						<c:when test="<%= singleVocab %>">
-							<%= vocabularyNavigation %>
+							<div id="<%=treeBoxId %>">
+								<%= vocabularyNavigation %>
+							</div>
 						</c:when>
 						<c:otherwise>
-							<liferay-ui:panel collapsible="<%= false %>" extended="<%= true %>" persistState="<%= true %>" 
+							<liferay-ui:panel defaultState="close" collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" 
 								title="<%= vocabulary.getTitle(locale) %>">
 								<%= vocabularyNavigation %>
 							</liferay-ui:panel>
@@ -123,8 +129,9 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 		%>
 		
 		<aui:script use="aui-tree-view">
+			
 			var treeViews = A.all('#<%= renderResponse.getNamespace() %>taglibMultiAssetCategoriesNavigationPanel .lfr-asset-category-list-container');
-		
+			
 			treeViews.each(
 				function(item, index, collection) {
 					var assetCategoryList = item.one('.lfr-asset-category-list');
@@ -227,7 +234,8 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 		
 		private String _buildVocabularyNavigation(RenderResponse renderResponse, AssetVocabulary vocabulary,
 		    String[] categoryIds, ThemeDisplay themeDisplay, boolean selectRootCategory) throws Exception {
-		
+		   
+			
 			List<AssetCategory> categories = AssetCategoryServiceUtil.getVocabularyRootCategories(
 			    vocabulary.getGroupId(), vocabulary.getVocabularyId(),
 			    QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -243,7 +251,7 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 			_buildCategoriesNavigation(renderResponse, categories, categoryIds, themeDisplay, selectRootCategory, sb);
 		
 			sb.append("</ul></div>");
-		
+			
 			return sb.toString();
 		}
 		%>

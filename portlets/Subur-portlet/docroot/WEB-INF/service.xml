@@ -30,7 +30,6 @@
 		
 		
 		
-		
 
 		<!-- Order -->
 
@@ -172,6 +171,133 @@
 		</finder>
 		<finder name="Expertise" return-type="Collection">
 			<finder-column name="expertiseId"></finder-column>
+		</finder>
+    </entity>
+    <entity name="DownloadSummary" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+    	<column name="itemId" type="long"></column>
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	
+ 		<column name="status" type="int"></column>
+ 		<finder name="Status" return-type="Collection">
+			<finder-column name="status"></finder-column>
+		</finder>
+		<finder name="ItemId" return-type="Collection">
+			<finder-column name="itemId"></finder-column>
+		</finder>
+		
+ 		<finder name="Period" return-type="Collection">
+			<finder-column name="perMonth"></finder-column>
+			<finder-column name="perYear"></finder-column>
+		</finder>
+		<finder name="Year" return-type="Collection">
+			
+			<finder-column name="perYear"></finder-column>
+		</finder>
+ 		
+    </entity>
+     <entity name="StatDownloadPeriod" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+    	<column name="itemId" type="long"></column>
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	<finder name="Period" return-type="Collection">
+			<finder-column name="perMonth"></finder-column>
+			<finder-column name="perYear"></finder-column>
+		</finder>
+ 		
+    </entity>
+    <entity name="StatDownloadItemType" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+ 
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	<column name="itemTypeId" type="long"></column>
+    	<finder name="ItemType" return-type="Collection">
+			<finder-column name="itemTypeId"></finder-column>
+		</finder>
+ 		
+    </entity>
+    <entity name="StatDownloadCategory" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+ 
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	<column name="categoryId" type="long"></column>
+    	<finder name="Category" return-type="Collection">
+			<finder-column name="categoryId"></finder-column>
+		</finder>
+ 		
+    </entity>
+     <entity name="StatDownloadTag" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+    
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	<column name="tagId" type="long"></column>
+    	<finder name="Tag" return-type="Collection">
+			<finder-column name="tagId"></finder-column>
+		</finder>
+ 		
+    </entity>
+    <entity name="ViewSummary" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+    	<column name="itemId" type="long"></column>
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+ 
+ 		<column name="status" type="int"></column>
+ 		<finder name="Status" return-type="Collection">
+			<finder-column name="status"></finder-column>
+		</finder>
+		
+ 		<finder name="Period" return-type="Collection">
+			<finder-column name="perMonth"></finder-column>
+			<finder-column name="perYear"></finder-column>
+		</finder>
+		<finder name="Year" return-type="Collection">
+			
+			<finder-column name="perYear"></finder-column>
+		</finder>
+    </entity>
+    <entity name="StatViewPeriod" local-service="true" remote-service="true">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+    	<column name="itemId" type="long"></column>
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	<finder name="ItemId" return-type="Collection">
+			<finder-column name="itemId"></finder-column>
+		</finder>
+ 		
+    </entity>
+     <entity name="StatViewItemType" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	<column name="itemTypeId" type="long"></column>
+    	<finder name="ItemType" return-type="Collection">
+			<finder-column name="itemTypeId"></finder-column>
+		</finder>
+ 		
+    </entity>
+    <entity name="StatViewCategory" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	<column name="categoryId" type="long"></column>
+    	<finder name="Category" return-type="Collection">
+			<finder-column name="categoryId"></finder-column>
+		</finder>
+ 		
+    </entity>
+     <entity name="StatViewTag" local-service="true" remote-service="false">
+    	<column name="id" type="long" primary="true" id-type="increment"></column>
+    	<column name="perMonth" type="int"></column>
+    	<column name="perYear" type="int"></column>
+    	<column name="tagId" type="long"></column>
+ 		<finder name="Tag" return-type="Collection">
+			<finder-column name="tagId"></finder-column>
 		</finder>
     </entity>
 </service-builder>

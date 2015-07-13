@@ -19,8 +19,7 @@
 	
 	
 	//view counter
-	AssetEntry incrementAssetEntry = null;
-	incrementAssetEntry = AssetEntryServiceUtil.incrementViewCounter(assetEntry.getClassName(), assetEntry.getClassPK());
+	SuburItemLocalServiceUtil.addViewStat(suburItem.getItemId());
 	
 	
 %>
@@ -163,6 +162,7 @@
 		<%
 			PortletURL serveFileURL = renderResponse.createActionURL();
 			serveFileURL.setParameter("id", "serveFile");
+			serveFileURL.setParameter("itemId", String.valueOf(suburItem.getItemId()));
 			serveFileURL.setParameter("javax.portlet.action", "serveFile");
 			String nameSpace = renderResponse.getNamespace();
 		%>	

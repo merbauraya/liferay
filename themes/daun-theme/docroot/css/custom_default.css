@@ -1,0 +1,193 @@
+@import "compass";
+@import "mixins";
+
+$colorBackground: #F5F5F5;
+
+.aui .color-scheme-default {
+	padding: 0;
+	background: $colorBackground;
+
+	#header-wrapper {
+		
+		background-color:#555;
+		position: relative;
+	}
+
+	#wrapper {
+		
+	}
+
+	#wrapper, #banner {
+		padding-left: 20px;
+		padding-right: 20px;
+	    max-width: 100%;
+	    min-width: 280px;
+	}
+	#breadcrumbs{
+	margin-top:10px;}
+	
+	#banner {
+		height: 111px;
+		box-sizing: border-box;
+		display: table;
+    	width: 100%;
+
+		#heading {
+			display: table-cell;
+    		white-space: nowrap;
+			vertical-align: middle;
+		}
+	}
+
+	#main-content > .portlet,
+	#main-content > .portlet-layout,
+	#content .breadcrumb {
+	    background: #FFF;
+	    margin-bottom: 18px;
+	    margin-top:5px;
+	    @include box-shadow(0 0 3px #999);
+	    @include border-radius(4px);
+	}
+
+	#main-content {
+		.portlet-layout {
+			position: relative;
+		}
+
+		.portlet-column {
+			margin-bottom: 12px;
+			margin-top: 12px;
+			min-height: 220px;
+			padding-left: 20px;
+		}
+
+		.portlet-column:before {
+			border-left: 1px solid #EEEEEE;
+			bottom: 12px;
+			content: "";
+			position: absolute;
+			top: 12px;
+			margin-left: -20px;
+		}
+
+		.portlet-column-first:before,
+		.portlet-column-only:before {
+			border: none;
+		}
+
+		.portlet-column-last,
+		.portlet-column-only {
+			padding-right: 20px;
+		}
+
+		.portlet-borderless {
+			padding: 12px;
+		}
+	}
+
+	#navigation {
+		display: table-cell;
+		vertical-align: middle;
+
+		.navbar-inner {
+			margin-left: 20px;
+			min-height: 0;
+
+			> .nav-collapse, .nav-helpers {
+				float: right;
+			}
+		}
+	}
+	
+	#sitesearch {
+		.site-search-button {
+			background-color: #6A6A6A;
+			color: #BBBBBB;
+		}
+	}
+
+	#content {
+		min-height: 70%;
+	}
+
+	.portlet-dockbar {
+		.dockbar {
+			display: none;
+
+			&.toggler-content-expanded {
+				display: block;
+			}
+		}
+	}
+	.portlet, .portlet-borderless-container
+	{
+		margin-bottom:10px;
+	}
+	.portlet-topper {
+		border-radius: 3px 3px 0 0;
+	}
+	.portlet-topper {
+		background: #555555;
+		color:#fff;
+		line-height:30px;
+		height:30px;
+	}
+	.portlet-topper h1 
+	{
+		line-height:30px;
+		
+	}
+	.portlet-topper .portlet-title i, .portlet-topper .portlet-title span img {
+    display: none;
+}
+	.portlet-content
+	{
+		border-image:none;
+		border-style:solid;
+		border-width: 0 1px 1px;
+		border-color:#BAA378;
+	}
+	@include respond-to(desktop) {
+		#sitesearch {
+			&.site-search-collapsed {
+				.site-search-form {
+					width: 0;
+				}
+
+				.site-search-button {
+					background: none;
+				}
+
+				.site-search-button:hover {
+					background: #6A6A6A;
+				}
+			}
+
+			.site-search-button {
+				background: #6A6A6A;
+				color: #BBBBBB;
+			}
+
+			.site-search-button:hover {
+				background-color: #FFFFFF;
+			}
+
+			.site-search-field {
+				float: right;
+			}
+
+			.site-search-form {
+				margin-right: -6px;
+				position: absolute;
+				right: 100%;
+				top: 0;
+				width: 160px;
+			}
+		}
+	}
+	/*taglib */
+	.taglib-categorization-filter .asset-entry {
+    background-color: #3a87ad;
+    color: #ffffff;
+}
+}

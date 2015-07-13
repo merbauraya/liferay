@@ -106,41 +106,41 @@ public class MetadataPropertyValueLocalServiceClpInvoker {
 				"com.idetronic.subur.model.MetadataPropertyValue"
 			};
 
-		_methodName90 = "getBeanIdentifier";
+		_methodName132 = "getBeanIdentifier";
 
-		_methodParameterTypes90 = new String[] {  };
+		_methodParameterTypes132 = new String[] {  };
 
-		_methodName91 = "setBeanIdentifier";
+		_methodName133 = "setBeanIdentifier";
 
-		_methodParameterTypes91 = new String[] { "java.lang.String" };
+		_methodParameterTypes133 = new String[] { "java.lang.String" };
 
-		_methodName96 = "addMetadataPropertyValue";
+		_methodName138 = "addMetadataPropertyValue";
 
-		_methodParameterTypes96 = new String[] {
+		_methodParameterTypes138 = new String[] {
 				"long", "long", "java.lang.String"
 			};
 
-		_methodName97 = "updateMetadataPropertyValue";
+		_methodName139 = "updateMetadataPropertyValue";
 
-		_methodParameterTypes97 = new String[] {
+		_methodParameterTypes139 = new String[] {
 				"long", "long", "long", "java.lang.String"
 			};
 
-		_methodName98 = "getAdditionalMetadata";
+		_methodName140 = "getAdditionalMetadata";
 
-		_methodParameterTypes98 = new String[] { "long" };
+		_methodParameterTypes140 = new String[] { "long" };
 
-		_methodName99 = "getAuthor";
+		_methodName141 = "getAuthor";
 
-		_methodParameterTypes99 = new String[] { "long" };
+		_methodParameterTypes141 = new String[] { "long" };
 
-		_methodName100 = "getByItemId";
+		_methodName142 = "getByItemId";
 
-		_methodParameterTypes100 = new String[] { "long" };
+		_methodParameterTypes142 = new String[] { "long" };
 
-		_methodName101 = "getItemCountAuthorBySubject";
+		_methodName143 = "getItemCountAuthorBySubject";
 
-		_methodParameterTypes101 = new String[] { "long" };
+		_methodParameterTypes143 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -232,48 +232,48 @@ public class MetadataPropertyValueLocalServiceClpInvoker {
 			return MetadataPropertyValueLocalServiceUtil.updateMetadataPropertyValue((com.idetronic.subur.model.MetadataPropertyValue)arguments[0]);
 		}
 
-		if (_methodName90.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+		if (_methodName132.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes132, parameterTypes)) {
 			return MetadataPropertyValueLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName91.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+		if (_methodName133.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes133, parameterTypes)) {
 			MetadataPropertyValueLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName96.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+		if (_methodName138.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes138, parameterTypes)) {
 			return MetadataPropertyValueLocalServiceUtil.addMetadataPropertyValue(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
 		}
 
-		if (_methodName97.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+		if (_methodName139.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes139, parameterTypes)) {
 			return MetadataPropertyValueLocalServiceUtil.updateMetadataPropertyValue(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(), (java.lang.String)arguments[3]);
 		}
 
-		if (_methodName98.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+		if (_methodName140.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes140, parameterTypes)) {
 			return MetadataPropertyValueLocalServiceUtil.getAdditionalMetadata(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName99.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+		if (_methodName141.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes141, parameterTypes)) {
 			return MetadataPropertyValueLocalServiceUtil.getAuthor(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName100.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+		if (_methodName142.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes142, parameterTypes)) {
 			return MetadataPropertyValueLocalServiceUtil.getByItemId(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName101.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+		if (_methodName143.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes143, parameterTypes)) {
 			return MetadataPropertyValueLocalServiceUtil.getItemCountAuthorBySubject(((Long)arguments[0]).longValue());
 		}
 
@@ -312,20 +312,20 @@ public class MetadataPropertyValueLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName90;
-	private String[] _methodParameterTypes90;
-	private String _methodName91;
-	private String[] _methodParameterTypes91;
-	private String _methodName96;
-	private String[] _methodParameterTypes96;
-	private String _methodName97;
-	private String[] _methodParameterTypes97;
-	private String _methodName98;
-	private String[] _methodParameterTypes98;
-	private String _methodName99;
-	private String[] _methodParameterTypes99;
-	private String _methodName100;
-	private String[] _methodParameterTypes100;
-	private String _methodName101;
-	private String[] _methodParameterTypes101;
+	private String _methodName132;
+	private String[] _methodParameterTypes132;
+	private String _methodName133;
+	private String[] _methodParameterTypes133;
+	private String _methodName138;
+	private String[] _methodParameterTypes138;
+	private String _methodName139;
+	private String[] _methodParameterTypes139;
+	private String _methodName140;
+	private String[] _methodParameterTypes140;
+	private String _methodName141;
+	private String[] _methodParameterTypes141;
+	private String _methodName142;
+	private String[] _methodParameterTypes142;
+	private String _methodName143;
+	private String[] _methodParameterTypes143;
 }

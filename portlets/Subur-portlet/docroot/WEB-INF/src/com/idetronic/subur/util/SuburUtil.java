@@ -11,6 +11,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
@@ -37,6 +38,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -155,9 +157,13 @@ public class SuburUtil {
 	    is.read(targetArray);
 	    return targetArray;
 	}
-	public void dummy()
+	public static void localeTest()
 	{
-		//AssetEntryLocalServiceUtil.getEntry(className, classPK)
+		Locale[] availableLocales = LanguageUtil.getAvailableLocales();
+		
+		for (Locale locale: availableLocales)
+			logger.info(locale.getDisplayName());
+		
 	}
 
 }

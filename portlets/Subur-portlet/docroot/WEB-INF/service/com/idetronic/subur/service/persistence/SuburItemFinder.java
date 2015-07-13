@@ -20,12 +20,20 @@ package com.idetronic.subur.service.persistence;
 public interface SuburItemFinder {
 	public java.util.List getItemTypes(long itemId);
 
-	public java.util.List getItemDetails(long itemId);
-
 	public java.util.List<com.idetronic.subur.model.SuburItem> findByAuthorGroup(
 		long groupId, long authorId, int start, int end, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List getItemAuthors(long itemId);
+
+	public int countEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> findAssetEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

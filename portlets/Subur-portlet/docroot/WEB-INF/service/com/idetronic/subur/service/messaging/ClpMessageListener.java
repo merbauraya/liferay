@@ -17,6 +17,7 @@ package com.idetronic.subur.service.messaging;
 import com.idetronic.subur.service.AuthorExpertiseLocalServiceUtil;
 import com.idetronic.subur.service.AuthorLocalServiceUtil;
 import com.idetronic.subur.service.ClpSerializer;
+import com.idetronic.subur.service.DownloadSummaryLocalServiceUtil;
 import com.idetronic.subur.service.ExpertiseLocalServiceUtil;
 import com.idetronic.subur.service.ExpertiseServiceUtil;
 import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
@@ -28,7 +29,17 @@ import com.idetronic.subur.service.ItemTypeTemplateLocalServiceUtil;
 import com.idetronic.subur.service.MetadataPropertyLocalServiceUtil;
 import com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil;
 import com.idetronic.subur.service.MetadataSchemaLocalServiceUtil;
+import com.idetronic.subur.service.StatDownloadCategoryLocalServiceUtil;
+import com.idetronic.subur.service.StatDownloadItemTypeLocalServiceUtil;
+import com.idetronic.subur.service.StatDownloadPeriodLocalServiceUtil;
+import com.idetronic.subur.service.StatDownloadTagLocalServiceUtil;
+import com.idetronic.subur.service.StatViewCategoryLocalServiceUtil;
+import com.idetronic.subur.service.StatViewItemTypeLocalServiceUtil;
+import com.idetronic.subur.service.StatViewPeriodLocalServiceUtil;
+import com.idetronic.subur.service.StatViewPeriodServiceUtil;
+import com.idetronic.subur.service.StatViewTagLocalServiceUtil;
 import com.idetronic.subur.service.SuburItemLocalServiceUtil;
+import com.idetronic.subur.service.ViewSummaryLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -52,6 +63,8 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			AuthorExpertiseLocalServiceUtil.clearService();
 
+			DownloadSummaryLocalServiceUtil.clearService();
+
 			ExpertiseLocalServiceUtil.clearService();
 
 			ExpertiseServiceUtil.clearService();
@@ -72,7 +85,26 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			MetadataSchemaLocalServiceUtil.clearService();
 
+			StatDownloadCategoryLocalServiceUtil.clearService();
+
+			StatDownloadItemTypeLocalServiceUtil.clearService();
+
+			StatDownloadPeriodLocalServiceUtil.clearService();
+
+			StatDownloadTagLocalServiceUtil.clearService();
+
+			StatViewCategoryLocalServiceUtil.clearService();
+
+			StatViewItemTypeLocalServiceUtil.clearService();
+
+			StatViewPeriodLocalServiceUtil.clearService();
+
+			StatViewPeriodServiceUtil.clearService();
+			StatViewTagLocalServiceUtil.clearService();
+
 			SuburItemLocalServiceUtil.clearService();
+
+			ViewSummaryLocalServiceUtil.clearService();
 		}
 	}
 }

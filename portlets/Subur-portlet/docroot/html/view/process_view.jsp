@@ -15,6 +15,8 @@
 	
 	List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 	
+	//need to filter out item type
+	
 	searchContainer.setTotal(total);
 	
 	searchContainer.setResults(assetEntries);

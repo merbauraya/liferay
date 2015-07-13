@@ -356,22 +356,47 @@ public class SuburItemLocalServiceUtil {
 		return getService().getByGroup(groupId);
 	}
 
-	public static java.util.List getDetails(long itemId) {
-		return getService().getDetails(itemId);
-	}
-
-	public static java.util.List getFileEntry(long itemId) {
-		return getService().getFileEntry(itemId);
-	}
-
-	public static java.util.List<com.idetronic.subur.model.SuburItem> getBySubjectId(
-		long subjectId, int start, int end) {
-		return getService().getBySubjectId(subjectId, start, end);
-	}
-
 	public static int countAssetVocabularyById(long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().countAssetVocabularyById(vocabularyId);
+	}
+
+	public static int getEntriesCount(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getEntriesCount(entryQuery, anyItemTypeIds, allItemTypeIds);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getAssetEntries(entryQuery, anyItemTypeIds, allItemTypeIds);
+	}
+
+	/**
+	* Add download info for the Item
+	*/
+	public static void addDownloadStats(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addDownloadStats(itemId);
+	}
+
+	/**
+	* Add view stats info the Item and increment Asset Entry view counter
+	*
+	* @param itemId
+	* @throws PortalException
+	* @throws SystemException
+	*/
+	public static void addViewStat(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addViewStat(itemId);
 	}
 
 	public static void clearService() {

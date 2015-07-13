@@ -1,25 +1,29 @@
 package com.idetronic.subur.service.persistence;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import java.util.Date;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portlet.asset.model.AssetCategory;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portal.model.Layout;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 
 public class SuburItemQuery  {
 	
-	AssetEntryQuery assetQuery = null;
+	private AssetEntryQuery assetQuery = null;
+	
 	public SuburItemQuery()
 	{
-		assetQuery = new AssetEntryQuery();
+		
+	}
+	
+	public SuburItemQuery(AssetEntryQuery assetQuery)
+	{
+		this.assetQuery = assetQuery;
+	}
+	public void setAssetQuery(AssetEntryQuery assetQuery)
+	{
+		this.assetQuery = assetQuery; 
 	}
 	public String getTitle()
 	{
@@ -74,7 +78,62 @@ public class SuburItemQuery  {
 	{
 		return _authorLastName;
 	}
-	
+	public boolean isExcludeZeroViewCount()
+	{
+		return assetQuery.isExcludeZeroViewCount();
+	}
+	public long[] getNotAllCategoryIds()
+	{
+		return assetQuery.getNotAllCategoryIds();
+	}
+	public long[] getNotAnyCategoryIds()
+	{
+		return assetQuery.getNotAnyCategoryIds();
+	}
+	public long[][] getAllTagIdsArray()
+	{
+		return assetQuery.getAllTagIdsArray();
+	}
+	public long[] getNotAllTagIds()
+	{
+		return assetQuery.getNotAllTagIds();
+	}
+	public long[][] getNotAllTagIdsArray()
+	{
+		return assetQuery.getNotAllTagIdsArray();
+	}
+	public long[] getNotAnyTagIds()
+	{
+		return assetQuery.getNotAnyTagIds();
+	}
+	public Date getPublishDate()
+	{
+		return assetQuery.getPublishDate();
+	}
+	public Date getExpirationDate()
+	{
+		return assetQuery.getExpirationDate();
+	}
+	public long[] getGroupIds()
+	{
+		return assetQuery.getGroupIds();
+	}
+	public long[] getClassNameIds()
+	{
+		return assetQuery.getClassNameIds();
+	}
+	public long[] getClassTypeIds()
+	{
+		return assetQuery.getClassTypeIds();
+	}
+	public String getDescription()
+	{
+		return assetQuery.getDescription();
+	}
+	public Layout getLayout()
+	{
+		return assetQuery.getLayout();
+	}
 	public boolean isVisible()
 	{
 		return assetQuery.isVisible();
@@ -82,6 +141,36 @@ public class SuburItemQuery  {
 	public String getKeywords() {
 		return assetQuery.getKeywords();
 	}
+	public int getStart()
+	{
+		return assetQuery.getStart();
+	}
+	public int getEnd()
+	{
+		return assetQuery.getEnd();
+	}
+	public String getOrderByCol1()
+	{
+		return assetQuery.getOrderByCol1();
+	}
+	public String getOrderByCol2()
+	{
+		return assetQuery.getOrderByCol2();
+	}
+	public String getOrderByType1()
+	{
+		return assetQuery.getOrderByType1();
+	}
+	
+	public long getLinkedAssetEntryId()
+	{
+		return assetQuery.getLinkedAssetEntryId();
+	}
+	public String getOrderByType2()
+	{
+		return assetQuery.getOrderByType2();
+	}
+	
 	public void setAnyItemTypeIds(long[] anyItemTypeIds)
 	{
 		_anyItemTypeIds = anyItemTypeIds;
@@ -124,39 +213,20 @@ public class SuburItemQuery  {
 	{
 		assetQuery.setGroupIds(groupIds);
 	}
-	private static Log _log = LogFactoryUtil.getLog(SuburItemQuery.class);
+	private static Log logger = LogFactoryUtil.getLog(SuburItemQuery.class);
 	
-	private int _start = QueryUtil.ALL_POS;
-	private int _end = QueryUtil.ALL_POS;
 	private long[] _anyItemTypeIds = new long[0];
 	private long[] _allItemTypeIds = new long[0];
-	private String _keywords;
-	
 	private long _yearPublished = 0;
 	private long _monthPublished = 0;
 	
 	
 
-	private long[] _allCategoryIds = new long[0];
-	private long[] _allTagIds = new long[0];
-	private long[][] _allTagIdsArray = new long[0][];
-	private long[] _anyCategoryIds = new long[0];
-	private long[] _anyTagIds = new long[0];
-	
-	private long[] _notAllCategoryIds = new long[0];
-	private long[] _notAllTagIds = new long[0];
-	private long[][] _notAllTagIdsArray = new long[0][];
-	private long[] _notAnyCategoryIds = new long[0];
-	private long[] _notAnyTagIds = new long[0];
-	
 	private String _authorFirstName = StringPool.BLANK;
 	private String _authorLastName = StringPool.BLANK;
 	
-	private String _title = StringPool.BLANK;
-	private String _toString;
-	private long[] _groupIds = new long[0];
 	
-	
+
 	
 
 }

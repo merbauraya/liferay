@@ -33,6 +33,13 @@
 		<field name="authorId" type="long" />
 		<field name="expertiseId" type="long" />
 	</model>
+	<model name="com.idetronic.subur.model.DownloadSummary">
+		<field name="id" type="long" />
+		<field name="itemId" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+		<field name="status" type="int" />
+	</model>
 	<model name="com.idetronic.subur.model.Expertise">
 		<field name="expertiseId" type="long" />
 		<field name="groupId" type="long" />
@@ -96,6 +103,54 @@
 		</field>
 		<field name="nameSpace" type="String" />
 	</model>
+	<model name="com.idetronic.subur.model.StatDownloadCategory">
+		<field name="id" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+		<field name="categoryId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.StatDownloadItemType">
+		<field name="id" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+		<field name="itemTypeId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.StatDownloadPeriod">
+		<field name="id" type="long" />
+		<field name="itemId" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+	</model>
+	<model name="com.idetronic.subur.model.StatDownloadTag">
+		<field name="id" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+		<field name="tagId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.StatViewCategory">
+		<field name="id" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+		<field name="categoryId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.StatViewItemType">
+		<field name="id" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+		<field name="itemTypeId" type="long" />
+	</model>
+	<model name="com.idetronic.subur.model.StatViewPeriod">
+		<field name="id" type="long" />
+		<field name="itemId" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+	</model>
+	<model name="com.idetronic.subur.model.StatViewTag">
+		<field name="id" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+		<field name="tagId" type="long" />
+	</model>
 	<model name="com.idetronic.subur.model.SuburItem">
 		<field name="itemId" type="long" />
 		<field name="companyId" type="long" />
@@ -115,5 +170,12 @@
 		</field>
 		<field name="status" type="int" />
 		<field name="Uuid" type="String" />
+	</model>
+	<model name="com.idetronic.subur.model.ViewSummary">
+		<field name="id" type="long" />
+		<field name="itemId" type="long" />
+		<field name="perMonth" type="int" />
+		<field name="perYear" type="int" />
+		<field name="status" type="int" />
 	</model>
 </model-hints>

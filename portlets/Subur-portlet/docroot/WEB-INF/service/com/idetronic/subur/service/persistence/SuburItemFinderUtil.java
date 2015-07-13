@@ -25,10 +25,6 @@ public class SuburItemFinderUtil {
 		return getFinder().getItemTypes(itemId);
 	}
 
-	public static java.util.List getItemDetails(long itemId) {
-		return getFinder().getItemDetails(itemId);
-	}
-
 	public static java.util.List<com.idetronic.subur.model.SuburItem> findByAuthorGroup(
 		long groupId, long authorId, int start, int end, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -39,6 +35,22 @@ public class SuburItemFinderUtil {
 
 	public static java.util.List getItemAuthors(long itemId) {
 		return getFinder().getItemAuthors(itemId);
+	}
+
+	public static int countEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .countEntries(entryQuery, anyItemTypeIds, allItemTypeIds);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> findAssetEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findAssetEntries(entryQuery, anyItemTypeIds, allItemTypeIds);
 	}
 
 	public static SuburItemFinder getFinder() {

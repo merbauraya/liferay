@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.xml.namespace.QName;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -22,9 +23,14 @@ public class CategoriesNavigationPortlet extends MVCPortlet {
 	    String categoryIds = ParamUtil.getString(actionRequest, "categoryIds");
 
 	    if (Validator.isNotNull(categoryIds)) {
-	      actionResponse.setRenderParameter("categoryId", categoryIds);
+	    	actionResponse.setRenderParameter("categoryId", categoryIds);
+	    	QName qName =
+	    		  new QName("http://liferay.com", "categoryNav", "x");
+	    	
+	    	actionResponse.setEvent(qName, categoryIds);
+	    	
 	    } else {
-	      actionResponse.setRenderParameter("categoryId", StringPool.BLANK);
+	    	actionResponse.setRenderParameter("categoryId", StringPool.BLANK);
 	    }
 
 	    actionResponse.setRenderParameter("resetCur", Boolean.TRUE.toString());

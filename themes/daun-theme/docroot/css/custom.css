@@ -1,0 +1,334 @@
+@import "compass";
+@import "mixins";
+
+@import url(custom_default.css);
+@import url(custom_dashboard.css);
+@import url(custom_responsive.css);
+@import url(custom_extras.css);
+
+$colorBackgroundBody: #F9F9F9;
+$colorHeading: #5E60B2;
+$colorHighlightWarn: #953537;
+$colorHighlightInfo: #5CB260;
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/opensans/OpenSans-Regular.eot');
+    src: local('Open Sans'),
+		 local('OpenSans'),
+    	 url('../fonts/opensans/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans/OpenSans-Regular.woff') format('woff'),
+         url('../fonts/opensans/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 300;
+	src: url('../fonts/opensans/OpenSans-Light.eot');
+    src: local('Open Sans Light'),
+		 local('OpenSans-Light'),
+    	 url('../fonts/opensans/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans/OpenSans-Light.woff') format('woff'),
+         url('../fonts/opensans/OpenSans-Light.ttf') format('truetype');
+}
+
+/* ---------- Base styles ---------- */
+
+.aui {
+	height: 100%;
+
+	.portal-normal {
+		min-height: 100%;
+		background: $colorBackgroundBody;
+		font-family: 'Open Sans';
+		font-weight: 400;
+	}
+	body {
+	font-size:13px;}
+	
+	a {
+		&:hover {
+			color: $colorHighlightWarn;
+		}
+	}
+
+	h2 {
+		font-size: 2.2em;
+	}
+
+	#wrapper {
+		height: 100%;
+	    padding: 0;
+    	margin: auto;
+    	position: relative;
+	}
+
+	#banner {
+		margin: auto;
+		overflow-y: auto;
+
+		.site-title {
+			margin: 0;
+			font-weight: 300;
+			font-size: 34px;
+			
+			> a:hover, > a:focus {
+				text-decoration: none;
+			}
+			
+			.logo > span {
+				vertical-align: middle;
+			}
+
+			.site-name {
+				color: #CCCCCC;
+				font-size: 1.5em;
+				margin-left: -0.1em;
+			}
+			
+			.site-header-icon {
+				text-shadow: 0 1px 0 #BBB;
+			}
+		}
+	}
+
+	#subbanner {
+		font-size: 38px;
+		font-weight: 300;
+		line-height: 1.6em;
+		margin-top: 5px;
+		text-align: center;
+		vertical-align: middle;
+		text-shadow: 0 0 3px #bbb;
+
+		.nav-banner-toggle {
+			display: none;
+		}
+	}
+
+	#navigation {
+		.navbar-inner {
+			background: none;
+			border: none;
+			padding: 0;
+			@include box-shadow(none);
+		}
+
+		.nav {
+			margin: 0;
+
+			> li {
+				border: 1px solid #888;
+				border-width: 0 0 0 1px;
+				margin: 0;
+				padding: 0 6px;
+
+				&:first-child {
+					border-width: 0 !important;
+
+					&.lfr-nav-item a:before {
+					    content: "\f015";
+					    font-family: 'fontawesome-alloy';
+					}
+				}
+
+				&.open {
+					> a {
+						color: #888;
+						background-color: #EEE;
+					}
+				}
+
+				> a {
+					background: none;
+					color: #BBB;
+					font-weight: 300;
+					text-transform: uppercase;
+					padding: 8px 12px;
+					margin: 0;
+					@include text-shadow(none);
+					@include border-radius(0);
+
+					&:hover, &.focus {
+						color: #888;
+						background-color: #EEE;
+					}
+				}
+			}
+
+			.active {
+				> a {
+					color: #EEE;
+    				box-shadow: none;
+				}
+			}
+
+			.dropdown-menu {
+				background-color: #EEE;
+				border-width: 0;
+				margin: 0;
+				left: 6px;
+				@include border-radius(0);
+
+				&:after, &:before {
+					border-width: 0;
+				}
+
+				a {
+					&:hover {
+						background: #DDD;
+						color: #333;
+					}
+				}
+			}
+		}
+
+		.nav-helpers {
+			display: none;
+		}
+
+		#personal-menu {
+			&:before {
+				content: "\f007";
+				font-family: 'fontawesome-alloy';
+				margin-right: 6px;
+			}
+		}
+
+		#sign-in, #sign-out {
+			color: lighten($colorHighlightInfo, 15%);
+
+			&:before {
+				content: "\f090";
+				font-family: 'fontawesome-alloy';
+				margin-right: 6px;
+			}
+
+			&:hover {
+				background-color: $colorHighlightInfo;
+				color: #EEEEEE;
+			}
+		}
+
+		#sign-out {
+			color: lighten($colorHighlightWarn, 10%);
+
+			&:before {
+				content: "\f08b";
+			}
+
+			&:hover {
+				background-color: $colorHighlightWarn;
+			}
+		}
+	}
+
+	#sitesearch {
+		display: table;
+
+		.site-search-button {
+			display: table-cell;
+			background-color: #6A6A6A;
+			padding: 4px 12px;
+			color: #BBBBBB;
+		}
+
+		.site-search-button:hover {
+			background-color: #FFFFFF;
+			text-decoration: none;
+		}
+
+		.site-search-button:focus {
+			text-decoration: none;
+		}
+
+		.site-search-form {
+			display: table-cell;
+			vertical-align: middle;
+			width: 100%;
+			overflow-x: hidden;
+			@include single-transition(width 0.3s ease);
+
+			.site-search-field {
+				width: 100%;
+				display: block;
+				@include border-radius(0);
+				margin: 0;
+				font-size: 12px;
+				line-height: 14px;
+				padding: 8px;
+				box-sizing: border-box;
+				background: #616161;
+				border: none;
+				color: #BBBBBB;
+				height: auto;
+/* 				@include box-shadow(1px 1px 2px rgba(20, 20, 20, 0.6) inset); */
+			}
+
+			.site-search-field:focus {
+				@include box-shadow(none);
+			}
+		}
+	}
+
+	#footer {
+		text-align: right;
+		padding: 0 20px;
+	}
+
+	.portlet {
+		.portlet-topper {
+			padding-left: 10px;
+
+			.portlet-topper-toolbar {
+				right: 7px;
+
+				.caret {
+					display: none;
+				}
+			}
+
+			h1 {
+				
+				font-size: 13px;
+				margin: 0;
+			}
+		}
+	}
+	ul , ol
+	{
+		margin: 0 0 5px 5px;
+	}
+	
+	.portlet-dockbar {
+		.navbar-inner {
+			background: #FFFFFF;
+			@include box-shadow(none);
+		}
+
+		.sign-out {
+			display: none;
+		}
+		
+		.dockbar-user-notifications {
+			.user-notification-link {
+				padding: 8px;
+			}
+			
+			.user-notifications-count {
+				margin: 0;
+				color: #BBBBBB;
+			}
+		}
+	}
+	.taglib-categorization-filter .asset-entry
+	{
+		border-color:none;
+		border:none;
+	}
+	.item-asset-links h2 {
+	font-size: 1em;}
+}

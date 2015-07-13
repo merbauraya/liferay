@@ -20,10 +20,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.idetronic.subur.NoSuchSuburItemException;
+import com.idetronic.subur.model.ItemItemType;
 import com.idetronic.subur.model.SuburItem;
 import com.idetronic.subur.service.AuthorLocalServiceUtil;
+import com.idetronic.subur.service.DownloadSummaryLocalServiceUtil;
 import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
 import com.idetronic.subur.service.ItemItemTypeLocalServiceUtil;
+import com.idetronic.subur.service.ViewSummaryLocalServiceUtil;
 import com.idetronic.subur.service.base.SuburItemLocalServiceBaseImpl;
 import com.idetronic.subur.service.persistence.SuburItemFinderUtil;
 import com.idetronic.subur.util.SuburConstant;
@@ -38,9 +41,16 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
+import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
+import com.liferay.portlet.asset.service.AssetTagServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
+import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 /**
@@ -264,28 +274,45 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 	{
 		return suburItemPersistence.findByGroupId(groupId);
 	}
-	public List getDetails(long itemId)
-	{
-		List itemList =  SuburItemFinderUtil.getItemDetails(itemId);// .getItemTypes(itemId);
-		return itemList;
-	}
-	public List getFileEntry(long itemId)
-	{
-		return SuburItemFinderUtil.getFileEntries(itemId);
-	}
 	
-	/*
-	 * Return list of Subur Item for any given subject Id
-	 */
-	public List<SuburItem> getBySubjectId(long subjectId,int start,int end)
-	{
-		List listItems = SuburItemFinderUtil.getItemBySubjectId(subjectId,start,end);
 		
-		List<SuburItem> items =  (List)listItems.get(0);
-		return items;
-	}
 	public int countAssetVocabularyById(long vocabularyId) throws SystemException
 	{
 		return AssetCategoryUtil.countByVocabularyId(vocabularyId);
+	}
+	public int getEntriesCount(AssetEntryQuery entryQuery,long[] anyItemTypeIds,long[] allItemTypeIds) throws SystemException
+	{
+		return SuburItemFinderUtil.countEntries(entryQuery,anyItemTypeIds,allItemTypeIds);
+	}
+	public List<AssetEntry> getAssetEntries(AssetEntryQuery entryQuery,long[] anyItemTypeIds,long[] allItemTypeIds) throws SystemException
+	{
+		return SuburItemFinderUtil.findAssetEntries(entryQuery,anyItemTypeIds,allItemTypeIds);
+	}
+	/**
+	 * Add download info for the Item
+	 */
+	public void addDownloadStats(long itemId) throws SystemException, PortalException
+	{
+		
+		
+		DownloadSummaryLocalServiceUtil.addStats(itemId);
+		
+	}
+	/**
+	 * Add view stats info the Item and increment Asset Entry view counter
+	 * @param itemId
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	public void addViewStat(long itemId) throws PortalException, SystemException
+	{
+		//view asset entry counter
+		AssetEntry incrementAssetEntry = null;
+		incrementAssetEntry = AssetEntryServiceUtil.incrementViewCounter(SuburItem.class.getName(), itemId);
+	
+		
+		ViewSummaryLocalServiceUtil.addStats(itemId);//, itemTypeIds, categoryIds, tagIds);
+		
+		
 	}
 }

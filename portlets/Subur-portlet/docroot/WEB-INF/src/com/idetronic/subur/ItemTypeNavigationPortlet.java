@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.xml.namespace.QName;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -24,6 +25,10 @@ public class ItemTypeNavigationPortlet extends MVCPortlet {
 
 	    if (Validator.isNotNull(itemTypeIds)) {
 	    	actionResponse.setRenderParameter("itemTypeId", itemTypeIds);
+	    	QName qName =
+		    		  new QName("http://liferay.com", "itemTypeNav", "x");
+		    	
+		    	actionResponse.setEvent(qName, itemTypeIds);
 	    } else {
 	    	actionResponse.setRenderParameter("itemTypeId", StringPool.BLANK);
 	    }

@@ -224,8 +224,8 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 <%@ page import="com.idetronic.subur.search.SuburDisplayTerms" %>
 <%@ page import="javax.portlet.PortletResponse" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
-<%@
-page import="com.liferay.portal.kernel.util.JavaConstants" %>
+<%@ page import="com.liferay.portal.kernel.util.JavaConstants" %>
+<%@ page import="com.idetronic.subur.service.persistence.SuburItemQuery" %>
 
 <portlet:defineObjects />
 

@@ -162,21 +162,31 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 
 		_methodParameterTypes28 = new String[] { "long" };
 
-		_methodName29 = "getDetails";
+		_methodName29 = "countAssetVocabularyById";
 
 		_methodParameterTypes29 = new String[] { "long" };
 
-		_methodName30 = "getFileEntry";
+		_methodName30 = "getEntriesCount";
 
-		_methodParameterTypes30 = new String[] { "long" };
+		_methodParameterTypes30 = new String[] {
+				"com.liferay.portlet.asset.service.persistence.AssetEntryQuery",
+				"long[][]", "long[][]"
+			};
 
-		_methodName31 = "getBySubjectId";
+		_methodName31 = "getAssetEntries";
 
-		_methodParameterTypes31 = new String[] { "long", "int", "int" };
+		_methodParameterTypes31 = new String[] {
+				"com.liferay.portlet.asset.service.persistence.AssetEntryQuery",
+				"long[][]", "long[][]"
+			};
 
-		_methodName32 = "countAssetVocabularyById";
+		_methodName32 = "addDownloadStats";
 
 		_methodParameterTypes32 = new String[] { "long" };
+
+		_methodName33 = "addViewStat";
+
+		_methodParameterTypes33 = new String[] { "long" };
 	}
 
 	@Override
@@ -1056,84 +1066,13 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 	}
 
 	@Override
-	public java.util.List getDetails(long itemId) {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName29,
-					_methodParameterTypes29, new Object[] { itemId });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public java.util.List getFileEntry(long itemId) {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName30,
-					_methodParameterTypes30, new Object[] { itemId });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public java.util.List<com.idetronic.subur.model.SuburItem> getBySubjectId(
-		long subjectId, int start, int end) {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName31,
-					_methodParameterTypes31,
-					new Object[] { subjectId, start, end });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<com.idetronic.subur.model.SuburItem>)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
 	public int countAssetVocabularyById(long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName32,
-					_methodParameterTypes32, new Object[] { vocabularyId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29, new Object[] { vocabularyId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1152,6 +1091,138 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 		}
 
 		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public int getEntriesCount(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
+					new Object[] {
+						ClpSerializer.translateInput(entryQuery),
+						
+					ClpSerializer.translateInput(anyItemTypeIds),
+						
+					ClpSerializer.translateInput(allItemTypeIds)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName31,
+					_methodParameterTypes31,
+					new Object[] {
+						ClpSerializer.translateInput(entryQuery),
+						
+					ClpSerializer.translateInput(anyItemTypeIds),
+						
+					ClpSerializer.translateInput(allItemTypeIds)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.portlet.asset.model.AssetEntry>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void addDownloadStats(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName32,
+				_methodParameterTypes32, new Object[] { itemId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void addViewStat(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName33,
+				_methodParameterTypes33, new Object[] { itemId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
 	}
 
 	private InvokableLocalService _invokableLocalService;
@@ -1219,4 +1290,6 @@ public class SuburItemLocalServiceClp implements SuburItemLocalService {
 	private String[] _methodParameterTypes31;
 	private String _methodName32;
 	private String[] _methodParameterTypes32;
+	private String _methodName33;
+	private String[] _methodParameterTypes33;
 }

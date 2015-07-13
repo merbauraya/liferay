@@ -374,25 +374,51 @@ public class SuburItemLocalServiceWrapper implements SuburItemLocalService,
 	}
 
 	@Override
-	public java.util.List getDetails(long itemId) {
-		return _suburItemLocalService.getDetails(itemId);
-	}
-
-	@Override
-	public java.util.List getFileEntry(long itemId) {
-		return _suburItemLocalService.getFileEntry(itemId);
-	}
-
-	@Override
-	public java.util.List<com.idetronic.subur.model.SuburItem> getBySubjectId(
-		long subjectId, int start, int end) {
-		return _suburItemLocalService.getBySubjectId(subjectId, start, end);
-	}
-
-	@Override
 	public int countAssetVocabularyById(long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _suburItemLocalService.countAssetVocabularyById(vocabularyId);
+	}
+
+	@Override
+	public int getEntriesCount(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _suburItemLocalService.getEntriesCount(entryQuery,
+			anyItemTypeIds, allItemTypeIds);
+	}
+
+	@Override
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
+		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
+		long[] anyItemTypeIds, long[] allItemTypeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _suburItemLocalService.getAssetEntries(entryQuery,
+			anyItemTypeIds, allItemTypeIds);
+	}
+
+	/**
+	* Add download info for the Item
+	*/
+	@Override
+	public void addDownloadStats(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_suburItemLocalService.addDownloadStats(itemId);
+	}
+
+	/**
+	* Add view stats info the Item and increment Asset Entry view counter
+	*
+	* @param itemId
+	* @throws PortalException
+	* @throws SystemException
+	*/
+	@Override
+	public void addViewStat(long itemId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_suburItemLocalService.addViewStat(itemId);
 	}
 
 	/**

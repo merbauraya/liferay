@@ -106,25 +106,25 @@ public class ItemTypeLocalServiceClpInvoker {
 				"com.idetronic.subur.model.ItemType"
 			};
 
-		_methodName90 = "getBeanIdentifier";
+		_methodName132 = "getBeanIdentifier";
 
-		_methodParameterTypes90 = new String[] {  };
+		_methodParameterTypes132 = new String[] {  };
 
-		_methodName91 = "setBeanIdentifier";
+		_methodName133 = "setBeanIdentifier";
 
-		_methodParameterTypes91 = new String[] { "java.lang.String" };
+		_methodParameterTypes133 = new String[] { "java.lang.String" };
 
-		_methodName96 = "decrementCounter";
+		_methodName138 = "decrementCounter";
 
-		_methodParameterTypes96 = new String[] { "long" };
+		_methodParameterTypes138 = new String[] { "long" };
 
-		_methodName97 = "incrementCounter";
+		_methodName139 = "incrementCounter";
 
-		_methodParameterTypes97 = new String[] { "long" };
+		_methodParameterTypes139 = new String[] { "long" };
 
-		_methodName98 = "getBySubjectId";
+		_methodName140 = "getBySubjectId";
 
-		_methodParameterTypes98 = new String[] { "long" };
+		_methodParameterTypes140 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,34 +216,34 @@ public class ItemTypeLocalServiceClpInvoker {
 			return ItemTypeLocalServiceUtil.updateItemType((com.idetronic.subur.model.ItemType)arguments[0]);
 		}
 
-		if (_methodName90.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+		if (_methodName132.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes132, parameterTypes)) {
 			return ItemTypeLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName91.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+		if (_methodName133.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes133, parameterTypes)) {
 			ItemTypeLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName96.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+		if (_methodName138.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes138, parameterTypes)) {
 			ItemTypeLocalServiceUtil.decrementCounter(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
-		if (_methodName97.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+		if (_methodName139.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes139, parameterTypes)) {
 			ItemTypeLocalServiceUtil.incrementCounter(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
-		if (_methodName98.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+		if (_methodName140.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes140, parameterTypes)) {
 			return ItemTypeLocalServiceUtil.getBySubjectId(((Long)arguments[0]).longValue());
 		}
 
@@ -282,14 +282,14 @@ public class ItemTypeLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName90;
-	private String[] _methodParameterTypes90;
-	private String _methodName91;
-	private String[] _methodParameterTypes91;
-	private String _methodName96;
-	private String[] _methodParameterTypes96;
-	private String _methodName97;
-	private String[] _methodParameterTypes97;
-	private String _methodName98;
-	private String[] _methodParameterTypes98;
+	private String _methodName132;
+	private String[] _methodParameterTypes132;
+	private String _methodName133;
+	private String[] _methodParameterTypes133;
+	private String _methodName138;
+	private String[] _methodParameterTypes138;
+	private String _methodName139;
+	private String[] _methodParameterTypes139;
+	private String _methodName140;
+	private String[] _methodParameterTypes140;
 }

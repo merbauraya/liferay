@@ -13,6 +13,9 @@ import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.Event;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -52,6 +55,7 @@ import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadRequest;
@@ -90,38 +94,20 @@ public class Subur extends MVCPortlet {
 	ThemeDisplay themeDisplay;
 	
 	
-	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException 
-	{
-		logger.info("processAction");
+	public void processEvent(EventRequest request,EventResponse response) throws PortletException, IOException {
 		
+		Event event = request.getEvent();
+        String value = (String) event.getValue();
+        
 		
-		super.processAction(actionRequest, actionResponse);
+       // if (event.getName().equalsIgnoreCase("categoryNav"))
+        //{
+        	response.setRenderParameter("jspPage", "/html/view.jsp");
+       // }
 	}
-	public void render(RenderRequest renderRequest, RenderResponse renderResponse)
-			throws PortletException, IOException {
-		
-		
-		//check PRP, if specified we show the default view
-		String categoryIds = ParamUtil.getString(renderRequest, "categoryId");
-		String tags = ParamUtil.getString(renderRequest, "tag");
-		String defaultPage = ParamUtil.getString(renderRequest, "jspPage");
-		
-		logger.info(renderResponse.getNamespace());
-		
-		//if (!Validator.isBlank(tags) || !Validator.isBlank(categoryIds))
-		//	include("/html/view.jsp",renderRequest,renderResponse);
-		Enumeration<String> ans =  renderRequest.getAttributeNames();
-		while (ans.hasMoreElements())
-		{
-			String ne = ans.nextElement();
-			//logger.info(ne + "="+renderRequest.getAttribute(ne) );
-		}
-		Enumeration<String> prms =  renderRequest.getParameterNames();
-		//while (prms.hasMoreElements())
-			//logger.info(prms.nextElement());
-		super.render(renderRequest, renderResponse);
-		
-	}
+	
+	
+	
 	
 	public void newItem(ActionRequest request,ActionResponse response) throws PortalException, SystemException
 	{
@@ -416,7 +402,7 @@ public class Subur extends MVCPortlet {
 	{
 		
 		long fileAssetId = ParamUtil.getLong(actionRequest, "fileAssetId");
-		
+		long itemId = ParamUtil.getLong(actionRequest, "itemId");
 		
 		HttpServletResponse response =  PortalUtil.getHttpServletResponse(actionResponse);
 		HttpServletRequest request =  PortalUtil.getHttpServletRequest(actionRequest);
@@ -436,11 +422,20 @@ public class Subur extends MVCPortlet {
 			String contentType = fv.getMimeType();
 			
 		
-			logger.info(contentType+ "::" + contentLength);
+			
 			//byte[] fileContent = SuburUtil.inputStreamToByteArray(is);
 			String contentDispositionType = "attachment; filename= " + fileName;
 			
 			ServletResponseUtil.sendFile(request, response, fileName, fis,contentLength,contentType,contentDispositionType);
+			//set download stat
+			SuburItemLocalServiceUtil.addDownloadStats(itemId);
+			
+			// Hide default Success Message
+			SessionMessages.add(actionRequest, PortalUtil.getPortletId(actionRequest) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+
+			// Hide default Error Message
+			SessionMessages.add(actionRequest, PortalUtil.getPortletId(actionRequest) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+			
 			
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
@@ -493,23 +488,7 @@ public class Subur extends MVCPortlet {
 			return "success";
 			}
 	
-		
-	private void setOtherTitle(long itemId,String otherTitle) throws SystemException
-	{
-		MetadataPropertyValueLocalServiceUtil.addMetadataPropertyValue(itemId, 
-				SuburConstant.METADATA_OTHER_TITLE, 
-				otherTitle);
-	}
 	
-	private void attachItemFile(SuburItem item,File file) throws SystemException
-	{
-		long folderId = SuburFolderUtil.getFolderId(_request, themeDisplay);
-		long fileEntryId = SuburFileUtil.addFile(_request, folderId, file,file.getName());
-		long entryType = 0;
-		ItemFileEntryLocalServiceUtil.add(item.getItemId(), fileEntryId, entryType);
-		
-		
-	}
 	
 	
 	public void serveResource(ResourceRequest resourceRequest,

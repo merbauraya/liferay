@@ -114,33 +114,33 @@ public class ItemAuthorLocalServiceClpInvoker {
 				"com.idetronic.subur.model.ItemAuthor"
 			};
 
-		_methodName90 = "getBeanIdentifier";
+		_methodName132 = "getBeanIdentifier";
 
-		_methodParameterTypes90 = new String[] {  };
+		_methodParameterTypes132 = new String[] {  };
 
-		_methodName91 = "setBeanIdentifier";
+		_methodName133 = "setBeanIdentifier";
 
-		_methodParameterTypes91 = new String[] { "java.lang.String" };
+		_methodParameterTypes133 = new String[] { "java.lang.String" };
 
-		_methodName96 = "add";
+		_methodName138 = "add";
 
-		_methodParameterTypes96 = new String[] { "long", "long" };
+		_methodParameterTypes138 = new String[] { "long", "long" };
 
-		_methodName97 = "getAuthorId";
+		_methodName139 = "getAuthorId";
 
-		_methodParameterTypes97 = new String[] { "long" };
+		_methodParameterTypes139 = new String[] { "long" };
 
-		_methodName98 = "getAuthors";
+		_methodName140 = "getAuthors";
 
-		_methodParameterTypes98 = new String[] { "long" };
+		_methodParameterTypes140 = new String[] { "long" };
 
-		_methodName99 = "getAuthorArray";
+		_methodName141 = "getAuthorArray";
 
-		_methodParameterTypes99 = new String[] { "long" };
+		_methodParameterTypes141 = new String[] { "long" };
 
-		_methodName100 = "setItemAuthor";
+		_methodName142 = "setItemAuthor";
 
-		_methodParameterTypes100 = new String[] { "long", "long[][]" };
+		_methodParameterTypes142 = new String[] { "long", "long[][]" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -232,43 +232,43 @@ public class ItemAuthorLocalServiceClpInvoker {
 			return ItemAuthorLocalServiceUtil.updateItemAuthor((com.idetronic.subur.model.ItemAuthor)arguments[0]);
 		}
 
-		if (_methodName90.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+		if (_methodName132.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes132, parameterTypes)) {
 			return ItemAuthorLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName91.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+		if (_methodName133.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes133, parameterTypes)) {
 			ItemAuthorLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName96.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+		if (_methodName138.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes138, parameterTypes)) {
 			ItemAuthorLocalServiceUtil.add(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 
 			return null;
 		}
 
-		if (_methodName97.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+		if (_methodName139.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes139, parameterTypes)) {
 			return ItemAuthorLocalServiceUtil.getAuthorId(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName98.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+		if (_methodName140.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes140, parameterTypes)) {
 			return ItemAuthorLocalServiceUtil.getAuthors(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName99.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+		if (_methodName141.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes141, parameterTypes)) {
 			return ItemAuthorLocalServiceUtil.getAuthorArray(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName100.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+		if (_methodName142.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes142, parameterTypes)) {
 			ItemAuthorLocalServiceUtil.setItemAuthor(((Long)arguments[0]).longValue(),
 				(long[])arguments[1]);
 
@@ -310,18 +310,18 @@ public class ItemAuthorLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName90;
-	private String[] _methodParameterTypes90;
-	private String _methodName91;
-	private String[] _methodParameterTypes91;
-	private String _methodName96;
-	private String[] _methodParameterTypes96;
-	private String _methodName97;
-	private String[] _methodParameterTypes97;
-	private String _methodName98;
-	private String[] _methodParameterTypes98;
-	private String _methodName99;
-	private String[] _methodParameterTypes99;
-	private String _methodName100;
-	private String[] _methodParameterTypes100;
+	private String _methodName132;
+	private String[] _methodParameterTypes132;
+	private String _methodName133;
+	private String[] _methodParameterTypes133;
+	private String _methodName138;
+	private String[] _methodParameterTypes138;
+	private String _methodName139;
+	private String[] _methodParameterTypes139;
+	private String _methodName140;
+	private String[] _methodParameterTypes140;
+	private String _methodName141;
+	private String[] _methodParameterTypes141;
+	private String _methodName142;
+	private String[] _methodParameterTypes142;
 }

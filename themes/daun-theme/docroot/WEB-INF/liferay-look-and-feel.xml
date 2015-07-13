@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 6.2.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_6_2_0.dtd">
+
+<look-and-feel>
+	<compatibility>
+		<version>6.2.1+</version>
+	</compatibility>
+	<theme id="daun" name="Daun">
+		<settings>
+		
+		<setting configurable="true" type="text" key="theme-color-main" value="#D9AF79"> <![CDATA[
+					AUI().ready(
+						'aui-color-picker-popover',
+						function(A) {
+							var selectObj = A.one("#[@NAMESPACE@]theme-color-main");
+							var selectHighlightObj = A.one("#[@NAMESPACE@]theme-color-highlight");
+							var selectionObj = A.Node.create("<span/>");
+
+							selectObj.setStyle('width', '176px');
+
+							selectionObj.setStyle('backgroundColor', selectObj.get('value'));
+
+							selectionObj.setStyle('display', 'inline-block');
+							selectionObj.setStyle('verticalAlign', 'top');
+							selectionObj.setStyle('width', '22px');
+							selectionObj.setStyle('height', '22px');
+							selectionObj.setStyle('margin', '3px');
+							selectionObj.setStyle('border', '1px solid #555');
+
+							var selectionHighlightObj = selectionObj.cloneNode(true);
+
+							selectObj.insert(selectionObj, "after");
+							selectHighlightObj.insert(selectionHighlightObj, "after");
+
+							var colorPicker = new A.ColorPickerPopover({
+						        trigger: selectObj,
+						        zIndex: 2
+							}).render();
+
+							colorPicker.on('select', function(event) {
+								var color = event.color;
+
+								event.trigger.set('value', color);
+
+								selectionObj.setStyle('backgroundColor', color);
+
+								/* http://stackoverflow.com/questions/5560248 */
+								var percent = -35;
+								var num = parseInt(color.slice(1),16), amt = Math.round(2.55 * percent), R = (num >> 16) + amt, G = (num >> 8 & 0x00FF) + amt, B = (num & 0x0000FF) + amt;
+								var highlightColor = '#' + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
+
+								selectHighlightObj.set('value', highlightColor);
+								selectionHighlightObj.setStyle('backgroundColor', highlightColor);
+							});
+						}
+					);
+				]]> </setting>
+			<setting configurable="true" type="text" key="theme-color-highlight" value="#A6691A"> <![CDATA[
+					AUI().ready(
+						'aui-color-picker-popover',
+						function(A) {
+							var selectObj = A.one("#[@NAMESPACE@]theme-color-highlight");
+							var selectionObj = selectObj.get('nextSibling');
+
+							selectObj.setStyle('width', '176px');
+
+							selectionObj.setStyle('backgroundColor', selectObj.get('value'));
+
+							var colorPicker = new A.ColorPickerPopover({
+						        trigger: selectObj,
+						        zIndex: 2
+							}).render();
+
+							colorPicker.on('select', function(event) {
+								var color = event.color;
+
+								event.trigger.set('value', color);
+
+								selectionObj.setStyle('backgroundColor', color);
+							});
+						}
+					);
+				]]> </setting>
+			<setting configurable="true" type="checkbox" key="dashboard-view-for-logged-in-users" value="false"></setting>
+			<setting configurable="true" type="checkbox" key="show_logo" value="true"></setting>
+			<setting configurable="true" type="checkbox" key="show_breadcrumb" value="true"></setting>
+			<setting configurable="true" type="checkbox" key="portlet-setup-show-borders-default" value="true"></setting>
+			<setting configurable="true" type="checkbox" key="template-show-subheading" value="false"></setting>
+			<setting configurable="true" type="checkbox" key="hide-dockbar" value="false"> <![CDATA[
+					AUI().ready(
+						'node',
+						function(A) {
+							var selectObj = A.one("#[@NAMESPACE@]hide-dockbarCheckbox");
+							var showLinkCheckboxes = A.all('label[for^="[@NAMESPACE@]show-link-"]');
+							
+							showLinkCheckboxes.setStyle('margin-left', '20px');
+							
+							if (!selectObj.get('checked')) {
+								showLinkCheckboxes.hide();
+							}
+
+							selectObj.on('change', function (event) {
+								showLinkCheckboxes.toggle();
+							});
+						}
+					);
+				]]> </setting>
+			<setting configurable="true" type="checkbox" key="show-link-user-personal-menu" value="false"></setting>
+			<setting configurable="true" type="checkbox" key="show-search-field" value="false"></setting>
+		</settings>
+		<color-scheme id="01" name="Default">
+			<default-cs>true</default-cs>
+			<css-class>default</css-class>
+		</color-scheme>
+		<color-scheme id="02" name="Dashboard">
+			<css-class>dashboard</css-class>
+		</color-scheme>
+	
+	
+	</theme>
+</look-and-feel>

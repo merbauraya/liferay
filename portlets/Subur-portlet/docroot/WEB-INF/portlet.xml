@@ -35,6 +35,15 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		
+		<supported-processing-event xmlns:x='http://liferay.com'>
+        	<qname>x:categoryNav</qname>
+        </supported-processing-event>
+		<supported-processing-event xmlns:x='http://liferay.com'>
+        	<qname>x:itemTypeNav</qname>
+        </supported-processing-event>
+
+
 		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
 		<supported-public-render-parameter>resetCur</supported-public-render-parameter>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
@@ -116,6 +125,9 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		 <supported-publishing-event xmlns:x='http://liferay.com'>
+			<qname>x:itemTypeNav</qname>
+		</supported-publishing-event>
 		<supported-public-render-parameter>itemTypeId</supported-public-render-parameter>
 		<supported-public-render-parameter>resetCur</supported-public-render-parameter>
 	</portlet>
@@ -156,9 +168,59 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		 <supported-publishing-event xmlns:x='http://liferay.com'>
+			<qname>x:categoryNav</qname>
+		</supported-publishing-event>
 		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
 		<supported-public-render-parameter>resetCur</supported-public-render-parameter>
+		
 	</portlet>
+	<portlet>
+		<portlet-name>subur-statistic</portlet-name>
+		<display-name>Subur Statistic</display-name>
+		<portlet-class>
+			com.idetronic.subur.SuburStatisticPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/suburstatistic/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/suburstatistic/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Subur Statistic</title>
+			<short-title>Subur Statistic</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<event-definition xmlns:x='http://liferay.com'>
+		<qname>x:categoryNav</qname>
+		<value-type>java.lang.String</value-type>
+	</event-definition>
+	<event-definition xmlns:x='http://liferay.com'>
+		<qname>x:itemTypeNav</qname>
+		<value-type>java.lang.String</value-type>
+	</event-definition>
 	<public-render-parameter>
 		<identifier>categoryId</identifier>
 		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:categoryId</qname>
@@ -184,5 +246,6 @@
 		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:authorId</qname>
 	</public-render-parameter>
 
+	
 
 </portlet-app>

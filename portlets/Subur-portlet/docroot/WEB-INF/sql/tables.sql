@@ -40,6 +40,14 @@ create table subur_Division (
 	depositable BOOLEAN
 );
 
+create table subur_DownloadSummary (
+	id_ LONG not null primary key,
+	itemId LONG,
+	perMonth INTEGER,
+	perYear INTEGER,
+	status INTEGER
+);
+
 create table subur_Expertise (
 	expertiseId LONG not null primary key,
 	groupId LONG,
@@ -152,6 +160,62 @@ create table subur_MetadataValueView (
 	primary key (propertyId, subjectId)
 );
 
+create table subur_StatDownloadCategory (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	categoryId LONG
+);
+
+create table subur_StatDownloadItemType (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	itemTypeId LONG
+);
+
+create table subur_StatDownloadPeriod (
+	id_ LONG not null primary key,
+	itemId LONG,
+	perMonth INTEGER,
+	perYear INTEGER
+);
+
+create table subur_StatDownloadTag (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	tagId LONG
+);
+
+create table subur_StatViewCategory (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	categoryId LONG
+);
+
+create table subur_StatViewItemType (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	itemTypeId LONG
+);
+
+create table subur_StatViewPeriod (
+	id_ LONG not null primary key,
+	itemId LONG,
+	perMonth INTEGER,
+	perYear INTEGER
+);
+
+create table subur_StatViewTag (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	tagId LONG
+);
+
 create table subur_Subject (
 	subjectId LONG not null primary key,
 	parentId LONG,
@@ -170,6 +234,14 @@ create table subur_SubjectTree (
 	rgt INTEGER,
 	depositable BOOLEAN,
 	itemCount INTEGER
+);
+
+create table subur_ViewSummary (
+	id_ LONG not null primary key,
+	itemId LONG,
+	perMonth INTEGER,
+	perYear INTEGER,
+	status INTEGER
 );
 
 create table subur_item (
