@@ -23,9 +23,7 @@
 
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		
-		<footer-portlet-javascript>/js/jquery-1.11.0.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/utils.js</footer-portlet-javascript>
+	
 
 
 		
@@ -66,6 +64,8 @@
 	<portlet>
 		<portlet-name>subur-statistic</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
+		<instanceable>true</instanceable>
 		<header-portlet-css>
 			/css/suburstatistic/main.css
 		</header-portlet-css>

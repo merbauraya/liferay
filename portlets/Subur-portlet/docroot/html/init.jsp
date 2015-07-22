@@ -180,16 +180,16 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 <%@ page import="com.idetronic.subur.service.SubjectLocalServiceUtil"%>
 <%@ page import="com.idetronic.subur.service.ItemSubjectLocalServiceUtil"%>
 <%@ page import="com.idetronic.subur.service.DivisionLocalServiceUtil"%>
-<%@ page import="com.idetronic.subur.service.ItemDivisionLocalServiceUtil"%>
+<%@ page import="com.idetronic.subur.service.AuthorSiteLocalServiceUtil"%>
 <%@ page import="com.idetronic.subur.service.ItemAuthorLocalServiceUtil"%>
 <%@ page import="com.idetronic.subur.service.AuthorLocalServiceUtil"%>
-<%@ page import="com.idetronic.subur.model.ItemFileEntry" %>
+<%@ page import="com.idetronic.subur.model.impl.AuthorSiteImpl" %>
 <%@ page import="com.idetronic.subur.model.FileEntryType" %>
 <%@ page import="com.idetronic.subur.model.Author" %>
 <%@ page import="com.idetronic.subur.model.MetadataValueView" %>
 <%@ page import="com.idetronic.subur.model.ItemSubject" %>
-<%@ page import="com.idetronic.subur.model.Division" %>
-<%@ page import="com.idetronic.subur.model.ItemDivision" %>
+
+<%@ page import="com.idetronic.subur.model.AuthorSite" %>
 <%@ page import="com.idetronic.subur.util.TreeNode" %>
 <%@ page import="com.idetronic.subur.search.AuthorSearch" %>
 <%@ page import="com.idetronic.subur.search.AuthorSearchTerms" %>
@@ -249,7 +249,7 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 	int delta = GetterUtil.getInteger(portletPreferences.getValue("delta", null), SearchContainer.DEFAULT_DELTA);
 	String paginationType = GetterUtil.getString(portletPreferences.getValue("paginationType", "none"));
 	String authorTitleString = GetterUtil.getString(portletPreferences.getValue("authorTitle",StringPool.BLANK), StringPool.BLANK);
-			
+	String authorSiteNameString = GetterUtil.getString(portletPreferences.getValue("authorSiteName", StringPool.BLANK))	;		
 	//default
 	boolean showEditEntryPermissions = true;
 	boolean showSearch = true; 

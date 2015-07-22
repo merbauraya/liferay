@@ -38,6 +38,7 @@ public class AuthorSoap implements Serializable {
 		soapModel.setRemoteId(model.getRemoteId());
 		soapModel.setFirstName(model.getFirstName());
 		soapModel.setLastName(model.getLastName());
+		soapModel.setMiddleName(model.getMiddleName());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setMetadata(model.getMetadata());
 		soapModel.setLastPublishedDate(model.getLastPublishedDate());
@@ -159,6 +160,14 @@ public class AuthorSoap implements Serializable {
 		_lastName = lastName;
 	}
 
+	public String getMiddleName() {
+		return _middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		_middleName = middleName;
+	}
+
 	public int getUserId() {
 		return _userId;
 	}
@@ -207,6 +216,7 @@ public class AuthorSoap implements Serializable {
 	private String _remoteId;
 	private String _firstName;
 	private String _lastName;
+	private String _middleName;
 	private int _userId;
 	private String _metadata;
 	private Date _lastPublishedDate;

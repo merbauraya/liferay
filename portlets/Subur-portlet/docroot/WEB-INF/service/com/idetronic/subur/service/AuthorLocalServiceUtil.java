@@ -273,13 +273,14 @@ public class AuthorLocalServiceUtil {
 
 	public static long addAuthor(java.lang.String firstName,
 		java.lang.String lastName, java.lang.String title,
+		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
 		java.lang.String[] expertiseNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addAuthor(firstName, lastName, title, remoteId, idType,
-			userId, groupId, expertiseNames);
+				   .addAuthor(firstName, lastName, title, authorSite, remoteId,
+			idType, userId, groupId, expertiseNames);
 	}
 
 	public static void setExpertises(long authorId,
@@ -304,13 +305,15 @@ public class AuthorLocalServiceUtil {
 	*/
 	public static com.idetronic.subur.model.Author updateAuthor(long authorId,
 		java.lang.String title, java.lang.String firstName,
-		java.lang.String lastName, java.lang.String remoteId, int idType,
-		long userId, long groupId, java.lang.String[] expertiseNames)
+		java.lang.String lastName,
+		java.util.Map<java.lang.String, java.lang.String> authorSite,
+		java.lang.String remoteId, int idType, long userId, long groupId,
+		java.lang.String[] expertiseNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateAuthor(authorId, title, firstName, lastName,
-			remoteId, idType, userId, groupId, expertiseNames);
+			authorSite, remoteId, idType, userId, groupId, expertiseNames);
 	}
 
 	/**

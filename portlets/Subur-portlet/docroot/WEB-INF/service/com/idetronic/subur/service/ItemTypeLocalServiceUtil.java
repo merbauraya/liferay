@@ -285,10 +285,6 @@ public class ItemTypeLocalServiceUtil {
 		getService().incrementCounter(itemTypeId);
 	}
 
-	public static java.util.List getBySubjectId(long subjectId) {
-		return getService().getBySubjectId(subjectId);
-	}
-
 	public static void clearService() {
 		_service = null;
 	}

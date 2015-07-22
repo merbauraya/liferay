@@ -170,13 +170,13 @@ public class SuburItemUtil {
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching subur item
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a matching subur item could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a matching subur item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem findByGroupId_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
@@ -202,13 +202,13 @@ public class SuburItemUtil {
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching subur item
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a matching subur item could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a matching subur item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem findByGroupId_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
@@ -235,13 +235,13 @@ public class SuburItemUtil {
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next subur item
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem[] findByGroupId_PrevAndNext(
 		long itemId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByGroupId_PrevAndNext(itemId, groupId, orderByComparator);
@@ -308,13 +308,13 @@ public class SuburItemUtil {
 	* @param groupId the group ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next subur item
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem[] filterFindByGroupId_PrevAndNext(
 		long itemId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .filterFindByGroupId_PrevAndNext(itemId, groupId,
@@ -415,13 +415,13 @@ public class SuburItemUtil {
 	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching subur item
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a matching subur item could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a matching subur item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem findByStatus_First(
 		int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByStatus_First(status, orderByComparator);
 	}
@@ -447,13 +447,13 @@ public class SuburItemUtil {
 	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching subur item
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a matching subur item could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a matching subur item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem findByStatus_Last(
 		int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByStatus_Last(status, orderByComparator);
 	}
@@ -480,13 +480,13 @@ public class SuburItemUtil {
 	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next subur item
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem[] findByStatus_PrevAndNext(
 		long itemId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByStatus_PrevAndNext(itemId, status, orderByComparator);
@@ -550,11 +550,11 @@ public class SuburItemUtil {
 	*
 	* @param itemId the primary key of the subur item
 	* @return the subur item that was removed
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem remove(long itemId)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(itemId);
 	}
@@ -566,16 +566,16 @@ public class SuburItemUtil {
 	}
 
 	/**
-	* Returns the subur item with the primary key or throws a {@link com.idetronic.subur.NoSuchSuburItemException} if it could not be found.
+	* Returns the subur item with the primary key or throws a {@link com.idetronic.subur.NoSuchItemException} if it could not be found.
 	*
 	* @param itemId the primary key of the subur item
 	* @return the subur item
-	* @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	* @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.idetronic.subur.model.SuburItem findByPrimaryKey(
 		long itemId)
-		throws com.idetronic.subur.NoSuchSuburItemException,
+		throws com.idetronic.subur.NoSuchItemException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(itemId);
 	}

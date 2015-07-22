@@ -14,7 +14,7 @@
 
 package com.idetronic.subur.service.persistence;
 
-import com.idetronic.subur.NoSuchSuburItemException;
+import com.idetronic.subur.NoSuchItemException;
 import com.idetronic.subur.model.SuburItem;
 import com.idetronic.subur.model.impl.SuburItemImpl;
 import com.idetronic.subur.model.impl.SuburItemModelImpl;
@@ -255,13 +255,13 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a matching subur item could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a matching subur item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		SuburItem suburItem = fetchByGroupId_First(groupId, orderByComparator);
 
 		if (suburItem != null) {
@@ -277,7 +277,7 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-		throw new NoSuchSuburItemException(msg.toString());
+		throw new NoSuchItemException(msg.toString());
 	}
 
 	/**
@@ -306,13 +306,13 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a matching subur item could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a matching subur item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		SuburItem suburItem = fetchByGroupId_Last(groupId, orderByComparator);
 
 		if (suburItem != null) {
@@ -328,7 +328,7 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-		throw new NoSuchSuburItemException(msg.toString());
+		throw new NoSuchItemException(msg.toString());
 	}
 
 	/**
@@ -365,13 +365,13 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem[] findByGroupId_PrevAndNext(long itemId, long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		SuburItem suburItem = findByPrimaryKey(itemId);
 
 		Session session = null;
@@ -639,13 +639,13 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem[] filterFindByGroupId_PrevAndNext(long itemId,
 		long groupId, OrderByComparator orderByComparator)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return findByGroupId_PrevAndNext(itemId, groupId, orderByComparator);
 		}
@@ -1104,13 +1104,13 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a matching subur item could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a matching subur item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem findByStatus_First(int status,
 		OrderByComparator orderByComparator)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		SuburItem suburItem = fetchByStatus_First(status, orderByComparator);
 
 		if (suburItem != null) {
@@ -1126,7 +1126,7 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-		throw new NoSuchSuburItemException(msg.toString());
+		throw new NoSuchItemException(msg.toString());
 	}
 
 	/**
@@ -1155,13 +1155,13 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a matching subur item could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a matching subur item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem findByStatus_Last(int status,
 		OrderByComparator orderByComparator)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		SuburItem suburItem = fetchByStatus_Last(status, orderByComparator);
 
 		if (suburItem != null) {
@@ -1177,7 +1177,7 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-		throw new NoSuchSuburItemException(msg.toString());
+		throw new NoSuchItemException(msg.toString());
 	}
 
 	/**
@@ -1214,13 +1214,13 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem[] findByStatus_PrevAndNext(long itemId, int status,
 		OrderByComparator orderByComparator)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		SuburItem suburItem = findByPrimaryKey(itemId);
 
 		Session session = null;
@@ -1526,12 +1526,12 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 *
 	 * @param itemId the primary key of the subur item
 	 * @return the subur item that was removed
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem remove(long itemId)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		return remove((Serializable)itemId);
 	}
 
@@ -1540,12 +1540,12 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 *
 	 * @param primaryKey the primary key of the subur item
 	 * @return the subur item that was removed
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem remove(Serializable primaryKey)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		Session session = null;
 
 		try {
@@ -1559,13 +1559,13 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchSuburItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				throw new NoSuchItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					primaryKey);
 			}
 
 			return remove(suburItem);
 		}
-		catch (NoSuchSuburItemException nsee) {
+		catch (NoSuchItemException nsee) {
 			throw nsee;
 		}
 		catch (Exception e) {
@@ -1718,12 +1718,12 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	 *
 	 * @param primaryKey the primary key of the subur item
 	 * @return the subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		SuburItem suburItem = fetchByPrimaryKey(primaryKey);
 
 		if (suburItem == null) {
@@ -1731,7 +1731,7 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchSuburItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+			throw new NoSuchItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 				primaryKey);
 		}
 
@@ -1739,16 +1739,16 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 	}
 
 	/**
-	 * Returns the subur item with the primary key or throws a {@link com.idetronic.subur.NoSuchSuburItemException} if it could not be found.
+	 * Returns the subur item with the primary key or throws a {@link com.idetronic.subur.NoSuchItemException} if it could not be found.
 	 *
 	 * @param itemId the primary key of the subur item
 	 * @return the subur item
-	 * @throws com.idetronic.subur.NoSuchSuburItemException if a subur item with the primary key could not be found
+	 * @throws com.idetronic.subur.NoSuchItemException if a subur item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SuburItem findByPrimaryKey(long itemId)
-		throws NoSuchSuburItemException, SystemException {
+		throws NoSuchItemException, SystemException {
 		return findByPrimaryKey((Serializable)itemId);
 	}
 

@@ -14,6 +14,8 @@
 
 package com.idetronic.subur.service.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -27,15 +29,21 @@ import com.idetronic.subur.model.SuburItem;
 import com.idetronic.subur.model.ViewSummary;
 import com.idetronic.subur.service.ItemItemTypeLocalServiceUtil;
 import com.idetronic.subur.service.base.ViewSummaryLocalServiceBaseImpl;
+import com.idetronic.subur.service.persistence.SuburItemFinderImpl;
+import com.idetronic.subur.service.persistence.ViewSummaryFinderUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagServiceUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 /**
  * The implementation of the view summary local service.
@@ -61,6 +69,25 @@ public class ViewSummaryLocalServiceImpl extends ViewSummaryLocalServiceBaseImpl
 	public static final int STATUS_UPDATED = 1;
 	
 	
+	private static Log logger = LogFactoryUtil.getLog(ViewSummaryLocalServiceImpl.class);
+
+	
+	@Override
+	public JSONArray getMonthlyStatRs(int year) throws SQLException
+	{
+		return ViewSummaryFinderUtil.getMonthlySummary(year);
+		
+		
+	}
+	
+	public JSONArray getMonthlyTag(int year) throws SQLException
+	{
+		return ViewSummaryFinderUtil.getMothlyTagSummary(year);
+	}
+	
+	/**
+	 * Add view stats info the the entity. 
+	 */
 	public ViewSummary addStats(long itemId) throws SystemException
 	{
 		

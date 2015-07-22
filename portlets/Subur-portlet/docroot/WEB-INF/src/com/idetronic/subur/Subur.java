@@ -7,8 +7,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.ActionRequest;
@@ -353,7 +355,8 @@ public class Subur extends MVCPortlet {
 		String lastName = ParamUtil.getString(request, "lastName");
 		String remoteId = ParamUtil.getString(request, "remoteId");
 		String title = ParamUtil.getString(request, "title");
-		
+		String personalSite = ParamUtil.getString(request, "personalSite");
+		String googleScholar = ParamUtil.getString(request, "googleScholar");
 		String expertises = ParamUtil.getString(request, "expertiseNames");
 		
 		String[] expertiseNamesArr = null;
@@ -365,18 +368,49 @@ public class Subur extends MVCPortlet {
 		
 		int idType = ParamUtil.getInteger(request, "idType");
 		
+		//handle Author Site
+		String authorSiteIndexesString = request.getParameter(
+				"authorSiteIndexes");
+		
+		
+		HashMap<String, String> authorSite = new HashMap<>();
+		int[] authorSiteIndexes = StringUtil.split(authorSiteIndexesString, 0);
+		for (int authorSiteIndex : authorSiteIndexes) {
+			
+			long authorSiteId = ParamUtil.getLong(
+					request, "authorSiteId" + authorSiteIndex);
+			
+			String authorSiteName = ParamUtil.getString(
+					request, "siteName" + authorSiteIndex);
+			
+			String authorSiteURL = ParamUtil.getString(
+					request, "siteURL" + authorSiteIndex);
+			
+			if (Validator.isNull(authorSiteURL))  {
+				continue;
+			}		
+			logger.info(authorSiteName+"="+authorSiteURL);
+			
+			authorSite.put(authorSiteName, authorSiteURL);
+			
+			
+			
+		}
+		
+		
 			
 		if (cmd.equalsIgnoreCase(Constants.ADD))
 		{
 			
-			authorId = AuthorLocalServiceUtil.addAuthor(firstName, lastName,title, remoteId, 
+			authorId = AuthorLocalServiceUtil.addAuthor(firstName, lastName,title, authorSite,
+					remoteId, 
 					idType, themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), expertiseNamesArr);
 			
 			
 		}else
 		{
 			 AuthorLocalServiceUtil.updateAuthor(authorId, title, 
-					firstName, lastName, 
+					firstName, lastName, authorSite,
 					remoteId, idType, 
 					themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), 
 					expertiseNamesArr);

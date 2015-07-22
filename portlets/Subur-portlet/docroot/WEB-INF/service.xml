@@ -2,13 +2,13 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 <service-builder package-path="com.idetronic.subur">
 	<author>Mazlan Mat</author>
-	<namespace>subur</namespace>
+	<namespace>Subur</namespace>
 
 	<entity name="SuburItem" local-service="true" remote-service="false" table="subur_item">
 
 		<!-- PK fields -->
 
-		<column name="itemId" type="long" primary="true" />
+		<column name="itemId" type="long" primary="true" id-type="increment" />
 
 		<!-- Audit fields -->
 
@@ -102,7 +102,7 @@
     </entity>
    
     <entity name="Author" local-service="true" remote-service="false">
-    	<column name="authorId" type="long" primary="true"></column>
+    	<column name="authorId" type="long" primary="true" id-type="increment"></column>
     	<column name="groupId" type="long" />
     	<column name="companyId" type="long" />
     	<column name="title" type="String" />
@@ -110,11 +110,13 @@
     	<column name="remoteId" type="String"></column>
     	<column name="firstName" type="String"></column>
     	<column name="lastName" type="String"></column>
+    	<column name="middleName" type="String"></column>
     	<column name="userId" type="int"></column>
     	<column name="metadata" type="String"></column>
     	<column name="lastPublishedDate" type="Date"></column>
     	<column name="itemCount" type="int"></column>
     	<column name="personalSite" type="String"></column>
+    	
     	<finder name="Group" return-type="Collection">
     		<finder-column name="groupId"></finder-column>
     	</finder>
@@ -132,6 +134,19 @@
     	<finder name="lastName" return-type="Collection">
     		<finder-column name="lastName" comparator="LIKE"></finder-column>
     	
+    	</finder>
+    </entity>
+    <entity name="AuthorSite" local-service="true" remote-service="false">
+    	<column name="authorSiteId" type="long" primary="true" id-type="increment"></column>
+    	<column name="authorId" type="long"/>
+    	<column name="siteName" type="String"/>
+    	<column name="siteURL" type="String"/>
+    	<finder name="Author" return-type="Collection">
+    		<finder-column name="authorId"></finder-column>
+    	</finder>	
+    	<finder name="AuthorSite" return-type="AuthorSite" unique="true">
+    		<finder-column name="authorId"></finder-column>
+    		<finder-column name="siteName"></finder-column>
     	</finder>
     </entity>
     <entity name="ItemAuthor" local-service="true" remote-service="false">
@@ -241,7 +256,7 @@
 		</finder>
  		
     </entity>
-    <entity name="ViewSummary" local-service="true" remote-service="false">
+    <entity name="ViewSummary" local-service="true" remote-service="true">
     	<column name="id" type="long" primary="true" id-type="increment"></column>
     	<column name="itemId" type="long"></column>
     	<column name="perMonth" type="int"></column>
@@ -261,16 +276,7 @@
 			<finder-column name="perYear"></finder-column>
 		</finder>
     </entity>
-    <entity name="StatViewPeriod" local-service="true" remote-service="true">
-    	<column name="id" type="long" primary="true" id-type="increment"></column>
-    	<column name="itemId" type="long"></column>
-    	<column name="perMonth" type="int"></column>
-    	<column name="perYear" type="int"></column>
-    	<finder name="ItemId" return-type="Collection">
-			<finder-column name="itemId"></finder-column>
-		</finder>
- 		
-    </entity>
+   
      <entity name="StatViewItemType" local-service="true" remote-service="false">
     	<column name="id" type="long" primary="true" id-type="increment"></column>
     	<column name="perMonth" type="int"></column>

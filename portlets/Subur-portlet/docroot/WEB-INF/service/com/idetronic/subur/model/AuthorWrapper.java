@@ -57,6 +57,7 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 		attributes.put("remoteId", getRemoteId());
 		attributes.put("firstName", getFirstName());
 		attributes.put("lastName", getLastName());
+		attributes.put("middleName", getMiddleName());
 		attributes.put("userId", getUserId());
 		attributes.put("metadata", getMetadata());
 		attributes.put("lastPublishedDate", getLastPublishedDate());
@@ -114,6 +115,12 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 
 		if (lastName != null) {
 			setLastName(lastName);
+		}
+
+		String middleName = (String)attributes.get("middleName");
+
+		if (middleName != null) {
+			setMiddleName(middleName);
 		}
 
 		Integer userId = (Integer)attributes.get("userId");
@@ -325,6 +332,26 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 	@Override
 	public void setLastName(java.lang.String lastName) {
 		_author.setLastName(lastName);
+	}
+
+	/**
+	* Returns the middle name of this author.
+	*
+	* @return the middle name of this author
+	*/
+	@Override
+	public java.lang.String getMiddleName() {
+		return _author.getMiddleName();
+	}
+
+	/**
+	* Sets the middle name of this author.
+	*
+	* @param middleName the middle name of this author
+	*/
+	@Override
+	public void setMiddleName(java.lang.String middleName) {
+		_author.setMiddleName(middleName);
 	}
 
 	/**

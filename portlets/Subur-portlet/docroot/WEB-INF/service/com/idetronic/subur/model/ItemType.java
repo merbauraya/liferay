@@ -17,7 +17,7 @@ package com.idetronic.subur.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the ItemType service. Represents a row in the &quot;subur_ItemType&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the ItemType service. Represents a row in the &quot;Subur_ItemType&quot; database table, with each column mapped to a property of this class.
  *
  * @author Mazlan Mat
  * @see ItemTypeModel

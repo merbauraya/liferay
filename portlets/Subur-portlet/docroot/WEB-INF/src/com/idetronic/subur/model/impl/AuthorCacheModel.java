@@ -37,7 +37,7 @@ import java.util.Date;
 public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{authorId=");
 		sb.append(authorId);
@@ -55,6 +55,8 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 		sb.append(firstName);
 		sb.append(", lastName=");
 		sb.append(lastName);
+		sb.append(", middleName=");
+		sb.append(middleName);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append(", metadata=");
@@ -108,6 +110,13 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 			authorImpl.setLastName(lastName);
 		}
 
+		if (middleName == null) {
+			authorImpl.setMiddleName(StringPool.BLANK);
+		}
+		else {
+			authorImpl.setMiddleName(middleName);
+		}
+
 		authorImpl.setUserId(userId);
 
 		if (metadata == null) {
@@ -148,6 +157,7 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 		remoteId = objectInput.readUTF();
 		firstName = objectInput.readUTF();
 		lastName = objectInput.readUTF();
+		middleName = objectInput.readUTF();
 		userId = objectInput.readInt();
 		metadata = objectInput.readUTF();
 		lastPublishedDate = objectInput.readLong();
@@ -192,6 +202,13 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 			objectOutput.writeUTF(lastName);
 		}
 
+		if (middleName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(middleName);
+		}
+
 		objectOutput.writeInt(userId);
 
 		if (metadata == null) {
@@ -220,6 +237,7 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 	public String remoteId;
 	public String firstName;
 	public String lastName;
+	public String middleName;
 	public int userId;
 	public String metadata;
 	public long lastPublishedDate;

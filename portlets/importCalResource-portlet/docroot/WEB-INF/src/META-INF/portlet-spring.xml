@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.idetronic.service.FooLocalService" class="com.idetronic.service.impl.FooLocalServiceImpl" />
+	<bean id="com.idetronic.service.FooService" class="com.idetronic.service.impl.FooServiceImpl" />
+	<bean id="com.idetronic.service.persistence.FooPersistence" class="com.idetronic.service.persistence.FooPersistenceImpl" parent="basePersistence" />
+	<bean id="com.idetronic.service.persistence.FooFinder" class="com.idetronic.service.persistence.FooFinderImpl" parent="basePersistence" />
+</beans>

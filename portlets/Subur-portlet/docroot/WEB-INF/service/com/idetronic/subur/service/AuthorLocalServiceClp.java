@@ -114,7 +114,7 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 
 		_methodParameterTypes19 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "long", "long",
+				"java.util.Map", "java.lang.String", "int", "long", "long",
 				"java.lang.String[][]"
 			};
 
@@ -126,8 +126,8 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 
 		_methodParameterTypes21 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "int", "long", "long",
-				"java.lang.String[][]"
+				"java.lang.String", "java.util.Map", "java.lang.String", "int",
+				"long", "long", "java.lang.String[][]"
 			};
 
 		_methodName22 = "getItemByAuthorGroup";
@@ -753,6 +753,7 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 	@Override
 	public long addAuthor(java.lang.String firstName,
 		java.lang.String lastName, java.lang.String title,
+		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
 		java.lang.String[] expertiseNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -768,6 +769,8 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 					ClpSerializer.translateInput(lastName),
 						
 					ClpSerializer.translateInput(title),
+						
+					ClpSerializer.translateInput(authorSite),
 						
 					ClpSerializer.translateInput(remoteId),
 						
@@ -833,8 +836,10 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 	@Override
 	public com.idetronic.subur.model.Author updateAuthor(long authorId,
 		java.lang.String title, java.lang.String firstName,
-		java.lang.String lastName, java.lang.String remoteId, int idType,
-		long userId, long groupId, java.lang.String[] expertiseNames)
+		java.lang.String lastName,
+		java.util.Map<java.lang.String, java.lang.String> authorSite,
+		java.lang.String remoteId, int idType, long userId, long groupId,
+		java.lang.String[] expertiseNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -850,6 +855,8 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 					ClpSerializer.translateInput(firstName),
 						
 					ClpSerializer.translateInput(lastName),
+						
+					ClpSerializer.translateInput(authorSite),
 						
 					ClpSerializer.translateInput(remoteId),
 						

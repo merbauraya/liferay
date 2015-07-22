@@ -19,6 +19,7 @@ import com.idetronic.subur.service.StatDownloadPeriodLocalService;
 import com.idetronic.subur.service.persistence.AuthorExpertisePersistence;
 import com.idetronic.subur.service.persistence.AuthorFinder;
 import com.idetronic.subur.service.persistence.AuthorPersistence;
+import com.idetronic.subur.service.persistence.AuthorSitePersistence;
 import com.idetronic.subur.service.persistence.DownloadSummaryPersistence;
 import com.idetronic.subur.service.persistence.ExpertiseFinder;
 import com.idetronic.subur.service.persistence.ExpertisePersistence;
@@ -38,10 +39,10 @@ import com.idetronic.subur.service.persistence.StatDownloadPeriodPersistence;
 import com.idetronic.subur.service.persistence.StatDownloadTagPersistence;
 import com.idetronic.subur.service.persistence.StatViewCategoryPersistence;
 import com.idetronic.subur.service.persistence.StatViewItemTypePersistence;
-import com.idetronic.subur.service.persistence.StatViewPeriodPersistence;
 import com.idetronic.subur.service.persistence.StatViewTagPersistence;
 import com.idetronic.subur.service.persistence.SuburItemFinder;
 import com.idetronic.subur.service.persistence.SuburItemPersistence;
+import com.idetronic.subur.service.persistence.ViewSummaryFinder;
 import com.idetronic.subur.service.persistence.ViewSummaryPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -397,6 +398,44 @@ public abstract class StatDownloadPeriodLocalServiceBaseImpl
 	public void setAuthorExpertisePersistence(
 		AuthorExpertisePersistence authorExpertisePersistence) {
 		this.authorExpertisePersistence = authorExpertisePersistence;
+	}
+
+	/**
+	 * Returns the author site local service.
+	 *
+	 * @return the author site local service
+	 */
+	public com.idetronic.subur.service.AuthorSiteLocalService getAuthorSiteLocalService() {
+		return authorSiteLocalService;
+	}
+
+	/**
+	 * Sets the author site local service.
+	 *
+	 * @param authorSiteLocalService the author site local service
+	 */
+	public void setAuthorSiteLocalService(
+		com.idetronic.subur.service.AuthorSiteLocalService authorSiteLocalService) {
+		this.authorSiteLocalService = authorSiteLocalService;
+	}
+
+	/**
+	 * Returns the author site persistence.
+	 *
+	 * @return the author site persistence
+	 */
+	public AuthorSitePersistence getAuthorSitePersistence() {
+		return authorSitePersistence;
+	}
+
+	/**
+	 * Sets the author site persistence.
+	 *
+	 * @param authorSitePersistence the author site persistence
+	 */
+	public void setAuthorSitePersistence(
+		AuthorSitePersistence authorSitePersistence) {
+		this.authorSitePersistence = authorSitePersistence;
 	}
 
 	/**
@@ -1100,63 +1139,6 @@ public abstract class StatDownloadPeriodLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the stat view period local service.
-	 *
-	 * @return the stat view period local service
-	 */
-	public com.idetronic.subur.service.StatViewPeriodLocalService getStatViewPeriodLocalService() {
-		return statViewPeriodLocalService;
-	}
-
-	/**
-	 * Sets the stat view period local service.
-	 *
-	 * @param statViewPeriodLocalService the stat view period local service
-	 */
-	public void setStatViewPeriodLocalService(
-		com.idetronic.subur.service.StatViewPeriodLocalService statViewPeriodLocalService) {
-		this.statViewPeriodLocalService = statViewPeriodLocalService;
-	}
-
-	/**
-	 * Returns the stat view period remote service.
-	 *
-	 * @return the stat view period remote service
-	 */
-	public com.idetronic.subur.service.StatViewPeriodService getStatViewPeriodService() {
-		return statViewPeriodService;
-	}
-
-	/**
-	 * Sets the stat view period remote service.
-	 *
-	 * @param statViewPeriodService the stat view period remote service
-	 */
-	public void setStatViewPeriodService(
-		com.idetronic.subur.service.StatViewPeriodService statViewPeriodService) {
-		this.statViewPeriodService = statViewPeriodService;
-	}
-
-	/**
-	 * Returns the stat view period persistence.
-	 *
-	 * @return the stat view period persistence
-	 */
-	public StatViewPeriodPersistence getStatViewPeriodPersistence() {
-		return statViewPeriodPersistence;
-	}
-
-	/**
-	 * Sets the stat view period persistence.
-	 *
-	 * @param statViewPeriodPersistence the stat view period persistence
-	 */
-	public void setStatViewPeriodPersistence(
-		StatViewPeriodPersistence statViewPeriodPersistence) {
-		this.statViewPeriodPersistence = statViewPeriodPersistence;
-	}
-
-	/**
 	 * Returns the stat view tag local service.
 	 *
 	 * @return the stat view tag local service
@@ -1270,6 +1252,25 @@ public abstract class StatDownloadPeriodLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the view summary remote service.
+	 *
+	 * @return the view summary remote service
+	 */
+	public com.idetronic.subur.service.ViewSummaryService getViewSummaryService() {
+		return viewSummaryService;
+	}
+
+	/**
+	 * Sets the view summary remote service.
+	 *
+	 * @param viewSummaryService the view summary remote service
+	 */
+	public void setViewSummaryService(
+		com.idetronic.subur.service.ViewSummaryService viewSummaryService) {
+		this.viewSummaryService = viewSummaryService;
+	}
+
+	/**
 	 * Returns the view summary persistence.
 	 *
 	 * @return the view summary persistence
@@ -1286,6 +1287,24 @@ public abstract class StatDownloadPeriodLocalServiceBaseImpl
 	public void setViewSummaryPersistence(
 		ViewSummaryPersistence viewSummaryPersistence) {
 		this.viewSummaryPersistence = viewSummaryPersistence;
+	}
+
+	/**
+	 * Returns the view summary finder.
+	 *
+	 * @return the view summary finder
+	 */
+	public ViewSummaryFinder getViewSummaryFinder() {
+		return viewSummaryFinder;
+	}
+
+	/**
+	 * Sets the view summary finder.
+	 *
+	 * @param viewSummaryFinder the view summary finder
+	 */
+	public void setViewSummaryFinder(ViewSummaryFinder viewSummaryFinder) {
+		this.viewSummaryFinder = viewSummaryFinder;
 	}
 
 	/**
@@ -1474,6 +1493,10 @@ public abstract class StatDownloadPeriodLocalServiceBaseImpl
 	protected com.idetronic.subur.service.AuthorExpertiseLocalService authorExpertiseLocalService;
 	@BeanReference(type = AuthorExpertisePersistence.class)
 	protected AuthorExpertisePersistence authorExpertisePersistence;
+	@BeanReference(type = com.idetronic.subur.service.AuthorSiteLocalService.class)
+	protected com.idetronic.subur.service.AuthorSiteLocalService authorSiteLocalService;
+	@BeanReference(type = AuthorSitePersistence.class)
+	protected AuthorSitePersistence authorSitePersistence;
 	@BeanReference(type = com.idetronic.subur.service.DownloadSummaryLocalService.class)
 	protected com.idetronic.subur.service.DownloadSummaryLocalService downloadSummaryLocalService;
 	@BeanReference(type = DownloadSummaryPersistence.class)
@@ -1548,12 +1571,6 @@ public abstract class StatDownloadPeriodLocalServiceBaseImpl
 	protected com.idetronic.subur.service.StatViewItemTypeLocalService statViewItemTypeLocalService;
 	@BeanReference(type = StatViewItemTypePersistence.class)
 	protected StatViewItemTypePersistence statViewItemTypePersistence;
-	@BeanReference(type = com.idetronic.subur.service.StatViewPeriodLocalService.class)
-	protected com.idetronic.subur.service.StatViewPeriodLocalService statViewPeriodLocalService;
-	@BeanReference(type = com.idetronic.subur.service.StatViewPeriodService.class)
-	protected com.idetronic.subur.service.StatViewPeriodService statViewPeriodService;
-	@BeanReference(type = StatViewPeriodPersistence.class)
-	protected StatViewPeriodPersistence statViewPeriodPersistence;
 	@BeanReference(type = com.idetronic.subur.service.StatViewTagLocalService.class)
 	protected com.idetronic.subur.service.StatViewTagLocalService statViewTagLocalService;
 	@BeanReference(type = StatViewTagPersistence.class)
@@ -1566,8 +1583,12 @@ public abstract class StatDownloadPeriodLocalServiceBaseImpl
 	protected SuburItemFinder suburItemFinder;
 	@BeanReference(type = com.idetronic.subur.service.ViewSummaryLocalService.class)
 	protected com.idetronic.subur.service.ViewSummaryLocalService viewSummaryLocalService;
+	@BeanReference(type = com.idetronic.subur.service.ViewSummaryService.class)
+	protected com.idetronic.subur.service.ViewSummaryService viewSummaryService;
 	@BeanReference(type = ViewSummaryPersistence.class)
 	protected ViewSummaryPersistence viewSummaryPersistence;
+	@BeanReference(type = ViewSummaryFinder.class)
+	protected ViewSummaryFinder viewSummaryFinder;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

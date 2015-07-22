@@ -30,6 +30,7 @@ import com.idetronic.subur.service.ViewSummaryLocalServiceUtil;
 import com.idetronic.subur.service.base.SuburItemLocalServiceBaseImpl;
 import com.idetronic.subur.service.persistence.SuburItemFinderUtil;
 import com.idetronic.subur.util.SuburConstant;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -76,7 +77,7 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		User user = userLocalService.getUserById(userId);
 		
 		Date now = new Date();
-		long itemId = counterLocalService.increment();
+		long itemId = CounterLocalServiceUtil.increment(SuburItem.class.getName());
 		
 		SuburItem suburItem = suburItemPersistence.create(itemId);
 		
@@ -176,13 +177,13 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		return suburItemPersistence.update(suburItem);
 		
 	}
-	
+	/*
 	public void deleteItem(long itemId) throws SystemException, NoSuchSuburItemException
 	{
 		SuburItem suburItem = suburItemPersistence.findByPrimaryKey(itemId);
 		suburItemLocalService.deleteSuburItem(suburItem);
 		
-	}
+	}*/
 	public void deleteItem(SuburItem suburItem) throws SystemException, PortalException
 	{
 		

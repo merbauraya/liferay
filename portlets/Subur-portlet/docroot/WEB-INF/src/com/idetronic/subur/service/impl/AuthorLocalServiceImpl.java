@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
@@ -28,10 +30,13 @@ import com.idetronic.subur.NoSuchAuthorException;
 import com.idetronic.subur.Subur;
 import com.idetronic.subur.model.Author;
 import com.idetronic.subur.model.AuthorExpertise;
+import com.idetronic.subur.model.AuthorSite;
+import com.idetronic.subur.model.DownloadSummary;
 import com.idetronic.subur.model.Expertise;
 import com.idetronic.subur.model.SuburItem;
 import com.idetronic.subur.search.AuthorSearchTerms;
 import com.idetronic.subur.service.AuthorExpertiseLocalServiceUtil;
+import com.idetronic.subur.service.AuthorSiteLocalServiceUtil;
 import com.idetronic.subur.service.ExpertiseLocalServiceUtil;
 import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
 import com.idetronic.subur.service.base.AuthorLocalServiceBaseImpl;
@@ -40,6 +45,7 @@ import com.idetronic.subur.service.persistence.AuthorFinder;
 import com.idetronic.subur.service.persistence.AuthorFinderUtil;
 import com.idetronic.subur.service.persistence.SuburItemFinderUtil;
 import com.idetronic.subur.util.SuburConstant;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -50,6 +56,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -82,6 +89,7 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	
 	
 	public long addAuthor(String firstName,String lastName,String title,
+			Map<String,String> authorSite,
 			String remoteId,int idType,
 			long userId, long groupId,String[] expertiseNames) throws SystemException, PortalException
 	{
@@ -89,7 +97,7 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		User user = userLocalService.getUserById(userId);
 		
 		Date now = new Date();
-		long authorId = counterLocalService.increment();
+		long authorId = CounterLocalServiceUtil.increment(Author.class.getName());
 		Author author = authorPersistence.create(authorId);
 		author.setFirstName(firstName);
 		author.setLastName(lastName);
@@ -98,6 +106,12 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		author.setIdType(idType);
 		author.setCompanyId(user.getCompanyId());
 		author.setGroupId(groupId);
+		//author.setPersonalSite(personalSite);
+		
+		
+		
+		
+		
 		author.setItemCount(0);
 		
 		
@@ -114,6 +128,8 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 			}
 			setExpertises(authorId,expertises);
 		}
+		
+		updateAuthorSite(authorId,authorSite);
 		authorPersistence.update(author);
 		
 		return authorId;
@@ -150,7 +166,7 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	 * @throws PortalException 
 	 */
 	public Author updateAuthor(long authorId,String title,String firstName,
-				String lastName,
+				String lastName,Map<String,String> authorSite,
 				String remoteId,int idType,
 				long userId, long groupId,
 				String[] expertiseNames) throws SystemException, PortalException
@@ -161,6 +177,7 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		author.setLastName(lastName);
 		author.setRemoteId(remoteId);
 		author.setIdType(idType);
+		
 		
 		if (expertiseNames != null)
 		{
@@ -190,6 +207,12 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 			setExpertises(authorId,newExpertises);
 		}
 		
+		//author Site
+		updateAuthorSite(authorId,authorSite);
+		
+		
+		
+		
 		
 		
 		authorPersistence.update(author);
@@ -215,6 +238,80 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		
 		return SuburItemFinderUtil.findByAuthorGroup(groupId, authorId, start, end, status, obc);
 	
+	}
+	/**
+	 * Create/update author site
+	 * @param authorId to be updated
+	 * @param authorSiteMap of Author site
+	 * @throws SystemException 
+	 */
+	private void updateAuthorSite(long authorId,Map<String,String> authorSiteMap) throws SystemException
+	{
+		//AuthorSite authorSite = null;
+		List<AuthorSite> authorSites = AuthorSiteLocalServiceUtil.findByAuthorId(authorId);
+		
+		
+		
+		//update existing if matches
+		for (Map.Entry<String, String> entry : authorSiteMap.entrySet()) 
+		{
+		    String siteName = entry.getKey();
+		    String siteURL = entry.getValue();
+		    
+		    boolean siteFound = false;
+		    for (AuthorSite authorSite : authorSites)
+		    {
+		    	if (authorSite.getSiteName().equalsIgnoreCase(siteName))
+		    	{
+		    		siteFound = true;
+		    		authorSite.setSiteURL(siteURL);
+		    		authorSitePersistence.update(authorSite);
+		    		break;
+		    	}
+		    	
+		    }
+		  //add if does not exist
+	    	if (!siteFound)
+	    	{
+	    		
+	    		long id = CounterLocalServiceUtil.increment(AuthorSite.class.getName());
+	    		AuthorSite newAuthorSite = authorSitePersistence.create(id);
+	    		newAuthorSite.setAuthorId(authorId);
+	    		newAuthorSite.setSiteName(siteName);
+	    		newAuthorSite.setSiteURL(siteURL);
+	    		authorSitePersistence.update(newAuthorSite);
+	    	}
+		}
+	    //delete existing site
+	    for (AuthorSite authorSite : authorSites)
+	    {
+	    	boolean found = false;
+	    	for (Map.Entry<String, String> entrySite : authorSiteMap.entrySet()) 
+	    	{
+	    		if (StringUtil.equalsIgnoreCase(authorSite.getSiteName(),entrySite.getKey()))
+	    		{
+	    			found = true;
+	    			break;
+	    		}
+	    		
+	    				
+	    	}
+	    	if (!found)
+    		{
+    			authorSitePersistence.remove(authorSite);
+    		}
+	    	
+	    }
+		    
+		    
+		    
+		    
+		    
+		
+		
+		
+		//
+		
 	}
 	/**
 	 * Find and return all associated expertise for the author
@@ -365,7 +462,7 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	
 	public List<SuburItem> getSuburItems(long authorId,int start,int end,OrderByComparator obc)
 	{
-		
+		return null;
 	}
 	
 	

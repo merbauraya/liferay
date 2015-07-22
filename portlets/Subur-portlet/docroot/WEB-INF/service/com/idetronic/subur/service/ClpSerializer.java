@@ -16,6 +16,7 @@ package com.idetronic.subur.service;
 
 import com.idetronic.subur.model.AuthorClp;
 import com.idetronic.subur.model.AuthorExpertiseClp;
+import com.idetronic.subur.model.AuthorSiteClp;
 import com.idetronic.subur.model.DownloadSummaryClp;
 import com.idetronic.subur.model.ExpertiseClp;
 import com.idetronic.subur.model.ItemAuthorClp;
@@ -32,7 +33,6 @@ import com.idetronic.subur.model.StatDownloadPeriodClp;
 import com.idetronic.subur.model.StatDownloadTagClp;
 import com.idetronic.subur.model.StatViewCategoryClp;
 import com.idetronic.subur.model.StatViewItemTypeClp;
-import com.idetronic.subur.model.StatViewPeriodClp;
 import com.idetronic.subur.model.StatViewTagClp;
 import com.idetronic.subur.model.SuburItemClp;
 import com.idetronic.subur.model.ViewSummaryClp;
@@ -131,6 +131,10 @@ public class ClpSerializer {
 			return translateInputAuthorExpertise(oldModel);
 		}
 
+		if (oldModelClassName.equals(AuthorSiteClp.class.getName())) {
+			return translateInputAuthorSite(oldModel);
+		}
+
 		if (oldModelClassName.equals(DownloadSummaryClp.class.getName())) {
 			return translateInputDownloadSummary(oldModel);
 		}
@@ -195,10 +199,6 @@ public class ClpSerializer {
 			return translateInputStatViewItemType(oldModel);
 		}
 
-		if (oldModelClassName.equals(StatViewPeriodClp.class.getName())) {
-			return translateInputStatViewPeriod(oldModel);
-		}
-
 		if (oldModelClassName.equals(StatViewTagClp.class.getName())) {
 			return translateInputStatViewTag(oldModel);
 		}
@@ -240,6 +240,16 @@ public class ClpSerializer {
 		AuthorExpertiseClp oldClpModel = (AuthorExpertiseClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getAuthorExpertiseRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputAuthorSite(BaseModel<?> oldModel) {
+		AuthorSiteClp oldClpModel = (AuthorSiteClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getAuthorSiteRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -409,16 +419,6 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputStatViewPeriod(BaseModel<?> oldModel) {
-		StatViewPeriodClp oldClpModel = (StatViewPeriodClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getStatViewPeriodRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
 	public static Object translateInputStatViewTag(BaseModel<?> oldModel) {
 		StatViewTagClp oldClpModel = (StatViewTagClp)oldModel;
 
@@ -506,6 +506,43 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.idetronic.subur.model.impl.AuthorExpertiseImpl")) {
 			return translateOutputAuthorExpertise(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.idetronic.subur.model.impl.AuthorSiteImpl")) {
+			return translateOutputAuthorSite(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -1133,43 +1170,6 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.idetronic.subur.model.impl.StatViewPeriodImpl")) {
-			return translateOutputStatViewPeriod(oldModel);
-		}
-		else if (oldModelClassName.endsWith("Clp")) {
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Method getClpSerializerClassMethod = oldModelClass.getMethod(
-						"getClpSerializerClass");
-
-				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
-
-				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-						BaseModel.class);
-
-				Class<?> oldModelModelClass = oldModel.getModelClass();
-
-				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-						oldModelModelClass.getSimpleName() + "RemoteModel");
-
-				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
-						oldRemoteModel);
-
-				return newModel;
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unable to translate " + oldModelClassName, t);
-				}
-			}
-		}
-
-		if (oldModelClassName.equals(
 					"com.idetronic.subur.model.impl.StatViewTagImpl")) {
 			return translateOutputStatViewTag(oldModel);
 		}
@@ -1369,6 +1369,10 @@ public class ClpSerializer {
 			return new com.idetronic.subur.NoSuchAuthorExpertiseException();
 		}
 
+		if (className.equals("com.idetronic.subur.NoSuchAuthorSiteException")) {
+			return new com.idetronic.subur.NoSuchAuthorSiteException();
+		}
+
 		if (className.equals(
 					"com.idetronic.subur.NoSuchDownloadSummaryException")) {
 			return new com.idetronic.subur.NoSuchDownloadSummaryException();
@@ -1444,17 +1448,12 @@ public class ClpSerializer {
 			return new com.idetronic.subur.NoSuchStatViewItemTypeException();
 		}
 
-		if (className.equals(
-					"com.idetronic.subur.NoSuchStatViewPeriodException")) {
-			return new com.idetronic.subur.NoSuchStatViewPeriodException();
-		}
-
 		if (className.equals("com.idetronic.subur.NoSuchStatViewTagException")) {
 			return new com.idetronic.subur.NoSuchStatViewTagException();
 		}
 
-		if (className.equals("com.idetronic.subur.NoSuchSuburItemException")) {
-			return new com.idetronic.subur.NoSuchSuburItemException();
+		if (className.equals("com.idetronic.subur.NoSuchItemException")) {
+			return new com.idetronic.subur.NoSuchItemException();
 		}
 
 		if (className.equals("com.idetronic.subur.NoSuchViewSummaryException")) {
@@ -1480,6 +1479,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setAuthorExpertiseRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputAuthorSite(BaseModel<?> oldModel) {
+		AuthorSiteClp newModel = new AuthorSiteClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setAuthorSiteRemoteModel(oldModel);
 
 		return newModel;
 	}
@@ -1644,16 +1653,6 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setStatViewItemTypeRemoteModel(oldModel);
-
-		return newModel;
-	}
-
-	public static Object translateOutputStatViewPeriod(BaseModel<?> oldModel) {
-		StatViewPeriodClp newModel = new StatViewPeriodClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setStatViewPeriodRemoteModel(oldModel);
 
 		return newModel;
 	}

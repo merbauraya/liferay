@@ -44,8 +44,8 @@
 	
 	</sql>
 	<sql id="com.idetronic.subur.service.persistence.ItemItemTypeFinderImpl.getItemType">
-	select a.*,b.itemid from subur_itemtype a
-	inner join subur_itemitemtype b
+	select a.*,b.itemid from Subur_itemtype a
+	inner join Subur_itemitemtype b
 		on a.itemtypeid = b.itemtypeid
 		and b.itemid = ?
 	
@@ -62,7 +62,7 @@
 	</sql>
 	
 	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getItemType">
-		select * from subur_ItemItemType a, subur_ItemType b
+		select * from Subur_ItemItemType a, Subur_ItemType b
 		where a.itemId = ?
 		and a.itemTypeId = b.itemTypeId
 	</sql>
@@ -70,28 +70,28 @@
 		SELECT 
 		  * 
 		FROM 
-		  subur_item, 
-		  subur_metadatapropertyvalue
+		  Subur_item, 
+		  Subur_metadatapropertyvalue
 		WHERE 
-		  subur_item.itemid = subur_metadatapropertyvalue.itemid
-		  and subur_item.itemid=?
+		  Subur_item.itemid = Subur_metadatapropertyvalue.itemid
+		  and Subur_item.itemid=?
 	</sql>
 	
 	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getItemAuthors">
-		select * from subur_itemauthor , subur_author 
-			where subur_itemauthor.authorid = subur_author.authorid
-			and subur_itemauthor.itemid = ?
+		select * from Subur_itemauthor , Subur_author 
+			where Subur_itemauthor.authorid = Subur_author.authorid
+			and Subur_itemauthor.itemid = ?
 	
 	</sql>
 	<sql id="com.idetronic.subur.service.persistence.SuburItemFinderImpl.getFileEntries">
 		SELECT 
 		  * 
 		FROM 
-		  subur_fileentrytype, 
-		  subur_itemfileentry
+		  Subur_fileentrytype, 
+		  Subur_itemfileentry
 		WHERE 
-		  subur_fileentrytype.typeid = subur_itemfileentry.entrytype
-		  and subur_itemfileentry.itemid=?
+		  Subur_fileentrytype.typeid = Subur_itemfileentry.entrytype
+		  and Subur_itemfileentry.itemid=?
 	
 	
 	</sql>
@@ -158,14 +158,14 @@
 	
 	</sql>
 	<sql id="com.idetronic.subur.service.persistence.AuthorFinderImpl.countItemByGroupCompany">
-		SELECT subur_itemauthor.authorid, 
+		SELECT Subur_ItemAuthor.authorid, 
        Count(*) AS itemTotal 
-		FROM   subur_itemauthor 
-		       INNER JOIN subur_author 
-		               ON subur_author.authorid = subur_itemauthor.authorid 
-		WHERE  subur_author.companyid = ? 
-		       AND subur_author.groupid = ? 
-		GROUP  BY subur_itemauthor.authorid 
+		FROM   Subur_ItemAuthor 
+		       INNER JOIN Subur_Author 
+		               ON Subur_Author.authorid = Subur_ItemAuthor.authorid 
+		WHERE  Subur_Author.companyid = ? 
+		       AND Subur_Author.groupid = ? 
+		GROUP  BY Subur_ItemAuthor.authorid 
 	</sql>
 	<sql id="com.idetronic.subur.service.persistence.AuthorFinderImpl.findByCompanyGroup">
 		SELECT * FROM Subur_Author
@@ -189,5 +189,57 @@
 	</sql>
 	
 	<!--  end expertise finder -->
+	<!--  start stats finder -->
+	<sql id="com.idetronic.subur.service.persistence.ViewSummaryFinder.monthlySummary">
+		SELECT permonth,count(*) as totalview 
+		FROM 
+			Subur_ViewSummary
+		WHERE 
+			perYear=?
+		GROUP BY perMonth
+		ORDER BY perMonth ASC
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.ViewSummaryFinder.monthlyTagSummary">
+		SELECT perMonth as permonth,assetTag.name as tagname,count(*) as totalview 
+		FROM 
+			Subur_StatViewTag
+		LEFT JOIN AssetTag
+		ON AssetTag.tagId = Subur_StatViewTag.tagId
+		WHERE
+			perYear=?
+		GROUP BY perMonth,AssetTag.name
+		ORDER BY AssetTag.name ASC
+	
+	</sql>
+	
+	<sql id="com.idetronic.subur.service.persistence.ViewSummaryFinder.monthlyItemTypeSummary">
+		SELECT itemTypeName as itemtypename,perMonth as permonth,count(*) as totalview 
+		FROM 
+			Subur_StatViewItemtype
+		LEFT JOIN Subur_ItemType
+		ON Subur_StatViewItemtype.itemTypeId = Subur_ItemType.itemTypeId
+		WHERE 
+			perYear = ?
+		GROUP BY perMonth,itemTypeName
+		ORDER BY itemTypeName ASC
+	
+	</sql>
+	<sql id="com.idetronic.subur.service.persistence.ViewSummaryFinder.monthlyCategorySummary">
+		SELECT permonth,name as categoryname,count(*) as totalview 
+		FROM 
+			Subur_StatViewCategory
+		LEFT JOIN AssetCategory 
+		ON Subur_StatViewCategory.categoryId = AssetCategory.categoryId
+		WHERE EXISTS
+			( SELECT 1 from AssetVocabulary WHERE vocabularyId = AssetCategory.vocabularyId
+				AND vocabularyId = [$VOCAB_ID$]
+			)
+		AND perYear = [$YEAR$]
+		GROUP BY perMonth,name
+		ORDER BY name
+	
+	</sql>
+	<!--  end stats finder -->
 	
 </custom-sql>

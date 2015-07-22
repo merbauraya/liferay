@@ -4,16 +4,47 @@
 
 	String redirect = ParamUtil.getString(request, "redirect");
 	String backURL = ParamUtil.getString(request, "backURL", redirect);
-
+	String[] siteNameList = StringUtil.split(authorSiteNameString,",");
+	
 	
 	String[] titles = StringUtil.split(authorTitleString, ",");
 	long authorId = ParamUtil.getLong(request,"authorId");
 	Author author = null;
+	List<AuthorSite> authorSites = Collections.emptyList();
+	int[] authorSiteIndexes = null;
+	
+	
 	if (Validator.isNotNull(authorId))
 	{
 		author = AuthorLocalServiceUtil.getAuthor(authorId);
+		authorSites = AuthorSiteLocalServiceUtil.findByAuthorId(authorId);
+		_log.info("size="+authorSites.size());
+		authorSiteIndexes = new int[authorSites.size()];
+		for (int i = 0; i < authorSites.size(); i++)
+		{
+			authorSiteIndexes[i] = i;
+		}
+		
+		
+		
+	}else
+	{
+		authorSiteIndexes = new int[] {0};
+		
 	}
+	if (authorSites.isEmpty())
+	{
+		authorSites = new ArrayList<AuthorSite>();
+		authorSites.add(new AuthorSiteImpl());
+		authorSiteIndexes = new int[] {0};
+	}
+	if (authorSiteIndexes == null)
+	{
+		authorSiteIndexes = new int[] {0};
+	}
+	
 %>
+isEmpty = <%=authorSiteIndexes.length%>
 <liferay-ui:header
 	backURL="<%= backURL %>"
 	localizeTitle="<%= (author == null) %>"
@@ -44,14 +75,58 @@
 		<aui:input name="firstName" />
 	
 		<aui:input name="lastName" />
-		<aui:input name="personalSite" />
+		<div id="authorSite">
+		<%
+			for (int i = 0; i < authorSiteIndexes.length; i++) {
+				int authorSiteIndex = authorSiteIndexes[i];
+				AuthorSite authorSite = authorSites.get(i);
+		%>
+		
+			<aui:model-context bean="<%= authorSite %>" model="<%= AuthorSite.class %>" />
+			<div class="lfr-form-row lfr-form-row-inline">
+				<div class="row-fields">
+					<aui:input name='<%= "authorSiteId" + authorSiteIndex %>' type="hidden" value="<%= authorSite.getAuthorSiteId() %>" />
+					<aui:select inlineField="<%= true %>" label="type" name='<%= "siteName" +  authorSiteIndex%>'>
+					<%
+						for (String siteName : siteNameList) 
+						{
+							boolean selected = false;
+							if (siteName.equalsIgnoreCase(authorSite.getSiteName())) 
+								selected = true;
+					%>
+						<aui:option selected="<%= selected %>"  value="<%=siteName %>"><%=siteName %></aui:option>
+					<%		
+						}
+					%>
+					</aui:select>
+					
+					<aui:input label="site-url" fieldParam='<%= "siteURL" + authorSiteIndex %>' 
+						id='<%= "siteURL" + authorSiteIndex %>'
+						inlineField="<%= true %>" 
+						name='siteURL' 
+						
+						/>
+					
+				</div>
+			
+			</div>
+		<%
+			}
+		%>
+		<aui:input name="authorSiteIndexes" type="hidden" value="<%= StringUtil.merge(authorSiteIndexes) %>" />
+		</div>
+		<aui:script use="liferay-auto-fields">
+    new Liferay.AutoFields(
+    	{
+    		contentBox: '#authorSite',
+    		fieldIndexes: '<portlet:namespace />authorSiteIndexes',
+    		namespace: '<portlet:namespace/>'
+    	}
+    ).render();
+  </aui:script>
+	
 		
 		
-		<aui:button-row>
-			<aui:button type="submit" />
-
-			<aui:button href="<%= redirect %>" type="cancel" />
-		</aui:button-row>
 	</aui:fieldset>
 
 
@@ -73,12 +148,12 @@
 	String namespace = portletResponse.getNamespace();
 	String hiddenInput = "expertiseNames";
 	String id = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-tags-selector:id"));
-	out.print(id);
+	
 %>
 <div class="lfr-tags-selector-content" id="<%= namespace + id %>assetTagsSelector">
 	<aui:input name="<%= hiddenInput %>" type="hidden" />
 
-	<input class="lfr-tag-selector-input" id="<%= id %>assetTagNames" maxlength="75" size="15" title="<liferay-ui:message key="add-tags" />" type="text" />
+	<input class="lfr-tag-selector-input" id="<%= id %>assetTagNames" maxlength="75" size="35" title="<liferay-ui:message key="add-tags" />" type="text" />
 </div>
 
 <aui:script use="expertise-tags-selector">
@@ -112,4 +187,13 @@
 		Liferay.Util.focusFormField('#<%= id %>assetTagNames');
 	</c:if>
 </aui:script>
+	<aui:button-row>
+	<aui:button type="submit" />
+	
+	<aui:button href="<%= redirect %>" type="cancel" />
+	</aui:button-row>
 </aui:form>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("subur.html.edit.author");
+%>

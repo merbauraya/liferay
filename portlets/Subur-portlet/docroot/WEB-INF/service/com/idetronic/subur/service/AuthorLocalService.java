@@ -252,6 +252,7 @@ public interface AuthorLocalService extends BaseLocalService,
 
 	public long addAuthor(java.lang.String firstName,
 		java.lang.String lastName, java.lang.String title,
+		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
 		java.lang.String[] expertiseNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -277,8 +278,10 @@ public interface AuthorLocalService extends BaseLocalService,
 	*/
 	public com.idetronic.subur.model.Author updateAuthor(long authorId,
 		java.lang.String title, java.lang.String firstName,
-		java.lang.String lastName, java.lang.String remoteId, int idType,
-		long userId, long groupId, java.lang.String[] expertiseNames)
+		java.lang.String lastName,
+		java.util.Map<java.lang.String, java.lang.String> authorSite,
+		java.lang.String remoteId, int idType, long userId, long groupId,
+		java.lang.String[] expertiseNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

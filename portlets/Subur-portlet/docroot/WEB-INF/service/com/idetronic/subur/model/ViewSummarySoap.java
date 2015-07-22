@@ -20,9 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services.
+ * This class is used by SOAP remote services, specifically {@link com.idetronic.subur.service.http.ViewSummaryServiceSoap}.
  *
  * @author Mazlan Mat
+ * @see com.idetronic.subur.service.http.ViewSummaryServiceSoap
  * @generated
  */
 public class ViewSummarySoap implements Serializable {

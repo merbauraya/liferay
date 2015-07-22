@@ -81,9 +81,10 @@
 	
 	
 	</liferay-ui:panel>
-	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="suburAuthorDisplayCategoriesPanel" persistState="<%= true %>" title="author-title">
+	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="suburAuthorDisplayCategoriesPanel" persistState="<%= true %>" title="author">
 			
 		<aui:input value="<%= authorTitleString %>" label="author-title-list" name="preferences--authorTitle--" />
+		<aui:input value="<%= authorSiteNameString %>" label="author-site-name-list" name="preferences--authorSiteName--" />
 				
 	</liferay-ui:panel>
 	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="suburSubscriptionPanel" persistState="<%= true %>" title="subscription">

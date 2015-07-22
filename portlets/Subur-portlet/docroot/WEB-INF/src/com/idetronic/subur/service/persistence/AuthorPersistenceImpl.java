@@ -2926,6 +2926,7 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 		authorImpl.setRemoteId(author.getRemoteId());
 		authorImpl.setFirstName(author.getFirstName());
 		authorImpl.setLastName(author.getLastName());
+		authorImpl.setMiddleName(author.getMiddleName());
 		authorImpl.setUserId(author.getUserId());
 		authorImpl.setMetadata(author.getMetadata());
 		authorImpl.setLastPublishedDate(author.getLastPublishedDate());

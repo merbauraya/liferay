@@ -21,6 +21,26 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Mazlan Mat
  */
 public class ViewSummaryFinderUtil {
+	public static com.liferay.portal.kernel.json.JSONArray getMonthlyCategorySummary(
+		int year, long vocabularyId) throws java.sql.SQLException {
+		return getFinder().getMonthlyCategorySummary(year, vocabularyId);
+	}
+
+	public static com.liferay.portal.kernel.json.JSONArray getMothlyItemTypeSummary(
+		int year) throws java.sql.SQLException {
+		return getFinder().getMothlyItemTypeSummary(year);
+	}
+
+	public static com.liferay.portal.kernel.json.JSONArray getMothlyTagSummary(
+		int year) throws java.sql.SQLException {
+		return getFinder().getMothlyTagSummary(year);
+	}
+
+	public static com.liferay.portal.kernel.json.JSONArray getMonthlySummary(
+		int year) throws java.sql.SQLException {
+		return getFinder().getMonthlySummary(year);
+	}
+
 	public static ViewSummaryFinder getFinder() {
 		if (_finder == null) {
 			_finder = (ViewSummaryFinder)PortletBeanLocatorUtil.locate(com.idetronic.subur.service.ClpSerializer.getServletContextName(),

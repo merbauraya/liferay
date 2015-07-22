@@ -1,3 +1,164 @@
+create table Subur_Author (
+	authorId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	title VARCHAR(75) null,
+	idType INTEGER,
+	remoteId VARCHAR(75) null,
+	firstName VARCHAR(75) null,
+	lastName VARCHAR(75) null,
+	middleName VARCHAR(75) null,
+	userId INTEGER,
+	metadata VARCHAR(75) null,
+	lastPublishedDate DATE null,
+	itemCount INTEGER,
+	personalSite VARCHAR(75) null
+);
+
+create table Subur_AuthorExpertise (
+	authorId LONG not null,
+	expertiseId LONG not null,
+	primary key (authorId, expertiseId)
+);
+
+create table Subur_AuthorSite (
+	authorSiteId LONG not null primary key,
+	authorId LONG,
+	siteName VARCHAR(75) null,
+	siteURL VARCHAR(150) null
+);
+
+create table Subur_DownloadSummary (
+	id_ LONG not null primary key,
+	itemId LONG,
+	perMonth INTEGER,
+	perYear INTEGER,
+	status INTEGER
+);
+
+create table Subur_Expertise (
+	expertiseId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	expertiseName VARCHAR(75) null,
+	indexedName VARCHAR(75) null,
+	modifiedDate DATE null,
+	authorCount INTEGER
+);
+
+create table Subur_ItemAuthor (
+	itemId LONG not null,
+	authorId LONG not null,
+	primary key (itemId, authorId)
+);
+
+create table Subur_ItemFileEntry (
+	itemId LONG not null,
+	fileEntryId LONG not null,
+	entryType LONG,
+	primary key (itemId, fileEntryId)
+);
+
+create table Subur_ItemItemType (
+	itemId LONG not null,
+	itemTypeId LONG not null,
+	primary key (itemId, itemTypeId)
+);
+
+create table Subur_ItemType (
+	ItemTypeId LONG not null primary key,
+	ItemTypeName VARCHAR(75) null,
+	itemCount INTEGER
+);
+
+create table Subur_ItemTypeTemplate (
+	itemTypeId LONG not null,
+	metadataPropertyId LONG not null,
+	required BOOLEAN,
+	primary key (itemTypeId, metadataPropertyId)
+);
+
+create table Subur_MetadataProperty (
+	metadataPropertyId LONG not null primary key,
+	metadataSchemaId LONG,
+	element VARCHAR(255) null,
+	scope VARCHAR(255) null,
+	note VARCHAR(1024) null
+);
+
+create table Subur_MetadataPropertyValue (
+	metadataPropertyValueId LONG not null primary key,
+	itemId LONG,
+	propertyId LONG,
+	textValue TEXT null,
+	itemCount INTEGER
+);
+
+create table Subur_MetadataSchema (
+	metadataSchemaId LONG not null primary key,
+	metadataName VARCHAR(1024) null,
+	nameSpace VARCHAR(75) null
+);
+
+create table Subur_StatDownloadCategory (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	categoryId LONG
+);
+
+create table Subur_StatDownloadItemType (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	itemTypeId LONG
+);
+
+create table Subur_StatDownloadPeriod (
+	id_ LONG not null primary key,
+	itemId LONG,
+	perMonth INTEGER,
+	perYear INTEGER
+);
+
+create table Subur_StatDownloadTag (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	tagId LONG
+);
+
+create table Subur_StatViewCategory (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	categoryId LONG
+);
+
+create table Subur_StatViewItemType (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	itemTypeId LONG
+);
+
+create table Subur_StatViewTag (
+	id_ LONG not null primary key,
+	perMonth INTEGER,
+	perYear INTEGER,
+	tagId LONG
+);
+
+create table Subur_ViewSummary (
+	id_ LONG not null primary key,
+	itemId LONG,
+	perMonth INTEGER,
+	perYear INTEGER,
+	status INTEGER
+);
+
 create table item (
 	itemId LONG not null primary key,
 	companyId LONG,
@@ -24,7 +185,8 @@ create table subur_Author (
 	metadata VARCHAR(75) null,
 	lastPublishedDate DATE null,
 	itemCount INTEGER,
-	personalSite VARCHAR(75) null
+	personalSite VARCHAR(75) null,
+	googleScholar VARCHAR(120) null
 );
 
 create table subur_AuthorExpertise (

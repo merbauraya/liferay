@@ -81,6 +81,7 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		attributes.put("remoteId", getRemoteId());
 		attributes.put("firstName", getFirstName());
 		attributes.put("lastName", getLastName());
+		attributes.put("middleName", getMiddleName());
 		attributes.put("userId", getUserId());
 		attributes.put("metadata", getMetadata());
 		attributes.put("lastPublishedDate", getLastPublishedDate());
@@ -138,6 +139,12 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 		if (lastName != null) {
 			setLastName(lastName);
+		}
+
+		String middleName = (String)attributes.get("middleName");
+
+		if (middleName != null) {
+			setMiddleName(middleName);
 		}
 
 		Integer userId = (Integer)attributes.get("userId");
@@ -348,6 +355,29 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 				Method method = clazz.getMethod("setLastName", String.class);
 
 				method.invoke(_authorRemoteModel, lastName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getMiddleName() {
+		return _middleName;
+	}
+
+	@Override
+	public void setMiddleName(String middleName) {
+		_middleName = middleName;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMiddleName", String.class);
+
+				method.invoke(_authorRemoteModel, middleName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -567,6 +597,7 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		clone.setRemoteId(getRemoteId());
 		clone.setFirstName(getFirstName());
 		clone.setLastName(getLastName());
+		clone.setMiddleName(getMiddleName());
 		clone.setUserId(getUserId());
 		clone.setMetadata(getMetadata());
 		clone.setLastPublishedDate(getLastPublishedDate());
@@ -624,7 +655,7 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{authorId=");
 		sb.append(getAuthorId());
@@ -642,6 +673,8 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		sb.append(getFirstName());
 		sb.append(", lastName=");
 		sb.append(getLastName());
+		sb.append(", middleName=");
+		sb.append(getMiddleName());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", metadata=");
@@ -659,7 +692,7 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.Author");
@@ -698,6 +731,10 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		sb.append(getLastName());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>middleName</column-name><column-value><![CDATA[");
+		sb.append(getMiddleName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
 		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
@@ -731,6 +768,7 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 	private String _remoteId;
 	private String _firstName;
 	private String _lastName;
+	private String _middleName;
 	private int _userId;
 	private String _metadata;
 	private Date _lastPublishedDate;

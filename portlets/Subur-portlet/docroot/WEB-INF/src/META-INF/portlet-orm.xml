@@ -17,6 +17,7 @@
 			<basic name="remoteId" />
 			<basic name="firstName" />
 			<basic name="lastName" />
+			<basic name="middleName" />
 			<basic name="userId" />
 			<basic name="metadata" />
 			<basic name="lastPublishedDate">
@@ -34,6 +35,17 @@
 		<attributes>
 			<id name="authorId" />
 			<id name="expertiseId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.idetronic.subur.model.impl.AuthorSiteModelImpl">
+		<attributes>
+			<id name="authorSiteId" />
+			<basic name="authorId" />
+			<basic name="siteName" />
+			<basic name="siteURL" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -238,19 +250,6 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.idetronic.subur.model.impl.StatViewPeriodModelImpl">
-		<attributes>
-			<id name="id">
-				<column name="ID_" />
-			</id>
-			<basic name="itemId" />
-			<basic name="perMonth" />
-			<basic name="perYear" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.idetronic.subur.model.impl.StatViewTagModelImpl">
 		<attributes>
 			<id name="id">
@@ -305,83 +304,83 @@
 		</attributes>
 	</mapped-superclass>
 	<entity class="com.idetronic.subur.model.impl.AuthorImpl" name="Author">
-		<table name="subur_Author" />
+		<table name="Subur_Author" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.AuthorExpertiseImpl" name="AuthorExpertise">
-		<table name="subur_AuthorExpertise" />
+		<table name="Subur_AuthorExpertise" />
+		<attributes />
+	</entity>
+	<entity class="com.idetronic.subur.model.impl.AuthorSiteImpl" name="AuthorSite">
+		<table name="Subur_AuthorSite" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.DownloadSummaryImpl" name="DownloadSummary">
-		<table name="subur_DownloadSummary" />
+		<table name="Subur_DownloadSummary" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ExpertiseImpl" name="Expertise">
-		<table name="subur_Expertise" />
+		<table name="Subur_Expertise" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemAuthorImpl" name="ItemAuthor">
-		<table name="subur_ItemAuthor" />
+		<table name="Subur_ItemAuthor" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemFileEntryImpl" name="ItemFileEntry">
-		<table name="subur_ItemFileEntry" />
+		<table name="Subur_ItemFileEntry" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemItemTypeImpl" name="ItemItemType">
-		<table name="subur_ItemItemType" />
+		<table name="Subur_ItemItemType" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemTypeImpl" name="ItemType">
-		<table name="subur_ItemType" />
+		<table name="Subur_ItemType" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ItemTypeTemplateImpl" name="ItemTypeTemplate">
-		<table name="subur_ItemTypeTemplate" />
+		<table name="Subur_ItemTypeTemplate" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.MetadataPropertyImpl" name="MetadataProperty">
-		<table name="subur_MetadataProperty" />
+		<table name="Subur_MetadataProperty" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.MetadataPropertyValueImpl" name="MetadataPropertyValue">
-		<table name="subur_MetadataPropertyValue" />
+		<table name="Subur_MetadataPropertyValue" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.MetadataSchemaImpl" name="MetadataSchema">
-		<table name="subur_MetadataSchema" />
+		<table name="Subur_MetadataSchema" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.StatDownloadCategoryImpl" name="StatDownloadCategory">
-		<table name="subur_StatDownloadCategory" />
+		<table name="Subur_StatDownloadCategory" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.StatDownloadItemTypeImpl" name="StatDownloadItemType">
-		<table name="subur_StatDownloadItemType" />
+		<table name="Subur_StatDownloadItemType" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.StatDownloadPeriodImpl" name="StatDownloadPeriod">
-		<table name="subur_StatDownloadPeriod" />
+		<table name="Subur_StatDownloadPeriod" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.StatDownloadTagImpl" name="StatDownloadTag">
-		<table name="subur_StatDownloadTag" />
+		<table name="Subur_StatDownloadTag" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.StatViewCategoryImpl" name="StatViewCategory">
-		<table name="subur_StatViewCategory" />
+		<table name="Subur_StatViewCategory" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.StatViewItemTypeImpl" name="StatViewItemType">
-		<table name="subur_StatViewItemType" />
-		<attributes />
-	</entity>
-	<entity class="com.idetronic.subur.model.impl.StatViewPeriodImpl" name="StatViewPeriod">
-		<table name="subur_StatViewPeriod" />
+		<table name="Subur_StatViewItemType" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.StatViewTagImpl" name="StatViewTag">
-		<table name="subur_StatViewTag" />
+		<table name="Subur_StatViewTag" />
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.SuburItemImpl" name="SuburItem">
@@ -389,7 +388,7 @@
 		<attributes />
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ViewSummaryImpl" name="ViewSummary">
-		<table name="subur_ViewSummary" />
+		<table name="Subur_ViewSummary" />
 		<attributes />
 	</entity>
 </entity-mappings>

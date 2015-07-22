@@ -294,11 +294,6 @@ public class ItemTypeLocalServiceWrapper implements ItemTypeLocalService,
 		_itemTypeLocalService.incrementCounter(itemTypeId);
 	}
 
-	@Override
-	public java.util.List getBySubjectId(long subjectId) {
-		return _itemTypeLocalService.getBySubjectId(subjectId);
-	}
-
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -1,0 +1,29 @@
+.table-table
+{
+	border-width:1px;
+	border-stye:solid;
+	border-color:#dddddd;
+}
+.aui .table-table caption
+{
+	font-size:16px;
+	margin-bottom:5px;
+	font-weight:bold;
+}
+.aui .table-table th, .aui .table-table td {
+    border-left: 1px solid #dddddd;
+	border-right: 1px solid #dddddd;
+}
+.aui .table-table tr{
+	border-bottom: 1px solid #dddddd;
+	border-top: 1px solid #dddddd;
+}
+
+.aui .table-table tbody .table-even td
+{
+	background-color:#fff;
+}
+.aui .table-table tbody > td .table-odd
+{
+	background-color:white;
+}

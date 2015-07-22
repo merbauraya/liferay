@@ -1,0 +1,1 @@
+create index IX_7ADB89BB on impCal_Foo (field2);

@@ -250,6 +250,17 @@ public interface ViewSummaryLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONArray getMonthlyStatRs(int year)
+		throws java.sql.SQLException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONArray getMonthlyTag(int year)
+		throws java.sql.SQLException;
+
+	/**
+	* Add view stats info the the entity.
+	*/
 	public com.idetronic.subur.model.ViewSummary addStats(long itemId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

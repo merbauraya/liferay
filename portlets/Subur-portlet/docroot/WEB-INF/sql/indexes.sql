@@ -1,3 +1,51 @@
+create index IX_FFFF61F5 on Subur_Author (companyId, groupId);
+create index IX_2AF8478 on Subur_Author (firstName);
+create index IX_149DFA17 on Subur_Author (groupId);
+create index IX_4A5E5E1C on Subur_Author (idType);
+create index IX_9DF5FD28 on Subur_Author (lastName);
+
+create index IX_CC54E0E4 on Subur_AuthorExpertise (authorId);
+create index IX_305DCC92 on Subur_AuthorExpertise (expertiseId);
+
+create index IX_9690014 on Subur_AuthorSite (authorId);
+create unique index IX_278E0FFA on Subur_AuthorSite (authorId, siteName);
+
+create index IX_22012CA4 on Subur_DownloadSummary (itemId);
+create index IX_4559BD91 on Subur_DownloadSummary (perMonth, perYear);
+create index IX_A4EC2AC8 on Subur_DownloadSummary (perYear);
+create index IX_2A706808 on Subur_DownloadSummary (status);
+
+create index IX_E625355 on Subur_Expertise (groupId);
+create unique index IX_5FEE7F17 on Subur_Expertise (groupId, indexedName);
+
+create index IX_AFE1C520 on Subur_ItemAuthor (authorId);
+create index IX_504C54A8 on Subur_ItemAuthor (itemId);
+
+create index IX_578F7669 on Subur_ItemFileEntry (itemId);
+
+create index IX_F6430C4A on Subur_ItemItemType (itemId);
+create index IX_131A3C24 on Subur_ItemItemType (itemTypeId);
+
+create index IX_BE8FEB13 on Subur_MetadataPropertyValue (itemId);
+
+create index IX_1714372F on Subur_StatDownloadCategory (categoryId);
+
+create index IX_B3AC994D on Subur_StatDownloadItemType (itemTypeId);
+
+create index IX_649E290E on Subur_StatDownloadPeriod (perMonth, perYear);
+
+create index IX_9BABC163 on Subur_StatDownloadTag (tagId);
+
+create index IX_95E6208C on Subur_StatViewCategory (categoryId);
+
+create index IX_327E82AA on Subur_StatViewItemType (itemTypeId);
+
+create index IX_8B534B00 on Subur_StatViewTag (tagId);
+
+create index IX_A41A932E on Subur_ViewSummary (perMonth, perYear);
+create index IX_A1B0F0A5 on Subur_ViewSummary (perYear);
+create index IX_C73CF28B on Subur_ViewSummary (status);
+
 create index IX_3793AB1 on item (groupId);
 create index IX_28461BFF on item (status);
 

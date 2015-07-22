@@ -17,7 +17,7 @@ package com.idetronic.subur.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the StatDownloadItemType service. Represents a row in the &quot;subur_StatDownloadItemType&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the StatDownloadItemType service. Represents a row in the &quot;Subur_StatDownloadItemType&quot; database table, with each column mapped to a property of this class.
  *
  * @author Mazlan Mat
  * @see StatDownloadItemTypeModel

@@ -16,6 +16,7 @@ package com.idetronic.subur.service.messaging;
 
 import com.idetronic.subur.service.AuthorExpertiseLocalServiceUtil;
 import com.idetronic.subur.service.AuthorLocalServiceUtil;
+import com.idetronic.subur.service.AuthorSiteLocalServiceUtil;
 import com.idetronic.subur.service.ClpSerializer;
 import com.idetronic.subur.service.DownloadSummaryLocalServiceUtil;
 import com.idetronic.subur.service.ExpertiseLocalServiceUtil;
@@ -35,11 +36,10 @@ import com.idetronic.subur.service.StatDownloadPeriodLocalServiceUtil;
 import com.idetronic.subur.service.StatDownloadTagLocalServiceUtil;
 import com.idetronic.subur.service.StatViewCategoryLocalServiceUtil;
 import com.idetronic.subur.service.StatViewItemTypeLocalServiceUtil;
-import com.idetronic.subur.service.StatViewPeriodLocalServiceUtil;
-import com.idetronic.subur.service.StatViewPeriodServiceUtil;
 import com.idetronic.subur.service.StatViewTagLocalServiceUtil;
 import com.idetronic.subur.service.SuburItemLocalServiceUtil;
 import com.idetronic.subur.service.ViewSummaryLocalServiceUtil;
+import com.idetronic.subur.service.ViewSummaryServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -62,6 +62,8 @@ public class ClpMessageListener extends BaseMessageListener {
 			AuthorLocalServiceUtil.clearService();
 
 			AuthorExpertiseLocalServiceUtil.clearService();
+
+			AuthorSiteLocalServiceUtil.clearService();
 
 			DownloadSummaryLocalServiceUtil.clearService();
 
@@ -97,14 +99,13 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			StatViewItemTypeLocalServiceUtil.clearService();
 
-			StatViewPeriodLocalServiceUtil.clearService();
-
-			StatViewPeriodServiceUtil.clearService();
 			StatViewTagLocalServiceUtil.clearService();
 
 			SuburItemLocalServiceUtil.clearService();
 
 			ViewSummaryLocalServiceUtil.clearService();
+
+			ViewSummaryServiceUtil.clearService();
 		}
 	}
 }

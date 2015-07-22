@@ -59,11 +59,5 @@ public class ItemTypeLocalServiceImpl extends ItemTypeLocalServiceBaseImpl {
 		
 		
 	}
-	public List getBySubjectId(long subjectId)
-	{
-		List listItems = SuburItemFinderUtil.itemCountByItemTypeInSubject(subjectId);
-		List<ItemType> itemTypes = (List)listItems.get(0);
-		return itemTypes;
-		
-	}
+	
 }

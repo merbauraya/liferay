@@ -255,7 +255,4 @@ public interface ItemTypeLocalService extends BaseLocalService,
 
 	public void incrementCounter(long itemTypeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List getBySubjectId(long subjectId);
 }
