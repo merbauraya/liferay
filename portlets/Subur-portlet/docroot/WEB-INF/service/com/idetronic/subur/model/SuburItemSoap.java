@@ -40,8 +40,10 @@ public class SuburItemSoap implements Serializable {
 		soapModel.setPublishedDate(model.getPublishedDate());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setItemAbstract(model.getItemAbstract());
+		soapModel.setLanguage(model.getLanguage());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setUuid(model.getUuid());
+		soapModel.setMetadataValue(model.getMetadataValue());
 
 		return soapModel;
 	}
@@ -174,6 +176,14 @@ public class SuburItemSoap implements Serializable {
 		_itemAbstract = itemAbstract;
 	}
 
+	public String getLanguage() {
+		return _language;
+	}
+
+	public void setLanguage(String language) {
+		_language = language;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -190,6 +200,14 @@ public class SuburItemSoap implements Serializable {
 		_Uuid = Uuid;
 	}
 
+	public String getMetadataValue() {
+		return _metadataValue;
+	}
+
+	public void setMetadataValue(String metadataValue) {
+		_metadataValue = metadataValue;
+	}
+
 	private long _itemId;
 	private long _companyId;
 	private long _groupId;
@@ -200,6 +218,8 @@ public class SuburItemSoap implements Serializable {
 	private Date _publishedDate;
 	private String _title;
 	private String _itemAbstract;
+	private String _language;
 	private int _status;
 	private String _Uuid;
+	private String _metadataValue;
 }

@@ -59,8 +59,10 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 		attributes.put("publishedDate", getPublishedDate());
 		attributes.put("title", getTitle());
 		attributes.put("itemAbstract", getItemAbstract());
+		attributes.put("language", getLanguage());
 		attributes.put("status", getStatus());
 		attributes.put("Uuid", getUuid());
+		attributes.put("metadataValue", getMetadataValue());
 
 		return attributes;
 	}
@@ -127,6 +129,12 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 			setItemAbstract(itemAbstract);
 		}
 
+		String language = (String)attributes.get("language");
+
+		if (language != null) {
+			setLanguage(language);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -137,6 +145,12 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 
 		if (Uuid != null) {
 			setUuid(Uuid);
+		}
+
+		String metadataValue = (String)attributes.get("metadataValue");
+
+		if (metadataValue != null) {
+			setMetadataValue(metadataValue);
 		}
 	}
 
@@ -383,6 +397,26 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 	}
 
 	/**
+	* Returns the language of this subur item.
+	*
+	* @return the language of this subur item
+	*/
+	@Override
+	public java.lang.String getLanguage() {
+		return _suburItem.getLanguage();
+	}
+
+	/**
+	* Sets the language of this subur item.
+	*
+	* @param language the language of this subur item
+	*/
+	@Override
+	public void setLanguage(java.lang.String language) {
+		_suburItem.setLanguage(language);
+	}
+
+	/**
 	* Returns the status of this subur item.
 	*
 	* @return the status of this subur item
@@ -420,6 +454,26 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 	@Override
 	public void setUuid(java.lang.String Uuid) {
 		_suburItem.setUuid(Uuid);
+	}
+
+	/**
+	* Returns the metadata value of this subur item.
+	*
+	* @return the metadata value of this subur item
+	*/
+	@Override
+	public java.lang.String getMetadataValue() {
+		return _suburItem.getMetadataValue();
+	}
+
+	/**
+	* Sets the metadata value of this subur item.
+	*
+	* @param metadataValue the metadata value of this subur item
+	*/
+	@Override
+	public void setMetadataValue(java.lang.String metadataValue) {
+		_suburItem.setMetadataValue(metadataValue);
 	}
 
 	@Override
@@ -524,6 +578,47 @@ public class SuburItemWrapper implements SuburItem, ModelWrapper<SuburItem> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_suburItem.persist();
+	}
+
+	@Override
+	public void setSeriesReportNo(
+		java.util.Map<java.lang.String, java.lang.String> entryMap) {
+		_suburItem.setSeriesReportNo(entryMap);
+	}
+
+	@Override
+	public void setIdentifier(
+		java.util.Map<java.lang.String, java.lang.String> identifierMap) {
+		_suburItem.setIdentifier(identifierMap);
+	}
+
+	@Override
+	public void setOtherTitle(java.lang.String[] otherTitle) {
+		_suburItem.setOtherTitle(otherTitle);
+	}
+
+	@Override
+	public java.util.Map<java.lang.String, java.lang.String> getIdentifiers()
+		throws java.io.IOException,
+			javax.xml.parsers.ParserConfigurationException,
+			org.xml.sax.SAXException {
+		return _suburItem.getIdentifiers();
+	}
+
+	@Override
+	public java.util.Map getSeriesReportNo()
+		throws java.io.IOException,
+			javax.xml.parsers.ParserConfigurationException,
+			org.xml.sax.SAXException {
+		return _suburItem.getSeriesReportNo();
+	}
+
+	@Override
+	public java.lang.String[] getOtherTitles()
+		throws java.io.IOException,
+			javax.xml.parsers.ParserConfigurationException,
+			org.xml.sax.SAXException {
+		return _suburItem.getOtherTitles();
 	}
 
 	@Override

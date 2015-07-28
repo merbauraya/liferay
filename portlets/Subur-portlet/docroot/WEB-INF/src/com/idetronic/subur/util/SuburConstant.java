@@ -126,6 +126,7 @@ public class SuburConstant {
 	public static final String FIELD_AUTHOR_FIRST_NAME="authorFirstName";
 	public static final String FIELD_AUTHOR_LAST_NAME = "authorLastName";
 	public static final String FIELD_TITLE_SORTABLE = "title_sortable";
+	public static final String FIELD_OTHER_TITLE = "otherTitle";
 	
 	
 	/* Serve Resource Request */

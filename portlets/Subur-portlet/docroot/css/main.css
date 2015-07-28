@@ -43,6 +43,8 @@
 		list-style-type:none;
 		
 	}
-	
+	.small-input
+	{width:100px;}
+	.fullwidth {width:90%;}
 	
 }

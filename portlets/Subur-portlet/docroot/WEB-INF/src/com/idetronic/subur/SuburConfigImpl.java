@@ -46,6 +46,8 @@ public class SuburConfigImpl extends DefaultConfigurationAction  {
 		String useOrOperatorTagSearch = getParameter(actionRequest,"useOrOperatorTagSearch");
 		String authorTitle = getParameter(actionRequest,"authorTitle");
 		String authorSiteName = getParameter(actionRequest,"authorSiteName");
+		String itemIdentifier = getParameter(actionRequest,"itemIdentifier");
+		
 		//rss related
 		String enableRss = getParameter(actionRequest,"enableRss");
 		String rssName = getParameter(actionRequest,"rssName");
@@ -65,6 +67,8 @@ public class SuburConfigImpl extends DefaultConfigurationAction  {
 		preferences.setValue("useOrOperatorTagSearch", useOrOperatorTagSearch);
 		preferences.setValue("authorTitle", authorTitle);
 		preferences.setValue("authorSiteName", authorSiteName);
+		preferences.setValue("itemIdentifier", itemIdentifier);
+		
 		preferences.setValue("enableRss", enableRss);
 		preferences.setValue("rssName", rssName);
 		preferences.setValue("rssDelta", rssDelta);

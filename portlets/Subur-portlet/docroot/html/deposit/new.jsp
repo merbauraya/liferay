@@ -23,10 +23,7 @@
 	</aui:select>
 
 	<aui:input type="text" name="title"></aui:input>
-	<aui:input type="textarea" name="itemAbstract"></aui:input>
-
-	<div class="control-group">
-		<aui:input type="text" name="otherTitle"></aui:input>
-	</div>
+	
+	
 	<aui:button name="submitBtn" type="submit" value="save" last="true" />
 </aui:form>

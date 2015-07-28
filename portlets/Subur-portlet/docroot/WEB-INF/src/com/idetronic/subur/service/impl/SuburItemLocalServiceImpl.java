@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.idetronic.subur.NoSuchItemException;
 import com.idetronic.subur.NoSuchSuburItemException;
 import com.idetronic.subur.model.ItemItemType;
 import com.idetronic.subur.model.SuburItem;
@@ -81,6 +82,7 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		
 		SuburItem suburItem = suburItemPersistence.create(itemId);
 		
+		suburItem.setItemId(itemId);
 		suburItem.setGroupId(groupId);
 		suburItem.setCompanyId(user.getCompanyId());
 		suburItem.setUserId(userId);
@@ -144,6 +146,7 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		String url = null;
 		String layoutUuid = null;
 		Date publishedDate = suburItem.getPublishedDate();
+		suburItem.getMetadataValue();
 		
 		indexer.reindex(suburItem);
 		AssetEntry assetEntry = assetEntryLocalService.updateEntry(userId,
@@ -177,13 +180,24 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		return suburItemPersistence.update(suburItem);
 		
 	}
-	/*
-	public void deleteItem(long itemId) throws SystemException, NoSuchSuburItemException
+	
+	public void deleteItem(long itemId)
 	{
-		SuburItem suburItem = suburItemPersistence.findByPrimaryKey(itemId);
-		suburItemLocalService.deleteSuburItem(suburItem);
+		SuburItem suburItem;
+		try {
+			suburItem = suburItemPersistence.findByPrimaryKey(itemId);
+			suburItemLocalService.deleteSuburItem(suburItem);
+
+		} catch (NoSuchItemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-	}*/
+	}
+	
 	public void deleteItem(SuburItem suburItem) throws SystemException, PortalException
 	{
 		
@@ -191,7 +205,9 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		resourceLocalService.deleteResource(suburItem.getCompanyId(),SuburItem.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,suburItem.getItemId());
 		
-		
+		List<ItemItemType> itemTypes = ItemItemTypeLocalServiceUtil.getByItemId(suburItem.getItemId());
+		for (ItemItemType iType : itemTypes)
+			itemItemTypePersistence.remove(iType);
 		
 		// Asset
 

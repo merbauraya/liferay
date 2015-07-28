@@ -85,8 +85,10 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		attributes.put("publishedDate", getPublishedDate());
 		attributes.put("title", getTitle());
 		attributes.put("itemAbstract", getItemAbstract());
+		attributes.put("language", getLanguage());
 		attributes.put("status", getStatus());
 		attributes.put("Uuid", getUuid());
+		attributes.put("metadataValue", getMetadataValue());
 
 		return attributes;
 	}
@@ -153,6 +155,12 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 			setItemAbstract(itemAbstract);
 		}
 
+		String language = (String)attributes.get("language");
+
+		if (language != null) {
+			setLanguage(language);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -163,6 +171,12 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 
 		if (Uuid != null) {
 			setUuid(Uuid);
+		}
+
+		String metadataValue = (String)attributes.get("metadataValue");
+
+		if (metadataValue != null) {
+			setMetadataValue(metadataValue);
 		}
 	}
 
@@ -407,6 +421,29 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 	}
 
 	@Override
+	public String getLanguage() {
+		return _language;
+	}
+
+	@Override
+	public void setLanguage(String language) {
+		_language = language;
+
+		if (_suburItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _suburItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setLanguage", String.class);
+
+				method.invoke(_suburItemRemoteModel, language);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public int getStatus() {
 		return _status;
 	}
@@ -453,6 +490,48 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 	}
 
 	@Override
+	public String getMetadataValue() {
+		return _metadataValue;
+	}
+
+	@Override
+	public void setMetadataValue(String metadataValue) {
+		_metadataValue = metadataValue;
+
+		if (_suburItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _suburItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMetadataValue", String.class);
+
+				method.invoke(_suburItemRemoteModel, metadataValue);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public java.util.Map<java.lang.String, java.lang.String> getIdentifiers() {
+		try {
+			String methodName = "getIdentifiers";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.util.Map<java.lang.String, java.lang.String> returnObj = (java.util.Map<java.lang.String, java.lang.String>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getSearchDescription() {
 		try {
 			String methodName = "getSearchDescription";
@@ -472,6 +551,39 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 	}
 
 	@Override
+	public void setIdentifier(
+		java.util.Map<java.lang.String, java.lang.String> identifierMap) {
+		try {
+			String methodName = "setIdentifier";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.util.Map.class };
+
+			Object[] parameterValues = new Object[] { identifierMap };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void setOtherTitle(java.lang.String[] otherTitle) {
+		try {
+			String methodName = "setOtherTitle";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.lang.String.class };
+
+			Object[] parameterValues = new Object[] { otherTitle };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.util.List<com.idetronic.subur.model.ItemType> getItemTypes() {
 		try {
 			String methodName = "getItemTypes";
@@ -484,6 +596,61 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 					parameterTypes, parameterValues);
 
 			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.String[] getOtherTitles() {
+		try {
+			String methodName = "getOtherTitles";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String[] returnObj = (java.lang.String[])invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.util.Map getSeriesReportNo() {
+		try {
+			String methodName = "getSeriesReportNo";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.util.Map returnObj = (java.util.Map)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void setSeriesReportNo(
+		java.util.Map<java.lang.String, java.lang.String> entryMap) {
+		try {
+			String methodName = "setSeriesReportNo";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.util.Map.class };
+
+			Object[] parameterValues = new Object[] { entryMap };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
 		}
 		catch (Exception e) {
 			throw new UnsupportedOperationException(e);
@@ -569,8 +736,10 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		clone.setPublishedDate(getPublishedDate());
 		clone.setTitle(getTitle());
 		clone.setItemAbstract(getItemAbstract());
+		clone.setLanguage(getLanguage());
 		clone.setStatus(getStatus());
 		clone.setUuid(getUuid());
+		clone.setMetadataValue(getMetadataValue());
 
 		return clone;
 	}
@@ -621,7 +790,7 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{itemId=");
 		sb.append(getItemId());
@@ -643,10 +812,14 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		sb.append(getTitle());
 		sb.append(", itemAbstract=");
 		sb.append(getItemAbstract());
+		sb.append(", language=");
+		sb.append(getLanguage());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", Uuid=");
 		sb.append(getUuid());
+		sb.append(", metadataValue=");
+		sb.append(getMetadataValue());
 		sb.append("}");
 
 		return sb.toString();
@@ -654,7 +827,7 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.SuburItem");
@@ -701,12 +874,20 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 		sb.append(getItemAbstract());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>language</column-name><column-value><![CDATA[");
+		sb.append(getLanguage());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>Uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>metadataValue</column-name><column-value><![CDATA[");
+		sb.append(getMetadataValue());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -725,8 +906,10 @@ public class SuburItemClp extends BaseModelImpl<SuburItem> implements SuburItem 
 	private Date _publishedDate;
 	private String _title;
 	private String _itemAbstract;
+	private String _language;
 	private int _status;
 	private String _Uuid;
+	private String _metadataValue;
 	private BaseModel<?> _suburItemRemoteModel;
 	private Class<?> _clpSerializerClass = com.idetronic.subur.service.ClpSerializer.class;
 }

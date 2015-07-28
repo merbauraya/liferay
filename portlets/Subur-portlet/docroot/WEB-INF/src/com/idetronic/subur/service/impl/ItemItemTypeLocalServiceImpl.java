@@ -64,12 +64,12 @@ public class ItemItemTypeLocalServiceImpl
 		
 		for (long itemTypeId: itemTypeIds)
 		{
-			
+			logger.info("id="+itemId + " :type="+ itemTypeId);
 			ItemItemTypePK entryPK = new ItemItemTypePK();
 			entryPK.setItemId(itemId);
 			entryPK.setItemTypeId(itemTypeId);
 			ItemItemType entry = itemItemTypePersistence.create(entryPK);
-			super.updateItemItemType(entry);
+			itemItemTypePersistence.update(entry);
 			ItemTypeLocalServiceUtil.incrementCounter(itemTypeId);
 			
 			
@@ -183,6 +183,9 @@ public class ItemItemTypeLocalServiceImpl
 	 */
 	public List<ItemItemType> itemTypeByItemid(long itemId) throws SystemException
 	{
-		return itemItemTypePersistence.findByItemId(itemId);
+		
+		List<ItemItemType> itemTypes = itemItemTypePersistence.findByItemId(itemId);
+		logger.info("id="+itemId +" size="+itemTypes.size());
+		return itemTypes;
 	}
 }

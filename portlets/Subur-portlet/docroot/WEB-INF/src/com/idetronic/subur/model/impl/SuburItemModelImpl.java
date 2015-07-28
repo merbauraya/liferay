@@ -72,10 +72,12 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 			{ "publishedDate", Types.TIMESTAMP },
 			{ "title", Types.VARCHAR },
 			{ "itemAbstract", Types.CLOB },
+			{ "language", Types.VARCHAR },
 			{ "status", Types.INTEGER },
-			{ "Uuid", Types.VARCHAR }
+			{ "Uuid", Types.VARCHAR },
+			{ "metadataValue", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table subur_item (itemId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,publishedDate DATE null,title VARCHAR(255) null,itemAbstract TEXT null,status INTEGER,Uuid VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table subur_item (itemId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,publishedDate DATE null,title VARCHAR(255) null,itemAbstract TEXT null,language VARCHAR(75) null,status INTEGER,Uuid VARCHAR(75) null,metadataValue TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table subur_item";
 	public static final String ORDER_BY_JPQL = " ORDER BY suburItem.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY subur_item.createDate ASC";
@@ -144,8 +146,10 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 		attributes.put("publishedDate", getPublishedDate());
 		attributes.put("title", getTitle());
 		attributes.put("itemAbstract", getItemAbstract());
+		attributes.put("language", getLanguage());
 		attributes.put("status", getStatus());
 		attributes.put("Uuid", getUuid());
+		attributes.put("metadataValue", getMetadataValue());
 
 		return attributes;
 	}
@@ -212,6 +216,12 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 			setItemAbstract(itemAbstract);
 		}
 
+		String language = (String)attributes.get("language");
+
+		if (language != null) {
+			setLanguage(language);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -222,6 +232,12 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 
 		if (Uuid != null) {
 			setUuid(Uuid);
+		}
+
+		String metadataValue = (String)attributes.get("metadataValue");
+
+		if (metadataValue != null) {
+			setMetadataValue(metadataValue);
 		}
 	}
 
@@ -365,6 +381,21 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 	}
 
 	@Override
+	public String getLanguage() {
+		if (_language == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _language;
+		}
+	}
+
+	@Override
+	public void setLanguage(String language) {
+		_language = language;
+	}
+
+	@Override
 	public int getStatus() {
 		return _status;
 	}
@@ -399,6 +430,21 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 	@Override
 	public void setUuid(String Uuid) {
 		_Uuid = Uuid;
+	}
+
+	@Override
+	public String getMetadataValue() {
+		if (_metadataValue == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _metadataValue;
+		}
+	}
+
+	@Override
+	public void setMetadataValue(String metadataValue) {
+		_metadataValue = metadataValue;
 	}
 
 	public long getColumnBitmask() {
@@ -442,8 +488,10 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 		suburItemImpl.setPublishedDate(getPublishedDate());
 		suburItemImpl.setTitle(getTitle());
 		suburItemImpl.setItemAbstract(getItemAbstract());
+		suburItemImpl.setLanguage(getLanguage());
 		suburItemImpl.setStatus(getStatus());
 		suburItemImpl.setUuid(getUuid());
+		suburItemImpl.setMetadataValue(getMetadataValue());
 
 		suburItemImpl.resetOriginalValues();
 
@@ -568,6 +616,14 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 			suburItemCacheModel.itemAbstract = null;
 		}
 
+		suburItemCacheModel.language = getLanguage();
+
+		String language = suburItemCacheModel.language;
+
+		if ((language != null) && (language.length() == 0)) {
+			suburItemCacheModel.language = null;
+		}
+
 		suburItemCacheModel.status = getStatus();
 
 		suburItemCacheModel.Uuid = getUuid();
@@ -578,12 +634,20 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 			suburItemCacheModel.Uuid = null;
 		}
 
+		suburItemCacheModel.metadataValue = getMetadataValue();
+
+		String metadataValue = suburItemCacheModel.metadataValue;
+
+		if ((metadataValue != null) && (metadataValue.length() == 0)) {
+			suburItemCacheModel.metadataValue = null;
+		}
+
 		return suburItemCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{itemId=");
 		sb.append(getItemId());
@@ -605,10 +669,14 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 		sb.append(getTitle());
 		sb.append(", itemAbstract=");
 		sb.append(getItemAbstract());
+		sb.append(", language=");
+		sb.append(getLanguage());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", Uuid=");
 		sb.append(getUuid());
+		sb.append(", metadataValue=");
+		sb.append(getMetadataValue());
 		sb.append("}");
 
 		return sb.toString();
@@ -616,7 +684,7 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.SuburItem");
@@ -663,12 +731,20 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 		sb.append(getItemAbstract());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>language</column-name><column-value><![CDATA[");
+		sb.append(getLanguage());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>Uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>metadataValue</column-name><column-value><![CDATA[");
+		sb.append(getMetadataValue());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -693,10 +769,12 @@ public class SuburItemModelImpl extends BaseModelImpl<SuburItem>
 	private Date _publishedDate;
 	private String _title;
 	private String _itemAbstract;
+	private String _language;
 	private int _status;
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
 	private String _Uuid;
+	private String _metadataValue;
 	private long _columnBitmask;
 	private SuburItem _escapedModel;
 }

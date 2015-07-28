@@ -107,6 +107,7 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.util.StringPool" %>
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %><%@
 page import="com.liferay.portal.theme.ThemeDisplay" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
@@ -154,6 +155,7 @@ page import="java.util.Date" %><%@
 page import="java.util.List" %><%@
 page import="java.util.Map" %>
 <%@ page import="java.util.Collections" %>
+<%@ page import="java.util.Locale" %>
 
 <%@ page import="javax.portlet.PortletPreferences" %><%@
 page import="javax.portlet.PortletURL" %><%@
@@ -250,6 +252,7 @@ page import="com.idetronic.subur.service.MetadataPropertyValueLocalServiceUtil" 
 	String paginationType = GetterUtil.getString(portletPreferences.getValue("paginationType", "none"));
 	String authorTitleString = GetterUtil.getString(portletPreferences.getValue("authorTitle",StringPool.BLANK), StringPool.BLANK);
 	String authorSiteNameString = GetterUtil.getString(portletPreferences.getValue("authorSiteName", StringPool.BLANK))	;		
+	String itemIdentifier = GetterUtil.getString(portletPreferences.getValue("itemIdentifier", StringPool.BLANK));
 	//default
 	boolean showEditEntryPermissions = true;
 	boolean showSearch = true; 

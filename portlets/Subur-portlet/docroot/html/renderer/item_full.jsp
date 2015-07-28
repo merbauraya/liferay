@@ -8,6 +8,7 @@
 	suburItem = suburItem.toEscapedModel();
 	AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(SuburItem.class.getName(), itemId);
 	suburItem = suburItem.toEscapedModel();
+	/*
 	List<ItemFileEntry> itemFileEntries = ItemFileEntryLocalServiceUtil.getByItemId(suburItem.getItemId());
 	
 	List<DLFileEntry> fileEntries = new ArrayList<DLFileEntry>();
@@ -16,7 +17,7 @@
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.fetchDLFileEntry(itemFileEntry.getFileEntryId());
 		fileEntries.add(fileEntry);
 	}
-	
+	*/
 	
 	//view counter
 	SuburItemLocalServiceUtil.addViewStat(suburItem.getItemId());

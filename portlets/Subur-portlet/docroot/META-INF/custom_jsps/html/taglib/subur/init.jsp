@@ -18,6 +18,7 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
+
 <%@ page import="com.liferay.portlet.PortletURLImpl" %>
 <%@ page import="com.liferay.portal.util.PortletKeys" %>
 <%@page import="java.util.Collections"%>
@@ -32,6 +33,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="java.util.Locale" %>
 <%@page import="com.liferay.portal.kernel.util.StringPool"%>
 <%@page import="com.liferay.portal.kernel.util.StringUtil"%>
 

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -79,6 +80,30 @@ public class SuburIndexer extends BaseIndexer {
          document.addKeyword(Field.SCOPE_GROUP_ID, item.getGroupId());
          document.addKeyword(SuburConstant.FIELD_YEAR, year);
          document.addKeyword(SuburConstant.FIELD_MONTH, month);
+         
+         //other title
+         String[] otherTitles = item.getOtherTitles();
+         if (otherTitles != null & otherTitles.length >0)
+         {
+             Field otherTitle = new Field(SuburConstant.FIELD_OTHER_TITLE, otherTitles );
+             document.add(otherTitle);
+         }
+         
+         //identifier
+         Map<String,String> itemIdentifiers = item.getIdentifiers();
+         if (itemIdentifiers != null && itemIdentifiers.size() > 0)
+         {
+	         for (Map.Entry<String, String> identEntry : itemIdentifiers.entrySet()) 
+	         {
+	        	    String identName = identEntry.getKey();
+	        	    String identValue = identEntry.getValue();
+	                document.addKeyword(identName, identValue);
+	
+	         }
+         }
+         
+         //Series Report No
+         
          
          //item type
          List<ItemItemType> itemItemTypes = ItemItemTypeLocalServiceUtil.itemTypeByItemid(item.getItemId());

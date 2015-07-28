@@ -234,6 +234,21 @@ public interface SuburItemModel extends BaseModel<SuburItem>, GroupedModel {
 	public void setItemAbstract(String itemAbstract);
 
 	/**
+	 * Returns the language of this subur item.
+	 *
+	 * @return the language of this subur item
+	 */
+	@AutoEscape
+	public String getLanguage();
+
+	/**
+	 * Sets the language of this subur item.
+	 *
+	 * @param language the language of this subur item
+	 */
+	public void setLanguage(String language);
+
+	/**
 	 * Returns the status of this subur item.
 	 *
 	 * @return the status of this subur item
@@ -261,6 +276,21 @@ public interface SuburItemModel extends BaseModel<SuburItem>, GroupedModel {
 	 * @param Uuid the uuid of this subur item
 	 */
 	public void setUuid(String Uuid);
+
+	/**
+	 * Returns the metadata value of this subur item.
+	 *
+	 * @return the metadata value of this subur item
+	 */
+	@AutoEscape
+	public String getMetadataValue();
+
+	/**
+	 * Sets the metadata value of this subur item.
+	 *
+	 * @param metadataValue the metadata value of this subur item
+	 */
+	public void setMetadataValue(String metadataValue);
 
 	@Override
 	public boolean isNew();

@@ -305,6 +305,11 @@ public class SuburItemLocalServiceWrapper implements SuburItemLocalService,
 	}
 
 	@Override
+	public void deleteItem(long itemId) {
+		_suburItemLocalService.deleteItem(itemId);
+	}
+
+	@Override
 	public void deleteItem(com.idetronic.subur.model.SuburItem suburItem)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

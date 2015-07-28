@@ -121,12 +121,16 @@ public class Subur extends MVCPortlet {
 		String itemAbstract = ParamUtil.getString(request, "itemAbstract");
 		String otherTitle = ParamUtil.getString(request, "otherTitle");
 		
-		String x = ParamUtil.getString(request, "itemType");
+		
 	
 		
 		long[] itemTypeIds = new long[itemTypeString.length];
 		for (int i = 0; i < itemTypeString.length; i++)
+		{
+			logger.info("it="+itemTypeString[i]);
 			itemTypeIds[i] = Long.valueOf(itemTypeString[i]);
+			
+		}
 		
 		SuburItem item = SuburItemLocalServiceUtil.addItem(themeDisplay.getUserId(), 
 				themeDisplay.getScopeGroupId(),title, itemAbstract, itemTypeIds, serviceContext);
@@ -188,15 +192,9 @@ public class Subur extends MVCPortlet {
 		String redirect = ParamUtil.getString(request, "redirect");
 		long itemId = ParamUtil.getLong(request, "itemId");
 		if (cmd.equals(Constants.DELETE)){
-			try {
-				SuburItemLocalServiceUtil.deleteItem(itemId);
-			} catch (NoSuchSuburItemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SystemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			SuburItemLocalServiceUtil.deleteItem(itemId);
+			
 		}
 		else if (cmd.equals(Constants.MOVE_TO_TRASH)){
 			//todo process thrash
@@ -239,18 +237,19 @@ public class Subur extends MVCPortlet {
 		String sourceFile = uploadRequest.getFileName("itemFile");
 	
 		String title = ParamUtil.getString(uploadRequest, "title");
-		
+		String language = ParamUtil.getString(uploadRequest, "language");
 		int itemStatus = ParamUtil.getInteger(uploadRequest, "itemStatus");
 		
 		String itemAbstract = ParamUtil.getString(uploadRequest, "itemAbstract");
-		long divisionId = ParamUtil.getLong(uploadRequest, "division");
-		String otherTitle = ParamUtil.getString(uploadRequest, "otherTitle");
+		
+		//String otherTitle = ParamUtil.getString(uploadRequest, "otherTitle");
 		String categoryIds = ParamUtil.getString(uploadRequest, "categoryIds");
-		logger.info(categoryIds);
+		
 		categoryIds = StringUtil.replace(categoryIds, ",,",",");
 		String authorIdsString = ParamUtil.getString(uploadRequest, "authorsSearchContainerPrimaryKeys");
 		String assetLinkEntryIdsString = ParamUtil.getString(uploadRequest,
 				"assetLinksSearchContainerPrimaryKeys");
+		
 		
 		
 		
@@ -275,7 +274,7 @@ public class Subur extends MVCPortlet {
 		long[] authorIds = StringUtil.split(GetterUtil.getString(authorIdsString), 0L);
 		
 		
-		//handler categories
+		//handle categories
 		long[] catIds = null;
 		logger.info(categoryIds);
 		if (!categoryIds.isEmpty())
@@ -299,25 +298,77 @@ public class Subur extends MVCPortlet {
 		}
 		
 		
+		//Serie / Report No
+		String serieReportNoIndexesString = uploadRequest.getParameter("serieReportNoIndexes");
+		int[] serieReportNoIndexes = StringUtil.split(serieReportNoIndexesString, 0);
+
+		
+		
+		Map<String,String> serieReportNoMap = new HashMap<String,String>();
+		for (int serieReportNoIndex : serieReportNoIndexes)
+		{
+			String serieName = ParamUtil.getString(uploadRequest, "serie"+serieReportNoIndex);
+			String reportNo = ParamUtil.getString(uploadRequest, "reportNo"+serieReportNoIndex);
+			serieReportNoMap.put(serieName, reportNo);
+			
+			
+		}
+		
+		//identifier
+		String identifierIndexesString = ParamUtil.getString(uploadRequest, "itemIdentifierIndexes");
+		logger.info("ident="+identifierIndexesString);
+		int[] identifierIndexes = StringUtil.split(identifierIndexesString, 0);
+		
+		Map<String,String> itemIdentifierMap = new HashMap<String,String>();
+		for (int itemIdentifierIndex : identifierIndexes)
+		{
+			String identName = ParamUtil.getString(uploadRequest, "identName"+itemIdentifierIndex);
+			String identValue = ParamUtil.getString(uploadRequest, "identValue"+itemIdentifierIndex); 
+			itemIdentifierMap.put(identName, identValue);
+			logger.info(identValue);
+		}
+		
+		
+		//end identifier
+		
+		//other titles
+		String otherTitleIndexesString = uploadRequest.getParameter(
+				"otherTitleIndexes");
+		
+		
+		
+		int[] otherTitleIndexes = StringUtil.split(otherTitleIndexesString, 0);
+		logger.info("otitle="+otherTitleIndexesString);
+		String[] otherTitles = new String[otherTitleIndexes.length];
+		int i = 0;
+		for (int otherTitleIndex : otherTitleIndexes) {
+			
+			String otherTitle = ParamUtil.getString(uploadRequest, "otherTitle"+otherTitleIndex);
+			if (Validator.isNull(otherTitle))
+				continue;
+			otherTitles[i] = otherTitle;
+			i++;
+			
+		
+		}
+		
 		
 		
 		try {
 			SuburItem suburItem = SuburItemLocalServiceUtil.getSuburItem(itemId);
-			
-			
+						
 			suburItem.setTitle(title);
+			suburItem.setLanguage(language);
 			suburItem.setItemAbstract(itemAbstract);
 			suburItem.setStatus(itemStatus);
-			
+			suburItem.setOtherTitle(otherTitles);
+			suburItem.setSeriesReportNo(serieReportNoMap);
+			suburItem.setIdentifier(itemIdentifierMap);
 			serviceContext.setAssetTagNames(tagNamesArr);
 			serviceContext.setAssetCategoryIds(catIds);
 			
 			
 			SuburItemLocalServiceUtil.updateSuburItem(suburItem, userId, itemTypeIds, authorIds, serviceContext);
-			/*
-			if (Validator.isNotNull(sourceFile))
-				attachItemFile(suburItem,file);
-			*/
 			
 			if (Validator.isNotNull(redirect))
 				actionResponse.sendRedirect(redirect);
@@ -355,8 +406,7 @@ public class Subur extends MVCPortlet {
 		String lastName = ParamUtil.getString(request, "lastName");
 		String remoteId = ParamUtil.getString(request, "remoteId");
 		String title = ParamUtil.getString(request, "title");
-		String personalSite = ParamUtil.getString(request, "personalSite");
-		String googleScholar = ParamUtil.getString(request, "googleScholar");
+		
 		String expertises = ParamUtil.getString(request, "expertiseNames");
 		
 		String[] expertiseNamesArr = null;

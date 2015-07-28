@@ -417,6 +417,8 @@ create table subur_item (
 	publishedDate DATE null,
 	title VARCHAR(255) null,
 	itemAbstract TEXT null,
+	language VARCHAR(75) null,
 	status INTEGER,
-	Uuid VARCHAR(75) null
+	Uuid VARCHAR(75) null,
+	metadataValue TEXT null
 );

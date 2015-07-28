@@ -1707,8 +1707,10 @@ public class SuburItemPersistenceImpl extends BasePersistenceImpl<SuburItem>
 		suburItemImpl.setPublishedDate(suburItem.getPublishedDate());
 		suburItemImpl.setTitle(suburItem.getTitle());
 		suburItemImpl.setItemAbstract(suburItem.getItemAbstract());
+		suburItemImpl.setLanguage(suburItem.getLanguage());
 		suburItemImpl.setStatus(suburItem.getStatus());
 		suburItemImpl.setUuid(suburItem.getUuid());
+		suburItemImpl.setMetadataValue(suburItem.getMetadataValue());
 
 		return suburItemImpl;
 	}

@@ -295,6 +295,10 @@ public class SuburItemLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void deleteItem(long itemId) {
+		getService().deleteItem(itemId);
+	}
+
 	public static void deleteItem(com.idetronic.subur.model.SuburItem suburItem)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

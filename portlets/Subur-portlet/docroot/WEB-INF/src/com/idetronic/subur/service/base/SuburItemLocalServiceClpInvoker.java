@@ -130,59 +130,63 @@ public class SuburItemLocalServiceClpInvoker {
 
 		_methodName152 = "deleteItem";
 
-		_methodParameterTypes152 = new String[] {
+		_methodParameterTypes152 = new String[] { "long" };
+
+		_methodName153 = "deleteItem";
+
+		_methodParameterTypes153 = new String[] {
 				"com.idetronic.subur.model.SuburItem"
 			};
 
-		_methodName153 = "getItemTypes";
+		_methodName154 = "getItemTypes";
 
-		_methodParameterTypes153 = new String[] { "long" };
+		_methodParameterTypes154 = new String[] { "long" };
 
-		_methodName154 = "getSuburItems";
+		_methodName155 = "getSuburItems";
 
-		_methodParameterTypes154 = new String[] { "int", "int", "int" };
+		_methodParameterTypes155 = new String[] { "int", "int", "int" };
 
-		_methodName155 = "publishItem";
-
-		_methodParameterTypes155 = new String[] { "long" };
-
-		_methodName156 = "withDrawItem";
+		_methodName156 = "publishItem";
 
 		_methodParameterTypes156 = new String[] { "long" };
 
-		_methodName157 = "getItemCount";
+		_methodName157 = "withDrawItem";
 
-		_methodParameterTypes157 = new String[] { "int" };
+		_methodParameterTypes157 = new String[] { "long" };
 
-		_methodName158 = "getByGroup";
+		_methodName158 = "getItemCount";
 
-		_methodParameterTypes158 = new String[] { "long" };
+		_methodParameterTypes158 = new String[] { "int" };
 
-		_methodName159 = "countAssetVocabularyById";
+		_methodName159 = "getByGroup";
 
 		_methodParameterTypes159 = new String[] { "long" };
 
-		_methodName160 = "getEntriesCount";
+		_methodName160 = "countAssetVocabularyById";
 
-		_methodParameterTypes160 = new String[] {
-				"com.liferay.portlet.asset.service.persistence.AssetEntryQuery",
-				"long[][]", "long[][]"
-			};
+		_methodParameterTypes160 = new String[] { "long" };
 
-		_methodName161 = "getAssetEntries";
+		_methodName161 = "getEntriesCount";
 
 		_methodParameterTypes161 = new String[] {
 				"com.liferay.portlet.asset.service.persistence.AssetEntryQuery",
 				"long[][]", "long[][]"
 			};
 
-		_methodName162 = "addDownloadStats";
+		_methodName162 = "getAssetEntries";
 
-		_methodParameterTypes162 = new String[] { "long" };
+		_methodParameterTypes162 = new String[] {
+				"com.liferay.portlet.asset.service.persistence.AssetEntryQuery",
+				"long[][]", "long[][]"
+			};
 
-		_methodName163 = "addViewStat";
+		_methodName163 = "addDownloadStats";
 
 		_methodParameterTypes163 = new String[] { "long" };
+
+		_methodName164 = "addViewStat";
+
+		_methodParameterTypes164 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -305,69 +309,76 @@ public class SuburItemLocalServiceClpInvoker {
 
 		if (_methodName152.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes152, parameterTypes)) {
-			SuburItemLocalServiceUtil.deleteItem((com.idetronic.subur.model.SuburItem)arguments[0]);
+			SuburItemLocalServiceUtil.deleteItem(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
 		if (_methodName153.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes153, parameterTypes)) {
-			return SuburItemLocalServiceUtil.getItemTypes(((Long)arguments[0]).longValue());
+			SuburItemLocalServiceUtil.deleteItem((com.idetronic.subur.model.SuburItem)arguments[0]);
+
+			return null;
 		}
 
 		if (_methodName154.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes154, parameterTypes)) {
+			return SuburItemLocalServiceUtil.getItemTypes(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName155.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes155, parameterTypes)) {
 			return SuburItemLocalServiceUtil.getSuburItems(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName155.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes155, parameterTypes)) {
-			return SuburItemLocalServiceUtil.publishItem(((Long)arguments[0]).longValue());
-		}
-
 		if (_methodName156.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes156, parameterTypes)) {
-			return SuburItemLocalServiceUtil.withDrawItem(((Long)arguments[0]).longValue());
+			return SuburItemLocalServiceUtil.publishItem(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName157.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes157, parameterTypes)) {
-			return SuburItemLocalServiceUtil.getItemCount(((Integer)arguments[0]).intValue());
+			return SuburItemLocalServiceUtil.withDrawItem(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName158.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes158, parameterTypes)) {
-			return SuburItemLocalServiceUtil.getByGroup(((Long)arguments[0]).longValue());
+			return SuburItemLocalServiceUtil.getItemCount(((Integer)arguments[0]).intValue());
 		}
 
 		if (_methodName159.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes159, parameterTypes)) {
-			return SuburItemLocalServiceUtil.countAssetVocabularyById(((Long)arguments[0]).longValue());
+			return SuburItemLocalServiceUtil.getByGroup(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName160.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes160, parameterTypes)) {
-			return SuburItemLocalServiceUtil.getEntriesCount((com.liferay.portlet.asset.service.persistence.AssetEntryQuery)arguments[0],
-				(long[])arguments[1], (long[])arguments[2]);
+			return SuburItemLocalServiceUtil.countAssetVocabularyById(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName161.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes161, parameterTypes)) {
-			return SuburItemLocalServiceUtil.getAssetEntries((com.liferay.portlet.asset.service.persistence.AssetEntryQuery)arguments[0],
+			return SuburItemLocalServiceUtil.getEntriesCount((com.liferay.portlet.asset.service.persistence.AssetEntryQuery)arguments[0],
 				(long[])arguments[1], (long[])arguments[2]);
 		}
 
 		if (_methodName162.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes162, parameterTypes)) {
+			return SuburItemLocalServiceUtil.getAssetEntries((com.liferay.portlet.asset.service.persistence.AssetEntryQuery)arguments[0],
+				(long[])arguments[1], (long[])arguments[2]);
+		}
+
+		if (_methodName163.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes163, parameterTypes)) {
 			SuburItemLocalServiceUtil.addDownloadStats(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
-		if (_methodName163.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes163, parameterTypes)) {
+		if (_methodName164.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes164, parameterTypes)) {
 			SuburItemLocalServiceUtil.addViewStat(((Long)arguments[0]).longValue());
 
 			return null;
@@ -440,4 +451,6 @@ public class SuburItemLocalServiceClpInvoker {
 	private String[] _methodParameterTypes162;
 	private String _methodName163;
 	private String[] _methodParameterTypes163;
+	private String _methodName164;
+	private String[] _methodParameterTypes164;
 }

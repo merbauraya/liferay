@@ -112,27 +112,4 @@
 
 </aui:row>
 
-<aui:script >
 
-    $('#<portlet:namespace />continueButton').on(
-        'click',
-        function(event) {
-            event.preventDefault();
-            var fm = $('#<portlet:namespace />fm1');
-            console.log(fm);
-            /*
-            //fm.ajaxSubmit(
-            $('#<portlet:namespace />fm1').ajaxSubmit(
-           
-            
-            
-                {
-                    success: function(responseData) {
-                    	console.log(responseData);
-                        <%-- $('#<portlet:namespace />exportImportOptions').html(responseData); --%>
-                    }
-                }
-            );*/
-        }
-    );
-</aui:script>

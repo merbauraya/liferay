@@ -281,8 +281,10 @@
 			</basic>
 			<basic name="title" />
 			<basic name="itemAbstract" />
+			<basic name="language" />
 			<basic name="status" />
 			<basic name="Uuid" />
+			<basic name="metadataValue" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -385,7 +387,9 @@
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.SuburItemImpl" name="SuburItem">
 		<table name="subur_item" />
-		<attributes />
+		<attributes>
+			<transient name="seriesReportNo" />
+		</attributes>
 	</entity>
 	<entity class="com.idetronic.subur.model.impl.ViewSummaryImpl" name="ViewSummary">
 		<table name="Subur_ViewSummary" />

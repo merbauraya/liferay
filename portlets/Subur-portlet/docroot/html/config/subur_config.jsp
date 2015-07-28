@@ -81,6 +81,11 @@
 	
 	
 	</liferay-ui:panel>
+	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="suburItemIdentifierTypePanel" persistState="<%= true %>" title="subur-item">
+			
+		<aui:input value="<%= itemIdentifier %>" label="item-identifier" name="preferences--itemIdentifier--" />
+				
+	</liferay-ui:panel>
 	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="suburAuthorDisplayCategoriesPanel" persistState="<%= true %>" title="author">
 			
 		<aui:input value="<%= authorTitleString %>" label="author-title-list" name="preferences--authorTitle--" />

@@ -264,6 +264,8 @@ public interface SuburItemLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteItem(long itemId);
+
 	public void deleteItem(com.idetronic.subur.model.SuburItem suburItem)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -38,7 +38,7 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{itemId=");
 		sb.append(itemId);
@@ -60,10 +60,14 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 		sb.append(title);
 		sb.append(", itemAbstract=");
 		sb.append(itemAbstract);
+		sb.append(", language=");
+		sb.append(language);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", Uuid=");
 		sb.append(Uuid);
+		sb.append(", metadataValue=");
+		sb.append(metadataValue);
 		sb.append("}");
 
 		return sb.toString();
@@ -120,6 +124,13 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 			suburItemImpl.setItemAbstract(itemAbstract);
 		}
 
+		if (language == null) {
+			suburItemImpl.setLanguage(StringPool.BLANK);
+		}
+		else {
+			suburItemImpl.setLanguage(language);
+		}
+
 		suburItemImpl.setStatus(status);
 
 		if (Uuid == null) {
@@ -127,6 +138,13 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 		}
 		else {
 			suburItemImpl.setUuid(Uuid);
+		}
+
+		if (metadataValue == null) {
+			suburItemImpl.setMetadataValue(StringPool.BLANK);
+		}
+		else {
+			suburItemImpl.setMetadataValue(metadataValue);
 		}
 
 		suburItemImpl.resetOriginalValues();
@@ -146,8 +164,10 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 		publishedDate = objectInput.readLong();
 		title = objectInput.readUTF();
 		itemAbstract = objectInput.readUTF();
+		language = objectInput.readUTF();
 		status = objectInput.readInt();
 		Uuid = objectInput.readUTF();
+		metadataValue = objectInput.readUTF();
 	}
 
 	@Override
@@ -183,6 +203,13 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 			objectOutput.writeUTF(itemAbstract);
 		}
 
+		if (language == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(language);
+		}
+
 		objectOutput.writeInt(status);
 
 		if (Uuid == null) {
@@ -190,6 +217,13 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 		}
 		else {
 			objectOutput.writeUTF(Uuid);
+		}
+
+		if (metadataValue == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(metadataValue);
 		}
 	}
 
@@ -203,6 +237,8 @@ public class SuburItemCacheModel implements CacheModel<SuburItem>,
 	public long publishedDate;
 	public String title;
 	public String itemAbstract;
+	public String language;
 	public int status;
 	public String Uuid;
+	public String metadataValue;
 }

@@ -31,6 +31,29 @@ public interface SuburItem extends SuburItemModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.idetronic.subur.model.impl.SuburItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public void setSeriesReportNo(
+		java.util.Map<java.lang.String, java.lang.String> entryMap);
+
+	public void setIdentifier(
+		java.util.Map<java.lang.String, java.lang.String> identifierMap);
+
+	public void setOtherTitle(java.lang.String[] otherTitle);
+
+	public java.util.Map<java.lang.String, java.lang.String> getIdentifiers()
+		throws java.io.IOException,
+			javax.xml.parsers.ParserConfigurationException,
+			org.xml.sax.SAXException;
+
+	public java.util.Map getSeriesReportNo()
+		throws java.io.IOException,
+			javax.xml.parsers.ParserConfigurationException,
+			org.xml.sax.SAXException;
+
+	public java.lang.String[] getOtherTitles()
+		throws java.io.IOException,
+			javax.xml.parsers.ParserConfigurationException,
+			org.xml.sax.SAXException;
+
 	public java.lang.String getSearchDescription();
 
 	public java.util.List<com.idetronic.subur.model.ItemType> getItemTypes()

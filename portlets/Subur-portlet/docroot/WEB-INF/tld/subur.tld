@@ -88,6 +88,24 @@
 		
 		
 	</tag>
+	<tag>
+		<name>category-selector</name>
+		<tag-class>com.idetronic.subur.taglib.AssetCategorySelectorTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>vocabularyId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>portletURL</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		
+		
+	</tag>
 	
 	
 </taglib>
