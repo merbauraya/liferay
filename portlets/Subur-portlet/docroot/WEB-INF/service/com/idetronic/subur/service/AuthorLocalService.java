@@ -254,7 +254,8 @@ public interface AuthorLocalService extends BaseLocalService,
 		java.lang.String lastName, java.lang.String title,
 		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
-		java.lang.String[] expertiseNames)
+		long createdByUserId, java.lang.String[] expertiseNames,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -281,7 +282,8 @@ public interface AuthorLocalService extends BaseLocalService,
 		java.lang.String lastName,
 		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
-		java.lang.String[] expertiseNames)
+		long createdByUserId, java.lang.String[] expertiseNames,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -72,9 +72,12 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 			{ "metadata", Types.VARCHAR },
 			{ "lastPublishedDate", Types.TIMESTAMP },
 			{ "itemCount", Types.INTEGER },
-			{ "personalSite", Types.VARCHAR }
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "Uuid", Types.VARCHAR },
+			{ "createdBy", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Subur_Author (authorId LONG not null primary key,groupId LONG,companyId LONG,title VARCHAR(75) null,idType INTEGER,remoteId VARCHAR(75) null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,middleName VARCHAR(75) null,userId INTEGER,metadata VARCHAR(75) null,lastPublishedDate DATE null,itemCount INTEGER,personalSite VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Subur_Author (authorId LONG not null primary key,groupId LONG,companyId LONG,title VARCHAR(75) null,idType INTEGER,remoteId VARCHAR(75) null,firstName VARCHAR(75) null,lastName VARCHAR(75) null,middleName VARCHAR(75) null,userId INTEGER,metadata VARCHAR(75) null,lastPublishedDate DATE null,itemCount INTEGER,createDate DATE null,modifiedDate DATE null,Uuid VARCHAR(75) null,createdBy LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Subur_Author";
 	public static final String ORDER_BY_JPQL = " ORDER BY author.authorId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Subur_Author.authorId ASC";
@@ -149,7 +152,10 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		attributes.put("metadata", getMetadata());
 		attributes.put("lastPublishedDate", getLastPublishedDate());
 		attributes.put("itemCount", getItemCount());
-		attributes.put("personalSite", getPersonalSite());
+		attributes.put("createDate", getCreateDate());
+		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("Uuid", getUuid());
+		attributes.put("createdBy", getCreatedBy());
 
 		return attributes;
 	}
@@ -234,10 +240,28 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 			setItemCount(itemCount);
 		}
 
-		String personalSite = (String)attributes.get("personalSite");
+		Date createDate = (Date)attributes.get("createDate");
 
-		if (personalSite != null) {
-			setPersonalSite(personalSite);
+		if (createDate != null) {
+			setCreateDate(createDate);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
+		String Uuid = (String)attributes.get("Uuid");
+
+		if (Uuid != null) {
+			setUuid(Uuid);
+		}
+
+		Long createdBy = (Long)attributes.get("createdBy");
+
+		if (createdBy != null) {
+			setCreatedBy(createdBy);
 		}
 	}
 
@@ -458,18 +482,48 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 	}
 
 	@Override
-	public String getPersonalSite() {
-		if (_personalSite == null) {
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	@Override
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	@Override
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
+	@Override
+	public String getUuid() {
+		if (_Uuid == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _personalSite;
+			return _Uuid;
 		}
 	}
 
 	@Override
-	public void setPersonalSite(String personalSite) {
-		_personalSite = personalSite;
+	public void setUuid(String Uuid) {
+		_Uuid = Uuid;
+	}
+
+	@Override
+	public long getCreatedBy() {
+		return _createdBy;
+	}
+
+	@Override
+	public void setCreatedBy(long createdBy) {
+		_createdBy = createdBy;
 	}
 
 	public long getColumnBitmask() {
@@ -516,7 +570,10 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		authorImpl.setMetadata(getMetadata());
 		authorImpl.setLastPublishedDate(getLastPublishedDate());
 		authorImpl.setItemCount(getItemCount());
-		authorImpl.setPersonalSite(getPersonalSite());
+		authorImpl.setCreateDate(getCreateDate());
+		authorImpl.setModifiedDate(getModifiedDate());
+		authorImpl.setUuid(getUuid());
+		authorImpl.setCreatedBy(getCreatedBy());
 
 		authorImpl.resetOriginalValues();
 
@@ -661,20 +718,40 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 
 		authorCacheModel.itemCount = getItemCount();
 
-		authorCacheModel.personalSite = getPersonalSite();
+		Date createDate = getCreateDate();
 
-		String personalSite = authorCacheModel.personalSite;
-
-		if ((personalSite != null) && (personalSite.length() == 0)) {
-			authorCacheModel.personalSite = null;
+		if (createDate != null) {
+			authorCacheModel.createDate = createDate.getTime();
 		}
+		else {
+			authorCacheModel.createDate = Long.MIN_VALUE;
+		}
+
+		Date modifiedDate = getModifiedDate();
+
+		if (modifiedDate != null) {
+			authorCacheModel.modifiedDate = modifiedDate.getTime();
+		}
+		else {
+			authorCacheModel.modifiedDate = Long.MIN_VALUE;
+		}
+
+		authorCacheModel.Uuid = getUuid();
+
+		String Uuid = authorCacheModel.Uuid;
+
+		if ((Uuid != null) && (Uuid.length() == 0)) {
+			authorCacheModel.Uuid = null;
+		}
+
+		authorCacheModel.createdBy = getCreatedBy();
 
 		return authorCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{authorId=");
 		sb.append(getAuthorId());
@@ -702,8 +779,14 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		sb.append(getLastPublishedDate());
 		sb.append(", itemCount=");
 		sb.append(getItemCount());
-		sb.append(", personalSite=");
-		sb.append(getPersonalSite());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", Uuid=");
+		sb.append(getUuid());
+		sb.append(", createdBy=");
+		sb.append(getCreatedBy());
 		sb.append("}");
 
 		return sb.toString();
@@ -711,7 +794,7 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.Author");
@@ -770,8 +853,20 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 		sb.append(getItemCount());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>personalSite</column-name><column-value><![CDATA[");
-		sb.append(getPersonalSite());
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append(getCreateDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>Uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createdBy</column-name><column-value><![CDATA[");
+		sb.append(getCreatedBy());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -802,7 +897,10 @@ public class AuthorModelImpl extends BaseModelImpl<Author>
 	private String _metadata;
 	private Date _lastPublishedDate;
 	private int _itemCount;
-	private String _personalSite;
+	private Date _createDate;
+	private Date _modifiedDate;
+	private String _Uuid;
+	private long _createdBy;
 	private long _columnBitmask;
 	private Author _escapedModel;
 }

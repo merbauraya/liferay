@@ -153,6 +153,69 @@ public interface AuthorPersistence extends BasePersistence<Author> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the authors that the user has permission to view where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the matching authors that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.idetronic.subur.model.Author> filterFindByGroup(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the authors that the user has permission to view where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of authors
+	* @param end the upper bound of the range of authors (not inclusive)
+	* @return the range of matching authors that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.idetronic.subur.model.Author> filterFindByGroup(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the authors that the user has permissions to view where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of authors
+	* @param end the upper bound of the range of authors (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching authors that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.idetronic.subur.model.Author> filterFindByGroup(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the authors before and after the current author in the ordered set of authors that the user has permission to view where groupId = &#63;.
+	*
+	* @param authorId the primary key of the current author
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next author
+	* @throws com.idetronic.subur.NoSuchAuthorException if a author with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.idetronic.subur.model.Author[] filterFindByGroup_PrevAndNext(
+		long authorId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.subur.NoSuchAuthorException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes all the authors where groupId = &#63; from the database.
 	*
 	* @param groupId the group ID
@@ -169,6 +232,16 @@ public interface AuthorPersistence extends BasePersistence<Author> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByGroup(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of authors that the user has permission to view where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the number of matching authors that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByGroup(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -299,6 +372,73 @@ public interface AuthorPersistence extends BasePersistence<Author> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the authors that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @return the matching authors that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.idetronic.subur.model.Author> filterFindByCompanyGroup(
+		long companyId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the authors that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param start the lower bound of the range of authors
+	* @param end the upper bound of the range of authors (not inclusive)
+	* @return the range of matching authors that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.idetronic.subur.model.Author> filterFindByCompanyGroup(
+		long companyId, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the authors that the user has permissions to view where companyId = &#63; and groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param start the lower bound of the range of authors
+	* @param end the upper bound of the range of authors (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching authors that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.idetronic.subur.model.Author> filterFindByCompanyGroup(
+		long companyId, long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the authors before and after the current author in the ordered set of authors that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	*
+	* @param authorId the primary key of the current author
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next author
+	* @throws com.idetronic.subur.NoSuchAuthorException if a author with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.idetronic.subur.model.Author[] filterFindByCompanyGroup_PrevAndNext(
+		long authorId, long companyId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.idetronic.subur.NoSuchAuthorException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes all the authors where companyId = &#63; and groupId = &#63; from the database.
 	*
 	* @param companyId the company ID
@@ -317,6 +457,17 @@ public interface AuthorPersistence extends BasePersistence<Author> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByCompanyGroup(long companyId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of authors that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @return the number of matching authors that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByCompanyGroup(long companyId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

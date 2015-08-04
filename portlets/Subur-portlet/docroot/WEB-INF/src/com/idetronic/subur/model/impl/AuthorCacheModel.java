@@ -37,7 +37,7 @@ import java.util.Date;
 public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{authorId=");
 		sb.append(authorId);
@@ -65,8 +65,14 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 		sb.append(lastPublishedDate);
 		sb.append(", itemCount=");
 		sb.append(itemCount);
-		sb.append(", personalSite=");
-		sb.append(personalSite);
+		sb.append(", createDate=");
+		sb.append(createDate);
+		sb.append(", modifiedDate=");
+		sb.append(modifiedDate);
+		sb.append(", Uuid=");
+		sb.append(Uuid);
+		sb.append(", createdBy=");
+		sb.append(createdBy);
 		sb.append("}");
 
 		return sb.toString();
@@ -135,12 +141,28 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 
 		authorImpl.setItemCount(itemCount);
 
-		if (personalSite == null) {
-			authorImpl.setPersonalSite(StringPool.BLANK);
+		if (createDate == Long.MIN_VALUE) {
+			authorImpl.setCreateDate(null);
 		}
 		else {
-			authorImpl.setPersonalSite(personalSite);
+			authorImpl.setCreateDate(new Date(createDate));
 		}
+
+		if (modifiedDate == Long.MIN_VALUE) {
+			authorImpl.setModifiedDate(null);
+		}
+		else {
+			authorImpl.setModifiedDate(new Date(modifiedDate));
+		}
+
+		if (Uuid == null) {
+			authorImpl.setUuid(StringPool.BLANK);
+		}
+		else {
+			authorImpl.setUuid(Uuid);
+		}
+
+		authorImpl.setCreatedBy(createdBy);
 
 		authorImpl.resetOriginalValues();
 
@@ -162,7 +184,10 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 		metadata = objectInput.readUTF();
 		lastPublishedDate = objectInput.readLong();
 		itemCount = objectInput.readInt();
-		personalSite = objectInput.readUTF();
+		createDate = objectInput.readLong();
+		modifiedDate = objectInput.readLong();
+		Uuid = objectInput.readUTF();
+		createdBy = objectInput.readLong();
 	}
 
 	@Override
@@ -220,13 +245,17 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 
 		objectOutput.writeLong(lastPublishedDate);
 		objectOutput.writeInt(itemCount);
+		objectOutput.writeLong(createDate);
+		objectOutput.writeLong(modifiedDate);
 
-		if (personalSite == null) {
+		if (Uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(personalSite);
+			objectOutput.writeUTF(Uuid);
 		}
+
+		objectOutput.writeLong(createdBy);
 	}
 
 	public long authorId;
@@ -242,5 +271,8 @@ public class AuthorCacheModel implements CacheModel<Author>, Externalizable {
 	public String metadata;
 	public long lastPublishedDate;
 	public int itemCount;
-	public String personalSite;
+	public long createDate;
+	public long modifiedDate;
+	public String Uuid;
+	public long createdBy;
 }

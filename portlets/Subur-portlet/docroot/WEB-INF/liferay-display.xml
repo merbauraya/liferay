@@ -12,5 +12,6 @@
 		<portlet id="item-type"></portlet>
 		<portlet id="1"></portlet>
 		<portlet id="subur-statistic"></portlet>
+		<portlet id="author"></portlet>
 	</category>
 </display>

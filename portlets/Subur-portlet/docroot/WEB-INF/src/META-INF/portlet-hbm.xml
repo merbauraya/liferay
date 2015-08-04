@@ -41,7 +41,10 @@
 		<property name="metadata" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastPublishedDate" type="org.hibernate.type.TimestampType" />
 		<property name="itemCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="personalSite" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="Uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.idetronic.subur.model.impl.AuthorExpertiseImpl" table="Subur_AuthorExpertise">
 		<cache usage="read-write" />

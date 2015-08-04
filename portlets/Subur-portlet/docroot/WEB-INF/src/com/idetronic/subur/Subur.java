@@ -111,11 +111,12 @@ public class Subur extends MVCPortlet {
 	
 	
 	
-	public void newItem(ActionRequest request,ActionResponse response) throws PortalException, SystemException
+	public void newItem(ActionRequest request,ActionResponse response) throws PortalException, SystemException 
 	{
 		themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-		         SuburItem.class.getName(), request);
+		
+		
+		
 		String title = ParamUtil.getString(request, "title");
 		String[] itemTypeString = ParamUtil.getParameterValues(request, "itemType");
 		String itemAbstract = ParamUtil.getString(request, "itemAbstract");
@@ -132,16 +133,34 @@ public class Subur extends MVCPortlet {
 			
 		}
 		
-		SuburItem item = SuburItemLocalServiceUtil.addItem(themeDisplay.getUserId(), 
-				themeDisplay.getScopeGroupId(),title, itemAbstract, itemTypeIds, serviceContext);
+		ServiceContext serviceContext;
+		try {
+			serviceContext = ServiceContextFactory.getInstance(
+			         SuburItem.class.getName(), request);
+			
+			SuburItem item = SuburItemLocalServiceUtil.addItem(themeDisplay.getUserId(), 
+					themeDisplay.getScopeGroupId(),title, itemAbstract, itemTypeIds, serviceContext);
+			
+			
+			request.setAttribute("itemId", String.valueOf(item.getItemId()));
+			
+			
+			response.setRenderParameter("jspPage","/html/deposit.jsp");
+			
+		} catch (PortalException e) {
+			logger.error(e);
+			throw new PortalException(e);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			logger.error(e);
+			throw new SystemException(e);
+		}
 		
 		
 		
-		//response.setRenderParameter("itemId", String.valueOf(item.getItemId()));
-		request.setAttribute("itemId", String.valueOf(item.getItemId()));
 		
-		//request.setAttribute("suburItem",item);
-		response.setRenderParameter("jspPage","/html/deposit.jsp");
+		
+		
 		
 		
 	}

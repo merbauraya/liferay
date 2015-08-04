@@ -86,7 +86,10 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		attributes.put("metadata", getMetadata());
 		attributes.put("lastPublishedDate", getLastPublishedDate());
 		attributes.put("itemCount", getItemCount());
-		attributes.put("personalSite", getPersonalSite());
+		attributes.put("createDate", getCreateDate());
+		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("Uuid", getUuid());
+		attributes.put("createdBy", getCreatedBy());
 
 		return attributes;
 	}
@@ -171,10 +174,28 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 			setItemCount(itemCount);
 		}
 
-		String personalSite = (String)attributes.get("personalSite");
+		Date createDate = (Date)attributes.get("createDate");
 
-		if (personalSite != null) {
-			setPersonalSite(personalSite);
+		if (createDate != null) {
+			setCreateDate(createDate);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
+		String Uuid = (String)attributes.get("Uuid");
+
+		if (Uuid != null) {
+			setUuid(Uuid);
+		}
+
+		Long createdBy = (Long)attributes.get("createdBy");
+
+		if (createdBy != null) {
+			setCreatedBy(createdBy);
 		}
 	}
 
@@ -479,21 +500,90 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 	}
 
 	@Override
-	public String getPersonalSite() {
-		return _personalSite;
+	public Date getCreateDate() {
+		return _createDate;
 	}
 
 	@Override
-	public void setPersonalSite(String personalSite) {
-		_personalSite = personalSite;
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
 
 		if (_authorRemoteModel != null) {
 			try {
 				Class<?> clazz = _authorRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPersonalSite", String.class);
+				Method method = clazz.getMethod("setCreateDate", Date.class);
 
-				method.invoke(_authorRemoteModel, personalSite);
+				method.invoke(_authorRemoteModel, createDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModifiedDate", Date.class);
+
+				method.invoke(_authorRemoteModel, modifiedDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getUuid() {
+		return _Uuid;
+	}
+
+	@Override
+	public void setUuid(String Uuid) {
+		_Uuid = Uuid;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUuid", String.class);
+
+				method.invoke(_authorRemoteModel, Uuid);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCreatedBy() {
+		return _createdBy;
+	}
+
+	@Override
+	public void setCreatedBy(long createdBy) {
+		_createdBy = createdBy;
+
+		if (_authorRemoteModel != null) {
+			try {
+				Class<?> clazz = _authorRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCreatedBy", long.class);
+
+				method.invoke(_authorRemoteModel, createdBy);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -602,7 +692,10 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		clone.setMetadata(getMetadata());
 		clone.setLastPublishedDate(getLastPublishedDate());
 		clone.setItemCount(getItemCount());
-		clone.setPersonalSite(getPersonalSite());
+		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setUuid(getUuid());
+		clone.setCreatedBy(getCreatedBy());
 
 		return clone;
 	}
@@ -655,7 +748,7 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{authorId=");
 		sb.append(getAuthorId());
@@ -683,8 +776,14 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		sb.append(getLastPublishedDate());
 		sb.append(", itemCount=");
 		sb.append(getItemCount());
-		sb.append(", personalSite=");
-		sb.append(getPersonalSite());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
+		sb.append(", Uuid=");
+		sb.append(getUuid());
+		sb.append(", createdBy=");
+		sb.append(getCreatedBy());
 		sb.append("}");
 
 		return sb.toString();
@@ -692,7 +791,7 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.idetronic.subur.model.Author");
@@ -751,8 +850,20 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 		sb.append(getItemCount());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>personalSite</column-name><column-value><![CDATA[");
-		sb.append(getPersonalSite());
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append(getCreateDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>Uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createdBy</column-name><column-value><![CDATA[");
+		sb.append(getCreatedBy());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -773,7 +884,10 @@ public class AuthorClp extends BaseModelImpl<Author> implements Author {
 	private String _metadata;
 	private Date _lastPublishedDate;
 	private int _itemCount;
-	private String _personalSite;
+	private Date _createDate;
+	private Date _modifiedDate;
+	private String _Uuid;
+	private long _createdBy;
 	private BaseModel<?> _authorRemoteModel;
 	private Class<?> _clpSerializerClass = com.idetronic.subur.service.ClpSerializer.class;
 }

@@ -115,7 +115,8 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 		_methodParameterTypes19 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.util.Map", "java.lang.String", "int", "long", "long",
-				"java.lang.String[][]"
+				"long", "java.lang.String[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName20 = "setExpertises";
@@ -127,7 +128,8 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 		_methodParameterTypes21 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.util.Map", "java.lang.String", "int",
-				"long", "long", "java.lang.String[][]"
+				"long", "long", "long", "java.lang.String[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName22 = "getItemByAuthorGroup";
@@ -755,7 +757,8 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 		java.lang.String lastName, java.lang.String title,
 		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
-		java.lang.String[] expertiseNames)
+		long createdByUserId, java.lang.String[] expertiseNames,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -780,7 +783,11 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 						
 					groupId,
 						
-					ClpSerializer.translateInput(expertiseNames)
+					createdByUserId,
+						
+					ClpSerializer.translateInput(expertiseNames),
+						
+					ClpSerializer.translateInput(serviceContext)
 					});
 		}
 		catch (Throwable t) {
@@ -839,7 +846,8 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 		java.lang.String lastName,
 		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
-		java.lang.String[] expertiseNames)
+		long createdByUserId, java.lang.String[] expertiseNames,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -866,7 +874,11 @@ public class AuthorLocalServiceClp implements AuthorLocalService {
 						
 					groupId,
 						
-					ClpSerializer.translateInput(expertiseNames)
+					createdByUserId,
+						
+					ClpSerializer.translateInput(expertiseNames),
+						
+					ClpSerializer.translateInput(serviceContext)
 					});
 		}
 		catch (Throwable t) {

@@ -62,7 +62,10 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 		attributes.put("metadata", getMetadata());
 		attributes.put("lastPublishedDate", getLastPublishedDate());
 		attributes.put("itemCount", getItemCount());
-		attributes.put("personalSite", getPersonalSite());
+		attributes.put("createDate", getCreateDate());
+		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("Uuid", getUuid());
+		attributes.put("createdBy", getCreatedBy());
 
 		return attributes;
 	}
@@ -147,10 +150,28 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 			setItemCount(itemCount);
 		}
 
-		String personalSite = (String)attributes.get("personalSite");
+		Date createDate = (Date)attributes.get("createDate");
 
-		if (personalSite != null) {
-			setPersonalSite(personalSite);
+		if (createDate != null) {
+			setCreateDate(createDate);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
+		String Uuid = (String)attributes.get("Uuid");
+
+		if (Uuid != null) {
+			setUuid(Uuid);
+		}
+
+		Long createdBy = (Long)attributes.get("createdBy");
+
+		if (createdBy != null) {
+			setCreatedBy(createdBy);
 		}
 	}
 
@@ -435,23 +456,83 @@ public class AuthorWrapper implements Author, ModelWrapper<Author> {
 	}
 
 	/**
-	* Returns the personal site of this author.
+	* Returns the create date of this author.
 	*
-	* @return the personal site of this author
+	* @return the create date of this author
 	*/
 	@Override
-	public java.lang.String getPersonalSite() {
-		return _author.getPersonalSite();
+	public java.util.Date getCreateDate() {
+		return _author.getCreateDate();
 	}
 
 	/**
-	* Sets the personal site of this author.
+	* Sets the create date of this author.
 	*
-	* @param personalSite the personal site of this author
+	* @param createDate the create date of this author
 	*/
 	@Override
-	public void setPersonalSite(java.lang.String personalSite) {
-		_author.setPersonalSite(personalSite);
+	public void setCreateDate(java.util.Date createDate) {
+		_author.setCreateDate(createDate);
+	}
+
+	/**
+	* Returns the modified date of this author.
+	*
+	* @return the modified date of this author
+	*/
+	@Override
+	public java.util.Date getModifiedDate() {
+		return _author.getModifiedDate();
+	}
+
+	/**
+	* Sets the modified date of this author.
+	*
+	* @param modifiedDate the modified date of this author
+	*/
+	@Override
+	public void setModifiedDate(java.util.Date modifiedDate) {
+		_author.setModifiedDate(modifiedDate);
+	}
+
+	/**
+	* Returns the uuid of this author.
+	*
+	* @return the uuid of this author
+	*/
+	@Override
+	public java.lang.String getUuid() {
+		return _author.getUuid();
+	}
+
+	/**
+	* Sets the uuid of this author.
+	*
+	* @param Uuid the uuid of this author
+	*/
+	@Override
+	public void setUuid(java.lang.String Uuid) {
+		_author.setUuid(Uuid);
+	}
+
+	/**
+	* Returns the created by of this author.
+	*
+	* @return the created by of this author
+	*/
+	@Override
+	public long getCreatedBy() {
+		return _author.getCreatedBy();
+	}
+
+	/**
+	* Sets the created by of this author.
+	*
+	* @param createdBy the created by of this author
+	*/
+	@Override
+	public void setCreatedBy(long createdBy) {
+		_author.setCreatedBy(createdBy);
 	}
 
 	@Override

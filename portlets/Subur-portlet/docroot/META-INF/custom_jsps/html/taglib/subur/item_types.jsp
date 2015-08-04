@@ -30,7 +30,7 @@
 %>
 	<c:if test="<%= showHeader%>">
 		<div class="item-item-type">
-			<label><liferay-ui:message key="item-type" /></label>
+			<h4><liferay-ui:message key="item-type" /></h4>
 				<span class="item-type-summary">
 	</c:if>
 

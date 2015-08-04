@@ -117,8 +117,11 @@
     	<column name="metadata" type="String"></column>
     	<column name="lastPublishedDate" type="Date"></column>
     	<column name="itemCount" type="int"></column>
-    	<column name="personalSite" type="String"></column>
     	
+    	<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<column name="Uuid" type="String" />
+		<column name="createdBy" type="long" />
     	<finder name="Group" return-type="Collection">
     		<finder-column name="groupId"></finder-column>
     	</finder>
@@ -137,6 +140,8 @@
     		<finder-column name="lastName" comparator="LIKE"></finder-column>
     	
     	</finder>
+    	<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
     </entity>
     <entity name="AuthorSite" local-service="true" remote-service="false">
     	<column name="authorSiteId" type="long" primary="true" id-type="increment"></column>

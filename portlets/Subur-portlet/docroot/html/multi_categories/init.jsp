@@ -6,7 +6,7 @@
 <%@page import="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
 
-<%@include file="/html/init.jsp" %>
+<%@include file="/html/subur/init.jsp" %>
 
 <%
 

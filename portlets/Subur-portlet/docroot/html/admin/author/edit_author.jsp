@@ -1,4 +1,4 @@
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/html/author/init.jsp" %>
 
 <%
 
@@ -7,7 +7,7 @@
 	String[] siteNameList = StringUtil.split(authorSiteNameString,",");
 	
 	
-	String[] titles = StringUtil.split(authorTitleString, ",");
+	String[] titles = StringUtil.split(authorSalutationString, ",");
 	long authorId = ParamUtil.getLong(request,"authorId");
 	Author author = null;
 	List<AuthorSite> authorSites = Collections.emptyList();
@@ -18,7 +18,6 @@
 	{
 		author = AuthorLocalServiceUtil.getAuthor(authorId);
 		authorSites = AuthorSiteLocalServiceUtil.findByAuthorId(authorId);
-		_log.info("size="+authorSites.size());
 		authorSiteIndexes = new int[authorSites.size()];
 		for (int i = 0; i < authorSites.size(); i++)
 		{
@@ -48,13 +47,13 @@ isEmpty = <%=authorSiteIndexes.length%>
 <liferay-ui:header
 	backURL="<%= backURL %>"
 	localizeTitle="<%= (author == null) %>"
-	title='<%= (author == null) ? "new-author" : author.getLastName()+","+author.getFirstName() %>'
+	title='<%= (author == null) ? "new-author" : author.getDisplayName() %>'
 />
 <portlet:actionURL var="editAuthorActionURL" name="editAuthor">
 
 	<portlet:param name="backURL" value="<%= backURL %>" />
 </portlet:actionURL>
-<aui:form action="<%=editAuthorActionURL %>" method="post" name="fm">
+<aui:form action="<%=editAuthorActionURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "submitForm();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (author == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="authorId" type="hidden" value="<%= authorId %>" />
@@ -72,9 +71,51 @@ isEmpty = <%=authorSiteIndexes.length%>
 		}
 		%>
 		</aui:select>
-		<aui:input name="firstName" />
-	
-		<aui:input name="lastName" />
+		<aui:input name="firstName" cssClass="fullwidth" />
+		<aui:input name="middleName" cssClass="fullwidth"/>
+		<aui:input name="lastName" cssClass="fullwidth"/>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="categorization">
+			<%
+				PortletURL portletURL = renderResponse.createRenderURL();
+				/*
+				String authorVocabularyIdString = null;
+				Map<String,Long> authorCategoryMap = AuthorUtil.getAuthorCategories(authorCategoryXML);
+				long[] authorVocabs = null;
+				
+				if (authorCategoryMap != null && authorCategoryMap.size() > 0 )
+				{
+					authorVocabs = new long[authorCategoryMap.size()];
+					int i = 0;
+					for (Map.Entry<String,Long> entry : authorCategoryMap.entrySet())
+					{
+						
+						authorVocabs[i] = entry.getValue();
+						i++;
+					}
+					authorVocabularyIdString = StringUtil.merge(authorVocabs);
+					
+				}
+				*/
+			%>
+			<aui:input 
+				classPK="<%= (author != null ? author.getAuthorId(): 0L) %>" 
+				model="<%= Author.class %>" 
+				name="categories" 
+				className="<%= Author.class.getName() %>"
+			type="assetCategories" />
+				
+			
+		<aui:input type="hidden" name="categoryIds" id="categoryIds" value=""/>			
+		
+		
+		
+		</liferay-ui:panel>
+		
+		
+		
+		<h5>
+<liferay-ui:message key="author-site"/>
+</h5>
 		<div id="authorSite">
 		<%
 			for (int i = 0; i < authorSiteIndexes.length; i++) {
@@ -104,6 +145,7 @@ isEmpty = <%=authorSiteIndexes.length%>
 						id='<%= "siteURL" + authorSiteIndex %>'
 						inlineField="<%= true %>" 
 						name='siteURL' 
+						cssClass="fullwidth"
 						
 						/>
 					
@@ -150,6 +192,9 @@ isEmpty = <%=authorSiteIndexes.length%>
 	String id = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-tags-selector:id"));
 	
 %>
+<h5>
+<liferay-ui:message key="research-interest"/>
+</h5>
 <div class="lfr-tags-selector-content" id="<%= namespace + id %>assetTagsSelector">
 	<aui:input name="<%= hiddenInput %>" type="hidden" />
 
@@ -186,6 +231,9 @@ isEmpty = <%=authorSiteIndexes.length%>
 	<c:if test="<%= autoFocus %>">
 		Liferay.Util.focusFormField('#<%= id %>assetTagNames');
 	</c:if>
+	
+	
+	
 </aui:script>
 	<aui:button-row>
 	<aui:button type="submit" />
@@ -193,6 +241,26 @@ isEmpty = <%=authorSiteIndexes.length%>
 	<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+<aui:script>
+function <portlet:namespace />submitForm()
+{
+	var A = AUI();
+	var assetCategoryIdArr = [];
+	var catdIds = A.all('input[name^=<portlet:namespace/>assetCategoryIds]');
+	
+	catdIds.each(function(){
+		assetCategoryIdArr.push(this.val());
+		
+		
+		
+	});
+	A.one("#<portlet:namespace/>categoryIds").val(assetCategoryIdArr);
+	alert(assetCategoryIdArr);
+	submitForm(document.<portlet:namespace />fm);
+	
+}
+</aui:script>
+
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("subur.html.edit.author");

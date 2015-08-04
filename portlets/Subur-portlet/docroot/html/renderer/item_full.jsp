@@ -1,4 +1,4 @@
-<%@include file="/html/init.jsp"%>
+<%@include file="/html/subur/init.jsp"%>
 <%@ page import="javax.portlet.ResourceURL" %>
 
 <%
@@ -8,6 +8,7 @@
 	suburItem = suburItem.toEscapedModel();
 	AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(SuburItem.class.getName(), itemId);
 	suburItem = suburItem.toEscapedModel();
+	Map<String,String> serieReportNoMap = suburItem.getSeriesReportNo();
 	/*
 	List<ItemFileEntry> itemFileEntries = ItemFileEntryLocalServiceUtil.getByItemId(suburItem.getItemId());
 	
@@ -139,15 +140,34 @@
 			viewItemTypeURL ="<%=viewItemTypeURL %>"	
 			showHeader= "<%= true %>"
 		/>
-	
+	<%
+		String[] otherTitles = suburItem.getOtherTitles();
+		if (otherTitles != null && otherTitles.length>0)
+		{
+	%>
+		<div>
+		<h4><liferay-ui:message key="other-title"/></h4>
+			<ul>
+			<%for (String otherTitle : otherTitles)
+			{	
+			%>
+				<li><%=otherTitle %></li>
+		<%
+			}
+		%>
+			</ul>
+		</div>
+	<%
+		}
+	%>
 	<div class="asset-categorization-display">
-		<label>Tags</label>
+		<h4>Tags</h4>
 		<liferay-ui:asset-tags-summary
 		    className="<%= SuburItem.class.getName() %>"
 		    classPK="<%= suburItem.getItemId() %>"
 		    portletURL="<%= renderResponse.createRenderURL() %>"
 		/>
-		<label>Categories</label>
+		<h4>Categories</h4>
 		<liferay-ui:asset-categories-summary
 		    className="<%= SuburItem.class.getName() %>"
 		    classPK="<%= suburItem.getPrimaryKey() %>"
@@ -155,8 +175,30 @@
 		/>
 	</div>
 	<div class="item-abstract">
+		<h4>Abstract</h4>
 		<%=suburItem.getItemAbstract() %>
 	</div>
+	<div>
+		<%if (serieReportNoMap != null && serieReportNoMap.size() > 0) 
+		{
+		%>
+			<h4><liferay-ui:message key="part-of"/></h4>
+				<ul>
+			<%
+			for (Map.Entry<String, String> serieEntry : serieReportNoMap.entrySet())
+			{
+			%>
+					<li><%=serieEntry.getKey() %>;<%=serieEntry.getValue() %></li>
+			<%} %>
+			
+				
+				</ul>
+		<%
+		}
+		%>
+	
+	</div>
+	
 	<div class="item-asset-links">
 		
 		

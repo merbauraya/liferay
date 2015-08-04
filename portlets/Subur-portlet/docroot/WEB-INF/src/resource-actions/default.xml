@@ -23,6 +23,27 @@
 			</guest-unsupported>
 		</permissions>
 	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>author</portlet-name>
+		<permissions>
+			<supports>
+				<action-key>ADD_TO_PAGE</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+				
+				<action-key>ADD_ENTRY</action-key>
+			</supports>
+			<site-member-defaults>
+				<action-key>VIEW</action-key>
+			</site-member-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>ADD_ENTRY</action-key>
+			</guest-unsupported>
+		</permissions>
+	</portlet-resource>
 	<model-resource>
 		<model-name>com.idetronic.subur</model-name>
 		<portlet-ref>
@@ -76,6 +97,31 @@
 			</guest-unsupported>
 		</permissions>
 	</model-resource>
-	
+	<model-resource>
+		<model-name>com.idetronic.subur.model.Author</model-name>
+		<portlet-ref>
+			<portlet-name>author</portlet-name>
+		</portlet-ref>
+		<permissions>
+			<supports>
+				<action-key>DELETE</action-key>
+				<action-key>PERMISSIONS</action-key>
+				<action-key>UPDATE</action-key>
+				<action-key>VIEW</action-key>
+				
+			</supports>
+			<site-member-defaults>
+				<action-key>VIEW</action-key>
+			</site-member-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>UPDATE</action-key>
+				<action-key>PERMISSIONS</action-key>
+				<action-key>DELETE</action-key>
+			</guest-unsupported>
+		</permissions>
+	</model-resource>
 	
 </resource-action-mapping>

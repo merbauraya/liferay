@@ -43,7 +43,10 @@ public class AuthorSoap implements Serializable {
 		soapModel.setMetadata(model.getMetadata());
 		soapModel.setLastPublishedDate(model.getLastPublishedDate());
 		soapModel.setItemCount(model.getItemCount());
-		soapModel.setPersonalSite(model.getPersonalSite());
+		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setUuid(model.getUuid());
+		soapModel.setCreatedBy(model.getCreatedBy());
 
 		return soapModel;
 	}
@@ -200,12 +203,36 @@ public class AuthorSoap implements Serializable {
 		_itemCount = itemCount;
 	}
 
-	public String getPersonalSite() {
-		return _personalSite;
+	public Date getCreateDate() {
+		return _createDate;
 	}
 
-	public void setPersonalSite(String personalSite) {
-		_personalSite = personalSite;
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
+	public String getUuid() {
+		return _Uuid;
+	}
+
+	public void setUuid(String Uuid) {
+		_Uuid = Uuid;
+	}
+
+	public long getCreatedBy() {
+		return _createdBy;
+	}
+
+	public void setCreatedBy(long createdBy) {
+		_createdBy = createdBy;
 	}
 
 	private long _authorId;
@@ -221,5 +248,8 @@ public class AuthorSoap implements Serializable {
 	private String _metadata;
 	private Date _lastPublishedDate;
 	private int _itemCount;
-	private String _personalSite;
+	private Date _createDate;
+	private Date _modifiedDate;
+	private String _Uuid;
+	private long _createdBy;
 }

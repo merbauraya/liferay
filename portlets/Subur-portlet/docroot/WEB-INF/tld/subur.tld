@@ -102,7 +102,21 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
-		
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>classPK</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>hiddenInput</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 		
 		
 	</tag>

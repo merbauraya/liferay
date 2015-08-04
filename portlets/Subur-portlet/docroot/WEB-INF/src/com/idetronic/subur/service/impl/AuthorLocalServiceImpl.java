@@ -14,34 +14,23 @@
 
 package com.idetronic.subur.service.impl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import javax.portlet.PortletException;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
 
 import com.idetronic.subur.NoSuchAuthorException;
-import com.idetronic.subur.Subur;
 import com.idetronic.subur.model.Author;
 import com.idetronic.subur.model.AuthorExpertise;
 import com.idetronic.subur.model.AuthorSite;
-import com.idetronic.subur.model.DownloadSummary;
 import com.idetronic.subur.model.Expertise;
 import com.idetronic.subur.model.SuburItem;
-import com.idetronic.subur.search.AuthorSearchTerms;
 import com.idetronic.subur.service.AuthorExpertiseLocalServiceUtil;
 import com.idetronic.subur.service.AuthorSiteLocalServiceUtil;
 import com.idetronic.subur.service.ExpertiseLocalServiceUtil;
 import com.idetronic.subur.service.ItemAuthorLocalServiceUtil;
 import com.idetronic.subur.service.base.AuthorLocalServiceBaseImpl;
 import com.idetronic.subur.service.persistence.AuthorExpertisePK;
-import com.idetronic.subur.service.persistence.AuthorFinder;
 import com.idetronic.subur.service.persistence.AuthorFinderUtil;
 import com.idetronic.subur.service.persistence.SuburItemFinderUtil;
 import com.idetronic.subur.util.SuburConstant;
@@ -49,19 +38,25 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 /**
@@ -91,7 +86,8 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	public long addAuthor(String firstName,String lastName,String title,
 			Map<String,String> authorSite,
 			String remoteId,int idType,
-			long userId, long groupId,String[] expertiseNames) throws SystemException, PortalException
+			long userId, long groupId,long createdByUserId,
+			String[] expertiseNames,ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		
 		User user = userLocalService.getUserById(userId);
@@ -106,9 +102,13 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		author.setIdType(idType);
 		author.setCompanyId(user.getCompanyId());
 		author.setGroupId(groupId);
+		author.setCreateDate(now);
+		author.setModifiedDate(now);
+		author.setUuid(PortalUUIDUtil.generate());
+		author.setCreatedBy(createdByUserId);
 		//author.setPersonalSite(personalSite);
 		
-		
+		logger.info("author creted:"+authorId);
 		
 		
 		
@@ -131,8 +131,47 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		
 		updateAuthorSite(authorId,authorSite);
 		authorPersistence.update(author);
+		logger.info("author upd");
+		
+		
+		
+		logger.info("res upd");
+		
+		
+		AssetEntry assetEntry = updateAssetEntry(createdByUserId,groupId,
+				author, serviceContext);
+		
+		logger.info("asset upd");
+		
+		resourceLocalService.addResources(author.getCompanyId(), author.getGroupId(),
+				createdByUserId,Author.class.getName(),author.getAuthorId(),
+				false,true,true);
+		/*
+		addResource(author.getCompanyId(),author.getGroupId(),
+				createdByUserId,author.getAuthorId());
+		*/
+		AssetLinkLocalServiceUtil.updateLinks(userId, assetEntry.getEntryId(),
+                serviceContext.getAssetLinkEntryIds(),
+                AssetLinkConstants.TYPE_RELATED);
+		
+		logger.info("ass link upd");
 		
 		return authorId;
+		
+	}
+	private void addResource(long companyId,long groupId,long createdBy,long authorId)
+	{
+		try {
+			ResourceLocalServiceUtil.addResources(companyId, groupId, 
+					createdBy, Author.class.getName(), authorId, 
+					false, true, true);
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	@Override
@@ -169,7 +208,8 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 				String lastName,Map<String,String> authorSite,
 				String remoteId,int idType,
 				long userId, long groupId,
-				String[] expertiseNames) throws SystemException, PortalException
+				long createdByUserId,String[] expertiseNames,
+				ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		Author author = authorPersistence.fetchByPrimaryKey(authorId);
 		author.setTitle(title);
@@ -216,8 +256,43 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		
 		
 		authorPersistence.update(author);
+		
+		resourceLocalService.updateResources(serviceContext.getCompanyId(),
+                serviceContext.getScopeGroupId(), author.getDisplayName(), author.getAuthorId(),
+                serviceContext.getGroupPermissions(),
+                serviceContext.getGuestPermissions());
+		
+		AssetEntry assetEntry = updateAssetEntry(createdByUserId,groupId,
+				author, serviceContext);
+		
+		AssetLinkLocalServiceUtil.updateLinks(userId, assetEntry.getEntryId(),
+                serviceContext.getAssetLinkEntryIds(),
+                AssetLinkConstants.TYPE_RELATED);
+		
 		return author;
 
+	}
+	
+	private AssetEntry updateAssetEntry(long userId,long groupId,
+				Author author,ServiceContext serviceContext) throws PortalException, SystemException
+	{
+		boolean visible = true;
+		String itemDescription = StringPool.BLANK;
+		String summary = StringPool.BLANK;
+		String url = StringPool.BLANK;
+		String layoutUuid = StringPool.BLANK;
+		
+		
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.updateEntry(userId,
+                groupId, author.getCreateDate(),
+                author.getModifiedDate(), Author.class.getName(),
+                author.getAuthorId(), author.getUuid(), 0,
+                serviceContext.getAssetCategoryIds(),
+                serviceContext.getAssetTagNames(), visible, null, null, null,
+                ContentTypes.TEXT_HTML, author.getDisplayName(), itemDescription, summary, url,
+                layoutUuid, 0, 0, null, false);
+		
+		return assetEntry;
 	}
 	/**
 	 * Find all item under a given author

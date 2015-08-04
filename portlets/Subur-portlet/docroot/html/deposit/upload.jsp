@@ -1,4 +1,4 @@
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/html/subur/init.jsp" %>
 
 <portlet:actionURL  var="NAMEUrl" name="METHODJAVANAMEManageForm">
 </portlet:actionURL>

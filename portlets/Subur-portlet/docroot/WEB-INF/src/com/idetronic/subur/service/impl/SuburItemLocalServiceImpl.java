@@ -95,11 +95,13 @@ public class SuburItemLocalServiceImpl extends SuburItemLocalServiceBaseImpl {
 		suburItemPersistence.update(suburItem);
 		ItemItemTypeLocalServiceUtil.addItemItemType(itemId, itemTypeId);
 		
+		/*
 				
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
                 SuburItem.class);
 
 		indexer.reindex(suburItem);
+		*/
 		//only show item with published status
 		boolean visible = (suburItem.getStatus() == SuburConstant.STATUS_PUBLISHED_ITEM);
 		String itemDescription = null;

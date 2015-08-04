@@ -1,2 +1,2 @@
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/html/subur/init.jsp" %>
 

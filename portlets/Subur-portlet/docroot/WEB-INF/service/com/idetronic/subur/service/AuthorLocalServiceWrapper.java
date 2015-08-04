@@ -285,11 +285,13 @@ public class AuthorLocalServiceWrapper implements AuthorLocalService,
 		java.lang.String lastName, java.lang.String title,
 		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
-		java.lang.String[] expertiseNames)
+		long createdByUserId, java.lang.String[] expertiseNames,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _authorLocalService.addAuthor(firstName, lastName, title,
-			authorSite, remoteId, idType, userId, groupId, expertiseNames);
+			authorSite, remoteId, idType, userId, groupId, createdByUserId,
+			expertiseNames, serviceContext);
 	}
 
 	@Override
@@ -319,12 +321,13 @@ public class AuthorLocalServiceWrapper implements AuthorLocalService,
 		java.lang.String lastName,
 		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
-		java.lang.String[] expertiseNames)
+		long createdByUserId, java.lang.String[] expertiseNames,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _authorLocalService.updateAuthor(authorId, title, firstName,
 			lastName, authorSite, remoteId, idType, userId, groupId,
-			expertiseNames);
+			createdByUserId, expertiseNames, serviceContext);
 	}
 
 	/**

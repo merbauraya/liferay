@@ -25,6 +25,9 @@
 	<div id="<portlet:namespace />myDataTable">
 		
 	</div>
+	<div id="<portlet:namespace />chartArea" style="width:100%; height:400px;">>
+	
+	</div>
 
 <aui:script use="aui-datatable,datatable-sort,aui-datatype">
 	var A = AUI();
@@ -46,7 +49,15 @@
 			  },
 			  function(obj) {
 			    
-			    renderStat(columns,obj,statYear + " monthly View Summary");
+				var chartData = new Array(); 
+				var xCategories = new Array();
+			    //renderStat(columns,obj,statYear + " monthly View Summary");
+				  for (i = 0; i < obj.length; i++){
+					  chartData.push(parseInt(obj[i].totalview));
+			            xCategories.push(obj[i].monthName);
+			        }
+			    
+			    renderChart(chartData,xCategories,statYear + " Monthly view");
 			  }
 			);
 	}
@@ -106,17 +117,65 @@
 		
 	
 	}
-		function renderStat(columns,data,caption)
-		{
-			var dataTable = new A.DataTable(
-				{
-					columnset: columns,
-					recordset: data,
-					caption: caption,
-					sortable: true
-					
-				}		
-			).render('#<portlet:namespace />myDataTable');
-			dataTable.get('boundingBox').unselectable();
-		}
+	function renderStat(columns,data,caption)
+	{
+		var dataTable = new A.DataTable(
+			{
+				columnset: columns,
+				recordset: data,
+				caption: caption,
+				sortable: true
+				
+			}		
+		).render('#<portlet:namespace />myDataTable');
+		dataTable.get('boundingBox').unselectable();
+	}
+	
+	function renderChart(chartData,chartCategories,chartTtitle)
+	{
+		
+	
+		var      chart1 = new Highcharts.Chart({
+		         chart: {
+		            renderTo: '<portlet:namespace />chartArea',
+		            type : 'column',
+		            zoomType: null
+		            
+		         },
+		         title: {
+		        	 text : chartTtitle
+		         },
+		         navigator : {
+						enabled : false
+				},
+				scrollbar : {
+		                enabled : false
+		        },
+		        credits: {
+		            enabled: false
+		        },
+		         
+		         xAxis: {
+                  
+                     categories: chartCategories,                 
+              
+                 },
+                 yAxis: {
+                     title: {
+                         text: "Views"
+                     },
+                     min:0,
+                 },
+                 rangeSelector : {
+     				enabled: false
+     			},
+		        
+		         series: [{
+		            name: 'Monthly View', 
+		            
+		            data: chartData // predefined JavaScript array
+		         }]
+		      });
+		   
+	}
 </aui:script>

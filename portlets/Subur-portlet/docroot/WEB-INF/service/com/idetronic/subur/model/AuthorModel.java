@@ -248,19 +248,61 @@ public interface AuthorModel extends BaseModel<Author> {
 	public void setItemCount(int itemCount);
 
 	/**
-	 * Returns the personal site of this author.
+	 * Returns the create date of this author.
 	 *
-	 * @return the personal site of this author
+	 * @return the create date of this author
 	 */
-	@AutoEscape
-	public String getPersonalSite();
+	public Date getCreateDate();
 
 	/**
-	 * Sets the personal site of this author.
+	 * Sets the create date of this author.
 	 *
-	 * @param personalSite the personal site of this author
+	 * @param createDate the create date of this author
 	 */
-	public void setPersonalSite(String personalSite);
+	public void setCreateDate(Date createDate);
+
+	/**
+	 * Returns the modified date of this author.
+	 *
+	 * @return the modified date of this author
+	 */
+	public Date getModifiedDate();
+
+	/**
+	 * Sets the modified date of this author.
+	 *
+	 * @param modifiedDate the modified date of this author
+	 */
+	public void setModifiedDate(Date modifiedDate);
+
+	/**
+	 * Returns the uuid of this author.
+	 *
+	 * @return the uuid of this author
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this author.
+	 *
+	 * @param Uuid the uuid of this author
+	 */
+	public void setUuid(String Uuid);
+
+	/**
+	 * Returns the created by of this author.
+	 *
+	 * @return the created by of this author
+	 */
+	public long getCreatedBy();
+
+	/**
+	 * Sets the created by of this author.
+	 *
+	 * @param createdBy the created by of this author
+	 */
+	public void setCreatedBy(long createdBy);
 
 	@Override
 	public boolean isNew();

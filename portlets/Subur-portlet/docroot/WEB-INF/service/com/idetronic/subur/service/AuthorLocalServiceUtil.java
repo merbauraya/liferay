@@ -275,12 +275,14 @@ public class AuthorLocalServiceUtil {
 		java.lang.String lastName, java.lang.String title,
 		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
-		java.lang.String[] expertiseNames)
+		long createdByUserId, java.lang.String[] expertiseNames,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addAuthor(firstName, lastName, title, authorSite, remoteId,
-			idType, userId, groupId, expertiseNames);
+			idType, userId, groupId, createdByUserId, expertiseNames,
+			serviceContext);
 	}
 
 	public static void setExpertises(long authorId,
@@ -308,12 +310,14 @@ public class AuthorLocalServiceUtil {
 		java.lang.String lastName,
 		java.util.Map<java.lang.String, java.lang.String> authorSite,
 		java.lang.String remoteId, int idType, long userId, long groupId,
-		java.lang.String[] expertiseNames)
+		long createdByUserId, java.lang.String[] expertiseNames,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateAuthor(authorId, title, firstName, lastName,
-			authorSite, remoteId, idType, userId, groupId, expertiseNames);
+			authorSite, remoteId, idType, userId, groupId, createdByUserId,
+			expertiseNames, serviceContext);
 	}
 
 	/**

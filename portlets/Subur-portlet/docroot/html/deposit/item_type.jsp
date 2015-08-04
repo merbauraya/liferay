@@ -1,4 +1,4 @@
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/html/subur/init.jsp" %>
 <%
 	List<ItemType> itemTypes = ItemTypeLocalServiceUtil.getItemTypes(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 

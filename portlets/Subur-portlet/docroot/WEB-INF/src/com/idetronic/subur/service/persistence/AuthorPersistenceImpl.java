@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -42,6 +43,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
@@ -500,6 +502,319 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
+	 * Returns all the authors that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching authors that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> filterFindByGroup(long groupId)
+		throws SystemException {
+		return filterFindByGroup(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the authors that the user has permission to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @return the range of matching authors that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> filterFindByGroup(long groupId, int start, int end)
+		throws SystemException {
+		return filterFindByGroup(groupId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the authors that the user has permissions to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching authors that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> filterFindByGroup(long groupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByGroup(groupId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_GROUP_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(AuthorModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(AuthorModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Author.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
+				groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, AuthorImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, AuthorImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<Author>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the authors before and after the current author in the ordered set of authors that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param authorId the primary key of the current author
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a author with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author[] filterFindByGroup_PrevAndNext(long authorId, long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByGroup_PrevAndNext(authorId, groupId, orderByComparator);
+		}
+
+		Author author = findByPrimaryKey(authorId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Author[] array = new AuthorImpl[3];
+
+			array[0] = filterGetByGroup_PrevAndNext(session, author, groupId,
+					orderByComparator, true);
+
+			array[1] = author;
+
+			array[2] = filterGetByGroup_PrevAndNext(session, author, groupId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Author filterGetByGroup_PrevAndNext(Session session,
+		Author author, long groupId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_GROUP_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(AuthorModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(AuthorModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Author.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
+				groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, AuthorImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, AuthorImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(author);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Author> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the authors where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
@@ -564,6 +879,55 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of authors that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching authors that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByGroup(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByGroup(groupId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_AUTHOR_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUP_GROUPID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Author.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
+				groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	private static final String _FINDER_COLUMN_GROUP_GROUPID_2 = "author.groupId = ?";
@@ -1021,6 +1385,334 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	}
 
 	/**
+	 * Returns all the authors that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @return the matching authors that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> filterFindByCompanyGroup(long companyId, long groupId)
+		throws SystemException {
+		return filterFindByCompanyGroup(companyId, groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the authors that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @return the range of matching authors that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> filterFindByCompanyGroup(long companyId, long groupId,
+		int start, int end) throws SystemException {
+		return filterFindByCompanyGroup(companyId, groupId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the authors that the user has permissions to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.idetronic.subur.model.impl.AuthorModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of authors
+	 * @param end the upper bound of the range of authors (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching authors that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Author> filterFindByCompanyGroup(long companyId, long groupId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByCompanyGroup(companyId, groupId, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYGROUP_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYGROUP_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(AuthorModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(AuthorModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Author.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
+				groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, AuthorImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, AuthorImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(groupId);
+
+			return (List<Author>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the authors before and after the current author in the ordered set of authors that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param authorId the primary key of the current author
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next author
+	 * @throws com.idetronic.subur.NoSuchAuthorException if a author with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Author[] filterFindByCompanyGroup_PrevAndNext(long authorId,
+		long companyId, long groupId, OrderByComparator orderByComparator)
+		throws NoSuchAuthorException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByCompanyGroup_PrevAndNext(authorId, companyId, groupId,
+				orderByComparator);
+		}
+
+		Author author = findByPrimaryKey(authorId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Author[] array = new AuthorImpl[3];
+
+			array[0] = filterGetByCompanyGroup_PrevAndNext(session, author,
+					companyId, groupId, orderByComparator, true);
+
+			array[1] = author;
+
+			array[2] = filterGetByCompanyGroup_PrevAndNext(session, author,
+					companyId, groupId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Author filterGetByCompanyGroup_PrevAndNext(Session session,
+		Author author, long companyId, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYGROUP_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYGROUP_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(AuthorModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(AuthorModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Author.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
+				groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, AuthorImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, AuthorImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(author);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Author> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the authors where companyId = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param companyId the company ID
@@ -1093,6 +1785,61 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of authors that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @return the number of matching authors that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByCompanyGroup(long companyId, long groupId)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByCompanyGroup(companyId, groupId);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_AUTHOR_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYGROUP_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYGROUP_GROUPID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Author.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
+				groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYGROUP_COMPANYID_2 = "author.companyId = ? AND ";
@@ -2931,7 +3678,10 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 		authorImpl.setMetadata(author.getMetadata());
 		authorImpl.setLastPublishedDate(author.getLastPublishedDate());
 		authorImpl.setItemCount(author.getItemCount());
-		authorImpl.setPersonalSite(author.getPersonalSite());
+		authorImpl.setCreateDate(author.getCreateDate());
+		authorImpl.setModifiedDate(author.getModifiedDate());
+		authorImpl.setUuid(author.getUuid());
+		authorImpl.setCreatedBy(author.getCreatedBy());
 
 		return authorImpl;
 	}
@@ -3242,7 +3992,17 @@ public class AuthorPersistenceImpl extends BasePersistenceImpl<Author>
 	private static final String _SQL_SELECT_AUTHOR_WHERE = "SELECT author FROM Author author WHERE ";
 	private static final String _SQL_COUNT_AUTHOR = "SELECT COUNT(author) FROM Author author";
 	private static final String _SQL_COUNT_AUTHOR_WHERE = "SELECT COUNT(author) FROM Author author WHERE ";
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "author.authorId";
+	private static final String _FILTER_SQL_SELECT_AUTHOR_WHERE = "SELECT DISTINCT {author.*} FROM Subur_Author author WHERE ";
+	private static final String _FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {Subur_Author.*} FROM (SELECT DISTINCT author.authorId FROM Subur_Author author WHERE ";
+	private static final String _FILTER_SQL_SELECT_AUTHOR_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN Subur_Author ON TEMP_TABLE.authorId = Subur_Author.authorId";
+	private static final String _FILTER_SQL_COUNT_AUTHOR_WHERE = "SELECT COUNT(DISTINCT author.authorId) AS COUNT_VALUE FROM Subur_Author author WHERE ";
+	private static final String _FILTER_ENTITY_ALIAS = "author";
+	private static final String _FILTER_ENTITY_TABLE = "Subur_Author";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "author.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Subur_Author.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Author exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Author exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(

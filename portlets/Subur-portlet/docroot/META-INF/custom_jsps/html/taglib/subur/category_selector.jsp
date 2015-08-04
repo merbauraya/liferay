@@ -14,18 +14,25 @@
  */
 --%>
 
-<%@ include file="/html/taglib/ui/asset_categories_selector/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetCategoryConstants" %>
 
 <%
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_asset_categories_selector_page") + StringPool.UNDERLINE;
 
-String className = (String)request.getAttribute("liferay-ui:asset-categories-selector:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-categories-selector:classPK"));
-long[] groupIds = (long[])request.getAttribute("liferay-ui:asset-categories-selector:groupIds");
-String hiddenInput = (String)request.getAttribute("liferay-ui:asset-categories-selector:hiddenInput");
+		 
+long[] selectedVocabularies = (long[]) request.getAttribute("subur:category-selector:vocabularyId");
+PortletURL portletURL = (PortletURL) request.getAttribute("subur:category-selector:portletURL");
+String className = (String)request.getAttribute("subur:category-selector:className");
+long classPK = GetterUtil.getLong(request.getAttribute("subur:category-selector:classPK"));
+long[] groupIds = (long[])request.getAttribute("subur:category-selector:groupIds");
+String hiddenInput = (String)request.getAttribute("subur:category-selector:hiddenInput");
 String curCategoryIds = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-categories-selector:curCategoryIds"), "");
+
 String curCategoryNames = StringPool.BLANK;
 int maxEntries = GetterUtil.getInteger(PropsUtil.get(PropsKeys.ASSET_CATEGORIES_SELECTOR_MAX_ENTRIES));
+
+
 
 Group siteGroup = themeDisplay.getSiteGroup();
 
@@ -39,12 +46,25 @@ if (!ArrayUtil.contains(groupIds, themeDisplay.getCompanyGroupId())) {
 
 groupIds = ArrayUtil.unique(groupIds);
 
+
+
 List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
+
+if (selectedVocabularies != null && selectedVocabularies.length > 0)
+{
+	for (long vocabularyId : selectedVocabularies)
+	{
+		if (vocabularyId > 0)
+			vocabularies.add(AssetVocabularyServiceUtil.getVocabulary(vocabularyId));
+	}
+}
+
+/*
 
 for (int i = 0; i < groupIds.length; i++) {
 	vocabularies.addAll(AssetVocabularyServiceUtil.getGroupVocabularies(groupIds[i], false));
 }
-
+*/
 if (Validator.isNotNull(className)) {
 	long classNameId = PortalUtil.getClassNameId(className);
 

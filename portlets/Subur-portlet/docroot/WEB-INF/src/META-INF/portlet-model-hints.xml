@@ -28,7 +28,10 @@
 		<field name="metadata" type="String" />
 		<field name="lastPublishedDate" type="Date" />
 		<field name="itemCount" type="int" />
-		<field name="personalSite" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="Uuid" type="String" />
+		<field name="createdBy" type="long" />
 	</model>
 	<model name="com.idetronic.subur.model.AuthorExpertise">
 		<field name="authorId" type="long" />

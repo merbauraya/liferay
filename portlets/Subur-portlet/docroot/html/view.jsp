@@ -14,7 +14,7 @@
  */
 %>
 
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/html/subur/init.jsp" %>
 
 <liferay-portlet:renderURL varImpl="searchURL">
         <portlet:param name="mvcPath" value="/html/search/subur_search.jsp" />

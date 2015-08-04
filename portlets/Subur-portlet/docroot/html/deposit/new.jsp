@@ -1,4 +1,4 @@
-<%@ include file="/html/init.jsp" %>
+<%@ include file="/html/subur/init.jsp" %>
 <%
 	String itemId = renderRequest.getParameter("itemId");
 	
@@ -22,7 +22,7 @@
 		%>
 	</aui:select>
 
-	<aui:input type="text" name="title"></aui:input>
+	<aui:input type="text" cssClass="fullwidth" name="title"></aui:input>
 	
 	
 	<aui:button name="submitBtn" type="submit" value="save" last="true" />

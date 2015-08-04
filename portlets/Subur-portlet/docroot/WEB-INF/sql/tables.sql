@@ -12,7 +12,10 @@ create table Subur_Author (
 	metadata VARCHAR(75) null,
 	lastPublishedDate DATE null,
 	itemCount INTEGER,
-	personalSite VARCHAR(75) null
+	createDate DATE null,
+	modifiedDate DATE null,
+	Uuid VARCHAR(75) null,
+	createdBy LONG
 );
 
 create table Subur_AuthorExpertise (

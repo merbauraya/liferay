@@ -24,7 +24,14 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="itemCount" />
-			<basic name="personalSite" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="Uuid" />
+			<basic name="createdBy" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

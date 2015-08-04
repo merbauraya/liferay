@@ -124,14 +124,17 @@ public class SuburItemImpl extends SuburItemBaseImpl {
 			xmlStreamWriter.writeStartElement("otherTitles");
 			if (_otherTitles != null)
 			{
-				
-				int i = 0;
+			
 				for (String otherTitle: _otherTitles)
 				{
-					i++;
-					xmlStreamWriter.writeStartElement("title");
-					xmlStreamWriter.writeCharacters(otherTitle);
-					xmlStreamWriter.writeEndElement();
+					
+					if (otherTitle != null && !otherTitle.isEmpty())
+					{
+						
+						xmlStreamWriter.writeStartElement("title");
+						xmlStreamWriter.writeCharacters(otherTitle);
+						xmlStreamWriter.writeEndElement();
+					}
 				}
 				
 			}
@@ -145,17 +148,20 @@ public class SuburItemImpl extends SuburItemBaseImpl {
 				//access via new for-loop
 				for(Object serie : _seriesReportNo.keySet()) {
 				    String reportNo = (String)_seriesReportNo.get(serie);
-				    xmlStreamWriter.writeStartElement("serie");
-				    
-				    xmlStreamWriter.writeStartElement("serieName");
-				    xmlStreamWriter.writeCharacters(serie.toString());
-				    xmlStreamWriter.writeEndElement();
-				    
-				    xmlStreamWriter.writeStartElement("reportNo");
-				    xmlStreamWriter.writeCharacters(reportNo);
-				    xmlStreamWriter.writeEndElement();
-				   
-				    xmlStreamWriter.writeEndElement();
+				    if (reportNo != null && !reportNo.isEmpty())
+				    {
+					    xmlStreamWriter.writeStartElement("serie");
+					    
+					    xmlStreamWriter.writeStartElement("serieName");
+					    xmlStreamWriter.writeCharacters(serie.toString());
+					    xmlStreamWriter.writeEndElement();
+					    
+					    xmlStreamWriter.writeStartElement("reportNo");
+					    xmlStreamWriter.writeCharacters(reportNo);
+					    xmlStreamWriter.writeEndElement();
+					   
+					    xmlStreamWriter.writeEndElement();
+				    }
 				}
 				
 				
@@ -169,19 +175,23 @@ public class SuburItemImpl extends SuburItemBaseImpl {
 			{
 				
 				//access via new for-loop
-				for(String identName : _identifierMap.keySet()) {
+				for(String identName : _identifierMap.keySet()) 
+				{
 				    String identValue = (String)_identifierMap.get(identName);
-				    xmlStreamWriter.writeStartElement("ident");
-				    
-				    xmlStreamWriter.writeStartElement("type");
-				    xmlStreamWriter.writeCharacters(identName);
-				    xmlStreamWriter.writeEndElement();
-				    
-				    xmlStreamWriter.writeStartElement("value");
-				    xmlStreamWriter.writeCharacters(identValue);
-				    xmlStreamWriter.writeEndElement();
-				   
-				    xmlStreamWriter.writeEndElement();
+				    if (identName != null && !identName.isEmpty())
+				    {
+					    xmlStreamWriter.writeStartElement("ident");
+					    
+					    xmlStreamWriter.writeStartElement("type");
+					    xmlStreamWriter.writeCharacters(identName);
+					    xmlStreamWriter.writeEndElement();
+					    
+					    xmlStreamWriter.writeStartElement("value");
+					    xmlStreamWriter.writeCharacters(identValue);
+					    xmlStreamWriter.writeEndElement();
+					   
+					    xmlStreamWriter.writeEndElement();
+				    }
 				}
 				
 				
@@ -203,6 +213,7 @@ public class SuburItemImpl extends SuburItemBaseImpl {
 		
 		_metadataValue = unsyncStringWriter.toString();
 		super.setMetadataValue(_metadataValue);
+		logger.info(unsyncStringWriter.toString());
 		
 		
 		

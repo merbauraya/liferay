@@ -72,7 +72,26 @@
 		<footer-portlet-javascript>
 			/js/suburstatistic/main.js
 		</footer-portlet-javascript>
+		<footer-portlet-javascript>
+			/js/suburstatistic/adapters/standalone-framework.js
+		</footer-portlet-javascript>
+		<footer-portlet-javascript>
+			/js/suburstatistic/highstock.js
+		</footer-portlet-javascript>
 		<css-class-wrapper>subur-statistic-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>author</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>com.idetronic.subur.AuthorConfigImpl</configuration-action-class>
+		<asset-renderer-factory>com.idetronic.subur.asset.AuthorRendererFactory</asset-renderer-factory>
+		
+		<header-portlet-css>/css/author/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/author/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>author-portlet</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

@@ -83,7 +83,7 @@ public class SuburIndexer extends BaseIndexer {
          
          //other title
          String[] otherTitles = item.getOtherTitles();
-         if (otherTitles != null & otherTitles.length >0)
+         if (otherTitles != null && otherTitles.length >0)
          {
              Field otherTitle = new Field(SuburConstant.FIELD_OTHER_TITLE, otherTitles );
              document.add(otherTitle);

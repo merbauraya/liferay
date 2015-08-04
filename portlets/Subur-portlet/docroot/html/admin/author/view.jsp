@@ -16,6 +16,8 @@
 	String andOperator = ParamUtil.getString(request,"andOperator");
 	boolean matchAll = Validator.equals(andOperator, "1");
 	
+	
+	
 	AuthorSearch authorSearch = new AuthorSearch(renderRequest,currentURLObj);
 %>
 <liferay-ui:header
@@ -26,6 +28,9 @@
 <portlet:renderURL var="viewAuthorsURL">
 	<portlet:param name="jspPage" value="/html/admin/author/view.jsp" />
 </portlet:renderURL>
+
+
+
 
 <aui:form action="<%= portletURLString %>" method="get" name="fm">
 	
